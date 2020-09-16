@@ -1,0 +1,22 @@
+
+server:
+  port: 8080
+  servlet:
+    context-path: /
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/postdoctoral_platform?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC
+    username: root
+    password: root
+
+
+mybatis-plus:
+  mapper-locations: mapper/*.xml
+
+logging:
+  level:
+    com.zpj.efforts: trace
+
+
+

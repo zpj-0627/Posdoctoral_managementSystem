@@ -19,8 +19,8 @@ package com.province.postdoctor.entity.station_info;
     @Data
         @EqualsAndHashCode(callSuper = false)
     @Accessors(chain = true)
-    @TableName("ldz_information")
-    public class LdzInformation implements Serializable {
+    @TableName("gzz_information")
+    public class GzzInformation implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -31,25 +31,17 @@ package com.province.postdoctor.entity.station_info;
 
     private String dName;
 
-    private String hcompany;
+    private String dEname;
+
+    private String professions;
 
     private String dType;
 
-    private String department;
+    private String domain;
 
-    private String fSubject;
-
-    private String province;
-
-    private String area;
-
-    private String remark;
-
-    private String dEname;
+    private String chdepartment;
 
     private String cddepartment;
-
-    private String aname;
 
     private String comaddress;
 
@@ -59,9 +51,11 @@ package com.province.postdoctor.entity.station_info;
 
     private String fax;
 
-    private Integer phone;
-
     private String email;
+
+    private String fJob;
+
+    private String sJob;
 
 
 }

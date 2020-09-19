@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
  *  前端控制器
  * </p>
  *
- * @author zpj
- * @since 2020-09-15
+ * @author tykj
+ * @since 2020-09-19
  */
 @RestController
 @RequestMapping("/ldz-information")

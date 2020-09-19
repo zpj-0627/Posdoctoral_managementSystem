@@ -22,7 +22,7 @@ public class CodeGenerator {
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
         gc.setOutputDir(projectPath + "/src/main/java");
-        gc.setAuthor("zpj");
+        gc.setAuthor("tykj");
         gc.setOpen(false);
         gc.setDateType(DateType.ONLY_DATE);
         //去掉接口前的i
@@ -91,7 +91,7 @@ public class CodeGenerator {
         strategy.setEntityLombokModel(true);
         strategy.setRestControllerStyle(true);
         //要生成的表
-        strategy.setInclude("learning_experience","phd_information", "postdoctor_project","studying_abroad_information","work_experience");
+        strategy.setInclude("ldz_information","gzz_information");
 //        strategy.setInclude("sys_role_menu");
         strategy.setControllerMappingHyphenStyle(true);
         mpg.setStrategy(strategy);

@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
  *  服务实现类
  * </p>
  *
- * @author zpj
- * @since 2020-09-15
+ * @author tykj
+ * @since 2020-09-19
  */
 @Service
 public class LdzInformationServiceImpl extends ServiceImpl<LdzInformationMapper, LdzInformation> implements LdzInformationService {

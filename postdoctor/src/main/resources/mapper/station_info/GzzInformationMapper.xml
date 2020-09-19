@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.province.postdoctor.mapper.station_info.GzzInformationMapper">
+
+    <!--根据名字查询学科平目录的所有信息到table-->
+    <select id="selectPoetTableByName" resultType="com.province.postdoctor.entity.station_info.poetTable">
+SELECT
+	d_name,
+	department,
+	fixedphone,
+	fax
+FROM
+	ldz_information
+WHERE
+	 d_name LIKE "%"#{dName}"%"
+UNION ALL
+	SELECT
+		d_name,
+		f_job AS department,
+		fixedphone,
+		fax
+	FROM
+		gzz_information
+	WHERE
+		d_name LIKE "%"#{dName}"%"
+</select>
+
+</mapper>

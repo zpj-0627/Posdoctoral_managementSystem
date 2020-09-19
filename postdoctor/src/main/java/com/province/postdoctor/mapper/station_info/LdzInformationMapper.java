@@ -8,8 +8,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  *  Mapper 接口
  * </p>
  *
- * @author zpj
- * @since 2020-09-15
+ * @author tykj
+ * @since 2020-09-19
  */
 public interface LdzInformationMapper extends BaseMapper<LdzInformation> {
 

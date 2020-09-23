@@ -10,8 +10,12 @@ import lombok.Data;
  */
 @Data
 public class poetTable {
+    private String dId;
     private String dName;
+    private String dType;
     private String department;
+    private String fSubject;
+    private String cddepartment;
     private String fixedphone;
     private String fax;
 }

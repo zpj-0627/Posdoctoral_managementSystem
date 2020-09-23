@@ -16,6 +16,6 @@ import java.util.List;
  */
 public interface GzzInformationMapper extends BaseMapper<GzzInformation> {
 
-    List<poetTable> selectPoetTableByName(String dName);
+    List<poetTable> selectPoetTable();
 
 }

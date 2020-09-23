@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -22,11 +23,11 @@ import java.util.List;
 public class GzzInformationServiceImpl extends ServiceImpl<GzzInformationMapper, GzzInformation> implements GzzInformationService {
 
 
-    @Autowired
+    @Resource
     private GzzInformationMapper gzzInformationMapper;
 
     @Override
-    public List<poetTable> selectPoetTableByName(String dName) {
-        return gzzInformationMapper.selectPoetTableByName(dName);
+    public List<poetTable> selectPoetTable() {
+        return gzzInformationMapper.selectPoetTable();
     }
 }

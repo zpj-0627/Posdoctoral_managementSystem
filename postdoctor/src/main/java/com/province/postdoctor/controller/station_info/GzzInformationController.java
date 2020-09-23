@@ -3,6 +3,7 @@ package com.province.postdoctor.controller.station_info;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
+import com.province.postdoctor.entity.station_info.GzzInformation;
 import com.province.postdoctor.entity.station_info.poetTable;
 import com.province.postdoctor.result.PoetResult;
 import com.province.postdoctor.service.station_info.GzzInformationService;
@@ -40,7 +41,8 @@ public class GzzInformationController {
         }else {
             queryWrapper.like("dName",dName);
         }
-        List<poetTable> dList = gzzInformationService.list(queryWrapper);
+        List<poetTable> dList = gzzInformationService.selectPoetTable();
+        System.out.println(dList);
         szdwTableResult.setCode(0);
         szdwTableResult.setMsg("");
         szdwTableResult.setCount(((Page)dList).getTotal());

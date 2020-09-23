@@ -3,10 +3,14 @@
 <mapper namespace="com.province.postdoctor.mapper.station_info.GzzInformationMapper">
 
     <!--根据名字查询学科平目录的所有信息到table-->
-    <select id="selectPoetTableByName" resultType="com.province.postdoctor.entity.station_info.poetTable">
+    <select id="selectPoetTable" resultType="com.province.postdoctor.entity.station_info.poetTable">
 SELECT
+    d_id,
 	d_name,
+	d_type,
 	department,
+	f_subject,
+	cddepartment,
 	fixedphone,
 	fax
 FROM
@@ -15,8 +19,12 @@ WHERE
 	 d_name LIKE "%"#{dName}"%"
 UNION ALL
 	SELECT
+	    d_id,
 		d_name,
+		d_type,
 		f_job AS department,
+		s_job AS f_subject,
+	    cddepartment,
 		fixedphone,
 		fax
 	FROM

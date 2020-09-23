@@ -1,5 +1,6 @@
 package com.province.postdoctor.service.station_info;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.province.postdoctor.entity.station_info.GzzInformation;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.province.postdoctor.entity.station_info.poetTable;
@@ -16,5 +17,7 @@ import java.util.List;
  */
 public interface GzzInformationService extends IService<GzzInformation> {
 
-    List<poetTable> selectPoetTableByName(String dName);
+    List<poetTable> selectPoetTable();
+
+
 }

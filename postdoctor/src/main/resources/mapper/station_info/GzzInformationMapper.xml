@@ -2,35 +2,92 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.province.postdoctor.mapper.station_info.GzzInformationMapper">
 
-    <!--根据名字查询学科平目录的所有信息到table-->
-    <select id="selectPoetTable" resultType="com.province.postdoctor.entity.station_info.poetTable">
+    <!--根据条件查询设站单位的所有信息到table-->
+    <select id="selectPoetTable" parameterType="com.province.postdoctor.entity.station_info.PoetTable" resultType="com.province.postdoctor.entity.station_info.PoetTable">
 SELECT
-    d_id,
-	d_name,
-	d_type,
-	department,
-	f_subject,
+	d_name 'dName',
 	cddepartment,
 	fixedphone,
-	fax
+	fax,
+	department,
+	f_subject 'fsubject',
+	d_type 'dType'
 FROM
 	ldz_information
-WHERE
-	 d_name LIKE "%"#{dName}"%"
+    <where> 1=1
+		<if test="dName != null and dName !=''">
+		    and d_name = #{dName}
+	    </if>
+		<if test="dType != null and dType !=''">
+			and d_type = #{dType}
+		</if>
+		<if test="department != null and department !=''">
+			and department = #{department}
+		</if>
+		<if test="fsubject != null and fsubject !=''">
+		    and f_subject = #{fsubject}
+		</if>
+	</where>
 UNION ALL
 	SELECT
-	    d_id,
-		d_name,
-		d_type,
-		f_job AS department,
-		s_job AS f_subject,
-	    cddepartment,
+		d_name 'dName',
+		cddepartment,
 		fixedphone,
-		fax
+		fax,
+		f_job,
+		s_job,
+		d_type 'dType'
 	FROM
 		gzz_information
-	WHERE
-		d_name LIKE "%"#{dName}"%"
+	<where> 1=1
+		<if test="dName != null and dName !=''">
+			and d_name = #{dName}
+		</if>
+		<if test="dType != null and dType !=''">
+			and d_type = #{dType}
+		</if>
+		<if test="f_job != null and f_job !=''">
+			and f_job = #{f_job}
+		</if>
+		<if test="s_job != null and s_job !=''">
+			and s_job = #{s_job}
+		</if>
+	</where>
 </select>
+
+
+	<!--查询全部流动站的所有信息到table-->
+	<select id="selectPoetTableByType" resultType="com.province.postdoctor.entity.station_info.PoetTable">
+		SELECT
+		d_name 'dName',
+		cddepartment,
+		fixedphone,
+		fax
+		FROM
+		ldz_information
+		WHERE
+		d_type = "1"
+		UNION ALL
+		SELECT
+		d_name 'dName',
+		cddepartment,
+		fixedphone,
+		fax
+		FROM
+		gzz_information
+		WHERE
+	    d_type = "1"
+
+	</select>
+
+	<select id="selectByd_id_g"  parameterType="com.province.postdoctor.entity.station_info.GzzInformation" resultType="com.province.postdoctor.entity.station_info.GzzInformation">
+        SELECT
+            *
+        FROM
+            `gzz_information`
+        WHERE d_id=#{dId};
+    </select>
+
+
 
 </mapper>

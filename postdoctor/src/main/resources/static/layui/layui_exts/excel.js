@@ -1,10 +1,10 @@
 /*
 * @Author: Jeffrey Wang
 * @Desc:  整理强大的 SheetJS 功能，依赖 XLSX.js 和 FileSaver
-* @Version: v1.6.2
+* @Version: v1.4
 * @Date:   2018-03-24 09:54:17
 * @Last Modified by:   Jeffrey Wang
-* @Last Modified ~: 2019-10-03 23:12:00
+* @Last Modified time: 2019-01-15 11:49:09
 */
 if (typeof layui === 'undefined' && typeof jQuery === 'undefined') {
 	console.error('非layui调用请先加载jQuery')
@@ -203,7 +203,7 @@ LAY_EXCEL = {
     var head = []
     dom.find('thead > tr').each(function () {
       var line = []
-      $(this).find('td,th').each(function () {
+      $(this).find('td').each(function () {
         line.push($(this).text())
       })
       head.push(line)
@@ -278,15 +278,22 @@ LAY_EXCEL = {
     return total;
   },
   /**
-   * 获取数据范围内有效范围
-   * @param data array sheet级别的数据
-   * @param range 范围字符串，如 A1:C12，默认从左上角到右下角
+   * 批量设置单元格属性
+   * @param  {array} data     [sheet级别的数据]
+   * @param  {string} range		 [范围字符串，比如 A1:C12，开始位置默认 A1，结束位置默认整个表格右下角]
+   * @param  {object} config   [批量设置的单元格属性]
+   * @param  {function} filter   [回调函数，传递函数生效，返回值作为新的值（可用于过滤、规则替换样式等骚操作）]
+   * @return {array}          [重新渲染后的 sheet 数据]
    */
-  getDefaultRange: function(data, range) {
+  setExportCellStyle: function(data, range, config, filter) {
+    if (typeof data !== 'object' || !data.length || !data[0] || !Object.keys(data[0]).length) {
+      return [];
+    }
+
     // 以 rowIndex 为键，field 为值
     var fieldKeys = Object.keys(data[0]);
-    var maxCol = fieldKeys.length - 1;
-    var maxRow = data.length -1;
+    var maxCol = data.length -1;
+    var maxRow = fieldKeys.length - 1;
     // 默认 A1 ~ 右下角
     var startPos = {c: 0, r: 0};
     var endPos = {c: maxCol, r: maxRow};
@@ -314,22 +321,7 @@ LAY_EXCEL = {
     if (startPos.r > endPos.r) {
       console.error('开始行不得大于结束行');
     }
-    return {
-      startPos: startPos,
-      endPos: endPos,
-      fieldKeys: fieldKeys
-    }
-  },
-  /**
-   * 根据 startPos endPos 遍历设置单元格属性，支持 filter 回调处理
-   * @param data array sheet级别数据
-   * @param startPos object {c: 开始列索引, r: 开始行索引}
-   * @param endPos object {c: 结束列索引, r: 结束行索引}
-   * @param fieldKeys ['第一列属性Key', '第二列属性Key']
-   * @param config object {s: {样式}, v: '值'}
-   * @param filter callable 回调函数，入参 cell(原cell)，newCell(新cell),row(当前行),config(配置), currentRow(当前行索引), currentCol(当前列索引-数字),currentColKey(当前列索引-对象)
-   */
-  setCellStyle: function (data, startPos, endPos, fieldKeys, config, filter) {
+
     // 遍历范围内的数据，进行样式设置，按从上到下从左到右按行遍历
     for (var currentRow = startPos.r; currentRow <= endPos.r; currentRow++) {
       for (var currentCol = startPos.c; currentCol <= endPos.c; currentCol++) {
@@ -365,99 +357,6 @@ LAY_EXCEL = {
         data[currentRow][fieldKeys[currentCol]] = newCell;
       }
     }
-  },
-  /**
-   * 设置范围内环绕的边框
-   * @param data [sheet级别的数据]
-   * @param range [范围字符串，如 A1:C12，默认从左上角到右下角]
-   * @param config [border 上下左右属性配置信息（对角线的三个属性被下放到left/right/top/bottom下），如：{top: {xxx}, bottom: {}, left: {}, right: {}}]
-   */
-  setRoundBorder: function(data, range, config) {
-    if (typeof data !== 'object' || !data.length || !data[0] || !Object.keys(data[0]).length) {
-      return [];
-    }
-
-    var rangeObj = this.getDefaultRange(data, range);
-    var startPos = rangeObj.startPos;
-    var endPos = rangeObj.endPos;
-    var fieldKeys = rangeObj.fieldKeys;
-
-    // 顶部 border 属性取 config.top
-    this.setCellStyle(data, startPos, {
-      c: endPos.c,
-      r: startPos.r
-    }, fieldKeys, {
-      s: {
-        border: {
-          top: config.top,
-          diagonal: config.top.diagonal,
-          diagonalUp: config.top.diagonalUp,
-          diagonalDown: config.top.diagonalDown
-        }
-      }
-    })
-    // 右侧 border 属性取 config.right
-    this.setCellStyle(data, {
-      c: endPos.c,
-      r: startPos.r
-    }, endPos, fieldKeys, {
-      s: {
-        border: {
-          right: config.right,
-          diagonal: config.right.diagonal,
-          diagonalUp: config.right.diagonalUp,
-          diagonalDown: config.right.diagonalDown
-        }
-      }
-    })
-    // 底部 border 属性取 config.bottom
-    this.setCellStyle(data, {
-      c: startPos.c,
-      r: endPos.r
-    }, endPos, fieldKeys, {
-      s: {
-        border: {
-          bottom: config.bottom,
-          diagonal: config.bottom.diagonal,
-          diagonalUp: config.bottom.diagonalUp,
-          diagonalDown: config.bottom.diagonalDown
-        }
-      }
-    })
-    // 左侧 border 属性取 config.left
-    this.setCellStyle(data, startPos, {
-      c: startPos.c,
-      r: endPos.r
-    }, fieldKeys, {
-      s: {
-        border: {
-          left: config.left,
-          diagonal: config.left.diagonal,
-          diagonalUp: config.left.diagonalUp,
-          diagonalDown: config.left.diagonalDown
-        }
-      }
-    })
-  },
-  /**
-   * 批量设置单元格属性
-   * @param  {array} data     [sheet级别的数据]
-   * @param  {string} range		 [范围字符串，比如 A1:C12，开始位置默认 A1，结束位置默认整个表格右下角]
-   * @param  {object} config   [批量设置的单元格属性]
-   * @param  {function} filter   [回调函数，传递函数生效，返回值作为新的值（可用于过滤、规则替换样式等骚操作）]
-   * @return {array}          [重新渲染后的 sheet 数据]
-   */
-  setExportCellStyle: function(data, range, config, filter) {
-    if (typeof data !== 'object' || !data.length || !data[0] || !Object.keys(data[0]).length) {
-      return [];
-    }
-
-    var rangeObj = this.getDefaultRange(data, range);
-    var startPos = rangeObj.startPos;
-    var endPos = rangeObj.endPos;
-    var fieldKeys = rangeObj.fieldKeys;
-
-    this.setCellStyle(data, startPos, endPos, fieldKeys, config, filter);
     return data;
   },
   /**
@@ -470,7 +369,7 @@ LAY_EXCEL = {
     for (var index = 0; index < origin.length; index++) {
       merge.push({
         s: this.splitPosition(origin[index][0]),
-        e: this.splitPosition(origin[index][1])
+        e: this.splitPosition(origin[index][1]),
       });
     }
     return merge;
@@ -568,7 +467,7 @@ LAY_EXCEL = {
    */
   filterDataToAoaData: function(filterData){
     var aoaData = [];
-    $.each(filterData, function(index, item) {
+    layui.each(filterData, function(index, item) {
       var itemData = [];
       for (var i in item) {
         if (!item.hasOwnProperty(i)) {
@@ -609,7 +508,7 @@ LAY_EXCEL = {
         var old_field_name = true_fields[key];
         // 如果传入的是回调，则回调的值则为新值
         if (typeof old_field_name === 'function' && old_field_name.apply) {
-          exportData[i][new_field_name] = old_field_name.apply(window, [item[new_field_name], item, data, i, new_field_name]);
+          exportData[i][new_field_name] = old_field_name.apply(window, [item[new_field_name], item, data]);
         } else {
           if (typeof item[old_field_name] !== 'undefined') {
             exportData[i][new_field_name] = item[old_field_name];
@@ -629,8 +528,8 @@ LAY_EXCEL = {
    */
   filterImportData: function(data, fields) {
     var that = this;
-    $.each(data, function(fileindex, xlsx) {
-      $.each(xlsx, function(sheetname, content) {
+    layui.each(data, function(fileindex, xlsx) {
+      layui.each(xlsx, function(sheetname, content) {
         xlsx[sheetname] = that.filterExportData(content, fields);
       });
     });
@@ -648,7 +547,6 @@ LAY_EXCEL = {
       header: 'A',
       range: null,
       fields: null,
-      checkMime: true,
     };
     $.extend(option, opt);
     var that = this;
@@ -668,22 +566,17 @@ LAY_EXCEL = {
       'application/vnd-xls',
       'application/csv',
       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-      'application/wps-office.xlsx',
       ''
     ];
-    if (option.checkMime) {
-      $.each(files, function(index, item) {
-        if (supportReadMime.indexOf(item.type) === -1) {
-          throw {code: 999, message: item.name+'（'+item.type+'）为不支持的文件类型'};
-        }
-      });
-    }
-    delete option.checkMime;
+    layui.each(files, function(index, item) {
+      if (supportReadMime.indexOf(item.type) === -1) {
+        throw {code: 999, message: item.name+'（'+item.type+'）为不支持的文件类型'};
+      }
+    });
 
     // 按照二进制读取
     var data = {};
-    var book = {};
-    $.each(files, function(index, item) {
+    layui.each(files, function(index, item) {
       var reader = new FileReader();
       if (!reader) {
         throw {code: 999, message: '不支持FileReader，请更换更新的浏览器'};
@@ -694,12 +587,11 @@ LAY_EXCEL = {
           type: 'binary'
         });
         var excelData = {};
-        $.each(wb.Sheets, function(sheet, sheetObj) {
+        layui.each(wb.Sheets, function(sheet, sheetObj) {
           // 全为空的去掉
           if (wb.Sheets.hasOwnProperty(sheet)) {
             var opt = {
-              header: option.header,
-              defval: ''
+              header: option.header
             };
             if (option.range) {
               opt.range = option.range;
@@ -712,118 +604,13 @@ LAY_EXCEL = {
           }
         });
         data[index] = excelData;
-        book[index] = wb;
         // 全部读取完毕才执行
         if (index === files.length - 1) {
-          callback && callback.apply && callback.apply(window, [data, book]);
+          callback && callback.apply && callback.apply(window, [data]);
         }
       };
       reader.readAsBinaryString(item);
     });
-  },
-  /**
-   * EXCEL日期码转换为Date对象
-   * @param code double excel中存储的日期格式码
-   */
-  dateCodeToDate: function(code)
-  {
-    var obj = XLSX.SSF.parse_date_code(code);
-    return (new Date(obj.y + '-' + obj.m + '-' + obj.d + ' ' + obj.H + ':' + obj.M + ':' + obj.S));
-  },
-  /**
-   * 字符补全函数
-   * @param str
-   * @param maxLength
-   * @param padString
-   * @returns {*}
-   */
-  strPad: function(str, maxLength, padString) {
-    str = str + ''
-    if (typeof maxLength === 'undefined') {
-      maxLength = 2
-    }
-    if (typeof padString === 'undefined') {
-      padString = '0'
-    }
-
-    if (padString.length <= 0) {
-      console.error('strPad error');
-      return str;
-    }
-
-    if (str.length < maxLength) {
-      var repeatCount = Math.floor((maxLength - str.length) / padString.length);
-      var exceptStr = '';
-      if (repeatCount * padString.length < maxLength - 1) {
-        exceptStr = padString.substr(0, maxLength - 1 - repeatCount * padString.length)
-      }
-      return padString * repeatCount + exceptStr  + str
-    } else {
-      return str
-    }
-  },
-  /**
-   * 简易格式转换
-   * @param date Date 待转换时间
-   * @param format String 日期格式 YYYY-MM-DD HH:ii:ss
-   */
-  dateFormat: function(date, format)
-  {
-    if (!(date instanceof Date)) {
-      console.error(date+'需要是时间日期对象');
-    }
-    if (typeof format === 'undefined') {
-      format = 'YYYY-MM-DD HH:ii:ss';
-    }
-    // 制造 format 相关参数
-    var YYYY = date.getFullYear();
-    var YY = (YYYY + '').substr(2, 2)
-    var M = date.getMonth() + 1;
-    var MM = this.strPad(M, 2, '0');
-    var D = date.getDate();
-    var DD = this.strPad(D, 2, '0');
-    var H = date.getHours();
-    var HH = this.strPad(H, 2, '0');
-    var i = date.getMinutes();
-    var ii = this.strPad(i, 2, '0');
-    var s = date.getSeconds();
-    var ss = this.strPad(s, 2, '0');
-
-    var config = {
-      'YYYY': YYYY,
-      'YY': YY,
-      'MM': MM,
-      'M': M,
-      'DD': DD,
-      'D': D,
-      'HH': HH,
-      'H': H,
-      'ii': ii,
-      'i': i,
-      'ss': ss,
-      's': s
-    };
-
-    for (var key in config) {
-      if (!config.hasOwnProperty(key)) {
-        continue;
-      }
-
-      var reg = RegExp(key, 'g');
-
-      format = format.replace(reg, config[key]);
-    }
-
-    return format;
-  },
-  /**
-   * excel的日期CODE格式化
-   * @param code
-   * @param format
-   * @returns {*|void|string}
-   */
-  dateCodeFormat: function (code, format) {
-    return this.dateFormat(this.dateCodeToDate(code), format)
   }
 }
 

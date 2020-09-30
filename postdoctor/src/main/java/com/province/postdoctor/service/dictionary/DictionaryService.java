@@ -18,10 +18,4 @@ public interface DictionaryService extends IService<Dictionary> {
 
     List<Dictionary> f_subject();
 
-    List<Dictionary> f_job();
-
-    List<Dictionary> s_job(String name);
-
-
-
 }

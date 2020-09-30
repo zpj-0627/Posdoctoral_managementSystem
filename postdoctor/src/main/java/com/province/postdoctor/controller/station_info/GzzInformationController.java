@@ -62,18 +62,6 @@ public class GzzInformationController {
         return szdwTableResult1;
     }
 
-//    //流动站表
-//    @RequestMapping("/list3")
-//    public List<GzzInformation> list3() {
-//        QueryWrapper<GzzInformation> queryWrapper=new QueryWrapper<>();
-//        queryWrapper.eq("f_job","采矿业");
-//        List<GzzInformation> dList = gzzInformationService.list(queryWrapper);
-//        System.out.println(dList);
-//
-//        return dList;
-//    }
-
-
     //点击工作站树节点展示信息
     @RequestMapping("/list2")
     public Didresult<GzzInformation> list2(String dId) {

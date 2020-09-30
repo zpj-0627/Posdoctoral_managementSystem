@@ -17,8 +17,7 @@ public class PoetTable implements Serializable {
     private String dType;
     private String department;
     private String fsubject;
-    private String f_job;
-    private String s_job;
+    private String Industry;
     private String cddepartment;
     private String fixedphone;
     private String fax;

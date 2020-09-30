@@ -53,9 +53,8 @@ package com.province.postdoctor.entity.station_info;
 
     private String email;
 
-    private String fJob;
+    private String Industry;
 
-    private String sJob;
 
 
 }

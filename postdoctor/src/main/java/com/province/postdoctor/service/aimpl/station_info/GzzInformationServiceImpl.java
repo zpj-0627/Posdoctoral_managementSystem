@@ -3,6 +3,7 @@ package com.province.postdoctor.service.aimpl.station_info;
 import com.province.postdoctor.entity.station_info.GzzInformation;
 import com.province.postdoctor.entity.station_info.LdzInformation;
 import com.province.postdoctor.entity.station_info.PoetTable;
+import com.province.postdoctor.entity.station_info.UnitTree;
 import com.province.postdoctor.mapper.station_info.GzzInformationMapper;
 import com.province.postdoctor.service.station_info.GzzInformationService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -39,5 +40,10 @@ public class GzzInformationServiceImpl extends ServiceImpl<GzzInformationMapper,
     @Override
     public List<GzzInformation> selectByd_id_g(String dId) {
         return gzzInformationMapper.selectByd_id_g(dId);
+    }
+
+    @Override
+    public List<UnitTree> selectUnitTree() {
+        return gzzInformationMapper.selectUnitTree();
     }
 }

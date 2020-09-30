@@ -17,9 +17,4 @@ public interface DictionaryMapper extends BaseMapper<Dictionary> {
     List<Dictionary> department();
 
     List<Dictionary> f_subject();
-
-    List<Dictionary> f_job();
-
-    List<Dictionary> s_job(String name);
-
 }

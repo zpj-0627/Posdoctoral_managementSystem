@@ -14,7 +14,7 @@ function departmentSelect(){
             success: function (data) {
                 $('#department').append(new Option());
                 $.each(data, function (index, item) {
-                        $('#department').append(new Option(item.name, item.id));
+                        $('#department').append(new Option(item.title, item.id));
 
                 });
                 form.render('select');
@@ -43,7 +43,7 @@ function f_subject(){
                 success: function (data) {
                     $('#fsubject').append(new Option());
                     $.each(data, function (index, item) {
-                        $('#fsubject').append(new Option(item.name, item.id));
+                        $('#fsubject').append(new Option(item.title, item.id));
 
                     });
                     form.render('select');
@@ -88,7 +88,7 @@ function selectIndustry(){
     layui.use(['form','jquery'],function () {
         var $ = layui.$,
             form = layui.form;
-        $('#f_job').empty();
+        $('#Industry').empty();
         $(function () {
             $.ajax({
                 type: "POST",
@@ -96,9 +96,9 @@ function selectIndustry(){
                 dataType: "json",
                 cache: false,
                 success: function (data) {
-                    $('#f_job').append(new Option());
+                    $('#Industry').append(new Option());
                     $.each(data, function (index, item) {
-                        $('#f_job').append(new Option(item.name, item.id));
+                        $('#Industry').append(new Option(item.name, item.id));
                     });
                     form.render('select');
                 }, error: function () {

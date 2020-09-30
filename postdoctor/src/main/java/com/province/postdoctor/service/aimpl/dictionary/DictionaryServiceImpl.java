@@ -32,13 +32,4 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
         return dictionaryMapper.f_subject() ;
     }
 
-    @Override
-    public List<Dictionary> f_job() {
-        return dictionaryMapper.f_job();
-    }
-
-    @Override
-    public List<Dictionary> s_job(String name) {
-        return dictionaryMapper.s_job(name);
-    }
 }

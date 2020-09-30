@@ -8,10 +8,7 @@ SELECT
 	d_name 'dName',
 	cddepartment,
 	fixedphone,
-	fax,
-	department,
-	f_subject 'fsubject',
-	d_type 'dType'
+	fax
 FROM
 	ldz_information
     <where> 1=1
@@ -25,7 +22,7 @@ FROM
 			and department = #{department}
 		</if>
 		<if test="fsubject != null and fsubject !=''">
-		    and f_subject = #{fsubject}
+		    and FIND_IN_SET(#{fsubject},f_subject)
 		</if>
 	</where>
 UNION ALL
@@ -33,10 +30,7 @@ UNION ALL
 		d_name 'dName',
 		cddepartment,
 		fixedphone,
-		fax,
-		f_job,
-		s_job,
-		d_type 'dType'
+		fax
 	FROM
 		gzz_information
 	<where> 1=1
@@ -46,11 +40,8 @@ UNION ALL
 		<if test="dType != null and dType !=''">
 			and d_type = #{dType}
 		</if>
-		<if test="f_job != null and f_job !=''">
-			and f_job = #{f_job}
-		</if>
-		<if test="s_job != null and s_job !=''">
-			and s_job = #{s_job}
+		<if test="Industry != null and Industry !=''">
+			and FIND_IN_SET(#{Industry},Industry)
 		</if>
 	</where>
 </select>
@@ -87,6 +78,21 @@ UNION ALL
             `gzz_information`
         WHERE d_id=#{dId};
     </select>
+
+	<select id="selectUnitTree"   resultType="com.province.postdoctor.entity.station_info.UnitTree">
+		SELECT
+			d_id,d_pid,d_name
+		FROM
+			`gzz_information`
+		UNION ALL
+		SELECT
+			d_id,d_pid,d_name
+		FROM
+			`ldz_information`
+
+    </select>
+
+
 
 
 

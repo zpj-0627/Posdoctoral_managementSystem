@@ -35,7 +35,7 @@ package com.province.postdoctor.entity.dictionary;
     private String dictionaryId;
 
     @JsonProperty("title")
-    private String name;
+    private String title;
 
     @JsonProperty("parentId")
     private String updictionaryId;

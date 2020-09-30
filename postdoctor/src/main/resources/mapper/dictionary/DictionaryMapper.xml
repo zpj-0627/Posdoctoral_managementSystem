@@ -4,7 +4,7 @@
 
     <select id="department"   resultType="com.province.postdoctor.entity.dictionary.Dictionary">
         SELECT
-            `name`
+            `title`
         FROM
             dictionary
         WHERE
@@ -13,34 +13,13 @@
 
     <select id="f_subject"   resultType="com.province.postdoctor.entity.dictionary.Dictionary">
         SELECT
-            `name`
+            `title`
         FROM
             dictionary
         WHERE
 	updictionaryId = '10003'
     </select>
 
-    <select id="f_job"   resultType="com.province.postdoctor.entity.dictionary.Dictionary">
-        SELECT
-            `name`
-        FROM
-            dictionary
-        WHERE
-	updictionaryId = '10004'
-    </select>
-
-    <select id="s_job"   parameterType="com.province.postdoctor.entity.dictionary.Dictionary" resultType="com.province.postdoctor.entity.dictionary.Dictionary">
-        SELECT
-	`name`
-FROM
-	`dictionary`
-WHERE
-	updictionaryId IN (
-		SELECT
-			dictionaryId
-		FROM
-			`dictionary` WHERE `name`=#{name})
-    </select>
 
 
 </mapper>

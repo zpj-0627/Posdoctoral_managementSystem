@@ -4,6 +4,7 @@ import com.province.postdoctor.entity.station_info.GzzInformation;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.province.postdoctor.entity.station_info.LdzInformation;
 import com.province.postdoctor.entity.station_info.PoetTable;
+import com.province.postdoctor.entity.station_info.UnitTree;
 
 import java.util.List;
 
@@ -22,4 +23,6 @@ public interface GzzInformationMapper extends BaseMapper<GzzInformation> {
     List<PoetTable> selectPoetTableByType();
 
     List<GzzInformation> selectByd_id_g(String dId);
+
+    List<UnitTree> selectUnitTree();
 }

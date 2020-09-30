@@ -4,6 +4,7 @@ import com.province.postdoctor.entity.station_info.GzzInformation;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.province.postdoctor.entity.station_info.LdzInformation;
 import com.province.postdoctor.entity.station_info.PoetTable;
+import com.province.postdoctor.entity.station_info.UnitTree;
 
 import java.util.List;
 
@@ -23,4 +24,5 @@ public interface GzzInformationService extends IService<GzzInformation> {
 
     List<GzzInformation> selectByd_id_g(String dId);
 
+    List<UnitTree> selectUnitTree();
 }

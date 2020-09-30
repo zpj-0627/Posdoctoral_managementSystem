@@ -14,11 +14,5 @@ import java.util.List;
  * @since 2020-09-19
  */
 public interface LdzInformationMapper extends BaseMapper<LdzInformation> {
-
-
-
-
     List<LdzInformation> selectByd_id(String dId);
-
-
 }

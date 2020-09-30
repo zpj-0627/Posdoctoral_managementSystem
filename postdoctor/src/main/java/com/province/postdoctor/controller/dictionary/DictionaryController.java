@@ -56,25 +56,4 @@ public class DictionaryController {
         List<Dictionary> dList = dictionaryService.f_subject();
         return dList;
     }
-
-
-//    //
-//    @RequestMapping("/queryAlljob")
-//    public List<Dictionary> queryAlljob(){
-//
-//        QueryWrapper<Dictionary> queryWrapper=new QueryWrapper<>();
-//        queryWrapper.eq("updictionaryId",10004);
-//        List<Dictionary> dList = dictionaryService.list(queryWrapper);
-//        return dList;
-//    }
-
-
-//    //查询工作站全部二级行业名称名称
-//    @RequestMapping("/querySjob")
-//    public List<Dictionary> querySJob(String name){
-//        System.out.println(name);
-//        List<Dictionary> dList = dictionaryService.s_job(name);
-//        System.out.println(dList);
-//        return dList;
-//    }
 }

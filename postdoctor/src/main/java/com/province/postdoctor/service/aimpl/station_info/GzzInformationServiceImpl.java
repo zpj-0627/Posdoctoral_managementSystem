@@ -23,7 +23,6 @@ import java.util.List;
 @Service
 public class GzzInformationServiceImpl extends ServiceImpl<GzzInformationMapper, GzzInformation> implements GzzInformationService {
 
-
     @Resource
     private GzzInformationMapper gzzInformationMapper;
 

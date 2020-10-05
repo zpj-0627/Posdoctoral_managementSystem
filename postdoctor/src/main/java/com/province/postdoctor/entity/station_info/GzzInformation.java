@@ -27,14 +27,29 @@ package com.province.postdoctor.entity.station_info;
             @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
+    /*
+    * 工作站id
+    */
     private String dId;
 
+    /*
+     * 工作站名字
+     */
     private String dName;
 
+    /*
+     * 工作站英文名字
+     */
     private String dEname;
 
+    /*
+     * 工作站id
+     */
     private String professions;
 
+    /*
+    * 类型
+    */
     private String dType;
 
     private String domain;
@@ -42,6 +57,8 @@ package com.province.postdoctor.entity.station_info;
     private String chdepartment;
 
     private String cddepartment;
+
+    private String Industry;
 
     private String comaddress;
 
@@ -52,9 +69,5 @@ package com.province.postdoctor.entity.station_info;
     private String fax;
 
     private String email;
-
-    private String Industry;
-
-
 
 }

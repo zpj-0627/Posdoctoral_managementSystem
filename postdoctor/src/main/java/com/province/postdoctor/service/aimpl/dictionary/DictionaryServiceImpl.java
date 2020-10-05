@@ -2,11 +2,12 @@ package com.province.postdoctor.service.aimpl.dictionary;
 
 import com.province.postdoctor.entity.dictionary.Dictionary;
 import com.province.postdoctor.mapper.dictionary.DictionaryMapper;
-import com.province.postdoctor.service.dictionary.DictionaryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.province.postdoctor.service.dictionary.DictionaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -20,8 +21,9 @@ import java.util.List;
 @Service
 public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Dictionary> implements DictionaryService {
 
-    @Autowired
+    @Resource
     private DictionaryMapper dictionaryMapper;
+
     @Override
     public List<Dictionary> department() {
         return dictionaryMapper.department() ;

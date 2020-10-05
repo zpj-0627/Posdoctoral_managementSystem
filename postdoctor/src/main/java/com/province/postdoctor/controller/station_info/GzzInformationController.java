@@ -65,13 +65,11 @@ public class GzzInformationController {
     //点击工作站树节点展示信息
     @RequestMapping("/list2")
     public Didresult<GzzInformation> list2(String dId) {
-        System.out.println(dId);
         Didresult<GzzInformation> didresult = new Didresult<>();
         List<GzzInformation> dList=gzzInformationService.selectByd_id_g(dId);
         didresult.setStatus(0);
         didresult.setData(dList);
         System.out.println(dList);
-        System.out.println(dId);
         return didresult;
     }
 

@@ -1,21 +1,29 @@
 package com.province.postdoctor.service.dictionary;
 
-import com.province.postdoctor.entity.dictionary.Dictionary;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.province.postdoctor.entity.dictionary.Dictionary;
 
 import java.util.List;
 
 /**
+ * Package: com.province.postdoctor.service.aimpl.dictionary
  * <p>
- *  服务类
- * </p>
- *
- * @author tykj
- * @since 2020-09-27
+ * Description： TODO
+ * <p>
+ * Author: 作者
+ * <p>
+ * Date: Created in 2020/10/5 19:28
+ * <p>
+ * Company: 公司
+ * <p>
+ * Copyright: Copyright (c) 2017
+ * <p>
+ * Version: 0.0.1
+ * <p>
+ * Modified By:
  */
 public interface DictionaryService extends IService<Dictionary> {
     List<Dictionary> department();
 
     List<Dictionary> f_subject();
-
 }

@@ -31,17 +31,32 @@ package com.province.postdoctor.entity.dictionary;
 //    @TableId(value = "id", type = IdType.AUTO)
 //    private Integer id;
 
+    /*
+    * 字典子id
+    */
     @JsonProperty("id")
     private String dictionaryId;
 
+    /*
+     * 字典名字
+     */
     @JsonProperty("title")
     private String title;
 
+    /*
+     * 字典父id
+     */
     @JsonProperty("parentId")
     private String updictionaryId;
 
+    /*
+     * 删除标志
+     */
     private Integer sign;
 
+    /*
+     * 描述
+     */
     private String describe;
 
 

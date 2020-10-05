@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.province.postdoctor.mapper.postdoctor_info.PostdoctorrinformationMapper">
+
+    <select id="selectpostdoctorInfo" parameterType="com.province.postdoctor.entity.postdoctor_info.Postdoctorrinformation" resultType="com.province.postdoctor.entity.postdoctor_info.Postdoctorrinformation">
+        SELECT
+    p_name,
+    p_id,
+    start_station,
+    d_name,
+    f_subject
+    FROM
+    postdoctorrinformation
+        <where> 1=1
+            <if test="dName != null and dName !=''">
+                and d_name like #{dName}
+            </if>
+            <if test="dId != null and pId !=''">
+                and p_id = #{pId}
+            </if>
+            <if test="startStation != null and startStation !=''">
+                and start_station between #{startStation}
+            </if>
+            <if test="fsubject != null and fsubject !=''">
+                and FIND_IN_SET(#{fsubject},f_subject)
+            </if>
+        </where>
+
+    </select>
+
+</mapper>

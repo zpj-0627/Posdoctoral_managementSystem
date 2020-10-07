@@ -3,7 +3,6 @@ function departmentSelect(){
     layui.use(['form','jquery'],function () {
     var $ = layui.$,
         form = layui.form;
-
     $('#department').empty();
     $(function () {
         $.ajax({
@@ -83,22 +82,22 @@ function siIdSelectEdit() {
     });
 }
 
-//所属行业下拉框
-function selectIndustry(){
+//人员管理——部门名字下拉框
+function selectdName(){
     layui.use(['form','jquery'],function () {
         var $ = layui.$,
             form = layui.form;
-        $('#Industry').empty();
+        $('#dName').empty();
         $(function () {
             $.ajax({
                 type: "POST",
-                url: "/dictionary/queryFJob",
+                url: "postdoctorrinformation/querydName",
                 dataType: "json",
                 cache: false,
                 success: function (data) {
-                    $('#Industry').append(new Option());
+                    $('#dName').append(new Option());
                     $.each(data, function (index, item) {
-                        $('#Industry').append(new Option(item.name, item.id));
+                        $('#dName').append(new Option(item.dname, item.id));
                     });
                     form.render('select');
                 }, error: function () {
@@ -110,26 +109,103 @@ function selectIndustry(){
     });
 }
 
-//所属行业下拉框
-function selectSjob(){
+//人员管理——国籍下拉框
+function selectpNationality(){
     layui.use(['form','jquery'],function () {
         var $ = layui.$,
             form = layui.form;
-        var name = $("#f_job").find("option:selected").text();
-        $('#s_job').empty();
+        $('#pNationality').empty();
         $(function () {
             $.ajax({
                 type: "POST",
-                url: "/dictionary/querySjob",
-                data: {
-                     name : name,
-                 },
+                url: "postdoctorrinformation/queryNationality",
                 dataType: "json",
                 cache: false,
                 success: function (data) {
-                    $('#s_job').append(new Option());
+                    $('#pNationality').append(new Option());
                     $.each(data, function (index, item) {
-                        $('#s_job').append(new Option(item.name, item.id));
+                        $('#pNationality').append(new Option(item.pnationality, item.id));
+                    });
+                    form.render('select');
+                }, error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}
+
+//人员管理——学科门类下拉框
+function selectsubjectCategory(){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $('#subjectCategory').empty();
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "dictionary/querySubjectCategory",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#subjectCategory').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#subjectCategory').append(new Option(item.title, item.id));
+                    });
+                    form.render('select');
+                }, error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}
+
+//人员管理——一级学科下拉框
+function selectpfSubject(){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $('#fSubject').empty();
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "dictionary/queryfSubject",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#fSubject').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#fSubject').append(new Option(item.title, item.id));
+                    });
+                    form.render('select');
+                }, error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}
+
+//人员管理——在站状态下拉框
+function selectstatus(){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $('#status').empty();
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "dictionary/querystatus",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#status').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#status').append(new Option(item.title, item.id));
                     });
                     form.render('select');
                 }, error: function () {

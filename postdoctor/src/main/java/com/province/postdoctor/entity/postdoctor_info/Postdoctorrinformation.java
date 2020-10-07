@@ -6,6 +6,7 @@ package com.province.postdoctor.entity.postdoctor_info;
     import lombok.Data;
     import lombok.EqualsAndHashCode;
     import lombok.experimental.Accessors;
+    import org.springframework.format.annotation.DateTimeFormat;
 
 /**
 * <p>
@@ -41,6 +42,11 @@ package com.province.postdoctor.entity.postdoctor_info;
     private Integer pId;
 
             /**
+             * 博士名字
+             */
+    private String pName;
+
+            /**
             * 学科领域
             */
     private String subjectArea;
@@ -68,6 +74,7 @@ package com.province.postdoctor.entity.postdoctor_info;
             /**
             * 出生日期
             */
+            @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date pBDate;
 
             /**
@@ -103,16 +110,24 @@ package com.province.postdoctor.entity.postdoctor_info;
             /**
             * 进站时间
             */
+            @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startStation;
 
             /**
             * 出站时间
             */
+            @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endStation;
+
+            /**
+             * 在站状态
+             */
+    private String status;
 
             /**
             * 入党日期
             */
+            @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date pJpDate;
 
             /**

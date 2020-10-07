@@ -27,7 +27,6 @@ public class DictionaryController {
     @Autowired
     private DictionaryService dictionaryService;
 
-
     //行业目录树
     @RequestMapping("/queryAll")
     public TreeResult<Dictionary> queryAll(){
@@ -54,6 +53,34 @@ public class DictionaryController {
     @RequestMapping("/queryFsubject")
     public List<Dictionary> queryFSubject(){
         List<Dictionary> dList = dictionaryService.f_subject();
+        return dList;
+    }
+
+    //学科门类列表
+    @RequestMapping("/querySubjectCategory")
+    public List<Dictionary> querySubjectCategory(){
+        QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("updictionaryId",10603);
+        queryWrapper.select("dictionaryId","updictionaryId","title","sign");
+        List<Dictionary> dList = dictionaryService.list(queryWrapper);
+        return dList;
+    }
+    //一级学科列表
+    @RequestMapping("/queryfSubject")
+    public List<Dictionary> queryfSubject(){
+        QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("updictionaryId",10003);
+        queryWrapper.select("dictionaryId","updictionaryId","title","sign");
+        List<Dictionary> dList = dictionaryService.list(queryWrapper);
+        return dList;
+    }
+    //在站状态列表
+    @RequestMapping("/querystatus")
+    public List<Dictionary> querystatus(){
+        QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("updictionaryId",10009);
+        queryWrapper.select("dictionaryId","updictionaryId","title","sign");
+        List<Dictionary> dList = dictionaryService.list(queryWrapper);
         return dList;
     }
 }

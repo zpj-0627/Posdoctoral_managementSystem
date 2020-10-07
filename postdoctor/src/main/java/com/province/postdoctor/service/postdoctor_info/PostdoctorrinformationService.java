@@ -16,4 +16,6 @@ import java.util.List;
 public interface PostdoctorrinformationService extends IService<Postdoctorrinformation> {
 
     List<Postdoctorrinformation> selectpostdoctorInfo(Postdoctorrinformation postdoctorrinformation);
+
+    List<Postdoctorrinformation> selectBydId(Postdoctorrinformation postdoctorrinformation);
 }

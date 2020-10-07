@@ -3,7 +3,7 @@
 <mapper namespace="com.province.postdoctor.mapper.postdoctor_info.PostdoctorrinformationMapper">
 
     <select id="selectpostdoctorInfo" parameterType="com.province.postdoctor.entity.postdoctor_info.Postdoctorrinformation" resultType="com.province.postdoctor.entity.postdoctor_info.Postdoctorrinformation">
-        SELECT
+    SELECT
     p_name,
     p_id,
     start_station,
@@ -11,18 +11,55 @@
     f_subject
     FROM
     postdoctorrinformation
+    <where> 1=1
+        <if test="dName != null and dName !=''">
+            and d_name like #{dName}
+        </if>
+        <if test="dId != null and pId !=''">
+            and p_id = #{pId}
+        </if>
+        <if test="startStation != null and startStation !=''">
+            and start_station <![CDATA[<=]]> #{startStation}
+        </if>
+        <if test="endStation != null and endStation !=''">
+            and end_station <![CDATA[>=]]> #{endStation}
+        </if>
+        <if test="pName != null and pName !=''">
+            and p_name = #{pName}
+        </if>
+        <if test="pNationality != null and pNationality !=''">
+            and p_nationality = #{pNationality}
+        </if>
+        <if test="pSex != null and pSex !=''">
+            and p_sex = #{pSex}
+        </if>
+        <if test="subjectArea != null and subjectArea !=''">
+            and FIND_IN_SET(#{subjectArea},subject_area)
+        </if>
+        <if test="endStation != null and endStation !=''">
+            and subject_category = #{subjectCategory}
+        </if>
+        <if test="fSubject != null and fSubject !=''">
+            and f_subject = #{fSubject}
+        </if>
+        <if test="status != null and status !=''">
+            and status = #{status}
+        </if>
+    </where>
+
+</select>
+    <select id="selectBydId" parameterType="com.province.postdoctor.entity.postdoctor_info.Postdoctorrinformation" resultType="com.province.postdoctor.entity.postdoctor_info.Postdoctorrinformation">
+        SELECT
+        p_name,
+        p_id,
+        start_station,
+        d_name,
+        f_subject
+        FROM
+        postdoctorrinformation
         <where> 1=1
-            <if test="dName != null and dName !=''">
-                and d_name like #{dName}
-            </if>
-            <if test="dId != null and pId !=''">
-                and p_id = #{pId}
-            </if>
-            <if test="startStation != null and startStation !=''">
-                and start_station between #{startStation}
-            </if>
-            <if test="fsubject != null and fsubject !=''">
-                and FIND_IN_SET(#{fsubject},f_subject)
+            <if test="dId != null and dId !=''">
+                and FIND_IN_SET(#{dId},d_id)
             </if>
         </where>
 

@@ -16,4 +16,6 @@ import java.util.List;
 public interface PostdoctorrinformationMapper extends BaseMapper<Postdoctorrinformation> {
 
     List<Postdoctorrinformation> selectpostdoctorInfo(Postdoctorrinformation postdoctorrinformation);
+
+    List<Postdoctorrinformation> selectBydId(Postdoctorrinformation postdoctorrinformation);
 }

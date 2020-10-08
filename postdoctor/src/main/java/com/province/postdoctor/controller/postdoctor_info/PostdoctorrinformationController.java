@@ -38,6 +38,7 @@ public class PostdoctorrinformationController {
         queryWrapper.eq("d_type",1);
         queryWrapper.select("p_name","p_id","start_station","d_name","f_subject");
         List<Postdoctorrinformation> dList = postdoctorrinformationService.list(queryWrapper);
+        System.out.println(dList);
         postdoctorrinformationTableResult.setCode(0);
         postdoctorrinformationTableResult.setMsg("");
         postdoctorrinformationTableResult.setCount(((Page)dList).getTotal());//((Page)dList).getTotal()
@@ -51,7 +52,6 @@ public class PostdoctorrinformationController {
         System.out.println(postdoctorrinformation);
         PageHelper.startPage(page,limit);
         PoetResult<Postdoctorrinformation> postdoctorrinformationResult = new PoetResult<>();
-        System.out.println(postdoctorrinformationResult);
         List<Postdoctorrinformation> dList = postdoctorrinformationService.selectpostdoctorInfo(postdoctorrinformation);
         System.out.println(dList);
         postdoctorrinformationResult.setCode(0);

@@ -141,12 +141,12 @@
                     </div>
                 </div>
                 <div class="layui-col-md3">
-                    <div class="layui-col-md6 mc-ui-flex-end">
+                    <!--<div class="layui-col-md5 mc-ui-flex-end">-->
                         <label class="layui-form-label">学科领域：</label>
-                    </div>
-                    <div class="layui-col-md6" style="z-index:9999">
-                        <div class="layui-unselect layui-form-select" id="spmenu">
-                            <input type="text" style="border-color: #009688;border-width: 1.5px;height: 30px" name="spmenu" id="input_spm"  readonly="" class="layui-input">
+                   <!-- </div>-->
+                    <div  class="layui-input-block " style="width:47.5%;z-index:9999">
+                        <div class="layui-unselect layui-form-select" id="spmenu" >
+                            <input type="text" style="border-color: #009688;border-width: 1.5px;height: 30px" name="spmenu" id="input_spm"  placeholder="请选择" readonly="" class="layui-input">
                             <i class="layui-edge"></i>
                         </div>
                         <div class="layui-card select-test" id="spmtest">
@@ -159,6 +159,8 @@
 
             </div>
             <a class="layui-btn layui-btn-primary" id="do_search" style="position: absolute; left: 91.5%; top: 70%;">查询</a>
+            <a class="layui-btn layui-btn-primary" onclick="reset()" style="position: absolute; left: 85%; top: 70%;">重置</a>
+
             <div class="layui-row ">
 
                 <div class="layui-col-md3">
@@ -237,9 +239,9 @@
                 <span class="layui-btn layui-btn-primary layui-btn-sm layui-icon layui-icon-delete" lay-event="delAll" title="批量删除"></span>
             </div>
         </div>-->
-        <div class="layui-col-md10 layui-col-sm9 layui-col-xs6" style="text-align: right;">
+        <div class="layui-col-md10 layui-col-sm9 layui-col-xs6" style="width: 100%;text-align: right">
             <!--筛选，导出，打印-->
-            <div class="layui-input-inline yutons-btn-margin-right">
+            <div class="layui-input-inline yutons-btn-margin-left">
                 <span class="layui-inline yutons-header-tool" title="导出" lay-event="table_export">
 				                    <i class="layui-icon layui-icon-export"></i></span>
                 <span class="layui-inline yutons-header-tool" title="上传" lay-event="LAYTABLE_PRINT">
@@ -303,21 +305,21 @@
                 };
             }
         });
+
+
         //表格重载
 
         $('#do_search').on('click', function () {
                     var dName = $("#dName").find("option:selected").text();
-                    console.log(dName);
                     var pId = $('#pId').val();
                     var startStation = $('#startStation').val();
-                     console.log(startStation);
                     var endStation = $('#endStation').val();
                     var pName = $('#pName').val();
                     var pNationality = $("#pNationality").find("option:selected").text();
                     var pSex = $("#pSex").find("option:selected").text();
                     var subjectArea = $('#input_spm');
                     var subjectCategory = $("#subjectCategory").find("option:selected").text();
-                    var fsubject = $("#fsubject").find("option:selected").text();
+                    var fSubject = $("#fSubject").find("option:selected").text();
                     var status = $("#status").find("option:selected").text();
                     //执行重载
                     table.reload('testReload',{
@@ -332,7 +334,7 @@
                             pSex: pSex,
                             subjectArea: subjectArea.val(),
                             subjectCategory: subjectCategory,
-                            fsubject: fsubject,
+                            fSubject: fSubject,
                             status: status
                         }
                         ,page: {
@@ -340,7 +342,6 @@
                         }
 
                     });
-                    console.log("sjsj");
         });
 
         //监听头工具栏事件
@@ -680,9 +681,9 @@
 */
                 // console.log(param);
                 table.reload('testReload',{
-                    url:'/subjectplatform/list2'
+                    url:'/postdoctorrinformation/searchById'
                     ,where:{
-                        nodeId: obj.param.nodeId
+                        dId: obj.param.nodeId
                     }
                 });
             });
@@ -707,9 +708,9 @@
     selectstatus();
     //重置搜索框
     function reset() {
-        $('#input_spm').val("");
-        $('#school').val("");
-        $("#dGrade1").val("");
+        $('#dName').val("");
+        $('#pNationality').val("");
+        $("#input_spm").val("");
         layui.form.render();
     }
     timeData();

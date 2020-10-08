@@ -74,7 +74,7 @@ package com.province.postdoctor.entity.postdoctor_info;
             /**
             * 出生日期
             */
-            @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date pBDate;
 
             /**
@@ -110,13 +110,13 @@ package com.province.postdoctor.entity.postdoctor_info;
             /**
             * 进站时间
             */
-            @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startStation;
 
             /**
             * 出站时间
             */
-            @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endStation;
 
             /**

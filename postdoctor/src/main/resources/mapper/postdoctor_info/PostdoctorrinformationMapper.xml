@@ -13,16 +13,16 @@
     postdoctorrinformation
     <where> 1=1
         <if test="dName != null and dName !=''">
-            and d_name like #{dName}
+            and d_name = #{dName}
         </if>
-        <if test="dId != null and pId !=''">
+        <if test="pId != null">
             and p_id = #{pId}
         </if>
-        <if test="startStation != null and startStation !=''">
-            and start_station <![CDATA[<=]]> #{startStation}
+        <if test="startStation != null">
+            and start_station <![CDATA[<]]> #{startStation}
         </if>
-        <if test="endStation != null and endStation !=''">
-            and end_station <![CDATA[>=]]> #{endStation}
+        <if test="endStation != null ">
+            and end_station <![CDATA[>]]> #{endStation}
         </if>
         <if test="pName != null and pName !=''">
             and p_name = #{pName}
@@ -36,7 +36,7 @@
         <if test="subjectArea != null and subjectArea !=''">
             and FIND_IN_SET(#{subjectArea},subject_area)
         </if>
-        <if test="endStation != null and endStation !=''">
+        <if test="subjectCategory != null and subjectCategory !=''">
             and subject_category = #{subjectCategory}
         </if>
         <if test="fSubject != null and fSubject !=''">
@@ -62,7 +62,6 @@
                 and FIND_IN_SET(#{dId},d_id)
             </if>
         </where>
-
     </select>
 
 </mapper>

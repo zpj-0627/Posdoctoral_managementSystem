@@ -13,7 +13,7 @@ FROM
 	ldz_information
     <where> 1=1
 		<if test="dName != null and dName !=''">
-		    and d_name like #{dName}
+		    and d_name like "%"#{dName}"%"
 	    </if>
 		<if test="dType != null and dType !=''">
 			and d_type = #{dType}
@@ -35,7 +35,7 @@ UNION ALL
 		gzz_information
 	<where> 1=1
 		<if test="dName != null and dName !=''">
-			and d_name like #{dName}
+			and d_name like "%"#{dName}"%"
 		</if>
 		<if test="dType != null and dType !=''">
 			and d_type = #{dType}

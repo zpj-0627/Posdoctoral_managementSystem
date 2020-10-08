@@ -265,9 +265,9 @@
 <!--头部工具栏-->
 <script type="text/html" id="toolbarDemo">
     <div class="layui-row" style="height: 2%">
-        <div class="layui-col-md10 layui-col-sm9 layui-col-xs6" style="text-align: right;">
+        <div class="layui-col-md10 layui-col-sm9 layui-col-xs6" style="width: 100%;text-align: right">
             <!--导出，打印-->
-            <div class="layui-input-inline yutons-btn-margin-right">
+            <div class="layui-input-inline yutons-btn-margin-left">
                 <span class="layui-inline yutons-header-tool" title="导出" lay-event="table_export">
                     <i class="layui-icon layui-icon-export"></i></span>
                 <span class="layui-inline yutons-header-tool" title="上传" lay-event="LAYTABLE_PRINT">
@@ -816,7 +816,7 @@
                                 $("#tabletest2").append('<tr>' + tr + '</tr>')
                                 tr = '<td align="right">' +'<strong>'+ mydata[1] +'</strong>'+ '</td>' + '<td>' + data.data[0].dename + '</td>'
                                 $("#tabletest2").append('<tr>' + tr + '</tr>')
-                                tr = '<td align="right">' +'<strong>'+mydata[2] +'</strong>'+ '</td>' + '<td>' + data.data[0].Industry + '</td>'
+                                tr = '<td align="right">' +'<strong>'+mydata[2] +'</strong>'+ '</td>' + '<td>' + data.data[0].industry + '</td>'
                                 $("#tabletest2").append('<tr>' + tr + '</tr>')
                                 tr = '<td align="right">' +'<strong>' + mydata[3] +'</strong>'+ '</td>' + '<td>' + data.data[0].domain + '</td>'
                                 $("#tabletest2").append('<tr>' + tr + '</tr>')

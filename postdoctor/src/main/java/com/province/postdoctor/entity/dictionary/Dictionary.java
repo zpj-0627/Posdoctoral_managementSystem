@@ -35,7 +35,7 @@ package com.province.postdoctor.entity.dictionary;
     * 字典子id
     */
     @JsonProperty("id")
-    private String dictionaryId;
+    private String dictionaryid;
 
     /*
      * 字典名字
@@ -47,7 +47,7 @@ package com.province.postdoctor.entity.dictionary;
      * 字典父id
      */
     @JsonProperty("parentId")
-    private String updictionaryId;
+    private String updictionaryid;
 
     /*
      * 删除标志
@@ -57,7 +57,7 @@ package com.province.postdoctor.entity.dictionary;
     /*
      * 描述
      */
-    private String describe;
+    private String remark;
 
 
 }

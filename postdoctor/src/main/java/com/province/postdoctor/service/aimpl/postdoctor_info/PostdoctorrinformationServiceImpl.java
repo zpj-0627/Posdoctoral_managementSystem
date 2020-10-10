@@ -32,4 +32,9 @@ public class PostdoctorrinformationServiceImpl extends ServiceImpl<Postdoctorrin
     public List<Postdoctorrinformation> selectBydId(Postdoctorrinformation postdoctorrinformation) {
         return postdoctorrinformationMapper.selectBydId(postdoctorrinformation);
     }
+
+    @Override
+    public List<Postdoctorrinformation> selectBygzzdId() {
+        return postdoctorrinformationMapper.selectBygzzdId();
+    }
 }

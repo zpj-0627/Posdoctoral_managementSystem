@@ -21,8 +21,8 @@ FROM
 		<if test="department != null and department !=''">
 			and department = #{department}
 		</if>
-		<if test="fsubject != null and fsubject !=''">
-		    and FIND_IN_SET(#{fsubject},f_subject)
+		<if test="fSubject != null and fSubject !=''">
+		    and FIND_IN_SET(#{fSubject},f_subject)
 		</if>
 	</where>
 UNION ALL
@@ -57,18 +57,7 @@ UNION ALL
 		FROM
 		ldz_information
 		WHERE
-		d_type = "1"
-		UNION ALL
-		SELECT
-		d_name 'dName',
-		cddepartment,
-		fixedphone,
-		fax
-		FROM
-		gzz_information
-		WHERE
-	    d_type = "1"
-
+	    d_type = "02"
 	</select>
 
 	<select id="selectByd_id_g"  parameterType="com.province.postdoctor.entity.station_info.GzzInformation" resultType="com.province.postdoctor.entity.station_info.GzzInformation">

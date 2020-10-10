@@ -132,7 +132,7 @@
                         <label class="layui-form-label mc-ui-flex-end" style="width: 60%;">流动站（一级学科）</label>
                     </div>
                     <div class="layui-col-md6" >
-                        <select id="fsubject" name="fsubject" style="border:1.5px solid #009688;height: 30px;width: 200px">
+                        <select id="fSubject" name="fSubject" style="border:1.5px solid #009688;height: 30px;width: 200px">
 <!--                            <option value="3"></option>-->
 <!--                            <option value="972a3338-b744-44a0-bf7e-8ae3f3fa3a1c">计算机</option>-->
 <!--                            <option value="e28436d3-a077-462e-afc9-0645dbab5b47">土木</option>-->
@@ -179,8 +179,8 @@
                 <form class="layui-form" action="" lay-filter="example">
                     <div class="layui-col-md6 mc-ui-flex-start layui-col-lg3" style="width: 120%;">
                         <label class="layui-form-label" style="margin-left:0.5cm;">单位类型：</label>
-                        <input lay-filter="sex" id="ldztype" type="radio" name="sex" checked="checked" value="1" title="流动站设站单位"/>
-                        <input lay-filter="sex" id="gzztype" type="radio" name="sex" value="0" title="工作站设站单位"/>
+                        <input lay-filter="sex" id="ldztype" type="radio" name="sex" checked="checked" value="02" title="流动站设站单位"/>
+                        <input lay-filter="sex" id="gzztype" type="radio" name="sex" value="01" title="工作站设站单位"/>
                     </div>
                 </form>
             </div>
@@ -289,11 +289,11 @@
 
         form.on("radio(sex)", function (data) {
             var sex = data.value;
-            if (this.value == '1') {
+            if (this.value == '02') {
                 $("#ldz").css('display', 'block');
                 $("#gzz").css('display', 'none');
             }
-            if (this.value == '0') {
+            if (this.value == '01') {
                 $("#gzz").css('display', 'block');
                 $("#ldz").hide();
             }
@@ -342,7 +342,7 @@
             var type = $('input[name="sex"]:checked').val();
             var Industry = $('#input_spm');
             var department = $("#department").find("option:selected").text();
-            var fsubject = $("#fsubject").find("option:selected").text();
+            var fSubject = $("#fSubject").find("option:selected").text();
             table.reload('testReload', {
                 url: '/gzz-information/search'
                 , where: {
@@ -351,7 +351,7 @@
                     // ldztype:ldztype,
                     Industry: Industry.val(),
                     department:department,
-                    fsubject:fsubject
+                    fSubject:fSubject
                 }
                 , page: {
                     curr: 1

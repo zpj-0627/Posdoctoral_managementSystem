@@ -32,7 +32,7 @@ function f_subject(){
         var $ = layui.$,
             form = layui.form;
 
-        $('#department').empty();
+        $('#fSubject').empty();
         $(function () {
             $.ajax({
                 type: "POST",
@@ -40,9 +40,9 @@ function f_subject(){
                 dataType: "json",
                 cache: false,
                 success: function (data) {
-                    $('#fsubject').append(new Option());
+                    $('#fSubject').append(new Option());
                     $.each(data, function (index, item) {
-                        $('#fsubject').append(new Option(item.title, item.id));
+                        $('#fSubject').append(new Option(item.title, item.id));
 
                     });
                     form.render('select');
@@ -219,7 +219,7 @@ function selectstatus(){
 
 
 
-//学科平台目录树
+//字典目录树
 function spmTree() {
     layui.extend({
         dtree: 'layui/layui_exts/layui_ext/dtree/dtree'

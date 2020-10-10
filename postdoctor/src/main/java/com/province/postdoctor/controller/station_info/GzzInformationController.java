@@ -38,9 +38,10 @@ public class GzzInformationController {
     @RequestMapping("/search")
     public PoetResult<PoetTable> search(Integer page, Integer limit,  PoetTable poetTable) {
         PageHelper.startPage(page,limit);
+        System.out.println(poetTable);
         PoetResult<PoetTable> szdwTableResult = new PoetResult<>();
         List<PoetTable> dList = gzzInformationService.selectPoetTable(poetTable);
-
+        System.out.println(dList);
         szdwTableResult.setCode(0);
         szdwTableResult.setMsg("");
         szdwTableResult.setCount(((Page)dList).getTotal());//((Page)dList).getTotal()

@@ -7,11 +7,13 @@ import com.github.pagehelper.PageHelper;
 import com.province.postdoctor.entity.postdoctor_info.Postdoctorrinformation;
 import com.province.postdoctor.result.PoetResult;
 import com.province.postdoctor.service.postdoctor_info.PostdoctorrinformationService;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,7 +37,6 @@ public class PostdoctorrinformationController {
         PageHelper.startPage(page,limit);
         PoetResult<Postdoctorrinformation> postdoctorrinformationTableResult = new PoetResult<>();
         QueryWrapper<Postdoctorrinformation> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("d_type",1);
         queryWrapper.select("p_name","p_id","start_station","d_name","f_subject");
         List<Postdoctorrinformation> dList = postdoctorrinformationService.list(queryWrapper);
         System.out.println(dList);
@@ -65,7 +66,26 @@ public class PostdoctorrinformationController {
     public PoetResult<Postdoctorrinformation> selectBydId(Integer page, Integer limit, Postdoctorrinformation postdoctorrinformation) {
         PageHelper.startPage(page,limit);
         PoetResult<Postdoctorrinformation> postdoctorrinformationResult = new PoetResult<>();
-        List<Postdoctorrinformation> dList = postdoctorrinformationService.selectBydId(postdoctorrinformation);
+        List<Postdoctorrinformation> dList = new ArrayList<>();
+        QueryWrapper<Postdoctorrinformation> queryWrapper = new QueryWrapper<>();
+        System.out.println(postdoctorrinformation.getDId());
+        System.out.println(postdoctorrinformation);
+        if ("110".equals(postdoctorrinformation.getDId())){
+            queryWrapper.select("p_name","p_id","start_station","d_name","f_subject");
+            dList = postdoctorrinformationService.list(queryWrapper);
+        }else if ("01".equals(postdoctorrinformation.getDId()))
+        {
+            queryWrapper.eq("d_type","01");
+            queryWrapper.select("p_name","p_id","start_station","d_name","f_subject");
+            dList = postdoctorrinformationService.list(queryWrapper);
+        }else if ("02".equals(postdoctorrinformation.getDId())) {
+            queryWrapper.eq("d_type","02");
+            queryWrapper.select("p_name","p_id","start_station","d_name","f_subject");
+            dList = postdoctorrinformationService.list(queryWrapper);
+        }else {
+                dList = postdoctorrinformationService.selectBydId(postdoctorrinformation);
+            }
+
         System.out.println(dList);
         postdoctorrinformationResult.setCode(0);
         postdoctorrinformationResult.setMsg("");
@@ -93,5 +113,14 @@ public class PostdoctorrinformationController {
         List<Postdoctorrinformation> dList = postdoctorrinformationService.list(queryWrapper);
         return dList;
     }
+
+
+    //个人基本信息表
+    @RequestMapping("/getText/{id}")
+    public Postdoctorrinformation getDoctorById(@PathVariable int id) {
+        Postdoctorrinformation postdoctorrinformation = postdoctorrinformationService.getById(id);
+        return postdoctorrinformation;
+    }
+
 
 }

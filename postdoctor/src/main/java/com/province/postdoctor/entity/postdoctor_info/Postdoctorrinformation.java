@@ -46,6 +46,11 @@ package com.province.postdoctor.entity.postdoctor_info;
              */
     private String pName;
 
+    /**
+     * 学科领域Id
+     */
+    private String subjectAreaId;
+
             /**
             * 学科领域
             */
@@ -64,7 +69,7 @@ package com.province.postdoctor.entity.postdoctor_info;
     /**
      * 部门类型
      */
-    private Integer dType;
+    private String dType;
 
             /**
             * 性别

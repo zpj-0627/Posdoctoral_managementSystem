@@ -47,6 +47,11 @@ package com.province.postdoctor.entity.postdoctor_info;
     private String pName;
 
     /**
+     * 展示时间
+     */
+    private String showtime;
+
+    /**
      * 学科领域Id
      */
     private String subjectAreaId;

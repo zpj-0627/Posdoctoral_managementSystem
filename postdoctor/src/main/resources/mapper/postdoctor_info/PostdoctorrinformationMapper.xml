@@ -21,7 +21,7 @@
         <if test="startStation != null">
             and start_station <![CDATA[<]]> #{startStation}
         </if>
-        <if test="endStation != null ">
+        <if test="endStation != null">
             and end_station <![CDATA[>]]> #{endStation}
         </if>
         <if test="pName != null and pName !=''">

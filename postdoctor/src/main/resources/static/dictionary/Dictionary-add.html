@@ -6,7 +6,7 @@
     <title>添加学科平台目录</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../css/plugins/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
-    <link rel="stylesheet"  type="text/css" href="../layui/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
     <link rel="stylesheet" type="text/css" href="../css/main.css" media="all">
     <link rel="stylesheet" type="text/css" href="../layui/layui_exts/layui_ext/dtree/dtree.css">
     <link rel="stylesheet" type="text/css" href="../layui/layui_exts/layui_ext/dtree/font/dtreefont.css">
@@ -61,8 +61,8 @@
                 <textarea placeholder="请输入内容" class="layui-textarea" name="remark"></textarea>
             </div>
         </div>
-        <div class="layui-form-item timo-finally"align="center">
-            <button class="layui-btn" lay-submit="" lay-filter="component-form-demo">保存</button>
+        <div class="layui-form-item timo-finally" align="center">
+            <button class="layui-btn" lay-submit="" lay-filter="component-form-demo"><i class="fa fa-check-circle"></i> 保存</button>
         </div>
     </form>
 </div>
@@ -73,12 +73,10 @@
             element = layui.element,
             $ = layui.jquery,
             form = layui.form;
-        /*监听提交*/
         form.on('submit(component-form-demo)',function (data) {
             $.post(
-                data.field,
-                console.log(data.field),
                 "/dictionary/add",
+                data.field,
                 function (res) {
                     if (res){
                         layer.msg("添加成功",{icon: 6, shade: 0.5, time: 1500},function () {
@@ -87,7 +85,6 @@
                             parent.layer.close(index);
                             parent.window.location.reload();
                         });
-
                     }else {
                         layer.msg("添加失败",{icon: 5, shade: 0.5, time: 1500});
                     }
@@ -125,17 +122,19 @@
         });
         dtree.on("node('spmTree')", function(obj){
             var param = Demotree.getChildParam(obj.param.nodeId);
-            if (obj.param.nodeId == "10"){
+            if (obj.param.nodeId == "0"){
                 var count = 0;
                 for (var i=0; i<param.length; i++){
-                    if (param[i].parentId == "10"){
+                    if (param[i].parentId == "0"){
                         count++;
                     }
                 }
                 count++;
                 if (count <= 9){
+                    var str = "0"+"0"+count;
+                }else if (count <=99) {
                     var str = "0"+count;
-                }else {
+                } else {
                     var str = count;
                 }
                 $("#spm").val(str);
@@ -143,9 +142,11 @@
                 var num = param.length;
                 num++;
                 if (num <= 9){
+                    var str = obj.param.nodeId+"00"+num;
+                }else if (num <= 99) {
                     var str = obj.param.nodeId+"0"+num;
-                }else {
-                    var str = obj.param.nodeId+"0"+num;
+                } else {
+                    var str = obj.param.nodeId+num;
                 }
                 $("#spm").val(str);
             }

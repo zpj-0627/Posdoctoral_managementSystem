@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.province.postdoctor.mapper.postdoctor_info.ThesisMapper">
+
+    <select id="selectthesisInfo" parameterType="com.province.postdoctor.entity.postdoctor_info.Thesis" resultType="com.province.postdoctor.entity.postdoctor_info.Thesis">
+        SELECT
+        p_name,
+        p_id,
+        publishingtime,
+        d_name,
+        t_ttitle,
+        collection,
+        literature
+        FROM
+        thesis
+        <where> 1=1
+            <if test="pName != null and pName !=''">
+                and p_name like "%"#{pName}"%"
+            </if>
+            <if test="pId != null">
+                and p_id = #{pId}
+            </if>
+            <if test="publishingtime != null">
+                and publishingtime <![CDATA[<]]> #{publishingtime}
+            </if>
+            <if test="dName != null and dName !=''">
+                and d_name = #{dName}
+            </if>
+            <if test="tTtitle != null and tTtitle !=''">
+                and t_ttitle = #{tTtitle}
+            </if>
+            <if test="collection != null and collection !=''">
+                and collection = #{collection}
+            </if>
+            <if test="literature != null and literature !=''">
+                and literature = #{literature}
+            </if>
+        </where>
+
+    </select>
+
+</mapper>

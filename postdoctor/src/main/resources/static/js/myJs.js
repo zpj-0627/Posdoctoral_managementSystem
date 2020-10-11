@@ -339,3 +339,56 @@ function yearData() {
 
     });
 }
+//文献类型下拉框
+function selectLiterature(){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $('#literature').empty();
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "dictionary/queryLiterature",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#literature').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#literature').append(new Option(item.title, item.id));
+                    });
+                    form.render('select');
+                }, error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}
+
+//收录情况下拉框
+function selectCollection(){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $('#collection').empty();
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "dictionary/queryCollection",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#collection').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#collection').append(new Option(item.title, item.id));
+                    });
+                    form.render('select');
+                }, error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}

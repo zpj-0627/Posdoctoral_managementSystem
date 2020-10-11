@@ -1,6 +1,6 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title>博士点管理</title>
+    <title>论文管理</title>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -48,7 +48,7 @@
             margin-right: 10px;
             line-height: 40px;
         }
-        .select-test{position: absolute;padding-left:-10px; max-height: 500px;height: 350px;overflow: auto;width: 220px;z-index: 123;display: none;border:1px solid silver;top: 42px;}
+        .select-test{position: absolute;padding-left:-10px; max-height: 500px;height: 350px;overflow: auto;width: 200px;z-index: 123;display: none;border:1px solid silver;top: 42px;}
         .layui-show{display: block!important;}
         .layui-table-cell .layui-form-checkbox[lay-skin="primary"]{
             top: 50%;
@@ -63,12 +63,12 @@
 <script type="text/javascript" src="js/main.js" charset="utf-8"></script>
 <script type="text/javascript" src="js/plugins/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="js/myJs.js" charset="utf-8"></script>
-<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.4.0/jquery.js"></script>
+<!--<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.4.0/jquery.js"></script>-->
 
 <div class="layui-card">
     <!--页面名称-->
     <div class="layui-card-header" style="height: 25px">
-        <i class="layui-icon layui-icon-rate-half"></i><strong>人员管理</strong>
+        <i class="layui-icon layui-icon-rate-half"></i><strong>成果管理>论文</strong>
         (查询条件)
     </div>
     <div class="layui-card-body layui-row ">
@@ -76,9 +76,9 @@
         <div id="magicalDragScene" class="mc-root mc-ui-absolute-pane">
 
             <!--单位名称下拉框-->
-            <div class="layui-col-md3 mc-ui-flex-end">
+            <div class="layui-col-md4 mc-ui-flex-end">
 
-                    <label class="layui-form-label" >单位名称：</label>
+                <label class="layui-form-label" >单位名称：</label>
 
                 <div class="layui-input-block " >
                     <select id="dName" name="dName" style="border:1.5px solid #009688;height: 30px;width: 150px">
@@ -86,124 +86,67 @@
                 </div>
             </div>
 
-            <div class="layui-col-md3">
-                <div>
-                    <label class="layui-form-label">编号：</label>
-                </div>
-                <div class="layui-input-block layui-form" lay-filter="test1">
-                    <input class="layui-input" id="pId" type="text" autocomplete="off"
-                           style="border:1.5px solid #009688;height: 30px;width: 150px"/>
-                </div>
-            </div>
+
 
             <!--日期框-->
-            <div class="layui-col-md3" style="float: left">
-                <label class="layui-form-label">时间：</label>
+            <div class="layui-col-md4" style="float: left">
+                <label class="layui-form-label">发表年份：</label>
                 <div class="layui-input-block layui-form" lay-filter="test1">
-                    <input type="text" id="startStation" name="dTime" placeholder="开始时间" readonly="" class="layui-input test-item"
+                    <input type="text" id="dTime1" name="dTime"  readonly="" class="layui-input test-item"
                            lay-verify="required" style="border:1.5px solid #009688;height: 30px;width: 150px">
                 </div>
             </div>
-            <div class="layui-col-md3" style="float: left">
+            <div class="layui-col-md4" style="float: left">
                 <label class="layui-form-label">至：</label>
                 <div>
-                    <input type="text" id="endStation" name="dTime" placeholder="结束时间" readonly="" class="layui-input test-item"
+                    <input type="text" id="dTime2" name="dTime"  readonly="" class="layui-input test-item"
                            lay-verify="required" style="border:1.5px solid #009688;height: 30px;width: 150px">
                 </div>
             </div>
 
             <div class="layui-row ">
-                <div class="layui-col-md3">
-                    <label class="layui-form-label">姓名：</label>
+                <div class="layui-col-md4">
+                    <label class="layui-form-label">文献类型：</label>
                     <div class="layui-input-block ">
+                        <select id="literature" name="literature" style="border:1.5px solid #009688;height: 30px;width: 150px">
+                        </select>
+                    </div>
+                </div>
+
+                <div class="layui-col-md4">
+                    <label class="layui-form-label">论文作者：</label>
+                    <div class="layui-input-block " >
                         <input class="layui-input" id="pName" type="text" autocomplete="off"
                                style="border:1.5px solid #009688;height: 30px;width: 150px"/>
                     </div>
                 </div>
 
-                <div class="layui-col-md3">
-                    <label class="layui-form-label">国籍：</label>
-                    <div class="layui-input-block " >
-                        <select id="pNationality" name="pNationality"
-                                style="border:1.5px solid #009688;height: 30px;width: 150px">
+                <div class="layui-col-md4">
+                    <label class="layui-form-label">收录情况：</label>
+                    <div class="layui-input-block ">
+                        <select id="collection" name="collection" style="border:1.5px solid #009688;height: 30px;width: 150px">
                         </select>
                     </div>
                 </div>
 
-                <div class="layui-col-md3">
-                    <label class="layui-form-label">性别：</label>
-                    <div class="layui-input-block " >
-                        <select id="pSex" name="pSex" style="border:1.5px solid #009688;height: 30px;width: 150px">
-                            <option></option>
-                            <option>男</option>
-                            <option>女</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="layui-col-md3">
-                    <!--<div class="layui-col-md5 mc-ui-flex-end">-->
-                        <label class="layui-form-label">学科领域：</label>
-                   <!-- </div>-->
-                    <div  class="layui-input-block " style="width:47.5%;z-index:9999">
-                        <div class="layui-unselect layui-form-select" id="spmenu" >
-                            <input type="text" style="border-color: #009688;border-width: 1.5px;height: 30px" name="spmenu" id="input_spm"  placeholder="请选择" readonly="" class="layui-input">
-                            <i class="layui-edge"></i>
-                        </div>
-                        <div class="layui-card select-test" id="spmtest">
-                            <div class="layui-card-body">
-                                <div id="toolbarDiv"><ul id="spmTree" class="dtree" data-id="10008"></ul></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
             </div>
-            <a class="layui-btn layui-btn-primary" id="do_search" style="position: absolute; left: 91.5%; top: 70%;">查询</a>
-            <a class="layui-btn layui-btn-primary" onclick="reset()" style="position: absolute; left: 85%; top: 70%;">重置</a>
+            <a class="layui-btn layui-btn-primary" id="do_search" style="position: absolute; left: 88%; top: 46%;">查询</a>
+            <a class="layui-btn layui-btn-primary" onclick="reset()" style="position: absolute; left: 93%; top: 46%;">重置</a>
 
-            <div class="layui-row ">
-
-                <div class="layui-col-md3">
-                    <label class="layui-form-label">学科门类：</label>
-                    <div class="layui-input-block " >
-                        <select id="subjectCategory" name="subjectCategory"
-                                style="border:1.5px solid #009688;height: 30px;width: 150px">
-                        </select>
-                    </div>
-                </div>
-
-                <div class="layui-col-md3">
-                    <label class="layui-form-label">一级学科：</label>
-                    <div class="layui-input-block " >
-                        <select id="fSubject" name="fSubject"
-                                style="border:1.5px solid #009688;height: 30px;width: 150px">
-                        </select>
-                    </div>
-                </div>
-
-                <div class="layui-col-md3">
-                    <label class="layui-form-label">状态：</label>
-                    <div class="layui-input-block " id="test1">
-                        <select id="status" name="status"
-                                style="border:1.5px solid #009688;height: 30px;width: 150px">
-                        </select>
-                    </div>
-                </div>
-
-            </div>
         </div>
-</div>
+    </div>
     <div class="layui-card-body layui-row">
         <div class="layui-col-lg3 layui-col-sm3">
             <div class="layui-card timo-nav-tree">
-                <div class="layui-card-header">全部设站单位</div>
+                <div class="layui-card-header">全部</div>
                 <div class="layui-card-body">
                     <ul id="demoTree" class="dtree" data-id="111"></ul>
                 </div>
             </div>
         </div>
         <div class="layui-col-lg9 layui-col-sm9">
-            <table class="layui-hide" id="demo" lay-filter="test"></table>
+            <table class="layui-hide" id="test" lay-filter="test"></table>
         </div>
     </div>
 </div>
@@ -212,9 +155,9 @@
 
 <!--对每条信息的操作按钮，事件对应到分页表工具栏-->
 <script type="text/html" id="barDemo">
-    <a class="layui-btn   layui-btn-sm" lay-event="detail">详细</a>
-    <!--<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-xs" lay-event="del">删除</a>-->
+    <a class="layui-btn   layui-btn-sm" lay-event="detail">个人详情</a>
+    <!-- <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+     <a class="layui-btn layui-btn-xs" lay-event="del">删除</a>-->
 </script>
 
 <!--分页表定义-->
@@ -226,17 +169,17 @@
 
     <div class="layui-row" style="height: 3%">
         <!--批量添加按钮-->
-       <!-- <div class="layui-col-md2 layui-col-sm3 layui-col-xs6" style="text-align: left;padding-left: 10px;">
-            <div class="layui-input-inline yutons-btn-margin-right">
+        <!-- <div class="layui-col-md2 layui-col-sm3 layui-col-xs6" style="text-align: left;padding-left: 10px;">
+             <div class="layui-input-inline yutons-btn-margin-right">
 
-                <span class="layui-btn layui-btn-primary layui-btn-sm layui-icon layui-icon-add-1" lay-event="addAll" title="批量添加"></span>
-            </div>
-            &lt;!&ndash;批量删除按钮&ndash;&gt;
-            <div class="layui-input-inline yutons-btn-margin-right">
+                 <span class="layui-btn layui-btn-primary layui-btn-sm layui-icon layui-icon-add-1" lay-event="addAll" title="批量添加"></span>
+             </div>
+             &lt;!&ndash;批量删除按钮&ndash;&gt;
+             <div class="layui-input-inline yutons-btn-margin-right">
 
-                <span class="layui-btn layui-btn-primary layui-btn-sm layui-icon layui-icon-delete" lay-event="delAll" title="批量删除"></span>
-            </div>
-        </div>-->
+                 <span class="layui-btn layui-btn-primary layui-btn-sm layui-icon layui-icon-delete" lay-event="delAll" title="批量删除"></span>
+             </div>
+         </div>-->
         <div class="layui-col-md10 layui-col-sm9 layui-col-xs6" style="width: 100%;text-align: right">
             <!--筛选，导出，打印-->
             <div class="layui-input-inline yutons-btn-margin-left">
@@ -261,23 +204,15 @@
             tree = layui.tree;
         form = layui.form;
 
-        lay('.test-item').each(function(){
-        laydate.render({
-            elem: this,
-            type: 'date',
-            theme: 'grid',
-            trigger: 'click',
-        });
-        });
 
         //执行table分页
         table.render({
-            elem: '#demo'
+            elem: '#test'
             , id: 'testReload'
             , height: "auto"
             , toolbar: "#toolbarDemo"
             , defaultToolbar: []
-            , url: 'postdoctorrinformation/list1' //数据接口
+            , url: 'thesis/list1' //数据接口
             , page: true //开启分页
             , limit: 5
             , limits: [5, 10, 15]
@@ -285,13 +220,13 @@
             , cols: [[ //表头
                 {align: 'center', title: '序号', type: 'numbers', width: '5%'}
                 ,{align:'center',field:'id',title:'学科编号',hide:true}
-                , {align: 'center', field: 'pname', title: '姓名', width: '15%'}
-                , {align: 'center', field: 'pid', title: '编号', width: '14.8%'}
-                , {align: 'center', field: 'showtime', title: '进站时间', width: '15%'}
-                , {align: 'center', field: 'dname', title: '进站单位', width: '15%'}
-                , {align: 'center', field: 'fsubject', title: '一级学科', width: '22%'}
-                ,{align:'center',fixed:'right',toolbar:'#barDemo',title:'操作',width: '14%'}
+                , {align: 'center', field: 'dname', title: '单位名称', width: '15%'}
+                , {align: 'center', field: 'pname', title: '作者', width: '15%'}
+                , {align: 'center', field: 'tttitle', title: '论文名称', width: '35%'}
+                , {align: 'center', field: 'showtime', title: '发表时间', width: '15%'}
+                , {align: 'center', field: 'collection', title: '收录情况', width: '15%'}
             ]]
+
             //表头颜色
             ,done: function () {
                 $('th').css({'background-color': '#009688', 'color': '#fff', 'font-weight':'bold'})
@@ -306,54 +241,44 @@
             }
         });
 
+        //时间转换函数
 
         //表格重载
 
         $('#do_search').on('click', function () {
+            var dName = $("#dName").find("option:selected").text();
+            var dTime1 = $('#dTime1').val();
+            var dTime2 = $('#dTime2').val();
+            var literature = $("#literature").find("option:selected").text()
+            var pName = $('#pName').val();
+            var collection = $("#collection").find("option:selected").text()
 
-            var d_1 = $('#startStation').val();
-            var d_2 = $('#endStation').val();
-            var e_1 = new Date(d_1).getTime();
-            var e_2 = new Date(d_2).getTime();
-            if(e_1>e_2){
-                alert("输入时间错误,请输入正确时间");
-            }else {
-                //执行重载
-                var dName = $("#dName").find("option:selected").text();
-                var pId = $('#pId').val();
-                var startStation = $('#startStation').val();
-                var endStation = $('#endStation').val();
-                var pName = $('#pName').val();
-                var pNationality = $("#pNationality").find("option:selected").text();
-                var pSex = $("#pSex").find("option:selected").text();
-                var subjectArea = $('#input_spm');
-                var subjectCategory = $("#subjectCategory").find("option:selected").text();
-                var fSubject = $("#fSubject").find("option:selected").text();
-                var status = $("#status").find("option:selected").text();
+            /*var endStation = $('#endStation').val();
+            var pName = $('#pName').val();
+            var pNationality = $("#pNationality").find("option:selected").text();
+            var pSex = $("#pSex").find("option:selected").text();
+            var subjectArea = $('#input_spm');
+            var subjectCategory = $("#subjectCategory").find("option:selected").text();
+            var fSubject = $("#fSubject").find("option:selected").text();
+            var status = $("#status").find("option:selected").text();*/
+            //执行重载
+            table.reload('testReload',{
+                url:'/thesis/search'
+                ,where:{
+                    dName: dName,
+                    dTime1: dTime1,
+                    dTime2: dTime2,
+                    literature: literature,
+                    pName: pName,
+                    collection: collection,
+                }
+                ,page: {
+                    curr: 1 //重新从第 1 页开始
+                }
 
-                table.reload('testReload',{
-                    url:'/postdoctorrinformation/search'
-                    ,where:{
-                        dName: dName,
-                        pId: pId,
-                        startStation: startStation,
-                        endStation: endStation,
-                        pName: pName,
-                        pNationality: pNationality,
-                        pSex: pSex,
-                        subjectArea: subjectArea.val(),
-                        subjectCategory: subjectCategory,
-                        fSubject: fSubject,
-                        status: status
-                    }
-                    ,page: {
-                        curr: 1 //重新从第 1 页开始
-                    }
-
-                });
-            }
-
+            });
         });
+
         //监听头工具栏事件
         table.on('toolbar(test)', function (obj) {
             var checkStatus = table.checkStatus(obj.config.id),
@@ -361,7 +286,7 @@
             switch (obj.event) {
                 //Excel导出
                 case 'table_export':
-                    exportFile('demo');
+                    exportFile('test');
                     break;
                 //批量删除
                 case 'delAll':
@@ -411,7 +336,7 @@
         });
 
         //监听工具栏事件
-        table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+      /*  table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
             var data = obj.data //获得当前行数据
                 , layEvent = obj.event; //获得 lay-event 对应的值
             //单条数据详细信息
@@ -426,7 +351,7 @@
                     skin: 'layui-layer-molv'
                 });
                 //删除单条数据
-            }  /*else if (layEvent === 'del') {
+            } /!*else if (layEvent === 'del') {
                 layer.confirm('您确定删除吗？',{title:'温馨提示',skin: 'layui-layer-molv'}, function removeThis() {
                     var id = data.id;
                     $.post('/doctorinformation/remove/' + id, function (r) {
@@ -441,7 +366,7 @@
 
                 });
                 //编辑单条数据
-            } *//*else if (layEvent === 'edit') {
+            }*!/ /!*else if (layEvent === 'edit') {
                 layer.open({
                     title: ['编辑信息', 'font-size:18px;'],
                     type: 2,
@@ -452,8 +377,8 @@
                     skin: 'layui-layer-molv',
                 });
 
-            }*/
-        });
+            }*!/
+        });*/
 
         if (!Array.from) {
             Array.from = function (el) {
@@ -697,8 +622,7 @@
                     }
                 });
             });
-            //学科平台下拉树
-            spmTree();
+
 
 
 
@@ -708,22 +632,22 @@
 
     //单位名字下拉框
     selectdName();
-    //国籍下拉框
-    selectpNationality();
+    //文献类型下拉框
+    selectLiterature();
     //学科门类下拉框
-    selectsubjectCategory();
-    //一级学科下拉框
-    selectpfSubject();
-    //状态下拉框
-    selectstatus();
+    selectCollection();
     //重置搜索框
     function reset() {
         $('#dName').val("");
-        $('#pNationality').val("");
-        $("#input_spm").val("");
+        $('#dTime1').val("");
+        $('#dTime2').val("");
+        $("#pName").val("");
+        $("#literature").val("");
+        $("#collection").val("");
         layui.form.render();
     }
-    timeData();
+    timeData1();
+    timeData2();
 
 </script>
 </body>

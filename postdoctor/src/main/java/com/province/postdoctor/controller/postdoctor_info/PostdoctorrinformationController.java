@@ -4,6 +4,7 @@ package com.province.postdoctor.controller.postdoctor_info;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.province.postdoctor.entity.dictionary.Dictionary;
 import com.province.postdoctor.entity.postdoctor_info.Postdoctorrinformation;
 import com.province.postdoctor.result.PoetResult;
 import com.province.postdoctor.service.postdoctor_info.PostdoctorrinformationService;
@@ -13,8 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * <p>
@@ -39,6 +41,28 @@ public class PostdoctorrinformationController {
         QueryWrapper<Postdoctorrinformation> queryWrapper = new QueryWrapper<>();
         queryWrapper.select("p_name","p_id","start_station","d_name","f_subject");
         List<Postdoctorrinformation> dList = postdoctorrinformationService.list(queryWrapper);
+        for (Postdoctorrinformation postdoctorrinformation1 : dList) {
+            Date time=postdoctorrinformation1.getStartStation();
+            System.out.println(postdoctorrinformation1.getStartStation());
+            SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.US);
+            TimeZone tz = TimeZone.getTimeZone("GMT+8");
+            sdf.setTimeZone(tz);
+            Date s = null;
+            String da = null;
+            Date strToDate = null;
+            try {
+                s = sdf.parse(String.valueOf(time));
+                System.out.println(s);    //  Sun Oct 22 00:00:00 CST 2017
+                sdf = new SimpleDateFormat("yyyy-MM-dd");
+                da = sdf.format(s);
+                System.out.println(da);   //  2017-10-22
+                strToDate = sdf.parse(da);
+            } catch (ParseException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            postdoctorrinformation1.setShowtime(da);
+        }
         System.out.println(dList);
         postdoctorrinformationTableResult.setCode(0);
         postdoctorrinformationTableResult.setMsg("");
@@ -54,6 +78,28 @@ public class PostdoctorrinformationController {
         PageHelper.startPage(page,limit);
         PoetResult<Postdoctorrinformation> postdoctorrinformationResult = new PoetResult<>();
         List<Postdoctorrinformation> dList = postdoctorrinformationService.selectpostdoctorInfo(postdoctorrinformation);
+        for (Postdoctorrinformation postdoctorrinformation2 : dList) {
+            Date time=postdoctorrinformation2.getStartStation();
+            System.out.println(postdoctorrinformation2.getStartStation());
+            SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.US);
+            TimeZone tz = TimeZone.getTimeZone("GMT+8");
+            sdf.setTimeZone(tz);
+            Date s = null;
+            String da = null;
+            Date strToDate = null;
+            try {
+                s = sdf.parse(String.valueOf(time));
+                System.out.println(s);    //  Sun Oct 22 00:00:00 CST 2017
+                sdf = new SimpleDateFormat("yyyy-MM-dd");
+                da = sdf.format(s);
+                System.out.println(da);   //  2017-10-22
+                strToDate = sdf.parse(da);
+            } catch (ParseException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            postdoctorrinformation2.setShowtime(da);
+        }
         System.out.println(dList);
         postdoctorrinformationResult.setCode(0);
         postdoctorrinformationResult.setMsg("");

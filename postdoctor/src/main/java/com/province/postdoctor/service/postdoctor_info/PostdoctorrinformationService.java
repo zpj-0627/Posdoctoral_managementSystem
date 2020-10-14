@@ -20,4 +20,8 @@ public interface PostdoctorrinformationService extends IService<Postdoctorrinfor
     List<Postdoctorrinformation> selectBydId(Postdoctorrinformation postdoctorrinformation);
 
     List<Postdoctorrinformation> selectBygzzdId();
+
+    List<Postdoctorrinformation> getById(Integer id);
+
+
 }

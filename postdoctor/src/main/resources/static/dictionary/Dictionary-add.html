@@ -86,7 +86,7 @@
                             parent.window.location.reload();
                         });
                     }else {
-                        layer.msg("添加失败",{icon: 5, shade: 0.5, time: 1500});
+                        layer.msg("添加失败，已存在该字段，不可再次添加",{icon: 5, shade: 0.5, time: 1500});
                     }
                 },'json');
             return false;

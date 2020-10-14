@@ -1,5 +1,6 @@
 package com.province.postdoctor.entity.postdoctor_info;
 
+    import com.baomidou.mybatisplus.annotation.TableField;
     import com.baomidou.mybatisplus.annotation.TableName;
     import java.util.Date;
     import java.io.Serializable;
@@ -49,6 +50,7 @@ package com.province.postdoctor.entity.postdoctor_info;
     /**
      * 展示时间
      */
+          @TableField(exist=false)
     private String showtime;
 
     /**

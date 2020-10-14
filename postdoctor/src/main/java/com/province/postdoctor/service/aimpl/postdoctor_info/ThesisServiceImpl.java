@@ -29,4 +29,9 @@ public class ThesisServiceImpl extends ServiceImpl<ThesisMapper, Thesis> impleme
     public List<Thesis> selectthesisInfo(Thesis thesis) {
         return thesisMapper.selectthesisInfo(thesis);
     }
+
+    @Override
+    public List<Thesis> selectBydId(Thesis thesis) {
+        return thesisMapper.selectBydId(thesis);
+    }
 }

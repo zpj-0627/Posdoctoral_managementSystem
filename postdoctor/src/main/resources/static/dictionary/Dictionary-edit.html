@@ -32,27 +32,27 @@
 <!--            </div>-->
 <!--        </div>-->
         <div class="layui-form-item">
-            <label class="layui-form-label"style="width: 120px;">父级学科代码</label>
+            <label class="layui-form-label"style="width: 120px;">父级字典编号</label>
             <div class="layui-input-inline">
-                <input id="parentId" class="layui-input"  type="text" name="smParentId"  placeholder="父级学科编号(自动填写)"   readonly="readonly"  disabled="disabled" >
+                <input id="updictionaryid" class="layui-input"  type="text" name="updictionaryid"  placeholder="父级学科编号(自动填写)"   readonly="readonly"  disabled="disabled" >
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label" style="width: 120px;">学科编号</label>
+            <label class="layui-form-label" style="width: 120px;">字典编号</label>
             <div class="layui-input-inline">
-                <input class="layui-input"  type="text" name="smId"  placeholder="请输入学科编号" autocomplete="off" id="smId" lay-verify="required" disabled="disabled">
+                <input class="layui-input"  type="text" name="dictionaryid"  placeholder="请输入学科编号" autocomplete="off" id="dictionaryid" lay-verify="required" disabled="disabled">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label " style="width: 120px;">学科平台名称<span class="required"> *</span></label>
             <div class="layui-input-inline">
-                <input class="layui-input"  type="text" id="smName" name="smName"  placeholder="请输入学科名称" autocomplete="off"  lay-verify="required">
+                <input class="layui-input"  type="text" id="title" name="title"  placeholder="请输入学科名称" autocomplete="off"  lay-verify="required">
             </div>
         </div>
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label" style="width: 120px;">备注</label>
             <div class="layui-input-block">
-                <textarea placeholder="请输入内容" class="layui-textarea" id="remark" name="smRemark"></textarea>
+                <textarea placeholder="请输入内容" class="layui-textarea" id="remark" name="remark"></textarea>
             </div>
         </div>
         <div class="layui-form-item timo-finally" align="center">
@@ -72,17 +72,17 @@
         $(function () {
             id=location.href.split("?")[1].split("=")[1]
             $.get('/dictionary/getText/'+id,function (r) {
-                $('[name=smId]').val(r.id)
-                $('[name=smName]').val(r.title)
-                $('[name=smParentId]').val(r.parentId)
+                $('[name=dictionaryid]').val(r.id)
+                $('[name=title]').val(r.title)
+                $('[name=updictionaryid]').val(r.parentId)
                 // $('[name=smParentName]').val(r.parentName)
-                $('[name=smRemark]').val(r.remark)
+                $('[name=remark]').val(r.remark)
 
                 /*监听提交*/
                 form.on('submit(component-form-demo)',function (data) {
-                    var smName = document.getElementById("smName").value;
-                    var smRemark = $('#smRemark').val();
-                    if (smName==r.title&&smRemark==r.remark) {
+                    var title = document.getElementById("title").value;
+                    var remark = $('#remark').val();
+                    if (title==r.title&&remark==r.remark) {
                         layer.msg('并没有修改信息',{icon: 5, shade: 0.5, time: 1500});
                     }else {
                         $.post(
@@ -96,7 +96,7 @@
                                         parent.window.location.reload();
                                     })
                                 } else {
-                                    layer.msg("修改失败", {icon: 5, shade: 0.5, time: 1500});
+                                    layer.msg("修改失败，以存在该字段，不可修改成该字段", {icon: 5, shade: 0.5, time: 1500});
                                 }
                             }, 'json');
                     }

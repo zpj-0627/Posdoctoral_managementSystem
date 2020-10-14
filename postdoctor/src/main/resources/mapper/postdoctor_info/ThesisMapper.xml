@@ -39,4 +39,23 @@
 
     </select>
 
+    <select id="selectBydId" parameterType="com.province.postdoctor.entity.postdoctor_info.Thesis" resultType="com.province.postdoctor.entity.postdoctor_info.Thesis">
+        SELECT
+        p_name,
+        p_id,
+        publishingtime,
+        d_name,
+        t_ttitle,
+        collection,
+        literature
+        FROM
+        thesis
+        <where> 1=1
+            <if test="dId != null and dId !=''">
+                and FIND_IN_SET(#{dId},d_id)
+            </if>
+        </where>
+    </select>
+
+
 </mapper>

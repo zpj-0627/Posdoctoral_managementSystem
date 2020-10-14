@@ -153,12 +153,13 @@ public class DictionaryController {
         if (count > 1){
             return 1;//此节点有子节点不能删除
         }
-        Dictionary dictionary = new Dictionary();
-        dictionary.setSign(1);
-        UpdateWrapper<Dictionary> dictionaryUpdateWrapper = new UpdateWrapper<>();
-        dictionaryUpdateWrapper.eq("dictionaryid",id);
-        boolean update = dictionaryService.update(dictionary,dictionaryUpdateWrapper);
-        if (update){
+        boolean del=dictionaryService.deleteById(id);
+//        Dictionary dictionary = new Dictionary();
+//        dictionary.setSign(1);
+//        UpdateWrapper<Dictionary> dictionaryUpdateWrapper = new UpdateWrapper<>();
+//        dictionaryUpdateWrapper.eq("dictionaryid",id);
+//        boolean update = dictionaryService.update(dictionary,dictionaryUpdateWrapper);
+        if (del){
             return 2;//删除成功
         }
         else{
@@ -175,16 +176,30 @@ public class DictionaryController {
     }
 
 
-
-
     //修改字典信息
     @RequestMapping("/update")
-    public boolean update(String smId,String smName,String smRemark){
+    public boolean update(String updictionaryid,String dictionaryid,String title,String remark){
+        int count=0;
         UpdateWrapper<Dictionary> updateWrapper = new UpdateWrapper<>();
-        updateWrapper.eq("dictionaryid",smId);
-        updateWrapper.set("title",smName);
-        updateWrapper.set("remark",smRemark);
-        return dictionaryService.update(updateWrapper);
+        QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("updictionaryid", updictionaryid);
+        List<Dictionary> dList = dictionaryService.list(queryWrapper);
+        System.out.println(dList);
+        for (Dictionary dictionary1 : dList) {
+            System.out.println(dictionary1);
+            if (Optional.ofNullable(dictionary1.getTitle()).orElse("zpj").equals(title)) {
+                count++;
+                break;
+            }
+        }
+        if (count>0){
+            return false;
+        }else {
+            updateWrapper.eq("dictionaryid",dictionaryid);
+            updateWrapper.set("title",title);
+            updateWrapper.set("remark",remark);
+            return dictionaryService.update(updateWrapper);
+        }
     }
 
     //学科门类列表
@@ -214,6 +229,49 @@ public class DictionaryController {
         List<Dictionary> dList = dictionaryService.list(queryWrapper);
         return dList;
     }
+//    //文献类型下拉框
+//    @RequestMapping("/queryLiterature")
+//    public List<Dictionary> queryLiterature() {
+//        QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<>();
+//        queryWrapper.eq("updictionaryid", 10101);
+//        queryWrapper.eq("sign", 0);
+//        queryWrapper.select("title");
+//        List<Dictionary> dList = dictionaryService.list(queryWrapper);
+//        return dList;
+//    }
+    //民族下拉框
+    @RequestMapping("/queryNational")
+    public List<Dictionary> queryNational() {
+        QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("updictionaryid", 10374);
+        queryWrapper.eq("sign", 0);
+        queryWrapper.select("title");
+        List<Dictionary> dList = dictionaryService.list(queryWrapper);
+        return dList;
+    }
+
+    //婚姻下拉框
+    @RequestMapping("/queryMarriage")
+    public List<Dictionary> queryMarriage() {
+        QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("updictionaryid", 10006);
+        queryWrapper.eq("sign", 0);
+        queryWrapper.select("title");
+        List<Dictionary> dList = dictionaryService.list(queryWrapper);
+        return dList;
+    }
+    //专业技术职称下拉框
+    @RequestMapping("/queryPositionaltitles")
+    public List<Dictionary> querypositionaltitles() {
+        QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("updictionaryid", 10378);
+        queryWrapper.eq("sign", 0);
+        queryWrapper.select("title");
+        List<Dictionary> dList = dictionaryService.list(queryWrapper);
+        return dList;
+    }
+
+
     //文献类型下拉框
     @RequestMapping("/queryLiterature")
     public List<Dictionary> queryLiterature() {
@@ -230,6 +288,28 @@ public class DictionaryController {
     public List<Dictionary> queryCollection() {
         QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("updictionaryid", 10102);
+        queryWrapper.select( "title");
+        queryWrapper.eq("sign", 0);
+        List<Dictionary> dList = dictionaryService.list(queryWrapper);
+        return dList;
+    }
+
+    //专利类型下拉框
+    @RequestMapping("/queryPtype")
+    public List<Dictionary> queryPtype() {
+        QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("updictionaryid", 10201);
+        queryWrapper.select( "title");
+        queryWrapper.eq("sign", 0);
+        List<Dictionary> dList = dictionaryService.list(queryWrapper);
+        return dList;
+    }
+
+    //论著方式下拉框
+    @RequestMapping("/queryTtype")
+    public List<Dictionary> queryTtype() {
+        QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("updictionaryid", 10301);
         queryWrapper.select( "title");
         queryWrapper.eq("sign", 0);
         List<Dictionary> dList = dictionaryService.list(queryWrapper);

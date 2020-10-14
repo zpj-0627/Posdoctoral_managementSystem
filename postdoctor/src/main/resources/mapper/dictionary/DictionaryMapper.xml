@@ -65,5 +65,14 @@
 	)
     </insert>
 
+    <!--根据id删除该条数据-->
+    <select id="deleteById" parameterType="java.lang.String">
+        DELETE
+        FROM
+        dictionary
+        WHERE
+        dictionaryid = #{id};
+    </select>
+
 
 </mapper>

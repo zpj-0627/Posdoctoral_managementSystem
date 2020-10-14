@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
-    <title>学科目录详细信息</title>
+    <title>字典目录详细信息</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../css/plugins/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
     <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
@@ -24,21 +24,21 @@
     <form class="layui-form" action="" lay-filter="component-form-group" id="component-form-group">
         <input type="hidden" name="id"/>
         <div class="layui-form-item">
-            <label class="layui-form-label"style="width: 120px;">学科编号</label>
+            <label class="layui-form-label"style="width: 120px;">字典编号</label>
             <div class="layui-input-inline">
-                <input class="layui-input"  type="text" name="smId" disabled="true">
+                <input class="layui-input"  type="text" name="dictionaryid" disabled="true">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label"style="width: 120px;">学科名称</label>
+            <label class="layui-form-label"style="width: 120px;">字典名称</label>
             <div class="layui-input-inline">
-                <input class="layui-input"  type="text" name="smName"  placeholder="请输入学科名称" disabled="true">
+                <input class="layui-input"  type="text" name="title"  placeholder="请输入学科名称" disabled="true">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label"style="width: 120px;">父级学科编号</label>
+            <label class="layui-form-label"style="width: 120px;">父级字典编号</label>
             <div class="layui-input-inline">
-                <input id="parentId" class="layui-input"  type="text" name="smParentId" disabled="true">
+                <input id="parentId" class="layui-input"  type="text" name="updictionaryid" disabled="true">
             </div>
         </div>
         <div class="layui-form-item layui-form-text">
@@ -53,10 +53,10 @@
 <script>
     id=location.href.split("?")[1].split("=")[1]
     $.get('/dictionary/getText/'+id,function (r) {
-        $('[name=smId]').val(r.id)
-        $('[name=smName]').val(r.title)
-        $('[name=smParentId]').val(r.parentId)
-        $('[name=smParentName]').val(r.parentName)
+        $('[name=dictionaryid]').val(r.id)
+        $('[name=title]').val(r.title)
+        $('[name=updictionaryid]').val(r.parentId)
+        $('[name=updictionaryName]').val(r.parentName)
         $('[name=remark]').val(r.remark)
     },'json')
 </script>

@@ -616,7 +616,7 @@
 */
                 // console.log(param);
                 table.reload('testReload',{
-                    url:'/postdoctorrinformation/searchById'
+                    url:'/thesis/searchById'
                     ,where:{
                         dId: obj.param.nodeId
                     }
@@ -630,12 +630,13 @@
 
     });
 
-    //单位名字下拉框
+    //单位名称下拉框
     selectdName();
     //文献类型下拉框
     selectLiterature();
-    //学科门类下拉框
-    selectCollection();
+
+    selectCollection()
+
     //重置搜索框
     function reset() {
         $('#dName').val("");

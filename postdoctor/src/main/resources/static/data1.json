@@ -1,0 +1,26 @@
+{
+  "status": 0,
+  "data": [
+    {
+      "id":1,
+      "hcompany":"2",
+      "department":"山西大学",
+      "province":null,
+      "area":null,
+      "remark":null,
+      "cddepartment":"太原市",
+      "aname":null,
+      "comaddress":null,
+      "zipcode":null,
+      "fixedphone":"123456",
+      "fax":"1-5565",
+      "phone":null,
+      "email":null,
+      "dtype":"1",
+      "did":"21",
+      "dname":"2",
+      "dename":null,
+      "fsubject":"计算机"
+    }
+  ]
+}

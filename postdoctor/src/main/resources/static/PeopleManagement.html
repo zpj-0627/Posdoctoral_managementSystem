@@ -284,7 +284,6 @@
             , title: '博士点管理信息表'
             , cols: [[ //表头
                 {align: 'center', title: '序号', type: 'numbers', width: '5%'}
-                ,{align:'center',field:'id',title:'学科编号',hide:true}
                 , {align: 'center', field: 'pname', title: '姓名', width: '15%'}
                 , {align: 'center', field: 'pid', title: '编号', width: '14.8%'}
                 , {align: 'center', field: 'showtime', title: '进站时间', width: '15%'}
@@ -419,7 +418,7 @@
                 layer.open({
                     title: ['详细信息', 'font-size:18px;'],
                     type: 2,
-                    content: 'Postdoctorrinformation.html?id=' + data.id,
+                    content: '测试.html?id=' + data.pid,
                     maxmin: true,
                     resize: true,
                     area: ['100%', '100%'],

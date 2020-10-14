@@ -75,4 +75,12 @@
         where d_type = '01'
     </select>
 
+    <select id="getBypId" parameterType="java.lang.Integer" resultType="com.province.postdoctor.entity.postdoctor_info.Postdoctorrinformation">
+        SELECT
+        *
+        FROM
+        `postdoctorrinformation`
+        WHERE
+        p_id = #{id};
+    </select>
 </mapper>

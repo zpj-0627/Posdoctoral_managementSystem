@@ -17,4 +17,6 @@ public interface ThesisService extends IService<Thesis> {
 
     List<Thesis> selectthesisInfo(Thesis thesis);
 
+    List<Thesis> selectBydId(Thesis thesis);
+
 }

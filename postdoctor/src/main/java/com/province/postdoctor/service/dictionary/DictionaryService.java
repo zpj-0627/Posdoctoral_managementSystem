@@ -3,7 +3,6 @@ package com.province.postdoctor.service.dictionary;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.province.postdoctor.entity.dictionary.Dictionary;
 import com.province.postdoctor.entity.dictionary.smTable;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -37,4 +36,5 @@ public interface DictionaryService extends IService<Dictionary> {
 
     int add(Dictionary dictionary);
 
+    boolean deleteById(String id);
 }

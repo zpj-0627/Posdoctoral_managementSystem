@@ -79,6 +79,28 @@ public class ThesisController {
         PageHelper.startPage(page,limit);
         PoetResult<Thesis> thesisPoetResult = new PoetResult<>();
         List<Thesis> dList = thesisService.selectthesisInfo(thesis);
+        for (Thesis thesis1 : dList) {
+            Date time=thesis1.getPublishingtime();
+            System.out.println(thesis1.getPublishingtime());
+            SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.US);
+            TimeZone tz = TimeZone.getTimeZone("GMT+8");
+            sdf.setTimeZone(tz);
+            Date s = null;
+            String da = null;
+            Date strToDate = null;
+            try {
+                s = sdf.parse(String.valueOf(time));
+                System.out.println(s);    //  Sun Oct 22 00:00:00 CST 2017
+                sdf = new SimpleDateFormat("yyyy-MM-dd");
+                da = sdf.format(s);
+                System.out.println(da);   //  2017-10-22
+                strToDate = sdf.parse(da);
+            } catch (ParseException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            thesis1.setShowtime(da);
+        }
         System.out.println(dList);
         thesisPoetResult.setCode(0);
         thesisPoetResult.setMsg("");
@@ -98,38 +120,38 @@ public class ThesisController {
         return dList;
     }
 
-//    //按树名字搜索
-//    @RequestMapping("/searchById")
-//    public PoetResult<Thesis> selectBydId(Integer page, Integer limit, Thesis thesis) {
-//        PageHelper.startPage(page,limit);
-//        PoetResult<Thesis> thesisPoetResult = new PoetResult<>();
-//        List<Thesis> dList = new ArrayList<>();
-//        QueryWrapper<Thesis> queryWrapper = new QueryWrapper<>();
-//        System.out.println(thesis.getDId());
-//        System.out.println(thesis);
-//        if ("110".equals(thesis.getDId())){
-//            queryWrapper.select("p_name","p_id","start_station","d_name","f_subject");
-//            dList = thesisService.list(queryWrapper);
-//        }else if ("01".equals(thesis.getDId()))
-//        {
-//            queryWrapper.eq("d_type","01");
-//            queryWrapper.select("p_name","p_id","start_station","d_name","f_subject");
-//            dList = thesisService.list(queryWrapper);
-//        }else if ("02".equals(thesis.getDId())) {
-//            queryWrapper.eq("d_type","02");
-//            queryWrapper.select("p_name","p_id","start_station","d_name","f_subject");
-//            dList = thesisService.list(queryWrapper);
-//        }else {
-//            dList = thesisService.selectBydId(thesis);
-//        }
-//
-//        System.out.println(dList);
-//        thesisPoetResult.setCode(0);
-//        thesisPoetResult.setMsg("");
-//        thesisPoetResult.setCount(((Page)dList).getTotal());//((Page)dList).getTotal()
-//        thesisPoetResult.setData(dList);
-//        return thesisPoetResult;
-//    }
+    //按树名字搜索
+    @RequestMapping("/searchById")
+    public PoetResult<Thesis> selectBydId(Integer page, Integer limit, Thesis thesis) {
+        PageHelper.startPage(page,limit);
+        PoetResult<Thesis> thesisPoetResult = new PoetResult<>();
+        List<Thesis> dList = new ArrayList<>();
+        QueryWrapper<Thesis> queryWrapper = new QueryWrapper<>();
+        System.out.println(thesis.getDId());
+        System.out.println(thesis);
+        if ("110".equals(thesis.getDId())){
+            queryWrapper.select("p_name","p_id","t_ttitle","d_name","publishingtime","collection");
+            dList = thesisService.list(queryWrapper);
+        }else if ("01".equals(thesis.getDId()))
+        {
+            queryWrapper.eq("d_type","01");
+            queryWrapper.select("p_name","p_id","t_ttitle","d_name","publishingtime","collection");
+            dList = thesisService.list(queryWrapper);
+        }else if ("02".equals(thesis.getDId())) {
+            queryWrapper.eq("d_type","02");
+            queryWrapper.select("p_name","p_id","t_ttitle","d_name","publishingtime","collection");
+            dList = thesisService.list(queryWrapper);
+        }else {
+            dList = thesisService.selectBydId(thesis);
+        }
+
+        System.out.println(dList);
+        thesisPoetResult.setCode(0);
+        thesisPoetResult.setMsg("");
+        thesisPoetResult.setCount(((Page)dList).getTotal());//((Page)dList).getTotal()
+        thesisPoetResult.setData(dList);
+        return thesisPoetResult;
+    }
 
 
 

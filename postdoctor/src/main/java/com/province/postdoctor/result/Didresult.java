@@ -8,4 +8,5 @@ import java.util.List;
 public class Didresult<T> {
     private Integer status;
     private List<T> data;
+
 }

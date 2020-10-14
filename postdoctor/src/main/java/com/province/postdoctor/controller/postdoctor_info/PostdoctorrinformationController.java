@@ -4,16 +4,17 @@ package com.province.postdoctor.controller.postdoctor_info;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.province.postdoctor.entity.dictionary.Dictionary;
-import com.province.postdoctor.entity.postdoctor_info.Postdoctorrinformation;
+import com.province.postdoctor.entity.postdoctor_info.*;
+import com.province.postdoctor.result.Didresult;
 import com.province.postdoctor.result.PoetResult;
-import com.province.postdoctor.service.postdoctor_info.PostdoctorrinformationService;
+import com.province.postdoctor.service.postdoctor_info.*;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.lang.Number;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -32,6 +33,18 @@ public class PostdoctorrinformationController {
 
     @Resource
     private PostdoctorrinformationService postdoctorrinformationService;
+
+    @Resource
+    private PhdinformationService phdinformationService;
+
+    @Resource
+    private LearningexperienceService learningexperienceService;
+
+    @Resource
+    private StudyingabroadinformationService studyingabroadinformationService;
+
+    @Resource
+    private WorkexperienceService workexperienceService;
 
     //人员信息管理表
     @RequestMapping("/list1")
@@ -161,12 +174,70 @@ public class PostdoctorrinformationController {
     }
 
 
-    //个人基本信息表
+    //查询一条信息
     @RequestMapping("/getText/{id}")
-    public Postdoctorrinformation getDoctorById(@PathVariable int id) {
-        Postdoctorrinformation postdoctorrinformation = postdoctorrinformationService.getById(id);
-        return postdoctorrinformation;
+    public Postdoctorrinformation getPostdoctorrinformationById(@PathVariable int id){
+        QueryWrapper<Postdoctorrinformation> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("P_id",id);
+        return postdoctorrinformationService.getOne(queryWrapper);
     }
 
+    @RequestMapping("/getAchievements/{id}")
+    public Didresult<PostdoctoralInfoNumber> getAchievementsById(@PathVariable int id){
+        QueryWrapper<Postdoctorrinformation> queryWrapper1 = new QueryWrapper<>();
+        QueryWrapper<Learningexperience> queryWrapper2 = new QueryWrapper<>();
+        QueryWrapper<Workexperience> queryWrapper3 = new QueryWrapper<>();
+        QueryWrapper<Studyingabroadinformation> queryWrapper4 = new QueryWrapper<>();
+        QueryWrapper<Phdinformation> queryWrapper5 = new QueryWrapper<>();
+        int a=0,b=0,c=0,d=0,e=0;
+        queryWrapper1.eq("P_id",id);
+        queryWrapper2.eq("P_id",id);
+        queryWrapper3.eq("P_id",id);
+        queryWrapper4.eq("P_id",id);
+        queryWrapper5.eq("P_id",id);
+        List<Postdoctorrinformation> dList1=postdoctorrinformationService.list(queryWrapper1);
+        List<Phdinformation> dList2=phdinformationService.list(queryWrapper5);
+        List<Learningexperience> dList3= learningexperienceService.list(queryWrapper2);
+        List<Workexperience> dList4=workexperienceService.list(queryWrapper3);
+        List<Studyingabroadinformation> dList5=studyingabroadinformationService.list(queryWrapper4);
+        PostdoctoralInfoNumber postdoctoralInfoNumber=new PostdoctoralInfoNumber();
+        for (Postdoctorrinformation postdoctorrinformation : dList1) {
+            if (Optional.ofNullable(postdoctorrinformation.getPId()).orElse(123).equals(id)) {
+                a++;
+            }
+            postdoctoralInfoNumber.setBasicInfoNumber(a);
+        }
+        for (Phdinformation phdinformation : dList2) {
+            if (Optional.ofNullable(phdinformation.getPId()).orElse(123).equals(id)) {
+                b++;
+            }
+            postdoctoralInfoNumber.setPhdSituationNumber(b);
+        }
+        for (Learningexperience learningexperience : dList3) {
+            if (Optional.ofNullable(learningexperience.getPId()).orElse(123).equals(id)) {
+                c++;
+            }
+            postdoctoralInfoNumber.setLearningExpNumber(c);
+        }
+        for (Workexperience workexperience : dList4) {
+            if (Optional.ofNullable(workexperience.getPId()).orElse(123).equals(id)) {
+                d++;
+            }
+            postdoctoralInfoNumber.setWorkExpNumber(d);
+        }
+        for (Studyingabroadinformation studyingabroadinformation : dList5) {
+            if (Optional.ofNullable(studyingabroadinformation.getPId()).orElse(123).equals(id)) {
+                e++;
+            }
+            postdoctoralInfoNumber.setStudyAbroadNumber(e);
+        }
+        List<PostdoctoralInfoNumber> postdoctoralInfoNumbers=new ArrayList<>();
+        postdoctoralInfoNumbers.add(postdoctoralInfoNumber);
+        Didresult<PostdoctoralInfoNumber> postdoctoralInfoNumberDidresult=new Didresult<>();
+        postdoctoralInfoNumberDidresult.setStatus(0);
+        postdoctoralInfoNumberDidresult.setData(postdoctoralInfoNumbers);
+        return  postdoctoralInfoNumberDidresult;
+
+    }
 
 }

@@ -20,4 +20,6 @@ public interface PostdoctorrinformationMapper extends BaseMapper<Postdoctorrinfo
     List<Postdoctorrinformation> selectBydId(Postdoctorrinformation postdoctorrinformation);
 
     List<Postdoctorrinformation> selectBygzzdId();
+
+    List<Postdoctorrinformation> getById(Integer id);
 }

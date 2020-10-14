@@ -339,6 +339,7 @@ function yearData() {
 
     });
 }
+
 //文献类型下拉框
 function selectLiterature(){
     layui.use(['form','jquery'],function () {
@@ -382,6 +383,146 @@ function selectCollection(){
                     $('#collection').append(new Option());
                     $.each(data, function (index, item) {
                         $('#collection').append(new Option(item.title, item.id));
+                    });
+                    form.render('select');
+                }, error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}
+//专利权人下拉框
+function PselectdName(){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $('#patenter').empty();
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/patent/querytName",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#patenter').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#patenter').append(new Option(item.patenter, item.id));
+
+                    });
+                    form.render('select');
+                }, error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}
+function timeData1() {
+    layui.use(['laydate','jquery'],function () {
+        var
+            $ = layui.$,
+            laydate = layui.laydate;
+
+        laydate.render({
+            elem: '#dTime1',
+            type: 'year',
+            theme: 'molv',
+            trigger: 'click',
+            format: 'yyyy年'
+        });
+
+    });
+}
+function timeData2() {
+    layui.use(['laydate','jquery'],function () {
+        var
+            $ = layui.$,
+            laydate = layui.laydate;
+
+        laydate.render({
+            elem: '#dTime2',
+            type: 'year',
+            theme: 'molv',
+            trigger: 'click',
+            format: 'yyyy年'
+        });
+
+    });
+}
+//专利类型下拉框
+function TrselectdName(){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $('#ptype').empty();
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/dictionary/queryPtype",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#ptype').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#ptype').append(new Option(item.title, item.id));
+
+                    });
+                    form.render('select');
+                }, error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}
+//论著方式下拉框
+function TrselectTtype(){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $('#treatiseType').empty();
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/dictionary/queryTtype",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#treatiseType').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#treatiseType').append(new Option(item.title, item.id));
+
+                    });
+                    form.render('select');
+                }, error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}
+//专利名称下拉框
+function selectPname(){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $('#patentName').empty();
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/patent/querypName",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#patentName').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#patentName').append(new Option(item.patentName, item.id));
+
                     });
                     form.render('select');
                 }, error: function () {

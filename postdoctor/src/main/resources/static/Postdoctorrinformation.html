@@ -124,35 +124,23 @@
             laydate= layui.laydate,
             tree = layui.tree;
         form = layui.form;
-
-        var elem = document.getElementById("tt");
-            elem.addEventListener("click",aa,false);    //click 代表的是事件，  aa代表事件触发执行的函数
-
-        function aa(){
-            layer.open({
-                title: ['基本信息', 'font-size:18px;'],
-                type: 2,
-               /* content: 'PeopleManagement.html?id=' + data.id,*/
-                content: 'BasicInformation.html',
-                maxmin: true,
-                resize: true,
-                area: ['80%', '100%'],
-                skin: 'layui-layer-lan'
-            });
-        }
     });
 
-
-
-
-
-
-
-
-
-
-
-
+    var elem = document.getElementById("tt");
+    elem.addEventListener("click",aa,false);    //click 代表的是事件，  aa代表事件触发执行的函数
+    pid=location.href.split("?")[1].split("=")[1]
+    function aa(){
+        layer.open({
+            title: ['基本信息', 'font-size:18px;'],
+            type: 2,
+            /* content: 'PeopleManagement.html?id=' + data.id,*/
+            content: 'BasicInformation.html?id=' + pid,
+            maxmin: true,
+            resize: true,
+            area: ['80%', '100%'],
+            skin: 'layui-layer-lan'
+        });
+    }
 
 </script>
 </body>

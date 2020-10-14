@@ -6,7 +6,6 @@ import com.province.postdoctor.mapper.dictionary.DictionaryMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.province.postdoctor.service.dictionary.DictionaryService;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -53,6 +52,11 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
     @Override
     public int add(Dictionary dictionary) {
         return dictionaryMapper.add(dictionary);
+    }
+
+    @Override
+    public boolean deleteById(String id) {
+        return dictionaryMapper.deleteById(id);
     }
 
 

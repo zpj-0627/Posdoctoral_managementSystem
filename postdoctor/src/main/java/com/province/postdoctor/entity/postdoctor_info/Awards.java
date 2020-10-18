@@ -1,11 +1,12 @@
 package com.province.postdoctor.entity.postdoctor_info;
 
     import com.baomidou.mybatisplus.annotation.IdType;
-    import java.sql.Date;
-
     import com.baomidou.mybatisplus.annotation.TableField;
     import com.baomidou.mybatisplus.annotation.TableId;
     import java.io.Serializable;
+    import java.sql.Date;
+
+    import com.fasterxml.jackson.annotation.JsonFormat;
     import lombok.Data;
     import lombok.EqualsAndHashCode;
     import lombok.experimental.Accessors;
@@ -17,12 +18,12 @@ package com.province.postdoctor.entity.postdoctor_info;
     * </p>
 *
 * @author tykj
-* @since 2020-10-13
+* @since 2020-10-15
 */
     @Data
         @EqualsAndHashCode(callSuper = false)
     @Accessors(chain = true)
-    public class Patent implements Serializable {
+    public class Awards implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -40,12 +41,7 @@ package com.province.postdoctor.entity.postdoctor_info;
     private String dName;
 
             /**
-            * 专利权人
-            */
-    private String patenter;
-
-            /**
-            * 博士号
+            * 博士ID
             */
     private Integer pId;
 
@@ -55,62 +51,68 @@ package com.province.postdoctor.entity.postdoctor_info;
     private String pName;
 
             /**
-            * 专利名称
+            * 项目名称
             */
-    private String patentName;
+    private String projectName;
 
             /**
-            * 专利申请日
+            * 类型
             */
-            private Date papplydate;
-
+    private String type;
 
             /**
-            * 公开日
+            * 奖励名称
             */
-            private Date opendate;
-
-
+    private String awardsName;
 
             /**
-            * 发明人
+            * 获奖时间
             */
-    private String inventor;
+
+//            @DateTimeFormat(pattern = "yyyy-MM-dd")
+//            @JsonFormat(pattern = "yyyy-MM-dd")
+            private Date awardsDate;
+    /**
+     * 获奖时间
+     */
+
+    @TableField(exist=false)
+    private String showtime;
 
             /**
-            * 专利号
+            * 获奖类型
             */
-    private String pnumber;
+    private String awardsType;
 
             /**
-            * 公开号
+            * 等级
             */
-    private String onumber;
+    private String awardsGrade;
 
             /**
-            * 专利类型
+            * 奖励类别
             */
-    private String ptype;
+    private String awardsCategories;
 
             /**
-            * 是否授权
+            * 成果评价
             */
-    private Integer authorized;
+    private String resultsAssessment;
 
             /**
             * 排名
             */
-    private Integer rank;
+    private Integer ranking;
 
             /**
-            * 专利批准国
+            * 项目简介
             */
-    private String papprove;
+    private String projectBrief;
 
             /**
-            * 专利简介
+            * 成果描述
             */
-    private String pbrief;
+    private String resultsDescribed;
 
 
 }

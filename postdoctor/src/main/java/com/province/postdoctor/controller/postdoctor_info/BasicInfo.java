@@ -37,18 +37,4 @@ public class BasicInfo {
 
     private PostdoctorrinformationService postdoctorrinformationService;
 
-    //基本信息数据条数
-    @RequestMapping("/number")
-    public Integer basicInfonumber(Postdoctorrinformation postdoctorrinformation) {
-        QueryWrapper<Postdoctorrinformation> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("p_id", postdoctorrinformation.getPId());
-        List<Postdoctorrinformation> dList = postdoctorrinformationService.list(queryWrapper);
-        int number = 0;
-        for (Postdoctorrinformation postdoctorrinformation1 : dList) {
-            if (Optional.ofNullable(postdoctorrinformation1.getPId()).orElse(10).equals(postdoctorrinformation.getPId())) {
-                number++;
-            }
-        }
-        return number;
-    }
 }

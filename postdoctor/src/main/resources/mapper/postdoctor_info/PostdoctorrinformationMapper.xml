@@ -19,10 +19,10 @@
             and p_id = #{pId}
         </if>
         <if test="startStation != null">
-            and start_station <![CDATA[<]]> #{startStation}
+            and #{startStation} between start_station and end_station
         </if>
         <if test="endStation != null">
-            and end_station <![CDATA[>]]> #{endStation}
+            and #{endStation} between start_station and end_station
         </if>
         <if test="pName != null and pName !=''">
             and p_name = #{pName}

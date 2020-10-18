@@ -91,7 +91,7 @@ public class CodeGenerator {
         strategy.setEntityLombokModel(true);
         strategy.setRestControllerStyle(true);
         //要生成的表
-        strategy.setInclude("phdinformation","learningexperience","studyingabroadinformation","workexperience");
+        strategy.setInclude("learningexperience");
 //        strategy.setInclude("sys_role_menu");
         strategy.setControllerMappingHyphenStyle(true);
         mpg.setStrategy(strategy);

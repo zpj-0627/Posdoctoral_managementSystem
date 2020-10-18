@@ -1,7 +1,7 @@
 package com.province.postdoctor.entity.postdoctor_info;
 
     import com.baomidou.mybatisplus.annotation.IdType;
-    import java.util.Date;
+    import java.sql.Date;
     import com.baomidou.mybatisplus.annotation.TableId;
     import java.io.Serializable;
     import lombok.Data;
@@ -62,13 +62,8 @@ package com.province.postdoctor.entity.postdoctor_info;
             /**
             * 出版日期
             */
-            @DateTimeFormat(pattern = "yyyy-MM-dd")
             private Date publicationDate;
 
-    /**
-     * 申请日期
-     */
-    private String showtime;
 
             /**
             * 书号

@@ -153,7 +153,8 @@ public class DictionaryController {
         if (count > 1){
             return 1;//此节点有子节点不能删除
         }
-        boolean del=dictionaryService.deleteById(id);
+        dictionaryService.deleteById(id);
+        boolean del=true;
 //        Dictionary dictionary = new Dictionary();
 //        dictionary.setSign(1);
 //        UpdateWrapper<Dictionary> dictionaryUpdateWrapper = new UpdateWrapper<>();
@@ -316,5 +317,47 @@ public class DictionaryController {
         return dList;
     }
 
+    //政治面貌下拉框
+    @RequestMapping("/queryPPstatus")
+    public List<Dictionary> queryPPstatus() {
+        QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("updictionaryid", 10007);
+        queryWrapper.select( "title");
+        queryWrapper.eq("sign", 0);
+        List<Dictionary> dList = dictionaryService.list(queryWrapper);
+        return dList;
+    }
 
+    //专业技术职称下拉框
+    @RequestMapping("/queryquerypPTitle")
+    public List<Dictionary> queryquerypPTitle() {
+        QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("updictionaryid", 10378);
+        queryWrapper.select( "title");
+        queryWrapper.eq("sign", 0);
+        List<Dictionary> dList = dictionaryService.list(queryWrapper);
+        return dList;
+    }
+
+    //获奖类型下拉框
+    @RequestMapping("/queryAtype")
+    public List<Dictionary> queryAtype() {
+        QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("updictionaryid", 10402);
+        queryWrapper.select( "title");
+        queryWrapper.eq("sign", 0);
+        List<Dictionary> dList = dictionaryService.list(queryWrapper);
+        return dList;
+    }
+
+    //成果评价下拉框
+    @RequestMapping("/queryAresults")
+    public List<Dictionary> queryAresults() {
+        QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("updictionaryid", 10403);
+        queryWrapper.select( "title");
+        queryWrapper.eq("sign", 0);
+        List<Dictionary> dList = dictionaryService.list(queryWrapper);
+        return dList;
+    }
 }

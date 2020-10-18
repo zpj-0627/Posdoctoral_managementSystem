@@ -28,5 +28,5 @@ public interface DictionaryMapper extends BaseMapper<Dictionary> {
 
     int add(Dictionary dictionary);
 
-    boolean deleteById(String id);
+    void deleteById(String id);
 }

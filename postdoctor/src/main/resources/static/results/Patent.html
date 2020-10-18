@@ -1,6 +1,6 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title>博士点管理</title>
+    <title>论文管理</title>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -17,14 +17,17 @@
     <!-- 引入css -->
 
 
-    <link rel="stylesheet" type="text/css" href="css/plugins/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
-    <link rel="stylesheet" type="text/css" href="layui/layui_exts/layui_ext/dtree/dtree.css">
-    <link rel="stylesheet" type="text/css" href="layui/layui_exts/layui_ext/dtree/font/dtreefont.css">
-    <link rel="stylesheet" href="layui/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../css/plugins/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../layui/layui_exts/layui_ext/dtree/dtree.css">
+    <link rel="stylesheet" type="text/css" href="../layui/layui_exts/layui_ext/dtree/font/dtreefont.css">
+    <link rel="stylesheet" href="../layui/css/layui.css" media="all">
     <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
     <style>
         body {
             margin: 10px;
+        }
+        .layui-form-label{
+            width: 115px;
         }
         .layui-table-tool-temp {
             padding-right: 0;
@@ -48,7 +51,7 @@
             margin-right: 10px;
             line-height: 40px;
         }
-        .select-test{position: absolute;padding-left:-10px; max-height: 500px;height: 350px;overflow: auto;width: 220px;z-index: 123;display: none;border:1px solid silver;top: 42px;}
+        .select-test{position: absolute;padding-left:-10px; max-height: 500px;height: 350px;overflow: auto;width: 200px;z-index: 123;display: none;border:1px solid silver;top: 42px;}
         .layui-show{display: block!important;}
         .layui-table-cell .layui-form-checkbox[lay-skin="primary"]{
             top: 50%;
@@ -59,16 +62,16 @@
     </style>
 </head>
 <body>
-<script type="text/javascript" src="layui/layui.js" charset="utf-8"></script>
-<script type="text/javascript" src="js/main.js" charset="utf-8"></script>
-<script type="text/javascript" src="js/plugins/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="js/myJs.js" charset="utf-8"></script>
-<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.4.0/jquery.js"></script>
+<script type="text/javascript" src="../layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="../js/main.js" charset="utf-8"></script>
+<script type="text/javascript" src="../js/plugins/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../js/myJs.js" charset="utf-8"></script>
+<!--<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.4.0/jquery.js"></script>-->
 
 <div class="layui-card">
     <!--页面名称-->
     <div class="layui-card-header" style="height: 25px">
-        <i class="layui-icon layui-icon-rate-half"></i><strong>人员管理</strong>
+        <i class="layui-icon layui-icon-rate-half"></i><strong>成果管理>论文</strong>
         (查询条件)
     </div>
     <div class="layui-card-body layui-row ">
@@ -76,134 +79,74 @@
         <div id="magicalDragScene" class="mc-root mc-ui-absolute-pane">
 
             <!--单位名称下拉框-->
-            <div class="layui-col-md3 mc-ui-flex-end">
+            <div class="layui-col-md4 mc-ui-flex-end">
 
-                    <label class="layui-form-label" >单位名称：</label>
+                <label class="layui-form-label" >专利权人：</label>
 
                 <div class="layui-input-block " >
-                    <select id="dName" name="dName" style="border:1.5px solid #009688;height: 30px;width: 150px">
+                    <select id="patenter" name="patenter" style="border:1.5px solid #009688;height: 30px;width: 150px">
                     </select>
                 </div>
             </div>
-
-            <div class="layui-col-md3">
-                <div>
-                    <label class="layui-form-label">编号：</label>
-                </div>
-                <div class="layui-input-block layui-form" lay-filter="test1">
-                    <input class="layui-input" id="pId" type="text" autocomplete="off"
-                           style="border:1.5px solid #009688;height: 30px;width: 150px"/>
-                </div>
-            </div>
-
             <!--日期框-->
-            <div class="layui-col-md3" style="float: left">
-                <label class="layui-form-label">时间：</label>
+            <div class="layui-col-md4" style="float: left">
+                <label class="layui-form-label">专利申请日：</label>
                 <div class="layui-input-block layui-form" lay-filter="test1">
-                    <input type="text" id="startStation" name="dTime" placeholder="开始时间" readonly="" class="layui-input test-item"
+                    <input type="text" id="papplydate" name="papplydate"  readonly="" class="layui-input test-item"
                            lay-verify="required" style="border:1.5px solid #009688;height: 30px;width: 150px">
                 </div>
             </div>
-            <div class="layui-col-md3" style="float: left">
-                <label class="layui-form-label">至：</label>
+            <div class="layui-col-md4" style="float: left">
+                <label class="layui-form-label">公开日：</label>
                 <div>
-                    <input type="text" id="endStation" name="dTime" placeholder="结束时间" readonly="" class="layui-input test-item"
+                    <input type="text" id="opendate" name="opendate"  readonly="" class="layui-input test-item"
                            lay-verify="required" style="border:1.5px solid #009688;height: 30px;width: 150px">
                 </div>
             </div>
 
             <div class="layui-row ">
-                <div class="layui-col-md3">
-                    <label class="layui-form-label">姓名：</label>
+                <div class="layui-col-md4">
+                    <label class="layui-form-label">专利类型：</label>
                     <div class="layui-input-block ">
+                        <select id="ptype" name="ptype" style="border:1.5px solid #009688;height: 30px;width: 150px">
+                        </select>
+                    </div>
+                </div>
+
+                <div class="layui-col-md4">
+                    <label class="layui-form-label">发明人：</label>
+                    <div class="layui-input-block " >
                         <input class="layui-input" id="pName" type="text" autocomplete="off"
                                style="border:1.5px solid #009688;height: 30px;width: 150px"/>
                     </div>
                 </div>
 
-                <div class="layui-col-md3">
-                    <label class="layui-form-label">国籍：</label>
-                    <div class="layui-input-block " >
-                        <select id="pNationality" name="pNationality"
-                                style="border:1.5px solid #009688;height: 30px;width: 150px">
+                <div class="layui-col-md4">
+                    <label class="layui-form-label">专利名称：</label>
+                    <div class="layui-input-block ">
+                        <select id="patentName" name="patentName" style="border:1.5px solid #009688;height: 30px;width: 150px">
                         </select>
                     </div>
                 </div>
 
-                <div class="layui-col-md3">
-                    <label class="layui-form-label">性别：</label>
-                    <div class="layui-input-block " >
-                        <select id="pSex" name="pSex" style="border:1.5px solid #009688;height: 30px;width: 150px">
-                            <option></option>
-                            <option>男</option>
-                            <option>女</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="layui-col-md3">
-                    <!--<div class="layui-col-md5 mc-ui-flex-end">-->
-                        <label class="layui-form-label">学科领域：</label>
-                   <!-- </div>-->
-                    <div  class="layui-input-block " style="width:47.5%;z-index:9999">
-                        <div class="layui-unselect layui-form-select" id="spmenu" >
-                            <input type="text" style="border-color: #009688;border-width: 1.5px;height: 30px" name="spmenu" id="input_spm"  placeholder="请选择" readonly="" class="layui-input">
-                            <i class="layui-edge"></i>
-                        </div>
-                        <div class="layui-card select-test" id="spmtest">
-                            <div class="layui-card-body">
-                                <div id="toolbarDiv"><ul id="spmTree" class="dtree" data-id="10008"></ul></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
             </div>
-            <a class="layui-btn layui-btn-primary" id="do_search" style="position: absolute; left: 91.5%; top: 70%;">查询</a>
-            <a class="layui-btn layui-btn-primary" onclick="reset()" style="position: absolute; left: 85%; top: 70%;">重置</a>
+            <a class="layui-btn " id="do_search" style="position: absolute; left: 89.5%; top: 44%;">查询</a>
+            <a class="layui-btn " onclick="reset()" style="position: absolute; left: 94%; top: 44%;">重置</a>
 
-            <div class="layui-row ">
-
-                <div class="layui-col-md3">
-                    <label class="layui-form-label">学科门类：</label>
-                    <div class="layui-input-block " >
-                        <select id="subjectCategory" name="subjectCategory"
-                                style="border:1.5px solid #009688;height: 30px;width: 150px">
-                        </select>
-                    </div>
-                </div>
-
-                <div class="layui-col-md3">
-                    <label class="layui-form-label">一级学科：</label>
-                    <div class="layui-input-block " >
-                        <select id="fSubject" name="fSubject"
-                                style="border:1.5px solid #009688;height: 30px;width: 150px">
-                        </select>
-                    </div>
-                </div>
-
-                <div class="layui-col-md3">
-                    <label class="layui-form-label">状态：</label>
-                    <div class="layui-input-block " id="test1">
-                        <select id="status" name="status"
-                                style="border:1.5px solid #009688;height: 30px;width: 150px">
-                        </select>
-                    </div>
-                </div>
-
-            </div>
         </div>
-</div>
+    </div>
     <div class="layui-card-body layui-row">
         <div class="layui-col-lg3 layui-col-sm3">
             <div class="layui-card timo-nav-tree">
-                <div class="layui-card-header">全部设站单位</div>
+                <div class="layui-card-header">全部</div>
                 <div class="layui-card-body">
                     <ul id="demoTree" class="dtree" data-id="111"></ul>
                 </div>
             </div>
         </div>
         <div class="layui-col-lg9 layui-col-sm9">
-            <table class="layui-hide" id="demo" lay-filter="test"></table>
+            <table class="layui-hide" id="test" lay-filter="test"></table>
         </div>
     </div>
 </div>
@@ -211,11 +154,11 @@
 
 
 <!--对每条信息的操作按钮，事件对应到分页表工具栏-->
-<script type="text/html" id="barDemo">
-    <a class="layui-btn   layui-btn-sm" lay-event="detail">详细</a>
-    <!--<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-xs" lay-event="del">删除</a>-->
-</script>
+<!--<script type="text/html" id="barDemo">
+    <a class="layui-btn   layui-btn-sm" lay-event="detail">个人详情</a>
+    &lt;!&ndash; <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+     <a class="layui-btn layui-btn-xs" lay-event="del">删除</a>&ndash;&gt;
+</script>-->
 
 <!--分页表定义-->
 <!--<div style="position: absolute;top: 40%;width: 98.5%">
@@ -225,18 +168,6 @@
 <script type="text/html" id="toolbarDemo">
 
     <div class="layui-row" style="height: 3%">
-        <!--批量添加按钮-->
-       <!-- <div class="layui-col-md2 layui-col-sm3 layui-col-xs6" style="text-align: left;padding-left: 10px;">
-            <div class="layui-input-inline yutons-btn-margin-right">
-
-                <span class="layui-btn layui-btn-primary layui-btn-sm layui-icon layui-icon-add-1" lay-event="addAll" title="批量添加"></span>
-            </div>
-            &lt;!&ndash;批量删除按钮&ndash;&gt;
-            <div class="layui-input-inline yutons-btn-margin-right">
-
-                <span class="layui-btn layui-btn-primary layui-btn-sm layui-icon layui-icon-delete" lay-event="delAll" title="批量删除"></span>
-            </div>
-        </div>-->
         <div class="layui-col-md10 layui-col-sm9 layui-col-xs6" style="width: 100%;text-align: right">
             <!--筛选，导出，打印-->
             <div class="layui-input-inline yutons-btn-margin-left">
@@ -262,35 +193,36 @@
         form = layui.form;
 
         lay('.test-item').each(function(){
-        laydate.render({
-            elem: this,
-            type: 'date',
-            theme: 'grid',
-            trigger: 'click',
+            laydate.render({
+                elem: this,
+                type: 'date',
+                theme: 'grid',
+                trigger: 'click',
+            });
         });
-        });
-
         //执行table分页
         table.render({
-            elem: '#demo'
+            elem: '#test'
             , id: 'testReload'
             , height: "auto"
             , toolbar: "#toolbarDemo"
             , defaultToolbar: []
-            , url: 'postdoctorrinformation/list1' //数据接口
+            , url: '/patent/list1' //数据接口
             , page: true //开启分页
             , limit: 5
             , limits: [5, 10, 15]
             , title: '博士点管理信息表'
             , cols: [[ //表头
                 {align: 'center', title: '序号', type: 'numbers', width: '5%'}
-                , {align: 'center', field: 'pname', title: '姓名', width: '15%'}
-                , {align: 'center', field: 'pid', title: '编号', width: '14.8%'}
-                , {align: 'center', field: 'showtime', title: '进站时间', width: '15%'}
-                , {align: 'center', field: 'dname', title: '进站单位', width: '15%'}
-                , {align: 'center', field: 'fsubject', title: '一级学科', width: '22%'}
-                ,{align:'center',fixed:'right',toolbar:'#barDemo',title:'操作',width: '14%'}
+                ,{align:'center',field:'id',title:'学科编号',hide:true}
+                , {align: 'center', field: 'patenter', title: '专利权人', width: '20%'}
+                , {align: 'center', field: 'pname', title: '发明人', width: '10%'}
+                , {align: 'center', field: 'patentName', title: '专利名称', width: '30%'}
+                , {align: 'center', field: 'papplydate', title: '申请日', width: '15%'}
+                , {align: 'center', field: 'ptype', title: '专利类型', width: '10%'}
+                , {align: 'center', field: 'opendate', title: '公开日', width: '10%'}
             ]]
+
             //表头颜色
             ,done: function () {
                 $('th').css({'background-color': '#009688', 'color': '#fff', 'font-weight':'bold'})
@@ -305,54 +237,44 @@
             }
         });
 
+        //时间转换函数
 
         //表格重载
 
         $('#do_search').on('click', function () {
+            var patenter = $("#patenter").find("option:selected").text();
+            var papplydate = $('#papplydate').val();
+            var opendate = $('#opendate').val();
+            var ptype = $("#ptype").find("option:selected").text()
+            var pName = $('#pName').val();
+            var patentName = $("#patentName").find("option:selected").text()
 
-            var d_1 = $('#startStation').val();
-            var d_2 = $('#endStation').val();
-            var e_1 = new Date(d_1).getTime();
-            var e_2 = new Date(d_2).getTime();
-            if(e_1>e_2){
-                alert("输入时间错误,请输入正确时间");
-            }else {
-                //执行重载
-                var dName = $("#dName").find("option:selected").text();
-                var pId = $('#pId').val();
-                var startStation = $('#startStation').val();
-                var endStation = $('#endStation').val();
-                var pName = $('#pName').val();
-                var pNationality = $("#pNationality").find("option:selected").text();
-                var pSex = $("#pSex").find("option:selected").text();
-                var subjectArea = $('#input_spm');
-                var subjectCategory = $("#subjectCategory").find("option:selected").text();
-                var fSubject = $("#fSubject").find("option:selected").text();
-                var status = $("#status").find("option:selected").text();
+            /*var endStation = $('#endStation').val();
+            var pName = $('#pName').val();
+            var pNationality = $("#pNationality").find("option:selected").text();
+            var pSex = $("#pSex").find("option:selected").text();
+            var subjectArea = $('#input_spm');
+            var subjectCategory = $("#subjectCategory").find("option:selected").text();
+            var fSubject = $("#fSubject").find("option:selected").text();
+            var status = $("#status").find("option:selected").text();*/
+            //执行重载
+            table.reload('testReload',{
+                url:'/patent/search'
+                ,where:{
+                    patenter: patenter,
+                    papplydate: papplydate,
+                    opendate: opendate,
+                    ptype: ptype,
+                    pName: pName,
+                    patentName: patentName,
+                }
+                ,page: {
+                    curr: 1 //重新从第 1 页开始
+                }
 
-                table.reload('testReload',{
-                    url:'/postdoctorrinformation/search'
-                    ,where:{
-                        dName: dName,
-                        pId: pId,
-                        startStation: startStation,
-                        endStation: endStation,
-                        pName: pName,
-                        pNationality: pNationality,
-                        pSex: pSex,
-                        subjectArea: subjectArea.val(),
-                        subjectCategory: subjectCategory,
-                        fSubject: fSubject,
-                        status: status
-                    }
-                    ,page: {
-                        curr: 1 //重新从第 1 页开始
-                    }
-
-                });
-            }
-
+            });
         });
+
         //监听头工具栏事件
         table.on('toolbar(test)', function (obj) {
             var checkStatus = table.checkStatus(obj.config.id),
@@ -360,7 +282,7 @@
             switch (obj.event) {
                 //Excel导出
                 case 'table_export':
-                    exportFile('demo');
+                    exportFile('test');
                     break;
                 //批量删除
                 case 'delAll':
@@ -410,49 +332,49 @@
         });
 
         //监听工具栏事件
-        table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
-            var data = obj.data //获得当前行数据
-                , layEvent = obj.event; //获得 lay-event 对应的值
-            //单条数据详细信息
-            if (layEvent === 'detail') {
-                layer.open({
-                    title: ['详细信息', 'font-size:18px;'],
-                    type: 2,
-                    content: '测试.html?id=' + data.pid,
-                    maxmin: true,
-                    resize: true,
-                    area: ['100%', '100%'],
-                    skin: 'layui-layer-molv'
-                });
-                //删除单条数据
-            }  /*else if (layEvent === 'del') {
-                layer.confirm('您确定删除吗？',{title:'温馨提示',skin: 'layui-layer-molv'}, function removeThis() {
-                    var id = data.id;
-                    $.post('/doctorinformation/remove/' + id, function (r) {
-                        if (r) {
-                            layer.msg("删除成功", {icon: 6, shade: 0.5, time: 1500}, function () {
-                                window.location.reload();
-                            })
-                        } else {
-                            layer.msg("删除失败",{icon: 5, shade: 0.5, time: 1500})
-                        }
-                    }, 'json');
+        /*  table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+              var data = obj.data //获得当前行数据
+                  , layEvent = obj.event; //获得 lay-event 对应的值
+              //单条数据详细信息
+              if (layEvent === 'detail') {
+                  layer.open({
+                      title: ['详细信息', 'font-size:18px;'],
+                      type: 2,
+                      content: '?id=' + data.id,
+                      maxmin: true,
+                      resize: true,
+                      area: ['100%', '100%'],
+                      skin: 'layui-layer-molv'
+                  });
+                  //删除单条数据
+              } /!*else if (layEvent === 'del') {
+                  layer.confirm('您确定删除吗？',{title:'温馨提示',skin: 'layui-layer-molv'}, function removeThis() {
+                      var id = data.id;
+                      $.post('/doctorinformation/remove/' + id, function (r) {
+                          if (r) {
+                              layer.msg("删除成功", {icon: 6, shade: 0.5, time: 1500}, function () {
+                                  window.location.reload();
+                              })
+                          } else {
+                              layer.msg("删除失败",{icon: 5, shade: 0.5, time: 1500})
+                          }
+                      }, 'json');
 
-                });
-                //编辑单条数据
-            } *//*else if (layEvent === 'edit') {
-                layer.open({
-                    title: ['编辑信息', 'font-size:18px;'],
-                    type: 2,
-                    content: 'DoctorManagement-edit.html?id=' + data.id,
-                    maxmin: true,
-                    resize: true,
-                    area: ['50%', '90%'],
-                    skin: 'layui-layer-molv',
-                });
+                  });
+                  //编辑单条数据
+              }*!/ /!*else if (layEvent === 'edit') {
+                  layer.open({
+                      title: ['编辑信息', 'font-size:18px;'],
+                      type: 2,
+                      content: 'DoctorManagement-edit.html?id=' + data.id,
+                      maxmin: true,
+                      resize: true,
+                      area: ['50%', '90%'],
+                      skin: 'layui-layer-molv',
+                  });
 
-            }*/
-        });
+              }*!/
+          });*/
 
         if (!Array.from) {
             Array.from = function (el) {
@@ -664,40 +586,16 @@
                 response: {message: "msg", statusCode: 0},
                 initLevel: 2,
                 url: "/ldz-information/queryUnitTree",
-                /* done: function (data, obj) {
-                     $("#search_btn").unbind("click");
-                     $("#search_btn").click(function () {
-                         var value = $("#searchInput").val();
-                         if (value){
-                             var flag = DemoTree.searchNode(value);
-                             if (!flag){
-                                 layer.msg("该名称节点不存在!",{icon:5});}
-                         } else {
-                             DemoTree.menubarMethod().refreshTree();
-                         }
-                     });
-                 }*/
             });
             dtree.on("node(demoTree)", function (obj) {
-                // if (!obj.param.leaf){
-                //     var  $div = obj.dom;
-                //     DemoTree.clickSpread($div);
-                // }else {
-                //     layer.msg("没有下级学科平台！")
-                // }
-                /*var param = dtree.getParam("demoTree", "001"); //获取ID为001的节点的值
-
-*/
-                // console.log(param);
                 table.reload('testReload',{
-                    url:'/postdoctorrinformation/searchById'
+                    url:'/patent/searchById'
                     ,where:{
                         dId: obj.param.nodeId
                     }
                 });
             });
-            //学科平台下拉树
-            spmTree();
+
 
 
 
@@ -705,24 +603,23 @@
 
     });
 
-    //单位名字下拉框
-    selectdName();
-    //国籍下拉框
-    selectpNationality();
-    //学科门类下拉框
-    selectsubjectCategory();
-    //一级学科下拉框
-    selectpfSubject();
-    //状态下拉框
-    selectstatus();
+    //专利权人下拉框
+    PselectdName();
+    //专利类型下拉框
+    TrselectdName();
+    //专利名称下拉框
+    selectPname();
     //重置搜索框
     function reset() {
-        $('#dName').val("");
-        $('#pNationality').val("");
-        $("#input_spm").val("");
+        $('#patenter').val("");
+        $('#papplydate').val("");
+        $('#opendate').val("");
+        $("#ptype").val("");
+        $("#pName").val("");
+        $("#patentName").val("");
         layui.form.render();
     }
-    timeData();
+
 
 </script>
 </body>

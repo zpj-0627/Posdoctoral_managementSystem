@@ -1,9 +1,10 @@
 package com.province.postdoctor.entity.postdoctor_info;
 
     import com.baomidou.mybatisplus.annotation.IdType;
+    import com.baomidou.mybatisplus.annotation.TableField;
     import com.baomidou.mybatisplus.annotation.TableId;
     import java.io.Serializable;
-    import java.util.Date;
+    import java.sql.Date;
 
     import lombok.Data;
     import lombok.EqualsAndHashCode;
@@ -58,14 +59,8 @@ package com.province.postdoctor.entity.postdoctor_info;
     /**
      * 发表日期
      */
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date publishingtime;
 
-    /**
-     * 发表日期
-     */
-
-    private String showtime;
 
             /**
             * 论文发表的学术刊物或会议名称
@@ -142,5 +137,11 @@ package com.province.postdoctor.entity.postdoctor_info;
             */
     private Integer cauthor;
 
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private java.util.Date publishingtimeStart;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private java.util.Date publishingtimeEnd;
 
 }

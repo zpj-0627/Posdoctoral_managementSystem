@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.province.postdoctor.mapper.postdoctor_info.FundapplicationMapper">
+
+    <select id="selectfundapplicationInfo" parameterType="com.province.postdoctor.entity.postdoctor_info.Fundapplication" resultType="com.province.postdoctor.entity.postdoctor_info.Fundapplication">
+        SELECT
+        fa_name,
+        fund_name,
+        approval_number,
+        fund_grade,
+        fa_date,
+        approval_time,
+        d_name
+        FROM
+        fundapplication
+        <where> 1=1
+            <if test="faName != null and faName !=''">
+                and fa_name like "%"#{faName}"%"
+            </if>
+            <if test="dName != null and dName !=''">
+                and d_name like "%"#{dName}"%"
+            </if>
+            <if test="approvalTime != null">
+                and approval_time = #{approvalTime}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectBydId" parameterType="com.province.postdoctor.entity.postdoctor_info.Fundapplication" resultType="com.province.postdoctor.entity.postdoctor_info.Fundapplication">
+        SELECT
+        fa_name,
+        fund_name,
+        approval_number,
+        fund_grade,
+        fa_date,
+        approval_time,
+        d_name
+        FROM
+        fundapplication
+        <where> 1=1
+            <if test="dId != null and dId !=''">
+                and FIND_IN_SET(#{dId},d_id)
+            </if>
+        </where>
+    </select>
+
+</mapper>

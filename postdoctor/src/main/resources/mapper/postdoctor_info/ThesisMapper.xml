@@ -20,8 +20,8 @@
             <if test="pId != null">
                 and p_id = #{pId}
             </if>
-            <if test="publishingtime != null">
-                and publishingtime <![CDATA[<]]> #{publishingtime}
+            <if test="publishingtimeStart != null and publishingtimeEnd != null">
+                and publishingtime between #{publishingtimeStart} and #{publishingtimeEnd}
             </if>
             <if test="dName != null and dName !=''">
                 and d_name = #{dName}

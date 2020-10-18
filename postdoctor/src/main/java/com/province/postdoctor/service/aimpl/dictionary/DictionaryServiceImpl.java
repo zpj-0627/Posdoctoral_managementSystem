@@ -55,8 +55,8 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
     }
 
     @Override
-    public boolean deleteById(String id) {
-        return dictionaryMapper.deleteById(id);
+    public void deleteById(String id) {
+         dictionaryMapper.deleteById(id);
     }
 
 

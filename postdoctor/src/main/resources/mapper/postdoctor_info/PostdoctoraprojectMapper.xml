@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.province.postdoctor.mapper.postdoctor_info.PostdoctoraprojectMapper">
+    <select id="selectpostdoctoraprojectInfo" parameterType="com.province.postdoctor.entity.postdoctor_info.Postdoctoraproject" resultType="com.province.postdoctor.entity.postdoctor_info.Postdoctoraproject">
+        SELECT
+        project_name,
+        department_name,
+        project_progress,
+        approve_time,
+        duty
+        FROM
+        postdoctoraproject
+        <where> 1=1
+            <if test="projectName != null and projectName !=''">
+                and project_name like "%"#{projectName}"%"
+            </if>
+            <if test="projectNature != null and projectNature !=''">
+                and project_nature = #{projectNature}
+            </if>
+            <if test="departmentName != null and departmentName !=''">
+                and department_name = #{departmentName}
+            </if>
+            <if test="approveTime != null">
+                and approve_time = #{approveTime}
+            </if>
+        </where>
+    </select>
+    <select id="selectBydId" parameterType="com.province.postdoctor.entity.postdoctor_info.Postdoctoraproject" resultType="com.province.postdoctor.entity.postdoctor_info.Postdoctoraproject">
+        SELECT
+        project_name,
+        department_name,
+        project_progress,
+        approve_time,
+        duty
+        FROM
+        postdoctoraproject
+        <where> 1=1
+            <if test="dId != null and dId !=''">
+                and FIND_IN_SET(#{dId},d_id)
+            </if>
+        </where>
+    </select>
+</mapper>

@@ -36,5 +36,5 @@ public interface DictionaryService extends IService<Dictionary> {
 
     int add(Dictionary dictionary);
 
-    boolean deleteById(String id);
+    void deleteById(String id);
 }

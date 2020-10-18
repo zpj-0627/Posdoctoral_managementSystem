@@ -1,0 +1,214 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>博士后个人信息管理</title>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon" th:href="./images/favicon.ico" type="image/x-icon">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+
+
+    <!-- 引入css -->
+
+
+    <link rel="stylesheet" type="text/css" href="../css/plugins/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../layui/layui_exts/layui_ext/dtree/dtree.css">
+    <link rel="stylesheet" type="text/css" href="../layui/layui_exts/layui_ext/dtree/font/dtreefont.css">
+    <link rel="stylesheet" href="../layui/css/layui.css" media="all">
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+    <style>
+        body {
+            margin: 10px;
+        }
+        .layui-table-tool-temp {
+            padding-right: 0;
+            margin-right: 0;
+        }
+        .yutons,
+        .layui-btn-sm{
+            margin-top: -2px;
+        }
+        .yutons-header-tool{
+            margin-top: -2px;
+            width: 30px !important;
+            height: 30px !important;
+            background-color: #ffffff;
+        }
+        .layui-tale-tool-panel{
+            left: auto;
+            right: -1px;
+        }
+        .yutons-btn-margin-right{
+            margin-right: 10px;
+            line-height: 40px;
+        }
+        .select-test{position: absolute;padding-left:-10px; max-height: 500px;height: 350px;overflow: auto;width: 200px;z-index: 123;display: none;border:1px solid silver;top: 42px;}
+        .layui-show{display: block!important;}
+        .layui-table-cell .layui-form-checkbox[lay-skin="primary"]{
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+
+    </style>
+</head>
+<body>
+<script type="text/javascript" src="../layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="../js/main.js" charset="utf-8"></script>
+<script type="text/javascript" src="../js/plugins/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../js/myJs.js" charset="utf-8"></script>
+<!--<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.4.0/jquery.js"></script>-->
+
+<div class="layui-card">
+    <!--页面名称-->
+    <div class="layui-card-header" style="height: 50px">
+        <i class="layui-icon layui-icon-rate-half"></i><strong>人员管理 >个人详细信息</strong>
+
+    </div>
+    <!--  <div class="layui-card-body layui-row "style="text-align: center;font-size: 20px">
+          <strong>个人情况</strong>
+      </div>-->
+
+    <div class="layui-card-body layui-row ">
+        <table class="layui-table" lay-skin="line" border="2" lay-filter="demoEvent" id="tabletest1">
+        </table>
+        <!--<table class="layui-table" border="2" lay-filter="demoEvent" id="data_table">
+            <tr >
+                <td  bgcolor="#009688" align="center" colspan="3"><font size="3" color="white"><strong>个人情况</strong></font></td>
+            </tr>
+            <tr>
+                <td style="text-align:center;" rowspan="3"><font size="2" color="black"><strong>个人情况</strong></font></td>
+                <th  align="left" id="tt" style="cursor: pointer;">基本信息</th>
+                <th align="left">读博情况</th>
+            </tr>
+            <tr>
+                <th align="left">是否为留学回国博士</th>
+                <th align="left">学习经历</th>
+            </tr>
+            <tr>
+                <th align="left">工作经历</th>
+                <td align="left"></td>
+            </tr>
+            <tr>
+                <td style="text-align:center;"rowspan="3"><font size="2" color="black"><strong>在站期间成果</strong></font></td>
+                <th align="left">代表性论文</th>
+                <th align="left">参与或主持的项目</td>
+            </tr>
+            <tr>
+
+                <th align="left">专利情况</th>
+                <th align="left">代表性专著</th>
+            </tr>
+            <tr>
+
+                <th align="left">在站科研成果或科技奖励</th>
+                <th align="left">申请基金资助情况</th>
+            </tr>
+        </table>-->
+    </div>
+</div>
+
+
+<script>
+
+    layui.config({
+        base: '../layui/layui_exts/',
+    }).use(['table','excel','tree','form','laydate'],function () {
+        var table = layui.table,
+            $ = layui.$,
+            excel = layui.excel,
+            laydate= layui.laydate,
+            tree = layui.tree;
+        form = layui.form;
+
+    });
+    id=location.href.split("?")[1].split("=")[1]
+    alert(id);
+
+    $.get('/postdoctorrinformation/getAchievements/'+id,function (data) {
+            //方法中传入的参数data为后台获取的数据
+            var mydata = new Array();
+            mydata[0] = "基本信息";
+            mydata[1] = "读博情况";
+            mydata[2] = "是否为留学回国博士";
+            mydata[3] = "学习经历";
+            mydata[4] = "工作经历";
+            mydata[5] = "代表性论文";
+            mydata[6] = "参与或主持的项目";
+            mydata[7] = "专利情况";
+            mydata[8] ="代表性专著";
+            mydata[9] = "在站科研成果或科技奖励";
+            mydata[10] = "申请基金资助情况";
+            mydata[11] = "个人情况";
+            mydata[12] = "在站期间成果";
+            var tr;
+            tr = '<td  bgcolor="#009688" align="center" colspan="5">'+'<font size="4" color="#fff">' + mydata[11] + '</font>'+'</td>'
+            $("#tabletest1").append('<tr >' + tr + '</tr>')
+
+            tr = '<td style="text-align:center;" rowspan="4" >' +'<font size="3" color="black">' +'<strong>'+ mydata[11] +'</strong>'+'</font>'+'</td>'
+            $("#tabletest1").append('<tr>' + tr + '</tr>')
+
+            tr = '<td  align="right" id="BasicInformation" style="cursor: pointer; width:17%" >'+'<strong>' + mydata[0]+'</strong>' + '</td>' + '<td align="left" style=" width:21%" >'+'(' + data.data[0].basicInfoNumber +')'+ '</td>'+'<td  align="right"  style="cursor: pointer;width:15%">'+'<strong>' + mydata[1]+'</strong>' + '</td>' + '<td align="left" style="width: 21%">' +'(' + data.data[0].phdSituationNumber  +')'+ '</td>'
+            $("#tabletest1").append('<tr>' + tr + '</tr>')
+
+            tr = '<td  align="right" id="tt"style="cursor: pointer; width:10%" >'+'<strong>' + mydata[2]+'</strong>' + '</td>' + '<td align="left" style=" width:30%" >' + '(' +data.data[0].studyAbroadNumber +')'+ '</td>'+'<td  align="right"  id="LearningExperience"style="cursor: pointer;width:10%">'+'<strong>' + mydata[3]+'</strong>' + '</td>' + '<td>' + '(' +data.data[0].learningExpNumber +')'+ '</td>'
+            $("#tabletest1").append('<tr>' + tr + '</tr>')
+
+            tr = '<td  align="right" id="tt" style="cursor: pointer; width:10%" >'+'<strong>' + mydata[4]+'</strong>' + '</td>' + '<td align="left" style=" width:30%" >' +'(' + data.data[0].workExpNumber+')' + '</td>'+'<td  colspan="2"  style="width:10%">'  + '</td>'
+            $("#tabletest1").append('<tr>' + tr + '</tr>')
+
+            tr = '<td style="text-align:center;" rowspan="4" >' +'<font size="3" color="black">'+'<strong>'+ mydata[12] +'</strong>'+'</font>'+'</td>'
+            $("#tabletest1").append('<tr>' + tr + '</tr>')
+
+            tr = '<td  align="right" id="tt" style="cursor: pointer; width:10%" >'+'<strong>' + mydata[5]+'</strong>' + '</td>' + '<td align="left" style=" width:30%" >' +'(' + data.data[0].paperNumber+')' + '</td>'+'<td  align="right"  style="cursor: pointer;width:10%">'+'<strong>' + mydata[6]+'</strong>' + '</td>' + '<td>' + '(' +data.data[0].projectNumber  +')'+ '</td>'
+            $("#tabletest1").append('<tr>' + tr + '</tr>')
+
+            tr = '<td  align="right" id="tt" style="cursor: pointer; width:10%" >'+'<strong>' + mydata[7]+'</strong>' + '</td>' + '<td align="left" style=" width:30%" >' + '(' +data.data[0].patentNumber +')'+ '</td>'+'<td  align="right"  style="cursor: pointer;width:10%">'+'<strong>' + mydata[8]+'</strong>' + '</td>' + '<td>' + '(' +data.data[0].monographNumber  +')'+ '</td>'
+            $("#tabletest1").append('<tr>' + tr + '</tr>')
+
+            tr = '<td  align="right" id="tt" style="cursor: pointer; width:10%" >'+'<strong>' + mydata[9]+'</strong>' + '</td>' + '<td align="left" style=" width:30%" >' + '(' +data.data[0].rewardNumber+')' + '</td>'+'<td  align="right"  style="cursor: pointer;width:10%">'+'<strong>' + mydata[10]+'</strong>' + '</td>' + '<td>' +'(' + data.data[0].fundfoNumber  +')'+ '</td>'
+            $("#tabletest1").append('<tr>' + tr + '</tr>')
+
+    },'json')
+
+    window.onload = function () {
+        var elem = document.getElementById("BasicInformation");
+        elem.addEventListener("click", BasicInformation, false);    //click 代表的是事件，  aa代表事件触发执行的函数
+        function BasicInformation() {
+            layer.open({
+                title: ['基本信息', 'font-size:18px;'],
+                type: 2,
+                /* content: 'PeopleManagement.html?id=' + data.id,*/
+                content: '/people/basicinformation/BasicInformation.html?id=' + id,
+                maxmin: true,
+                resize: true,
+                area: ['80%', '100%'],
+                skin: 'layui-layer-lan'
+            });
+        }
+
+        var elem = document.getElementById("LearningExperience");
+        elem.addEventListener("click", LearningExperience, false);    //click 代表的是事件，  aa代表事件触发执行的函数
+        function LearningExperience() {
+            layer.open({
+                title: ['基本信息', 'font-size:18px;'],
+                type: 2,
+                /* content: 'PeopleManagement.html?id=' + data.id,*/
+                content: '/people/learning/LearningExperience.html?id=' + id,
+                maxmin: true,
+                resize: true,
+                area: ['80%', '100%'],
+                skin: 'layui-layer-lan'
+            });
+        }
+    }
+
+</script>
+</body>
+</html>

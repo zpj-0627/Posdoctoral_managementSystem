@@ -28,10 +28,10 @@
                 and patent_name = #{patentName}
             </if>
             <if test="papplydate != null">
-                and papplydate <![CDATA[<]]> #{papplydate}
+                and papplydate = #{papplydate}
             </if>
             <if test="opendate != null">
-                and opendate <![CDATA[<]]> #{opendate}
+                and opendate = #{opendate}
             </if>
             <if test="ptype != null and ptype !=''">
                 and ptype = #{ptype}

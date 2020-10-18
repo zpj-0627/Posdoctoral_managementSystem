@@ -1,0 +1,663 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>论文管理</title>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon" th:href="./images/favicon.ico" type="image/x-icon">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+
+
+    <!-- 引入css -->
+
+
+    <link rel="stylesheet" type="text/css" href="../css/plugins/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../layui/layui_exts/layui_ext/dtree/dtree.css">
+    <link rel="stylesheet" type="text/css" href="../layui/layui_exts/layui_ext/dtree/font/dtreefont.css">
+    <link rel="stylesheet" href="../layui/css/layui.css" media="all">
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+    <style>
+        body {
+            margin: 10px;
+        }
+        .layui-table-tool-temp {
+            padding-right: 0;
+            margin-right: 0;
+        }
+        .yutons,
+        .layui-btn-sm{
+            margin-top: -2px;
+        }
+        .yutons-header-tool{
+            margin-top: -2px;
+            width: 30px !important;
+            height: 30px !important;
+            background-color: #ffffff;
+        }
+        .layui-tale-tool-panel{
+            left: auto;
+            right: -1px;
+        }
+        .yutons-btn-margin-right{
+            margin-right: 10px;
+            line-height: 40px;
+        }
+        .select-test{position: absolute;padding-left:-10px; max-height: 500px;height: 350px;overflow: auto;width: 200px;z-index: 123;display: none;border:1px solid silver;top: 42px;}
+        .layui-show{display: block!important;}
+        .layui-table-cell .layui-form-checkbox[lay-skin="primary"]{
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+
+    </style>
+</head>
+<body>
+<script type="text/javascript" src="../layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="../js/main.js" charset="utf-8"></script>
+<script type="text/javascript" src="../js/plugins/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../js/myJs.js" charset="utf-8"></script>
+<!--<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.4.0/jquery.js"></script>-->
+
+<div class="layui-card">
+    <!--页面名称-->
+    <div class="layui-card-header" style="height: 25px">
+        <i class="layui-icon layui-icon-rate-half"></i><strong>成果管理>论文</strong>
+        (查询条件)
+    </div>
+    <div class="layui-card-body layui-row ">
+
+        <div id="magicalDragScene" class="mc-root mc-ui-absolute-pane">
+
+            <!--单位名称下拉框-->
+            <div class="layui-col-md4 mc-ui-flex-end">
+
+                <label class="layui-form-label" >单位名称：</label>
+
+                <div class="layui-input-block " >
+                    <select id="dName" name="dName" style="border:1.5px solid #009688;height: 30px;width: 150px">
+                    </select>
+                </div>
+            </div>
+
+
+
+            <!--日期框-->
+            <div class="layui-col-md4" style="float: left">
+                <label class="layui-form-label">发表年份：</label>
+                <div class="layui-input-block layui-form" lay-filter="test1">
+                    <input type="text" id="publishingtimeStart" name="dTime"  readonly="" class="layui-input test-item"
+                           lay-verify="required" style="border:1.5px solid #009688;height: 30px;width: 150px">
+                </div>
+            </div>
+            <div class="layui-col-md4" style="float: left">
+                <label class="layui-form-label">至：</label>
+                <div>
+                    <input type="text" id="publishingtimeEnd" name="dTime"  readonly="" class="layui-input test-item"
+                           lay-verify="required" style="border:1.5px solid #009688;height: 30px;width: 150px">
+                </div>
+            </div>
+
+            <div class="layui-row ">
+                <div class="layui-col-md4">
+                    <label class="layui-form-label">文献类型：</label>
+                    <div class="layui-input-block ">
+                        <select id="literature" name="literature" style="border:1.5px solid #009688;height: 30px;width: 150px">
+                        </select>
+                    </div>
+                </div>
+
+                <div class="layui-col-md4">
+                    <label class="layui-form-label">论文作者：</label>
+                    <div class="layui-input-block " >
+                        <input class="layui-input" id="pName" type="text" autocomplete="off"
+                               style="border:1.5px solid #009688;height: 30px;width: 150px"/>
+                    </div>
+                </div>
+
+                <div class="layui-col-md4">
+                    <label class="layui-form-label">收录情况：</label>
+                    <div class="layui-input-block ">
+                        <select id="collection" name="collection" style="border:1.5px solid #009688;height: 30px;width: 150px">
+                        </select>
+                    </div>
+                </div>
+
+
+            </div>
+            <a class="layui-btn " id="do_search" style="position: absolute; left: 88%; top: 46%;">查询</a>
+            <a class="layui-btn " onclick="reset()" style="position: absolute; left: 93%; top: 46%;">重置</a>
+
+        </div>
+    </div>
+    <div class="layui-card-body layui-row">
+        <div class="layui-col-lg3 layui-col-sm3">
+            <div class="layui-card timo-nav-tree">
+                <div class="layui-card-header">全部</div>
+                <div class="layui-card-body">
+                    <ul id="demoTree" class="dtree" data-id="111"></ul>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-lg9 layui-col-sm9">
+            <table class="layui-hide" id="test" lay-filter="test"></table>
+        </div>
+    </div>
+</div>
+
+
+
+<!--对每条信息的操作按钮，事件对应到分页表工具栏-->
+<script type="text/html" id="barDemo">
+    <a class="layui-btn   layui-btn-sm" lay-event="detail">个人详情</a>
+    <!-- <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+     <a class="layui-btn layui-btn-xs" lay-event="del">删除</a>-->
+</script>
+
+<!--分页表定义-->
+<!--<div style="position: absolute;top: 40%;width: 98.5%">
+    <table class="layui-hide" id="demo" lay-filter="test"></table>
+</div>-->
+<!--头工具栏操作按钮-->
+<script type="text/html" id="toolbarDemo">
+
+    <div class="layui-row" style="height: 3%">
+        <!--批量添加按钮-->
+        <!-- <div class="layui-col-md2 layui-col-sm3 layui-col-xs6" style="text-align: left;padding-left: 10px;">
+             <div class="layui-input-inline yutons-btn-margin-right">
+
+                 <span class="layui-btn layui-btn-primary layui-btn-sm layui-icon layui-icon-add-1" lay-event="addAll" title="批量添加"></span>
+             </div>
+             &lt;!&ndash;批量删除按钮&ndash;&gt;
+             <div class="layui-input-inline yutons-btn-margin-right">
+
+                 <span class="layui-btn layui-btn-primary layui-btn-sm layui-icon layui-icon-delete" lay-event="delAll" title="批量删除"></span>
+             </div>
+         </div>-->
+        <div class="layui-col-md10 layui-col-sm9 layui-col-xs6" style="width: 100%;text-align: right">
+            <!--筛选，导出，打印-->
+            <div class="layui-input-inline yutons-btn-margin-left">
+                <span class="layui-inline yutons-header-tool" title="导出" lay-event="table_export">
+				                    <i class="layui-icon layui-icon-export"></i></span>
+                <span class="layui-inline yutons-header-tool" title="上传" lay-event="LAYTABLE_PRINT">
+							<i class="layui-icon layui-icon-upload"></i>
+				</span>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script>
+    layui.config({
+        base: '../layui/layui_exts/',
+    }).use(['table','excel','tree','form','laydate'],function () {
+        var table = layui.table,
+            $ = layui.$,
+            excel = layui.excel,
+            laydate= layui.laydate,
+            tree = layui.tree;
+        form = layui.form;
+
+        lay('.test-item').each(function(){
+            laydate.render({
+                elem: this,
+                type: 'date',
+                theme: 'grid',
+                trigger: 'click',
+            });
+        });
+
+        //执行table分页
+        table.render({
+            elem: '#test'
+            , id: 'testReload'
+            , height: "auto"
+            , toolbar: "#toolbarDemo"
+            , defaultToolbar: []
+            , url: '/thesis/list1' //数据接口
+            , page: true //开启分页
+            , limit: 5
+            , limits: [5, 10, 15]
+            , title: '博士点管理信息表'
+            , cols: [[ //表头
+                {align: 'center', title: '序号', type: 'numbers', width: '5%'}
+                ,{align:'center',field:'id',title:'学科编号',hide:true}
+                , {align: 'center', field: 'dname', title: '单位名称', width: '15%'}
+                , {align: 'center', field: 'pname', title: '作者', width: '15%'}
+                , {align: 'center', field: 'tttitle', title: '论文名称', width: '35%'}
+                , {align: 'center', field: 'publishingtime', title: '发表时间', width: '15%'}
+                , {align: 'center', field: 'collection', title: '收录情况', width: '15%'}
+            ]]
+
+            //表头颜色
+            ,done: function () {
+                $('th').css({'background-color': '#009688', 'color': '#fff', 'font-weight':'bold'})
+            }
+            , paresData: function (res) {
+                return {
+                    "code": res.code,
+                    "msg": res.msg,
+                    "count": res.count,
+                    "data": res.data
+                };
+            }
+        });
+
+        //时间转换函数
+
+        //表格重载
+
+        $('#do_search').on('click', function () {
+            var dName = $("#dName").find("option:selected").text();
+            var publishingtimeStart = $('#publishingtimeStart').val();
+            var publishingtimeEnd = $('#publishingtimeEnd').val();
+            var literature = $("#literature").find("option:selected").text()
+            var pName = $('#pName').val();
+            var collection = $("#collection").find("option:selected").text()
+
+            /*var endStation = $('#endStation').val();
+            var pName = $('#pName').val();
+            var pNationality = $("#pNationality").find("option:selected").text();
+            var pSex = $("#pSex").find("option:selected").text();
+            var subjectArea = $('#input_spm');
+            var subjectCategory = $("#subjectCategory").find("option:selected").text();
+            var fSubject = $("#fSubject").find("option:selected").text();
+            var status = $("#status").find("option:selected").text();*/
+            //执行重载
+            table.reload('testReload',{
+                url:'/thesis/search'
+                ,where:{
+                    dName: dName,
+                    publishingtimeStart: publishingtimeStart,
+                    publishingtimeEnd: publishingtimeEnd,
+                    literature: literature,
+                    pName: pName,
+                    collection: collection,
+                }
+                ,page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+
+            });
+        });
+
+        //监听头工具栏事件
+        table.on('toolbar(test)', function (obj) {
+            var checkStatus = table.checkStatus(obj.config.id),
+                data = checkStatus.data; //获取选中的数据
+            switch (obj.event) {
+                //Excel导出
+                case 'table_export':
+                    exportFile('test');
+                    break;
+                //批量删除
+                case 'delAll':
+                    if (data.length === 0) {
+                        layer.msg('请选择一行');
+                    } else {
+                        layer.confirm('您确定删除吗？', {title:'温馨提示',skin: 'layui-layer-molv'}, function removeAll() {
+
+                            //将所有复选框的默认值放入id数组中
+                            var ids = new Array();
+                            for (var i = 0; i < data.length; i++) {
+                                ids.push(data[i].id);
+                            }
+                            $.post('/doctorinformation/removeAll/' + ids, function (r) {
+                                if (r) {
+                                    layer.msg("删除成功", {icon: 6, shade: 0.5, time: 1500}, function () {
+                                        window.location.reload();
+                                    })
+                                } else {
+                                    layer.msg("删除失败",{icon: 5, shade: 0.5, time: 1500})
+                                }
+                            }, 'json');
+                        });
+                    }
+                    break;
+                //批量添加
+                case 'addAll':
+                    layer.open({
+                        title: ['添加信息', 'font-size:18px;'],
+                        type: 2,
+                        content: 'DoctorManagement-add.html',
+                        resize: true,
+                        area: ['100%', '100%'],
+                        skin: 'layui-layer-molv',
+                        cancel: function (index, layero) {
+                            layer.confirm('您确定关闭吗', {title:'温馨提示',skin: 'layui-layer-molv'},function() {//只有当点击confirm框的确定时，该层才会关闭
+                                layer.close(index);
+                                layer.closeAll('dialog');
+
+                            });
+                            return false;
+                        }
+                    });
+                    break;
+            }
+
+        });
+
+        //监听工具栏事件
+      /*  table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+            var data = obj.data //获得当前行数据
+                , layEvent = obj.event; //获得 lay-event 对应的值
+            //单条数据详细信息
+            if (layEvent === 'detail') {
+                layer.open({
+                    title: ['详细信息', 'font-size:18px;'],
+                    type: 2,
+                    content: '' + data.id,
+                    maxmin: true,
+                    resize: true,
+                    area: ['100%', '100%'],
+                    skin: 'layui-layer-molv'
+                });
+                //删除单条数据
+            } /!*else if (layEvent === 'del') {
+                layer.confirm('您确定删除吗？',{title:'温馨提示',skin: 'layui-layer-molv'}, function removeThis() {
+                    var id = data.id;
+                    $.post('/doctorinformation/remove/' + id, function (r) {
+                        if (r) {
+                            layer.msg("删除成功", {icon: 6, shade: 0.5, time: 1500}, function () {
+                                window.location.reload();
+                            })
+                        } else {
+                            layer.msg("删除失败",{icon: 5, shade: 0.5, time: 1500})
+                        }
+                    }, 'json');
+
+                });
+                //编辑单条数据
+            }*!/ /!*else if (layEvent === 'edit') {
+                layer.open({
+                    title: ['编辑信息', 'font-size:18px;'],
+                    type: 2,
+                    content: 'DoctorManagement-edit.html?id=' + data.id,
+                    maxmin: true,
+                    resize: true,
+                    area: ['50%', '90%'],
+                    skin: 'layui-layer-molv',
+                });
+
+            }*!/
+        });*/
+
+        if (!Array.from) {
+            Array.from = function (el) {
+                return Array.apply(this, el);
+            }
+        }
+
+        //表格导出
+        function exportFile(id) {
+            $.ajax({
+                url: '/doctorinformation/queryAll'
+                , dataType: 'json'
+                , success(res) {
+                    var data = res.data;
+                    var arr = [{
+                        sign:{
+                            v: '博士点信息管理表',
+                            s: {
+                                alignment: {
+                                    horizontal: 'center',
+                                    vertical: 'center'
+                                },
+                                font: {
+                                    sz: 18
+                                }
+                            }
+                        },
+                        siId: '',
+                        siName: '',
+                        smId: '',
+                        smName: '',
+                        dClass: '',
+                        dGrade: '',
+                        dTime: '',
+                        dRemark: ''
+                    },
+                        {
+                            sign: {
+                                v: '编号',
+                                s: {
+                                    alignment: {
+                                        horizontal: 'center',
+                                        vertical: 'center'
+                                    }
+                                }
+                            },
+                            siId:{
+                                v: '高校代码',
+                                s: {
+                                    alignment: {
+                                        horizontal: 'center',
+                                        vertical: 'center'
+                                    }
+                                }
+                            },
+                            siName: {
+                                v: '高校名称',
+                                s: {
+                                    alignment: {
+                                        horizontal: 'center',
+                                        vertical: 'center'
+                                    }
+                                }
+                            },
+                            smId: {
+                                v: '学科代码',
+                                s: {
+                                    alignment: {
+                                        horizontal: 'center',
+                                        vertical: 'center'
+                                    }
+                                }
+                            },
+                            smName: {
+                                v: '学科名称',
+                                s: {
+                                    alignment: {
+                                        horizontal: 'center',
+                                        vertical: 'center'
+                                    }
+                                }
+                            },
+                            dClass: {
+                                v: '类别',
+                                s: {
+                                    alignment: {
+                                        horizontal: 'center',
+                                        vertical: 'center'
+                                    }
+                                }
+                            },
+                            dGrade: {
+                                v: '级别',
+                                s: {
+                                    alignment: {
+                                        horizontal: 'center',
+                                        vertical: 'center'
+                                    }
+                                }
+                            },
+                            dTime: {
+                                v: '批准时间',
+                                s: {
+                                    alignment: {
+                                        horizontal: 'center',
+                                        vertical: 'center'
+                                    }
+                                }
+                            },
+                            dRemark: {
+                                v: '备注',
+                                s: {
+                                    alignment: {
+                                        horizontal: 'center',
+                                        vertical: 'center'
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                    data = excel.filterExportData(data, [
+                        'sign'
+                        ,'siId'
+                        , 'siName'
+                        , 'smId'
+                        , 'smName'
+                        , 'dClass'
+                        , 'dGrade'
+                        , 'dTime'
+                        , 'dRemark'
+                    ]);
+                    for (var i = 0; i < data.length; i++) {
+                        data[i].sign = i+1;
+                    }
+                    var mergeConf = excel.makeMergeConfig([
+                        ['A1','I1']
+                    ]);
+                    // 2. B列宽 150，F列宽200，默认80
+                    var colConf = excel.makeColConfig({
+                        A: 40,
+                        B: 100,
+                        D: 100,
+                        E: 150,
+                        G: 120,
+                        F: 100,
+                        I: 120
+                    },80);
+                    // 3. 第1行行高40，第二行行高30，默认20
+                    var rowConf = excel.makeRowConfig({
+                        1: 40
+                    },40);
+                    excel.setExportCellStyle(data,'A1:H'+data.length,{
+                        s: {
+                            alignment: {
+                                horizontal: 'center',
+                                vertical: 'center'
+                            }
+                        }
+                    });
+                    excel.setExportCellStyle(data,'A1:A'+data.length,{
+                        s: {
+                            alignment: {
+                                horizontal: 'center',
+                                vertical: 'center'
+                            }
+                        }
+                    });
+                    excel.exportExcel(arr.concat(data)
+                        , '博士点信息管理表.xlsx', 'xlsx', {
+                            extend: {
+                                // extend 中可以指定某个 sheet 的属性，如果不指定 sheet 则所有 sheet 套用同一套属性
+                                '!merges': mergeConf
+                                , '!cols': colConf
+                                , '!rows': rowConf
+                            }
+                        });
+                },
+                error() {
+                    layer.alert('获取数据失败');
+                }
+            });
+        }
+        //学科平台目录树
+        layui.extend({
+            dtree: 'layui_ext/dtree/dtree'
+        }).use(['dtree', 'layer', 'jquery', 'table'], function () {
+            var dtree = layui.dtree,
+                layer = layui.layer,
+                $ = layui.jquery,
+                table = layui.table;
+            var DemoTree = dtree.render({
+                elem: "#demoTree",
+                type: "all",
+                dataStyle: "layuiStyle",
+                dot: false,
+                toolbar: true,
+                toolbarStyle: {title: "单位管理平台", area: ["50%", "400px"]},
+                skin: "zdy",
+                iconfont: ["dtreefont", "layui-icon", "iconfont"],
+                iconfontStyle: [{
+                    snode: {
+                        leaf: "dtree-icon-xiangmuxiaoxi",
+                        node: {
+                            open: "icon-appreciate"
+                        }
+                    }
+                }],
+                dataFormat: "list",
+                response: {message: "msg", statusCode: 0},
+                initLevel: 2,
+                url: "/ldz-information/queryUnitTree",
+                /* done: function (data, obj) {
+                     $("#search_btn").unbind("click");
+                     $("#search_btn").click(function () {
+                         var value = $("#searchInput").val();
+                         if (value){
+                             var flag = DemoTree.searchNode(value);
+                             if (!flag){
+                                 layer.msg("该名称节点不存在!",{icon:5});}
+                         } else {
+                             DemoTree.menubarMethod().refreshTree();
+                         }
+                     });
+                 }*/
+            });
+            dtree.on("node(demoTree)", function (obj) {
+                // if (!obj.param.leaf){
+                //     var  $div = obj.dom;
+                //     DemoTree.clickSpread($div);
+                // }else {
+                //     layer.msg("没有下级学科平台！")
+                // }
+                /*var param = dtree.getParam("demoTree", "001"); //获取ID为001的节点的值
+
+*/
+                // console.log(param);
+                table.reload('testReload',{
+                    url:'/thesis/searchById'
+                    ,where:{
+                        dId: obj.param.nodeId
+                    }
+                });
+            });
+
+
+
+
+        });
+
+    });
+
+    //单位名称下拉框
+    selectdName();
+    //文献类型下拉框
+    selectLiterature();
+
+    selectCollection()
+
+    //重置搜索框
+    function reset() {
+        $('#dName').val("");
+        $('#publishingtimeStart').val("");
+        $('#publishingtimeEnd').val("");
+        $("#pName").val("");
+        $("#literature").val("");
+        $("#collection").val("");
+        layui.form.render();
+    }
+    // timeData1();
+    // timeData2();
+
+</script>
+</body>
+</html>

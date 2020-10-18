@@ -10,6 +10,9 @@ import com.province.postdoctor.entity.postdoctor_info.Patent;
 import com.province.postdoctor.result.PoetResult;
 import com.province.postdoctor.service.postdoctor_info.PatentService;
 
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -34,6 +37,13 @@ public class PatentController {
     @Resource
     private PatentService patentService;
 
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+    }
+
+
     //专利信息表
     @RequestMapping("/list1")
     public PoetResult<Patent> list1(Integer page, Integer limit) {
@@ -42,50 +52,6 @@ public class PatentController {
         QueryWrapper<Patent> queryWrapper = new QueryWrapper<>();
         queryWrapper.select("d_name","p_id","p_name","patenter","patent_name","papplydate","ptype","opendate");
         List<Patent> dList = patentService.list(queryWrapper);
-        for (Patent patent : dList) {
-            Date time=patent.getPapplydate();
-            System.out.println(patent.getPapplydate());
-            SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.US);
-            TimeZone tz = TimeZone.getTimeZone("GMT+8");
-            sdf.setTimeZone(tz);
-            Date s = null;
-            String da = null;
-            Date strToDate = null;
-            try {
-                s = sdf.parse(String.valueOf(time));
-                System.out.println(s);    //  Sun Oct 22 00:00:00 CST 2017
-                sdf = new SimpleDateFormat("yyyy-MM-dd");
-                da = sdf.format(s);
-                System.out.println(da);   //  2017-10-22
-                strToDate = sdf.parse(da);
-            } catch (ParseException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            patent.setShowtime(da);
-        }
-        for (Patent patent1 : dList) {
-            Date time=patent1.getOpendate();
-            System.out.println(patent1.getOpendate());
-            SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.US);
-            TimeZone tz = TimeZone.getTimeZone("GMT+8");
-            sdf.setTimeZone(tz);
-            Date s = null;
-            String da = null;
-            Date strToDate = null;
-            try {
-                s = sdf.parse(String.valueOf(time));
-                System.out.println(s);    //  Sun Oct 22 00:00:00 CST 2017
-                sdf = new SimpleDateFormat("yyyy-MM-dd");
-                da = sdf.format(s);
-                System.out.println(da);   //  2017-10-22
-                strToDate = sdf.parse(da);
-            } catch (ParseException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            patent1.setShowtime1(da);
-        }
         System.out.println(dList);
         thesisPoetResult.setCode(0);
         thesisPoetResult.setMsg("");
@@ -100,50 +66,6 @@ public class PatentController {
         PageHelper.startPage(page,limit);
         PoetResult<Patent> thesisPoetResult = new PoetResult<>();
         List<Patent> dList = patentService.selectpatentInfo(patent);
-        for (Patent patent3 : dList) {
-            Date time=patent3.getPapplydate();
-            System.out.println(patent3.getPapplydate());
-            SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.US);
-            TimeZone tz = TimeZone.getTimeZone("GMT+8");
-            sdf.setTimeZone(tz);
-            Date s = null;
-            String da = null;
-            Date strToDate = null;
-            try {
-                s = sdf.parse(String.valueOf(time));
-                System.out.println(s);    //  Sun Oct 22 00:00:00 CST 2017
-                sdf = new SimpleDateFormat("yyyy-MM-dd");
-                da = sdf.format(s);
-                System.out.println(da);   //  2017-10-22
-                strToDate = sdf.parse(da);
-            } catch (ParseException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            patent.setShowtime(da);
-        }
-        for (Patent patent1 : dList) {
-            Date time=patent1.getOpendate();
-            System.out.println(patent1.getOpendate());
-            SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.US);
-            TimeZone tz = TimeZone.getTimeZone("GMT+8");
-            sdf.setTimeZone(tz);
-            Date s = null;
-            String da = null;
-            Date strToDate = null;
-            try {
-                s = sdf.parse(String.valueOf(time));
-                System.out.println(s);    //  Sun Oct 22 00:00:00 CST 2017
-                sdf = new SimpleDateFormat("yyyy-MM-dd");
-                da = sdf.format(s);
-                System.out.println(da);   //  2017-10-22
-                strToDate = sdf.parse(da);
-            } catch (ParseException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            patent1.setShowtime1(da);
-        }
         System.out.println(dList);
         thesisPoetResult.setCode(0);
         thesisPoetResult.setMsg("");
@@ -162,16 +84,16 @@ public class PatentController {
         System.out.println(patent.getDId());
         System.out.println(patent);
         if ("110".equals(patent.getDId())){
-            queryWrapper.select("p_name","p_id","papplydate","opendate","patenter","patent_name");
+            queryWrapper.select("p_name","p_id","papplydate","opendate","patenter","patent_name","ptype");
             dList = patentService.list(queryWrapper);
         }else if ("01".equals(patent.getDId()))
         {
             queryWrapper.eq("d_type","01");
-            queryWrapper.select("p_name","p_id","papplydate","opendate","patenter","patent_name");
+            queryWrapper.select("p_name","p_id","papplydate","opendate","patenter","patent_name","ptype");
             dList = patentService.list(queryWrapper);
         }else if ("02".equals(patent.getDId())) {
             queryWrapper.eq("d_type","02");
-            queryWrapper.select("p_name","p_id","papplydate","opendate","patenter","patent_name");
+            queryWrapper.select("p_name","p_id","papplydate","opendate","patenter","patent_name","ptype");
             dList = patentService.list(queryWrapper);
         }else {
             dList = patentService.selectBydId(patent);

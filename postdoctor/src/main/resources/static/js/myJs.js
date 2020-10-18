@@ -91,7 +91,7 @@ function selectdName(){
         $(function () {
             $.ajax({
                 type: "POST",
-                url: "postdoctorrinformation/querydName",
+                url: "/postdoctorrinformation/querydName",
                 dataType: "json",
                 cache: false,
                 success: function (data) {
@@ -118,7 +118,7 @@ function selectpNationality(){
         $(function () {
             $.ajax({
                 type: "POST",
-                url: "postdoctorrinformation/queryNationality",
+                url: "/postdoctorrinformation/queryNationality",
                 dataType: "json",
                 cache: false,
                 success: function (data) {
@@ -145,7 +145,7 @@ function selectsubjectCategory(){
         $(function () {
             $.ajax({
                 type: "POST",
-                url: "dictionary/querySubjectCategory",
+                url: "/dictionary/querySubjectCategory",
                 dataType: "json",
                 cache: false,
                 success: function (data) {
@@ -172,7 +172,7 @@ function selectpfSubject(){
         $(function () {
             $.ajax({
                 type: "POST",
-                url: "dictionary/queryfSubject",
+                url: "/dictionary/queryfSubject",
                 dataType: "json",
                 cache: false,
                 success: function (data) {
@@ -199,7 +199,7 @@ function selectstatus(){
         $(function () {
             $.ajax({
                 type: "POST",
-                url: "dictionary/querystatus",
+                url: "/dictionary/querystatus",
                 dataType: "json",
                 cache: false,
                 success: function (data) {
@@ -349,7 +349,7 @@ function selectLiterature(){
         $(function () {
             $.ajax({
                 type: "POST",
-                url: "dictionary/queryLiterature",
+                url: "/dictionary/queryLiterature",
                 dataType: "json",
                 cache: false,
                 success: function (data) {
@@ -376,7 +376,7 @@ function selectCollection(){
         $(function () {
             $.ajax({
                 type: "POST",
-                url: "dictionary/queryCollection",
+                url: "/dictionary/queryCollection",
                 dataType: "json",
                 cache: false,
                 success: function (data) {
@@ -420,6 +420,8 @@ function PselectdName(){
 
     });
 }
+
+//专利申请时间下拉框
 function timeData1() {
     layui.use(['laydate','jquery'],function () {
         var
@@ -436,6 +438,7 @@ function timeData1() {
 
     });
 }
+//专利公开日下拉框
 function timeData2() {
     layui.use(['laydate','jquery'],function () {
         var
@@ -522,6 +525,197 @@ function selectPname(){
                     $('#patentName').append(new Option());
                     $.each(data, function (index, item) {
                         $('#patentName').append(new Option(item.patentName, item.id));
+
+                    });
+                    form.render('select');
+                }, error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}
+
+//获奖类型下拉框
+function selectAtype(){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $('#awardsType').empty();
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/dictionary/queryAtype",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#awardsType').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#awardsType').append(new Option(item.title, item.id));
+
+                    });
+                    form.render('select');
+                }, error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}
+
+//成果评价下拉框
+function selectAresults(){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $('#resultsAssessment').empty();
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/dictionary/queryAresults",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#resultsAssessment').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#resultsAssessment').append(new Option(item.title, item.id));
+
+                    });
+                    form.render('select');
+                }, error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}
+//成果类型下拉框
+function selectType(){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $('#type').empty();
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/awards/queryType",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#type').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#type').append(new Option(item.type, item.id));
+
+                    });
+                    form.render('select');
+                }, error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}
+//获奖类别下拉框
+function selectCategories(){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $('#awardsCategories').empty();
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/awards/queryCategories",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#awardsCategories').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#awardsCategories').append(new Option(item.awardsCategories, item.id));
+
+                    });
+                    form.render('select');
+                }, error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}
+//单位名称下拉框
+function Aselectdname(){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $('#dName').empty();
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/awards/querydname",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#dName').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#dName').append(new Option(item.dname, item.id));
+
+                    });
+                    form.render('select');
+                }, error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}
+//下达部门下拉框
+function selectdepartmentName(){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $('#departmentName').empty();
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/postdoctoraproject/queryDepartment",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#departmentName').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#departmentName').append(new Option(item.departmentName, item.id));
+
+                    });
+                    form.render('select');
+                }, error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}
+//项目性质下拉框
+function selectprojectNature(){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $('#projectNature').empty();
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/postdoctoraproject/queryprojectNature",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#projectNature').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#projectNature').append(new Option(item.projectNature, item.id));
 
                     });
                     form.render('select');

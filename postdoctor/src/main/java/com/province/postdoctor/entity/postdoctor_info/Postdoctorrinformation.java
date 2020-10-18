@@ -2,8 +2,10 @@ package com.province.postdoctor.entity.postdoctor_info;
 
     import com.baomidou.mybatisplus.annotation.TableField;
     import com.baomidou.mybatisplus.annotation.TableName;
-    import java.util.Date;
+
     import java.io.Serializable;
+    import java.sql.Date;
+
     import lombok.Data;
     import lombok.EqualsAndHashCode;
     import lombok.experimental.Accessors;
@@ -46,13 +48,6 @@ package com.province.postdoctor.entity.postdoctor_info;
              * 博士名字
              */
     private String pName;
-
-    /**
-     * 展示时间
-     */
-          @TableField(exist=false)
-    private String showtime;
-
     /**
      * 学科领域Id
      */
@@ -86,7 +81,6 @@ package com.province.postdoctor.entity.postdoctor_info;
             /**
             * 出生日期
             */
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date pBDate;
 
             /**
@@ -122,13 +116,11 @@ package com.province.postdoctor.entity.postdoctor_info;
             /**
             * 进站时间
             */
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startStation;
 
             /**
             * 出站时间
             */
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endStation;
 
             /**
@@ -139,7 +131,6 @@ package com.province.postdoctor.entity.postdoctor_info;
             /**
             * 入党日期
             */
-            @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date pJpDate;
 
             /**
@@ -168,19 +159,9 @@ package com.province.postdoctor.entity.postdoctor_info;
     private String pEmail;
 
             /**
-            * 出生省份
-            */
-    private String pBProvince;
-
-            /**
             * 出生城市
             */
     private String pBCity;
-
-            /**
-            * 现户籍省份
-            */
-    private String pChrProvince;
 
             /**
             * 现户籍城市

@@ -9,6 +9,9 @@ import com.province.postdoctor.entity.postdoctor_info.Thesis;
 import com.province.postdoctor.result.PoetResult;
 import com.province.postdoctor.service.postdoctor_info.PostdoctorrinformationService;
 import com.province.postdoctor.service.postdoctor_info.ThesisService;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -34,6 +37,12 @@ public class ThesisController {
     @Resource
     private ThesisService thesisService;
 
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+    }
+
     //论文信息表
     @RequestMapping("/list1")
     public PoetResult<Thesis> list1(Integer page, Integer limit) {
@@ -42,28 +51,6 @@ public class ThesisController {
         QueryWrapper<Thesis> queryWrapper = new QueryWrapper<>();
         queryWrapper.select("d_name","p_id","p_name","t_ttitle","publishingtime","collection","literature");
         List<Thesis> dList = thesisService.list(queryWrapper);
-        for (Thesis thesis1 : dList) {
-            Date time=thesis1.getPublishingtime();
-            System.out.println(thesis1.getPublishingtime());
-            SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.US);
-            TimeZone tz = TimeZone.getTimeZone("GMT+8");
-            sdf.setTimeZone(tz);
-            Date s = null;
-            String da = null;
-            Date strToDate = null;
-            try {
-                s = sdf.parse(String.valueOf(time));
-                System.out.println(s);    //  Sun Oct 22 00:00:00 CST 2017
-                sdf = new SimpleDateFormat("yyyy-MM-dd");
-                da = sdf.format(s);
-                System.out.println(da);   //  2017-10-22
-                strToDate = sdf.parse(da);
-            } catch (ParseException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            thesis1.setShowtime(da);
-        }
         System.out.println(dList);
         thesisPoetResult.setCode(0);
         thesisPoetResult.setMsg("");
@@ -79,28 +66,6 @@ public class ThesisController {
         PageHelper.startPage(page,limit);
         PoetResult<Thesis> thesisPoetResult = new PoetResult<>();
         List<Thesis> dList = thesisService.selectthesisInfo(thesis);
-        for (Thesis thesis1 : dList) {
-            Date time=thesis1.getPublishingtime();
-            System.out.println(thesis1.getPublishingtime());
-            SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.US);
-            TimeZone tz = TimeZone.getTimeZone("GMT+8");
-            sdf.setTimeZone(tz);
-            Date s = null;
-            String da = null;
-            Date strToDate = null;
-            try {
-                s = sdf.parse(String.valueOf(time));
-                System.out.println(s);    //  Sun Oct 22 00:00:00 CST 2017
-                sdf = new SimpleDateFormat("yyyy-MM-dd");
-                da = sdf.format(s);
-                System.out.println(da);   //  2017-10-22
-                strToDate = sdf.parse(da);
-            } catch (ParseException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            thesis1.setShowtime(da);
-        }
         System.out.println(dList);
         thesisPoetResult.setCode(0);
         thesisPoetResult.setMsg("");

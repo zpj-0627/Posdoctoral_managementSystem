@@ -1,21 +1,24 @@
 //民族下拉框
-function selectNational(){
+function selectNational(r){
     layui.use(['form','jquery'],function () {
-        var $ = layui.$,
+         var $ = layui.$,
             form = layui.form;
         $(function () {
             $.ajax({
                 type: "POST",
-                url: "dictionary/queryNational",
+                url: "/dictionary/queryNational",
                 dataType: "json",
                 cache: false,
                 success: function (data) {
-                    $('#National').append(new Option());
-                    $.each(data, function (index, item) {
-                        $('#National').append(new Option(item.title, item.id));
+
+                    $('#pNation').append(new Option());
+                    $.each(data,function (index,item) {
+                        $('#pNation').append(new Option(item.title,item.dictionaryid));
+                        $('#pNation').val(r.pnation);
                     });
                     form.render('select');
-                }, error: function () {
+
+                },error: function () {
                     alert("查询失败");
                 }
             });
@@ -25,23 +28,52 @@ function selectNational(){
 }
 
 //婚姻下拉框
-function selectmarriage(){
+function selectmarriage(r){
     layui.use(['form','jquery'],function () {
         var $ = layui.$,
             form = layui.form;
         $(function () {
             $.ajax({
                 type: "POST",
-                url: "dictionary/queryNational",
+                url: "/dictionary/queryMarriage",
                 dataType: "json",
                 cache: false,
                 success: function (data) {
-                    $('#Marriage').append(new Option());
+                    $('#pMarriage').append(new Option());
                     $.each(data, function (index, item) {
-                        $('#Marriage').append(new Option(item.title, item.id));
+                        $('#pMarriage').append(new Option(item.title, item.dictionaryid));
+                        $('#pMarriage').val(r.pmarriage);
                     });
                     form.render('select');
                 }, error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}
+
+//政治面貌下拉框
+function selectPPstatus(r){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/dictionary/queryPPstatus",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#pPStatus').append(new Option());
+                    $.each(data,function (index,item) {
+                        $('#pPStatus').append(new Option(item.title,item.dictionaryid));
+                        $('#pPStatus').val(r.ppstatus);
+                    });
+                    form.render('select');
+
+                },error: function () {
                     alert("查询失败");
                 }
             });
@@ -51,20 +83,21 @@ function selectmarriage(){
 }
 
 //专业技术职称下拉框
-function selectPositionaltitles(){
+function selectpPTitle(r){
     layui.use(['form','jquery'],function () {
         var $ = layui.$,
             form = layui.form;
         $(function () {
             $.ajax({
                 type: "POST",
-                url: "dictionary/queryPositionaltitles",
+                url: "/dictionary/queryquerypPTitle",
                 dataType: "json",
                 cache: false,
                 success: function (data) {
-                    $('#Positionaltitles').append(new Option());
+                    $('#pPTitle').append(new Option());
                     $.each(data, function (index, item) {
-                        $('#Positionaltitles').append(new Option(item.title, item.id));
+                        $('#pPTitle').append(new Option(item.title, item.dictionaryid));
+                        $('#pPTitle').val(r.pptitle);
                     });
                     form.render('select');
                 }, error: function () {
@@ -76,31 +109,86 @@ function selectPositionaltitles(){
     });
 }
 
-//出生省份下拉框
-function selectBProvince(){
-    layui.use(['form','jquery'],function () {
-        var $ = layui.$,
-            form = layui.form;
-        $(function () {
-            $.ajax({
-                type: "POST",
-                url: "dictionary/queryPositionaltitles",
-                dataType: "json",
-                cache: false,
-                success: function (data) {
-                    $('#Positionaltitles').append(new Option());
-                    $.each(data, function (index, item) {
-                        $('#Positionaltitles').append(new Option(item.title, item.id));
-                    });
-                    form.render('select');
-                }, error: function () {
-                    alert("查询失败");
+//出生城市下拉树
+function cityTree() {
+    layui.extend({
+        dtree: '../../layui/layui_exts/layui_ext/dtree/dtree'
+    }).use(['dtree', 'layer', 'jquery'], function () {
+        var dtree = layui.dtree,
+            layer = layui.layer,
+            $ = layui.jquery;
+        dtree.render({
+            elem: "#cityTree",
+            isJump: true,
+            dataStyle: "layuiStyle",
+            dataFormat: "list",
+            response: {message: "msg", statusCode: 0},
+            skin: "zdy",
+            initLevel: 1,
+            iconfont: ["dtreefont", "layui-icon", "iconfont"],
+            iconfontStyle: [{
+                snode: {
+                    leaf: "dtree-icon-xiangmuxiaoxi",
+                    node: {
+                        open: "icon-appreciate"
+                    }
                 }
-            });
+            }],
+            url: "/dictionary/queryAll"
+        });
+        $("#smenu").on("click", function () {
+            $(this).toggleClass("layui-form-selected");
+            $("#smtest").toggleClass("layui-show layui-anim layui-anim-upbit");
+        });
+
+        dtree.on("node(cityTree)", function (obj) {
+            $("#pBCity").val(obj.param.context);
+            $("#smenu").toggleClass("layui-form-selected");
+            $("#smtest").toggleClass("layui-show layui-anim layui-anim-upbit");
+            $("#smId").val(obj.param.nodeId);
         });
 
     });
 }
+//现户籍城市下拉树
+function nowCityTree() {
+    layui.extend({
+        dtree: '../../layui/layui_exts/layui_ext/dtree/dtree'
+    }).use(['dtree', 'layer', 'jquery'], function () {
+        var dtree = layui.dtree,
+            layer = layui.layer,
+            $ = layui.jquery;
+        dtree.render({
+            elem: "#nowCityTree",
+            isJump: true,
+            dataStyle: "layuiStyle",
+            dataFormat: "list",
+            response: {message: "msg", statusCode: 0},
+            skin: "zdy",
+            initLevel: 1,
+            iconfont: ["dtreefont", "layui-icon", "iconfont"],
+            iconfontStyle: [{
+                snode: {
+                    leaf: "dtree-icon-xiangmuxiaoxi",
+                    node: {
+                        open: "icon-appreciate"
+                    }
+                }
+            }],
+            url: "/dictionary/queryAll"
+        });
+        $("#spmenu").on("click", function () {
+            $(this).toggleClass("layui-form-selected");
+            $("#spmtest").toggleClass("layui-show layui-anim layui-anim-upbit");
+        });
 
+        dtree.on("node(nowCityTree)", function (obj) {
+            $("#pChrCity").val(obj.param.context);
+            $("#spmenu").toggleClass("layui-form-selected");
+            $("#spmtest").toggleClass("layui-show layui-anim layui-anim-upbit");
+            $("#spmId").val(obj.param.nodeId);
+        });
 
+    });
+}
 

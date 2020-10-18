@@ -21,7 +21,7 @@
                 and treatise_name like "%"#{treatiseName}"%"
             </if>
             <if test="publicationDate != null">
-                and publication_date <![CDATA[<]]> #{publicationDate}
+                and publication_date = #{publicationDate}
             </if>
             <if test="treatiseType != null and treatiseType !=''">
                 and treatise_type = #{treatiseType}

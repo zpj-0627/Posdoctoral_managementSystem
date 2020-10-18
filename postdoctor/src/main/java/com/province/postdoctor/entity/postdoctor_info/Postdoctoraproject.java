@@ -6,6 +6,8 @@ package com.province.postdoctor.entity.postdoctor_info;
     import com.baomidou.mybatisplus.annotation.TableField;
     import com.baomidou.mybatisplus.annotation.TableId;
     import java.io.Serializable;
+
+    import com.fasterxml.jackson.annotation.JsonFormat;
     import lombok.Data;
     import lombok.EqualsAndHashCode;
     import lombok.experimental.Accessors;
@@ -17,14 +19,15 @@ package com.province.postdoctor.entity.postdoctor_info;
     * </p>
 *
 * @author tykj
-* @since 2020-10-13
+* @since 2020-10-16
 */
     @Data
         @EqualsAndHashCode(callSuper = false)
     @Accessors(chain = true)
-    public class Patent implements Serializable {
+    public class Postdoctoraproject implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
 
             @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
@@ -40,12 +43,12 @@ package com.province.postdoctor.entity.postdoctor_info;
     private String dName;
 
             /**
-            * 专利权人
+            * 单位类型
             */
-    private String patenter;
+    private String dType;
 
             /**
-            * 博士号
+            * 博士ID
             */
     private Integer pId;
 
@@ -55,62 +58,47 @@ package com.province.postdoctor.entity.postdoctor_info;
     private String pName;
 
             /**
-            * 专利名称
+            * 研究项目名称
             */
-    private String patentName;
+    private String projectName;
 
             /**
-            * 专利申请日
+            * 下达部门
             */
-            private Date papplydate;
-
+    private String departmentName;
 
             /**
-            * 公开日
+            * 项目性质名称
             */
-            private Date opendate;
-
-
+    private String projectNature;
 
             /**
-            * 发明人
+            * 项目进展名称
             */
-    private String inventor;
+    private String projectProgress;
 
             /**
-            * 专利号
+            * 项目金额
             */
-    private String pnumber;
+    private String projectSum;
 
             /**
-            * 公开号
+            * 批准时间
             */
-    private String onumber;
+
+
+            private Date approveTime;
+    /**
+     * 获奖时间
+     */
+
+    @TableField(exist=false)
+    private String showtime;
 
             /**
-            * 专利类型
+            * 承担责任名称
             */
-    private String ptype;
-
-            /**
-            * 是否授权
-            */
-    private Integer authorized;
-
-            /**
-            * 排名
-            */
-    private Integer rank;
-
-            /**
-            * 专利批准国
-            */
-    private String papprove;
-
-            /**
-            * 专利简介
-            */
-    private String pbrief;
+    private String duty;
 
 
 }

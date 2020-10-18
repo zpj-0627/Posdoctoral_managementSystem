@@ -2,14 +2,11 @@ package com.province.postdoctor.entity.postdoctor_info;
 
     import com.baomidou.mybatisplus.annotation.IdType;
     import java.sql.Date;
-
-    import com.baomidou.mybatisplus.annotation.TableField;
     import com.baomidou.mybatisplus.annotation.TableId;
     import java.io.Serializable;
     import lombok.Data;
     import lombok.EqualsAndHashCode;
     import lombok.experimental.Accessors;
-    import org.springframework.format.annotation.DateTimeFormat;
 
 /**
 * <p>
@@ -17,12 +14,12 @@ package com.province.postdoctor.entity.postdoctor_info;
     * </p>
 *
 * @author tykj
-* @since 2020-10-13
+* @since 2020-10-15
 */
     @Data
         @EqualsAndHashCode(callSuper = false)
     @Accessors(chain = true)
-    public class Patent implements Serializable {
+    public class Fundapplication implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -40,77 +37,46 @@ package com.province.postdoctor.entity.postdoctor_info;
     private String dName;
 
             /**
-            * 专利权人
-            */
-    private String patenter;
-
-            /**
             * 博士号
             */
     private Integer pId;
 
             /**
-            * 博士名
+            * 博士名字
             */
     private String pName;
 
             /**
-            * 专利名称
+            * 申获基金名称
             */
-    private String patentName;
+    private String faName;
 
             /**
-            * 专利申请日
+            * 基金名称
             */
-            private Date papplydate;
+    private String fundName;
+
+            /**
+            * 项目批准号
+            */
+    private String approvalNumber;
+
+            /**
+            * 基金级别名称
+            */
+    private String fundGrade;
+
+            /**
+            * 申请时间
+            */
+    private Date faDate;
 
 
             /**
-            * 公开日
+            * 项目批准时间
             */
-            private Date opendate;
+    private Date approvalTime;
 
-
-
-            /**
-            * 发明人
-            */
-    private String inventor;
-
-            /**
-            * 专利号
-            */
-    private String pnumber;
-
-            /**
-            * 公开号
-            */
-    private String onumber;
-
-            /**
-            * 专利类型
-            */
-    private String ptype;
-
-            /**
-            * 是否授权
-            */
-    private Integer authorized;
-
-            /**
-            * 排名
-            */
-    private Integer rank;
-
-            /**
-            * 专利批准国
-            */
-    private String papprove;
-
-            /**
-            * 专利简介
-            */
-    private String pbrief;
 
 
 }

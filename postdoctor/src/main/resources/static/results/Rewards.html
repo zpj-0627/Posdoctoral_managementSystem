@@ -1,6 +1,6 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title>论文管理</title>
+    <title>奖励管理</title>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -17,10 +17,10 @@
     <!-- 引入css -->
 
 
-    <link rel="stylesheet" type="text/css" href="css/plugins/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
-    <link rel="stylesheet" type="text/css" href="layui/layui_exts/layui_ext/dtree/dtree.css">
-    <link rel="stylesheet" type="text/css" href="layui/layui_exts/layui_ext/dtree/font/dtreefont.css">
-    <link rel="stylesheet" href="layui/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../css/plugins/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../layui/layui_exts/layui_ext/dtree/dtree.css">
+    <link rel="stylesheet" type="text/css" href="../layui/layui_exts/layui_ext/dtree/font/dtreefont.css">
+    <link rel="stylesheet" href="../layui/css/layui.css" media="all">
     <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
     <style>
         body {
@@ -59,82 +59,103 @@
     </style>
 </head>
 <body>
-<script type="text/javascript" src="layui/layui.js" charset="utf-8"></script>
-<script type="text/javascript" src="js/main.js" charset="utf-8"></script>
-<script type="text/javascript" src="js/plugins/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="js/myJs.js" charset="utf-8"></script>
+<script type="text/javascript" src="../layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="../js/main.js" charset="utf-8"></script>
+<script type="text/javascript" src="../js/plugins/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../js/myJs.js" charset="utf-8"></script>
 <!--<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.4.0/jquery.js"></script>-->
 
 <div class="layui-card">
     <!--页面名称-->
     <div class="layui-card-header" style="height: 25px">
-        <i class="layui-icon layui-icon-rate-half"></i><strong>成果管理>论文</strong>
+        <i class="layui-icon layui-icon-rate-half"></i><strong>成果管理>奖励</strong>
         (查询条件)
     </div>
-    <div class="layui-card-body layui-row ">
-
-        <div id="magicalDragScene" class="mc-root mc-ui-absolute-pane">
-
-            <!--单位名称下拉框-->
-            <div class="layui-col-md4 mc-ui-flex-end">
-
+    <div class="layui-card-body layui-row">
+        <div class=" layui-row">
+            <div class="layui-col-md4 ">
                 <label class="layui-form-label" >单位名称：</label>
-
                 <div class="layui-input-block " >
                     <select id="dName" name="dName" style="border:1.5px solid #009688;height: 30px;width: 150px">
                     </select>
                 </div>
             </div>
-
-
-
-            <!--日期框-->
-            <div class="layui-col-md4" style="float: left">
-                <label class="layui-form-label">发表年份：</label>
-                <div class="layui-input-block layui-form" lay-filter="test1">
-                    <input type="text" id="dTime1" name="dTime"  readonly="" class="layui-input test-item"
-                           lay-verify="required" style="border:1.5px solid #009688;height: 30px;width: 150px">
-                </div>
+        <!--单位名称下拉框-->
+        <div class="layui-col-md4 ">
+            <label class="layui-form-label">获奖类型：</label>
+            <div class="layui-input-block ">
+                <select id="awardsType" name="awardsType"
+                        style="border:1.5px solid #009688;height: 30px;width: 150px">
+                </select>
             </div>
-            <div class="layui-col-md4" style="float: left">
-                <label class="layui-form-label">至：</label>
-                <div>
-                    <input type="text" id="dTime2" name="dTime"  readonly="" class="layui-input test-item"
-                           lay-verify="required" style="border:1.5px solid #009688;height: 30px;width: 150px">
-                </div>
+        </div>
+        <!--日期框-->
+        <div class="layui-col-md4" >
+            <label class="layui-form-label">获奖时间：</label>
+            <div class="layui-input-block ">
+                <input type="text" id="awardsDate" name="awardsDate" placeholder="" readonly="" class="layui-input test-item"
+                       lay-verify="required" style="border:1.5px solid #009688;height: 30px;width: 150px">
             </div>
-
-            <div class="layui-row ">
-                <div class="layui-col-md4">
-                    <label class="layui-form-label">文献类型：</label>
-                    <div class="layui-input-block ">
-                        <select id="literature" name="literature" style="border:1.5px solid #009688;height: 30px;width: 150px">
-                        </select>
-                    </div>
-                </div>
-
-                <div class="layui-col-md4">
-                    <label class="layui-form-label">论文作者：</label>
-                    <div class="layui-input-block " >
-                        <input class="layui-input" id="pName" type="text" autocomplete="off"
-                               style="border:1.5px solid #009688;height: 30px;width: 150px"/>
-                    </div>
-                </div>
-
-                <div class="layui-col-md4">
-                    <label class="layui-form-label">收录情况：</label>
-                    <div class="layui-input-block ">
-                        <select id="collection" name="collection" style="border:1.5px solid #009688;height: 30px;width: 150px">
-                        </select>
-                    </div>
-                </div>
-
-
-            </div>
-            <a class="layui-btn layui-btn-primary" id="do_search" style="position: absolute; left: 88%; top: 46%;">查询</a>
-            <a class="layui-btn layui-btn-primary" onclick="reset()" style="position: absolute; left: 93%; top: 46%;">重置</a>
+        </div>
 
         </div>
+        <!--<a class="layui-btn layui-btn-primary" id="do_search" style="position: absolute; left:91%;top: 74%;">查询</a>-->
+        <!--<a class="layui-btn layui-btn-primary" onclick="reset()" style="position: absolute; left: 94%; ">重置</a>-->
+
+    <div class=" layui-row" >
+        <div class="layui-col-md4" >
+            <label class="layui-form-label">奖励等级：</label>
+            <div class="layui-input-block ">
+                <select id="awardsGrade" name="awardsGrade"
+                        style="border:1.5px solid #009688;height: 30px;width: 150px">
+                    <option></option>
+                    <option>特等奖</option>
+                    <option>一等奖</option>
+                    <option>二等奖</option>
+                    <option>三等奖</option>
+                    <option>其他</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-col-md4" >
+            <label class="layui-form-label">奖励类别：</label>
+            <div class="layui-input-block ">
+                <select id="awardsCategories" name="awardsCategories"
+                        style="border:1.5px solid #009688;height: 30px;width: 150px">
+                </select>
+            </div>
+        </div>
+        <div class="layui-col-md4">
+            <label class="layui-form-label">成果评价：</label>
+            <div class="layui-input-block ">
+                <select id="resultsAssessment" name="resultsAssessment"
+                        style="border:1.5px solid #009688;height: 30px;width: 150px">
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class=" layui-row">
+        <div class="layui-col-md4" >
+            <label class="layui-form-label">成果类型：</label>
+            <div class="layui-input-block ">
+                <select id="type" name="type"
+                        style="border:1.5px solid #009688;height: 30px;width: 150px">
+                </select>
+            </div>
+        </div>
+        <div class="layui-col-md4 ">
+            <label class="layui-form-label">项目名称：</label>
+            <div class="layui-input-block ">
+                <input class="layui-input" id="projectName" name="projectName" type="text" autocomplete="off"
+                       style="border:1.5px solid #009688;height: 30px;width: 280px"/>
+            </div>
+        </div>
+
+        <div class="layui-col-md4" style="text-align: right;" >
+            <a class="layui-btn " id="do_search" >查询</a>
+            <a class="layui-btn " onclick="reset()" >重置</a>
+        </div>
+    </div>
     </div>
     <div class="layui-card-body layui-row">
         <div class="layui-col-lg3 layui-col-sm3">
@@ -154,11 +175,11 @@
 
 
 <!--对每条信息的操作按钮，事件对应到分页表工具栏-->
-<script type="text/html" id="barDemo">
+<!--<script type="text/html" id="barDemo">
     <a class="layui-btn   layui-btn-sm" lay-event="detail">个人详情</a>
-    <!-- <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-     <a class="layui-btn layui-btn-xs" lay-event="del">删除</a>-->
-</script>
+    &lt;!&ndash; <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+     <a class="layui-btn layui-btn-xs" lay-event="del">删除</a>&ndash;&gt;
+</script>-->
 
 <!--分页表定义-->
 <!--<div style="position: absolute;top: 40%;width: 98.5%">
@@ -204,6 +225,14 @@
             tree = layui.tree;
         form = layui.form;
 
+        lay('.test-item').each(function(){
+            laydate.render({
+                elem: this,
+                type: 'date',
+                theme: 'grid',
+                trigger: 'click',
+            });
+        });
 
         //执行table分页
         table.render({
@@ -212,19 +241,20 @@
             , height: "auto"
             , toolbar: "#toolbarDemo"
             , defaultToolbar: []
-            , url: 'thesis/list1' //数据接口
+            , url: '/awards/list1' //数据接口
             , page: true //开启分页
             , limit: 5
             , limits: [5, 10, 15]
             , title: '博士点管理信息表'
             , cols: [[ //表头
-                {align: 'center', title: '序号', type: 'numbers', width: '5%'}
-                ,{align:'center',field:'id',title:'学科编号',hide:true}
-                , {align: 'center', field: 'dname', title: '单位名称', width: '15%'}
-                , {align: 'center', field: 'pname', title: '作者', width: '15%'}
-                , {align: 'center', field: 'tttitle', title: '论文名称', width: '35%'}
-                , {align: 'center', field: 'showtime', title: '发表时间', width: '15%'}
-                , {align: 'center', field: 'collection', title: '收录情况', width: '15%'}
+                {align: 'center', title: '序号', type: 'numbers', width: '10%'}
+                , {align: 'center', field: 'projectName', title: '项目名称', width: '20%'}
+                , {align: 'center', field: 'awardsName', title: '奖励名称', width: '20%'}
+                , {align: 'center', field: 'type', title: '成果类型', width: '20%'}
+                , {align: 'center', field: 'awardsType', title: '获奖类型', width: '20%'}
+                , {align: 'center', field: 'awardsDate', title: '获奖时间', width: '20%'}
+                , {align: 'center', field: 'awardsGrade', title: '获奖等级', width: '20%'}
+                , {align: 'center', field: 'ranking', title: '作者排名', width: '11%'}
             ]]
 
             //表头颜色
@@ -246,12 +276,14 @@
         //表格重载
 
         $('#do_search').on('click', function () {
-            var dName = $("#dName").find("option:selected").text();
-            var dTime1 = $('#dTime1').val();
-            var dTime2 = $('#dTime2').val();
-            var literature = $("#literature").find("option:selected").text()
-            var pName = $('#pName').val();
-            var collection = $("#collection").find("option:selected").text()
+            var type = $("#type").find("option:selected").text();
+            var awardsType = $("#awardsType").find("option:selected").text();
+            var awardsDate = $('#awardsDate').val();
+            var awardsGrade = $("#awardsGrade").find("option:selected").text();
+            var awardsCategories = $("#awardsCategories").find("option:selected").text();
+            var resultsAssessment = $('#resultsAssessment').find("option:selected").text();
+            var projectName = $('#projectName').val();
+            var dName = $('#dName').find("option:selected").text();
 
             /*var endStation = $('#endStation').val();
             var pName = $('#pName').val();
@@ -263,14 +295,16 @@
             var status = $("#status").find("option:selected").text();*/
             //执行重载
             table.reload('testReload',{
-                url:'/thesis/search'
+                url:'/awards/search'
                 ,where:{
-                    dName: dName,
-                    dTime1: dTime1,
-                    dTime2: dTime2,
-                    literature: literature,
-                    pName: pName,
-                    collection: collection,
+                    type: type,
+                    awardsType:awardsType,
+                    awardsDate: awardsDate,
+                    awardsGrade: awardsGrade,
+                    awardsCategories: awardsCategories,
+                    resultsAssessment: resultsAssessment,
+                    projectName: projectName,
+                    dName:dName,
                 }
                 ,page: {
                     curr: 1 //重新从第 1 页开始
@@ -336,49 +370,49 @@
         });
 
         //监听工具栏事件
-      /*  table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
-            var data = obj.data //获得当前行数据
-                , layEvent = obj.event; //获得 lay-event 对应的值
-            //单条数据详细信息
-            if (layEvent === 'detail') {
-                layer.open({
-                    title: ['详细信息', 'font-size:18px;'],
-                    type: 2,
-                    content: 'Postdoctorrinformation.html?id=' + data.id,
-                    maxmin: true,
-                    resize: true,
-                    area: ['100%', '100%'],
-                    skin: 'layui-layer-molv'
-                });
-                //删除单条数据
-            } /!*else if (layEvent === 'del') {
-                layer.confirm('您确定删除吗？',{title:'温馨提示',skin: 'layui-layer-molv'}, function removeThis() {
-                    var id = data.id;
-                    $.post('/doctorinformation/remove/' + id, function (r) {
-                        if (r) {
-                            layer.msg("删除成功", {icon: 6, shade: 0.5, time: 1500}, function () {
-                                window.location.reload();
-                            })
-                        } else {
-                            layer.msg("删除失败",{icon: 5, shade: 0.5, time: 1500})
-                        }
-                    }, 'json');
+        /*  table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+              var data = obj.data //获得当前行数据
+                  , layEvent = obj.event; //获得 lay-event 对应的值
+              //单条数据详细信息
+              if (layEvent === 'detail') {
+                  layer.open({
+                      title: ['详细信息', 'font-size:18px;'],
+                      type: 2,
+                      content: '?id=' + data.id,
+                      maxmin: true,
+                      resize: true,
+                      area: ['100%', '100%'],
+                      skin: 'layui-layer-molv'
+                  });
+                  //删除单条数据
+              } /!*else if (layEvent === 'del') {
+                  layer.confirm('您确定删除吗？',{title:'温馨提示',skin: 'layui-layer-molv'}, function removeThis() {
+                      var id = data.id;
+                      $.post('/doctorinformation/remove/' + id, function (r) {
+                          if (r) {
+                              layer.msg("删除成功", {icon: 6, shade: 0.5, time: 1500}, function () {
+                                  window.location.reload();
+                              })
+                          } else {
+                              layer.msg("删除失败",{icon: 5, shade: 0.5, time: 1500})
+                          }
+                      }, 'json');
 
-                });
-                //编辑单条数据
-            }*!/ /!*else if (layEvent === 'edit') {
-                layer.open({
-                    title: ['编辑信息', 'font-size:18px;'],
-                    type: 2,
-                    content: 'DoctorManagement-edit.html?id=' + data.id,
-                    maxmin: true,
-                    resize: true,
-                    area: ['50%', '90%'],
-                    skin: 'layui-layer-molv',
-                });
+                  });
+                  //编辑单条数据
+              }*!/ /!*else if (layEvent === 'edit') {
+                  layer.open({
+                      title: ['编辑信息', 'font-size:18px;'],
+                      type: 2,
+                      content: 'DoctorManagement-edit.html?id=' + data.id,
+                      maxmin: true,
+                      resize: true,
+                      area: ['50%', '90%'],
+                      skin: 'layui-layer-molv',
+                  });
 
-            }*!/
-        });*/
+              }*!/
+          });*/
 
         if (!Array.from) {
             Array.from = function (el) {
@@ -616,7 +650,7 @@
 */
                 // console.log(param);
                 table.reload('testReload',{
-                    url:'/thesis/searchById'
+                    url:'/awards/searchById'
                     ,where:{
                         dId: obj.param.nodeId
                     }
@@ -630,26 +664,35 @@
 
     });
 
-    //单位名称下拉框
-    selectdName();
-    //文献类型下拉框
-    selectLiterature();
+    //成果评价下拉框
+    selectAresults()
 
-    selectCollection()
+    //获奖类型下拉框
+    selectAtype()
+
+    //成果类型下拉框
+    selectType()
+
+    //获奖类别下拉框
+    selectCategories()
+
+    //单位名称下拉框
+    Aselectdname()
 
     //重置搜索框
     function reset() {
         $('#dName').val("");
-        $('#dTime1').val("");
-        $('#dTime2').val("");
-        $("#pName").val("");
-        $("#literature").val("");
-        $("#collection").val("");
+        $('#awardsType').val("");
+        $('#awardsDate').val("");
+        $("#awardsCategories").val("");
+        $("#awardsGrade").val("");
+        $("#resultsAssessment").val("");
+        $("#type").val("");
+        $("#projectName").val("");
         layui.form.render();
     }
-    timeData1();
-    timeData2();
 
+    // timeData1();
 </script>
 </body>
 </html>

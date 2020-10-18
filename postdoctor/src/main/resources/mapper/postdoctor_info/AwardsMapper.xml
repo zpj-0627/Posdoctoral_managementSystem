@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.province.postdoctor.mapper.postdoctor_info.AwardsMapper">
+    <select id="selectawardsInfo" parameterType="com.province.postdoctor.entity.postdoctor_info.Awards" resultType="com.province.postdoctor.entity.postdoctor_info.Awards">
+        SELECT
+        project_name,
+        awards_name,
+        type,
+        awards_type,
+        awards_date,
+        awards_grade,
+        ranking
+        FROM
+        awards
+        <where> 1=1
+            <if test="dName != null and dName !=''">
+                and d_name =#{dName}
+            </if>
+            <if test="projectName != null and projectName !=''">
+                and project_name like "%"#{projectName}"%"
+            </if>
+            <if test="type != null and type !=''">
+                and type = #{type}
+            </if>
+            <if test="awardsType != null and awardsType !=''">
+                and awards_type = #{awardsType}
+            </if>
+            <if test="resultsAssessment != null and resultsAssessment !=''">
+                and results_assessment = #{resultsAssessment}
+            </if>
+            <if test="awardsDate != null">
+                and awards_date = #{awardsDate}
+            </if>
+            <if test="awardsGrade != null and awardsGrade !=''">
+                and awards_grade = #{awardsGrade}
+            </if>
+            <if test="awardsCategories != null and awardsCategories !=''">
+                and awards_categories = #{awardsCategories}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectBydId" parameterType="com.province.postdoctor.entity.postdoctor_info.Awards" resultType="com.province.postdoctor.entity.postdoctor_info.Awards">
+        SELECT
+        project_name,
+        awards_name,
+        type,
+        awards_type,
+        awards_date,
+        awards_grade,
+        ranking
+        FROM
+        awards
+        <where> 1=1
+            <if test="dId != null and dId !=''">
+                and FIND_IN_SET(#{dId},d_id)
+            </if>
+        </where>
+    </select>
+
+</mapper>

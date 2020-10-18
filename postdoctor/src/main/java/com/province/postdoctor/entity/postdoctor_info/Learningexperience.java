@@ -1,6 +1,8 @@
 package com.province.postdoctor.entity.postdoctor_info;
 
     import java.io.Serializable;
+    import java.sql.Date;
+
     import lombok.Data;
     import lombok.EqualsAndHashCode;
     import lombok.experimental.Accessors;
@@ -33,7 +35,7 @@ package com.province.postdoctor.entity.postdoctor_info;
             /**
             * 博士名字
             */
-    private Integer pName;
+    private String pName;
 
             /**
             * 单位编号
@@ -48,12 +50,12 @@ package com.province.postdoctor.entity.postdoctor_info;
             /**
             * 起始时间
             */
-    private String leStartDate;
+    private Date lestartdate;
 
             /**
             * 终止时间
             */
-    private String leEndDate;
+    private Date leenddate;
 
             /**
             * 学校

@@ -46,56 +46,52 @@
 <script type="text/javascript" src="../../layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript" src="../../js/main.js" charset="utf-8"></script>
 <script type="text/javascript" src="../../js/plugins/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/BasicInfo.js" charset="utf-8"></script>
 <div class="layui-form timo-compile">
     <!--添加表单元素-->
     <form class="layui-form" action="" lay-filter="component-form-group" id="component-form-group">
-
+        <input type="hidden" name="Id" id="Id">
         <div class="layui-form-item">
             <label class="layui-form-label" >起始时间</label>
             <div class="layui-input-inline">
-                <input type="text" id="lestardate" name="dTime" placeholder="起始时间" readonly="" class="layui-input test-item"
+                <input type="text" id="lestartdate" name="lestartdate" placeholder="起始时间" readonly="" class="layui-input test-item"
                        lay-verify="required" >
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label" >终止时间</label>
             <div class="layui-input-inline">
-                <input type="text" id="leenddate" name="dTime" placeholder="终止时间" readonly="" class="layui-input test-item"
+                <input type="text" id="leenddate" name="leenddate" placeholder="终止时间" readonly="" class="layui-input test-item"
                        lay-verify="required" >
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label" >学校</label>
             <div class="layui-input-inline">
-                <input class="layui-input"  type="text" name="spmId"  id="spm" readonly="readonly" >
+                <input class="layui-input"  type="text" name="school"  id="school"  >
             </div>
         </div>
         <div class="layui-form-item ">
             <label class="layui-form-label" >学历</label>
             <div class="layui-input-inline">
                 <select id="education" name="education" >
-                    <option>博士</option>
+                  <!--  <option>博士</option>
                     <option>硕士</option>
+                    <option>高中</option>-->
                 </select>
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label" >一级学科</label>
             <div class="layui-input-inline">
-                <select id="smName1" name="smName1" >
-
-                    <option>计算机科学与技术</option>
-                    <option>群众</option>
-                </select>
+                <input class="layui-input"  type="text" name="smName1"  id="smName1"  >
             </div>
+
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label" >二级学科</label>
             <div class="layui-input-inline">
-                <select id="smName2" name="smName2" >
-                    <option>--请选择--</option>
-                    <option>教授</option>
-                </select>
+                <input class="layui-input"  type="text" name="smName2"  id="smName2"  >
             </div>
         </div>
         <div class="layui-form-item timo-finally" align="center">
@@ -105,8 +101,10 @@
 </div>
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
 <script>
-    layui.use('laydate', function(){
+    layui.use(['table','form','laydate','jquery'], function(){
         var laydate = layui.laydate;
+        $ = layui.$,
+            form = layui.form;
         lay('.test-item').each(function(){
             laydate.render({
                 elem: this,
@@ -115,16 +113,60 @@
                 trigger: 'click',
             });
         });
-    });
+
     id=location.href.split("?")[1].split("=")[1];
     alert(id);
-    /* $.get('/subjectplatformmenu/getText/'+id,function (r) {
-         $('[name=spmId]').val(r.id)
-         $('[name=spmName]').val(r.title)
-         $('[name=spmParentId]').val(r.parentId)
-         $('[name=spmParentName]').val(r.parentName)
-         $('[name=spmRemark]').val(r.spmRemark)
-     },'json')*/
+     $.get('/learningexperience/getText/'+id,function (r) {
+         $('[name=Id]').val(r.id)
+         $('[name=lestartdate]').val(r.lestartdate)
+         $('[name=leenddate]').val(r.leenddate)
+         $('[name=school]').val(r.school)
+        /* $('[name=education]').val(r.education  )*/
+         $('[name=smName1]').val(r.smName1)
+         $('[name=smName2]').val(r.smName2)
+         layui.form.render('select');
+         //学历下拉框
+         selectDegree(r)
+         // //一级学科下拉框
+         // selectSmName1(r);
+         // //二级学科下拉框
+         // selectSmName2(r);
+
+
+         /*监听提交*/
+         form.on('submit(component-form-demo)',function (data) {
+             var id = document.getElementById("Id").value;
+             var lestartdate = document.getElementById("lestartdate").value;
+             var leenddate = document.getElementById("leenddate").value;
+             var school = document.getElementById("school").value;
+             var education = document.getElementById("education").options[document.getElementById("education").selectedIndex].text;
+             var smName1 = document.getElementById("smName1").value;
+             var smName2 = document.getElementById("smName2").value;
+             if (lestartdate==r.lestartdate&&leenddate==r.leenddate&&school==r.school&&education==r.education&&smName1==r.smName1&&smName2==r.smName2) {
+                 layer.msg('并没有修改信息',{icon: 5, shade: 0.5, time: 1500});
+             }else {
+                 var json1 = $('form').serialize();
+                 $.post(
+                     "/learningexperience/update",
+                     json1,
+                     function (res) {
+                         if (res){
+                             layer.msg("修改成功", {icon: 6, shade: 0.5, time: 1500}, function () {
+                                 var index = parent.layer.getFrameIndex(window.name);
+                                 parent.layer.close(index);
+                                 parent.window.location.reload();
+                             })
+                         }else {
+                             layer.msg("修改失败",{icon: 5, shade: 0.5, time: 1500});
+                         }
+                     },'json');
+             }
+
+             return false;
+         });
+
+     },'json')
+    });
 </script>
 </body>
 </html>

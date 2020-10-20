@@ -107,8 +107,8 @@
             tree = layui.tree;
         form = layui.form;
 
-        // id=location.href.split("?")[1].split("=")[1];
-        // alert(id);
+      /*  id=location.href.split("?")[1].split("=")[1];
+         alert(id);*/
         //执行table分页
         table.render({
             elem: '#demo'
@@ -116,14 +116,18 @@
             , height: "auto"
             , toolbar: "#toolbarDemo"
             , defaultToolbar: []
-            , url: '/learningexperience/list1' //数据接口
+            /*, url: '/learningexperience/list1'*/
             , page: true //开启分页
             , limit: 5
             , limits: [5, 10, 15]
             , title: '博士点管理信息表'
             , cols: [[ //表头
                  {align: 'center', title: '序号', type: 'numbers', width: '10%'}
-                , {align: 'center', field: 'pid', title: '编号',hide: true }
+                , {align: 'center', field: 'id', title: 'ID',hide: true }
+                , {align: 'center', field: 'pid', title: 'pID',hide: true }
+                , {align: 'center', field: 'pname', title: '姓名',hide: true }
+                , {align: 'center', field: 'did', title: 'dID',hide: true }
+                , {align: 'center', field: 'dname', title: '单位名称',hide: true }
                 , {align: 'center', field: 'lestartdate', title: '起止时间', width: '19%'}
                 , {align: 'center', field: 'leenddate', title: '终止时间', width: '19%'}
                 , {align: 'center', field: 'school', title: '学校', width: '20%'}
@@ -145,43 +149,34 @@
             }
         });
         //表格重载
-        var $ = layui.$, active = {
-            reload: function () {
-                var demoReload = $('#input_spm');
-                var  option =$("#school").find("option:selected").text();
-                var grade = $("#dGrade1").find("option:selected").text();
 
-                //执行重载
-                table.reload('testReload',{
-                    url:'/doctorinformation/list1'
-                    ,where:{
-                        spmmenu: demoReload.val(),
-                        school: option,
-                        dGrade: grade
-                    }
-                    ,page: {
-                        curr: 1 //重新从第 1 页开始
-                    }
+        id=location.href.split("?")[1].split("=")[1];
+        alert(id);
 
-                });
+        //执行重载
+        table.reload('testReload',{
+            url:'/learningexperience/list1'
+            ,where:{
+               pId: id,
             }
-        };
-        $('.demoTable .layui-btn').on('click',function () {
-            var type = $(this).data('type');
-            active[type] ? active[type].call(this) : '';
+            ,page: {
+                curr: 1 //重新从第 1 页开始
+            }
+
         });
 
         //监听头工具栏事件
         table.on('toolbar(test)', function (obj) {
-            var checkStatus = table.checkStatus(obj.config.id),
-                data = checkStatus.data; //获取选中的数据
+            alert(obj)
+                var checkStatus = table.checkStatus(obj.config.id),
+                    data = checkStatus.data; //获取选中的数据
             switch (obj.event) {
                 //添加
                 case 'add':
                     layer.open({
                         title: ['添加信息', 'font-size:18px;'],
                         type: 2,
-                        content: '/people/learning/LearningExperience-add.html',
+                        content: '/people/learning/LearningExperience-add.html?id=' + obj.pid,
                         resize: true,
                         area: ['100%', '100%'],
                         skin: 'layui-layer-lan',
@@ -251,7 +246,7 @@
         }
 
         //表格导出
-        function exportFile(id) {
+        /*function exportFile(id) {
             $.ajax({
                 url: '/doctorinformation/queryAll'
                 , dataType: 'json'
@@ -424,25 +419,8 @@
                     layer.alert('获取数据失败');
                 }
             });
-        }
-
-        //学科平台目录树
-        layui.extend({
-            dtree: 'layui_ext/dtree/dtree'
-        }).use(['dtree','layer','jquery'], function () {
-            spmTree();
-        });
-
+        }*/
     });
-    //高校目录下拉框
-  /*  schoolSelect();*/
-    //重置搜索框
-    function reset() {
-        $('#input_spm').val("");
-        $('#school').val("");
-        $("#dGrade1").val("");
-        layui.form.render();
-    }
 </script>
 </body>
 </html>

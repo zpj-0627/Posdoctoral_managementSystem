@@ -191,4 +191,31 @@ function nowCityTree() {
 
     });
 }
+//学历信息下拉框
+function selectDegree(r){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/dictionary/queryDegree",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#education').append(new Option());
+                    $.each(data,function (index,item) {
+                        $('#education').append(new Option(item.title,item.dictionaryid));
+                        $('#education').val(r.education);
+                    });
+                    form.render('select');
+
+                },error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}
 

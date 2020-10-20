@@ -44,8 +44,6 @@ public class AwardsController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
 
-
-
     //奖励信息表
     @RequestMapping("/list1")
     public PoetResult<Awards> list1(Integer page, Integer limit) {

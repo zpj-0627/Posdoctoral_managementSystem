@@ -360,4 +360,15 @@ public class DictionaryController {
         List<Dictionary> dList = dictionaryService.list(queryWrapper);
         return dList;
     }
+
+    //学历下拉框
+    @RequestMapping("/queryDegree")
+    public List<Dictionary> queryDegree() {
+        QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("updictionaryid", 10383);
+        queryWrapper.select( "title");
+        queryWrapper.eq("sign", 0);
+        List<Dictionary> dList = dictionaryService.list(queryWrapper);
+        return dList;
+    }
 }

@@ -21,4 +21,6 @@ public interface TreatiseMapper extends BaseMapper<Treatise> {
 
     List<Treatise> selectBydId(Treatise treatise);
 
+    void deleteById(String id);
+
 }

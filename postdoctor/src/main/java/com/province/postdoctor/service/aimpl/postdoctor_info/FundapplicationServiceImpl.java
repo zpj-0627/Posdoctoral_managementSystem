@@ -32,4 +32,9 @@ public class FundapplicationServiceImpl extends ServiceImpl<FundapplicationMappe
     public List<Fundapplication> selectBydId(Fundapplication fundapplication) {
         return fundapplicationMapper.selectBydId(fundapplication);
     }
+
+    @Override
+    public void deleteById(String id) {
+        fundapplicationMapper.deleteById(id);
+    }
 }

@@ -17,7 +17,7 @@ public class PostdoctoralInfoNumber {
     /*
     读博情况
     */
-    private Integer phdSituationNumber;
+    private Integer PhdSituationNumber;
     /*
     留学情况
     */

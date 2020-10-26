@@ -20,4 +20,6 @@ public interface FundapplicationMapper extends BaseMapper<Fundapplication> {
 
     List<Fundapplication> selectBydId(Fundapplication fundapplication);
 
+    void deleteById(String id);
+
 }

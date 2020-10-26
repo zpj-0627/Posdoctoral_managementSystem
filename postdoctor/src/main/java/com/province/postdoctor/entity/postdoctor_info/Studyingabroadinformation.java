@@ -4,6 +4,8 @@ package com.province.postdoctor.entity.postdoctor_info;
     import com.baomidou.mybatisplus.annotation.IdType;
     import com.baomidou.mybatisplus.annotation.TableId;
     import java.io.Serializable;
+    import java.sql.Date;
+
     import lombok.Data;
     import lombok.EqualsAndHashCode;
     import lombok.experimental.Accessors;
@@ -43,7 +45,7 @@ package com.province.postdoctor.entity.postdoctor_info;
             /**
             * 是否留学
             */
-    private Integer studyingAbroad;
+    private String studyingAbroad;
 
             /**
             * 留学国别
@@ -55,25 +57,22 @@ package com.province.postdoctor.entity.postdoctor_info;
             */
     private String saId;
 
-            /**
-            * 留学开始时间（年）
-            */
-    private String saStartDateY;
 
             /**
-            * 留学开始时间（月）
-            */
-    private String saStartDateM;
+             * 出国前是否注销户口
+             */
+    private String saLogoff;
 
             /**
-            * 留学结束时间（年）
+            * 留学开始时间
             */
-    private String saEndDateY;
+    private Date saStartDate;
+
 
             /**
-            * 留学结束时间（月）
+            * 留学结束时间
             */
-    private String saEndDateM;
+    private Date saEndDate;
 
             /**
             * 留学学校

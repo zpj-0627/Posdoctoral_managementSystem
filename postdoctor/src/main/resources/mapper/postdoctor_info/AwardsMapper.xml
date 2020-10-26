@@ -57,5 +57,13 @@
             </if>
         </where>
     </select>
+    <!--根据id删除该条数据-->
+    <select id="deleteById" parameterType="java.lang.String" >
+        DELETE
+        FROM
+        awards
+        WHERE
+        id = #{id};
+    </select>
 
 </mapper>

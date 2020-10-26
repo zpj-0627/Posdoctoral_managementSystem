@@ -19,4 +19,6 @@ public interface AwardsService extends IService<Awards> {
 
     List<Awards> selectBydId(Awards awards);
 
+    void deleteById(String id);
+
 }

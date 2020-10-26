@@ -34,4 +34,9 @@ public class ThesisServiceImpl extends ServiceImpl<ThesisMapper, Thesis> impleme
     public List<Thesis> selectBydId(Thesis thesis) {
         return thesisMapper.selectBydId(thesis);
     }
+
+    @Override
+    public void deleteById(String id) {
+        thesisMapper.deleteById(id);
+    }
 }

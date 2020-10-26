@@ -95,7 +95,7 @@ package com.province.postdoctor.entity.postdoctor_info;
             /**
             * 是否授权
             */
-    private Integer authorized;
+    private String authorized;
 
             /**
             * 排名

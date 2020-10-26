@@ -13,4 +13,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface WorkexperienceService extends IService<Workexperience> {
 
+    void deleteById(String id);
+
 }

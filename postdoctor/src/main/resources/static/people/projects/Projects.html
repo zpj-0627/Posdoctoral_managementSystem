@@ -1,0 +1,415 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>项目管理</title>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon" th:href="./images/favicon.ico" type="image/x-icon">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+
+
+    <!-- 引入css -->
+
+
+    <link rel="stylesheet" type="text/css" href="../../css/plugins/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../layui/layui_exts/layui_ext/dtree/dtree.css">
+    <link rel="stylesheet" type="text/css" href="../../layui/layui_exts/layui_ext/dtree/font/dtreefont.css">
+    <link rel="stylesheet" href="../../layui/css/layui.css" media="all">
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+    <style>
+        body {
+            margin: 10px;
+        }
+        . layui-btn-xs{
+            color:#037ef3 ;
+        }
+        .layui-laypage .layui-laypage-curr .layui-laypage-em{
+            background-color: #037ef3
+        }
+
+        .layui-table-tool-temp {
+            padding-right: 0;
+            margin-right: 0;
+        }
+        .yutons,
+        .layui-btn-sm{
+            margin-top: -2px;
+        }
+        .yutons-header-tool{
+            margin-top: -2px;
+            width: 30px !important;
+            height: 30px !important;
+            background-color: #ffffff;
+        }
+        .layui-tale-tool-panel{
+            left: auto;
+            right: -1px;
+        }
+        .yutons-btn-margin-right{
+            margin-right: 10px;
+            line-height: 40px;
+        }
+        .select-test{position: absolute;padding-left:-10px; max-height: 500px;height: 350px;overflow: auto;width: 220px;z-index: 123;display: none;border:1px solid silver;top: 42px;}
+        .layui-show{display: block!important;}
+        .layui-table-cell .layui-form-checkbox[lay-skin="primary"]{
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+
+    </style>
+</head>
+<body>
+
+
+<script type="text/javascript" src="../../layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../js/main.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../js/plugins/jquery-3.3.1.min.js" charset="utf-8"></script>
+<script src="../../js/myJs.js" charset="utf-8"></script>
+
+<!--对每条信息的操作按钮，事件对应到分页表工具栏-->
+<script type="text/html" id="barDemo" >
+    <a class="layui-btn layui-btn-xs" lay-event="edit" style="background-color:#0091cd">编辑</a>
+    <a class="layui-btn layui-btn-xs" lay-event="del" style="background-color:#0091cd">删除</a>
+</script>
+
+<!--分页表定义-->
+<div class="layui-card-body layui-row ">
+    <table class="layui-hide" id="demo" lay-filter="test"></table>
+</div>
+<!--头工具栏操作按钮-->
+<script type="text/html" id="toolbarDemo">
+
+    <div class="layui-row" style="height: 3%">
+        <!--添加按钮-->
+        <div class="layui-btn-container" style="text-align: right">
+            <button class="layui-btn layui-btn-sm layui-btn-normal" lay-event="add" style="background-color:#0091cd"> <i class="layui-icon">&#xe608;</i>添加</button>
+        </div>
+    </div>
+</script>
+
+<script>
+    layui.config({
+        base: '../../layui/layui_exts/',
+    }).use(['table','excel','tree','form','laypage'],function () {
+        var table = layui.table,
+            $ = layui.$,
+            excel = layui.excel,
+            tree = layui.tree;
+        form = layui.form;
+
+        id=location.href.split("?")[1].split("=")[1];
+        alert(id);
+        //执行table分页
+        table.render({
+            elem: '#demo'
+            , id: 'testReload'
+            , height: "auto"
+            , toolbar: "#toolbarDemo"
+
+            , defaultToolbar: []
+            , page: true //开启分页
+            , limit: 5
+            , limits: [5, 10, 15]
+            , title: '博士点管理信息表'
+            , cols: [[ //表头
+                {align: 'center', title: '序号', type: 'numbers', width: '10%'}
+                , {align: 'center', field: 'pid', title: '编号',hide: true }
+                , {align: 'center', field: 'projectName', title: '项目名称', width: '50%'}
+                , {align: 'center', field: 'departmentName', title: '下达部门', width: '20%'}
+                , {align: 'center', fixed: 'right', title: '操作',width: '21%', toolbar: '#barDemo'}
+
+            ]]
+            //表头颜色
+            ,done: function () {
+                $('th').css({'background-color': '#0091cd', 'color': '#fff', 'font-weight':'bold'})
+            }
+            , paresData: function (res) {
+                return {
+                    "code": res.code,
+                    "msg": res.msg,
+                    "count": res.count,
+                    "data": res.data
+                };
+            }
+        });
+
+        //执行重载
+        table.reload('testReload',{
+            url:'/postdoctoraproject/plist1'
+            ,where:{
+                pId:id,
+            }
+            ,page: {
+                curr: 1 //重新从第 1 页开始
+            }
+
+        });
+
+        //监听头工具栏事件
+        table.on('toolbar(test)', function (obj) {
+            var checkStatus = table.checkStatus(obj.config.id),
+                data = checkStatus.data; //获取选中的数据
+            switch (obj.event) {
+                //添加
+                case 'add':
+                    layer.open({
+                        title: ['添加信息', 'font-size:18px;'],
+                        type: 2,
+                        content: 'LearningExperience-add.html',
+                        resize: true,
+                        area: ['100%', '100%'],
+                        skin: 'layui-layer-lan',
+                        cancel: function (index, layero) {
+                            layer.confirm('您确定关闭吗', {title:'温馨提示',skin: 'layui-layer-molv'},function() {//只有当点击confirm框的确定时，该层才会关闭
+                                layer.close(index);
+                                layer.closeAll('dialog');
+
+                            });
+                            return false;
+                        }
+                    });
+                    break;
+            }
+
+        });
+
+        //监听工具栏事件
+        table.on('tool(test)', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+            var data = obj.data //获得当前行数据
+                , layEvent = obj.event; //获得 lay-event 对应的值
+            //单条数据详细信息
+            /*if (layEvent === 'detail') {
+                layer.open({
+                    title: ['详细信息', 'font-size:18px;'],
+                    type: 2,
+                    content: 'DoctorManagement-detail.html?id=' + data.id,
+                    maxmin: true,
+                    resize: true,
+                    area: ['50%', '90%'],
+                    skin: 'layui-layer-molv'
+                });
+                //删除单条数据
+            } else */if (layEvent === 'del') {
+                layer.confirm('您确定删除吗？',{title:'温馨提示',skin: 'layui-layer-lan'}, function removeThis() {
+                    var id = data.id;
+                    $.post('/postdoctoraproject/remove/' + id, function (r) {
+                        if (r) {
+                            layer.msg("删除成功", {icon: 6, shade: 0.5, time: 1500}, function () {
+                                window.location.reload();
+                            })
+                        } else {
+                            layer.msg("删除失败",{icon: 5, shade: 0.5, time: 1500})
+                        }
+                    }, 'json');
+
+                });
+                //编辑单条数据
+            } else if (layEvent === 'edit') {
+                var id = data.id;
+                layer.open({
+                    title: ['编辑信息', 'font-size:18px;'],
+                    type: 2,
+                    content: 'Projects-edit.html?id=' + id,
+                    maxmin: true,
+                    resize: true,
+                    area: ['100%', '100%'],
+                    skin: 'layui-layer-lan',
+                });
+
+            }
+        });
+
+        if (!Array.from) {
+            Array.from = function (el) {
+                return Array.apply(this, el);
+            }
+        }
+
+        //表格导出
+        function exportFile(id) {
+            $.ajax({
+                url: '/doctorinformation/queryAll'
+                , dataType: 'json'
+                , success(res) {
+                    var data = res.data;
+                    var arr = [{
+                        sign:{
+                            v: '博士点信息管理表',
+                            s: {
+                                alignment: {
+                                    horizontal: 'center',
+                                    vertical: 'center'
+                                },
+                                font: {
+                                    sz: 18
+                                }
+                            }
+                        },
+                        siId: '',
+                        siName: '',
+                        smId: '',
+                        smName: '',
+                        dClass: '',
+                        dGrade: '',
+                        dTime: '',
+                        dRemark: ''
+                    },
+                        {
+                            sign: {
+                                v: '编号',
+                                s: {
+                                    alignment: {
+                                        horizontal: 'center',
+                                        vertical: 'center'
+                                    }
+                                }
+                            },
+                            siId:{
+                                v: '高校代码',
+                                s: {
+                                    alignment: {
+                                        horizontal: 'center',
+                                        vertical: 'center'
+                                    }
+                                }
+                            },
+                            siName: {
+                                v: '高校名称',
+                                s: {
+                                    alignment: {
+                                        horizontal: 'center',
+                                        vertical: 'center'
+                                    }
+                                }
+                            },
+                            smId: {
+                                v: '学科代码',
+                                s: {
+                                    alignment: {
+                                        horizontal: 'center',
+                                        vertical: 'center'
+                                    }
+                                }
+                            },
+                            smName: {
+                                v: '学科名称',
+                                s: {
+                                    alignment: {
+                                        horizontal: 'center',
+                                        vertical: 'center'
+                                    }
+                                }
+                            },
+                            dClass: {
+                                v: '类别',
+                                s: {
+                                    alignment: {
+                                        horizontal: 'center',
+                                        vertical: 'center'
+                                    }
+                                }
+                            },
+                            dGrade: {
+                                v: '级别',
+                                s: {
+                                    alignment: {
+                                        horizontal: 'center',
+                                        vertical: 'center'
+                                    }
+                                }
+                            },
+                            dTime: {
+                                v: '批准时间',
+                                s: {
+                                    alignment: {
+                                        horizontal: 'center',
+                                        vertical: 'center'
+                                    }
+                                }
+                            },
+                            dRemark: {
+                                v: '备注',
+                                s: {
+                                    alignment: {
+                                        horizontal: 'center',
+                                        vertical: 'center'
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                    data = excel.filterExportData(data, [
+                        'sign'
+                        ,'siId'
+                        , 'siName'
+                        , 'smId'
+                        , 'smName'
+                        , 'dClass'
+                        , 'dGrade'
+                        , 'dTime'
+                        , 'dRemark'
+                    ]);
+                    for (var i = 0; i < data.length; i++) {
+                        data[i].sign = i+1;
+                    }
+                    var mergeConf = excel.makeMergeConfig([
+                        ['A1','I1']
+                    ]);
+                    // 2. B列宽 150，F列宽200，默认80
+                    var colConf = excel.makeColConfig({
+                        A: 40,
+                        B: 100,
+                        D: 100,
+                        E: 150,
+                        G: 120,
+                        F: 100,
+                        I: 120
+                    },80);
+                    // 3. 第1行行高40，第二行行高30，默认20
+                    var rowConf = excel.makeRowConfig({
+                        1: 40
+                    },40);
+                    excel.setExportCellStyle(data,'A1:H'+data.length,{
+                        s: {
+                            alignment: {
+                                horizontal: 'center',
+                                vertical: 'center'
+                            }
+                        }
+                    });
+                    excel.setExportCellStyle(data,'A1:A'+data.length,{
+                        s: {
+                            alignment: {
+                                horizontal: 'center',
+                                vertical: 'center'
+                            }
+                        }
+                    });
+                    excel.exportExcel(arr.concat(data)
+                        , '博士点信息管理表.xlsx', 'xlsx', {
+                            extend: {
+                                // extend 中可以指定某个 sheet 的属性，如果不指定 sheet 则所有 sheet 套用同一套属性
+                                '!merges': mergeConf
+                                , '!cols': colConf
+                                , '!rows': rowConf
+                            }
+                        });
+                },
+                error() {
+                    layer.alert('获取数据失败');
+                }
+            });
+        }
+
+    });
+
+</script>
+</body>
+</html>

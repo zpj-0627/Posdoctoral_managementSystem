@@ -19,4 +19,6 @@ public interface PatentService extends IService<Patent> {
 
     List<Patent> selectBydId(Patent patent);
 
+    void deleteById(String id);
+
 }

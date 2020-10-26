@@ -371,4 +371,76 @@ public class DictionaryController {
         List<Dictionary> dList = dictionaryService.list(queryWrapper);
         return dList;
     }
+    //博士学位一级学科下拉框
+    @RequestMapping("/queryPostfsub")
+    public List<Dictionary> queryPostfsub() {
+        QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("updictionaryid", 10389);
+        queryWrapper.eq("sign", 0);
+        queryWrapper.select("title");
+        List<Dictionary> dList = dictionaryService.list(queryWrapper);
+        return dList;
+    }
+    //博士学位二级学科下拉框
+    @RequestMapping("/queryPostssub")
+    public List<Dictionary> queryPostssub() {
+        QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("updictionaryid", 10392);
+        queryWrapper.eq("sign", 0);
+        queryWrapper.select("title");
+        List<Dictionary> dList = dictionaryService.list(queryWrapper);
+        return dList;
+    }
+
+    //国别下拉框
+    @RequestMapping("/queryPCountry")
+    public List<Dictionary> queryPCountry() {
+        QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("updictionaryid", 10390);
+        queryWrapper.eq("sign", 0);
+        queryWrapper.select("title");
+        List<Dictionary> dList = dictionaryService.list(queryWrapper);
+        return dList;
+    }
+    //科研项目下达部门下拉框
+    @RequestMapping("/queryPDept")
+    public List<Dictionary> queryPDept() {
+        QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("updictionaryid", 10011);
+        queryWrapper.eq("sign", 0);
+        queryWrapper.select("title");
+        List<Dictionary> dList = dictionaryService.list(queryWrapper);
+        return dList;
+    }
+    //科研项目性质下拉框
+    @RequestMapping("/queryPprojectNature")
+    public List<Dictionary> queryPprojectNature() {
+        QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("updictionaryid", 10012);
+        queryWrapper.eq("sign", 0);
+        queryWrapper.select("title");
+        List<Dictionary> dList = dictionaryService.list(queryWrapper);
+        return dList;
+    }
+    //科研项目进展下拉框
+    @RequestMapping("/queryPprojectProgress")
+    public List<Dictionary> queryPprojectProgress() {
+        QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("updictionaryid", 10013);
+        queryWrapper.eq("sign", 0);
+        queryWrapper.select("title");
+        List<Dictionary> dList = dictionaryService.list(queryWrapper);
+        return dList;
+    }
+    //科研项目承担责任下拉框
+    @RequestMapping("/queryPduty")
+    public List<Dictionary> queryPduty() {
+        QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("updictionaryid", 10014);
+        queryWrapper.eq("sign", 0);
+        queryWrapper.select("title");
+        List<Dictionary> dList = dictionaryService.list(queryWrapper);
+        return dList;
+    }
+
 }

@@ -33,4 +33,9 @@ public class TreatiseServiceImpl extends ServiceImpl<TreatiseMapper, Treatise> i
     public List<Treatise> selectBydId(Treatise treatise) {
         return treatiseMapper.selectBydId(treatise);
     }
+
+    @Override
+    public void deleteById(String id) {
+        treatiseMapper.deleteById(id);
+    }
 }

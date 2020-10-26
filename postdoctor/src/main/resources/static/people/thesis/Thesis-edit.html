@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+    <title>基本信息</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../css/plugins/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../layui/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../layui/layui_exts/layui_ext/dtree/dtree.css">
+    <link rel="stylesheet" type="text/css" href="../../layui/layui_exts/layui_ext/dtree/font/dtreefont.css">
+    <style>
+        .layui-form-label {
+            width: 150px;
+        }
+        .layui-input{
+            border:1.5px solid #74d2e7;
+        }
+
+
+        /* .layui-form-item {
+             margin: 0px;
+         }
+         .layui-input-inline {
+             margin: 0px;
+
+         }
+         .layui-form-label {
+             padding:2px 0px;
+             width: 60px;
+             !* line-height: 24px; *!
+             background: #74d2e7;
+
+             !*font-size: 15px;*!
+         }
+         .layui-input {
+             width: 80%;
+             background: #74d2e7;
+         }*/
+        /*.select-test{position: absolute;max-height: 500px;height: 350px;overflow: auto;width: 235px;z-index: 123;display: none;border:1px solid silver;top: 42px;}
+        .layui-show{display: block!important;}*/
+    </style>
+</head>
+<body>
+<script type="text/javascript" src="../../layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../js/main.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../js/plugins/jquery-3.3.1.min.js"></script>
+<div class="layui-form timo-compile">
+    <!--添加表单元素-->
+    <form class="layui-form" action="" lay-filter="component-form-group" id="component-form-group">
+
+        <div class="layui-form-item">
+            <label class="layui-form-label" >论文题目<span class="required"> *</span></label>
+            <div class="layui-input-inline">
+                <input id="tttitle" class="layui-input"  type="text" name="tttitle"  lay-verify="required"  style="width:670px;" >
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" >论文英文题目<span class="required"> *</span></label>
+            <div class="layui-input-inline">
+                <input id="tetitle" class="layui-input"  type="text" name="tetitle"  lay-verify="required"  style="width:670px;" >
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" >论文发表的学术刊物或会议名称<span class="required"> *</span></label>
+            <div class="layui-input-inline">
+                <input id="academic" class="layui-input"  type="text" name="academic"  lay-verify="required"  style="width:670px;" >
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" >卷期信息<span class="required"> *</span></label>
+            <div class="layui-input-inline">
+                <input id="parentId" class="layui-input"  type="text" name="spmParentId"  lay-verify="required"  style="width:670px;" >
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">文献类型 </label>
+            <div class="layui-input-inline ">
+                <select id="dGrade1" name="dGrade">
+                    <option></option>
+                    <option>一级博士点</option>
+                    <option>二级博士点</option>
+                </select>
+            </div>
+            <label class="layui-form-label">论文作者排名 </label>
+            <div class="layui-input-inline ">
+                <select id="dGrade1" name="dGrade">
+                    <option></option>
+                    <option>一级博士点</option>
+                    <option>二级博士点</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" >期刊号</label>
+            <div class="layui-input-inline">
+                <input class="layui-input"  type="text" name="spmName" disabled="true" >
+            </div>
+            <label class="layui-form-label" style="text-align: left;width: 200px;padding:9px 0px" > ISSN或CN 例 ISSN 0005-5395</label>
+
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" >收录情况<span class="required"> *</span></label>
+            <div class="layui-input-inline">
+                <select id="pSex" name="pSex" lay-verify="required">
+                    <option></option>
+                    <option>男</option>
+                    <option>女</option>
+                </select>
+            </div>
+            <label class="layui-form-label" >英文姓名</label>
+            <div class="layui-input-inline">
+                <input class="layui-input"  type="text" name="spmId"  id="spm"  >
+            </div>
+        </div>
+        <div class="layui-form-item ">
+            <label class="layui-form-label" >URL</label>
+            <div class="layui-input-inline">
+                <input class="layui-input"  type="text" name="spmId"  id="spm"  >
+            </div>
+            <label class="layui-form-label" >DOI</label>
+            <div class="layui-input-inline">
+                <input class="layui-input"  type="text" name="spmId"  id="spm" >
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" >WOS号/入藏号</label>
+            <div class="layui-input-inline">
+                <input class="layui-input"  type="text" name="spmId"  id="spm" >
+            </div>
+            <label class="layui-form-label" >ACCESSION NUMBER</label>
+            <div class="layui-input-inline">
+                <input class="layui-input"  type="text" name="spmId"  id="spm" >
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" >收录情况备注</label>
+            <div class="layui-input-inline">
+                <input class="layui-input"  type="text" name="spmId"  id="spm" >
+            </div>
+            <label class="layui-form-label" >是否通讯作者</label>
+            <div class="layui-input-inline">
+                <select id="pSex" name="pSex">
+                    <option>是</option>
+                    <option>否</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-form-item timo-finally" align="center">
+            <button class="layui-btn" lay-submit="" lay-filter="component-form-demo">保存</button>
+        </div>
+
+    </form>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+<script>
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+    });
+    id=location.href.split("?")[1].split("=")[1];
+    alert(id);
+     $.get('/subjectplatformmenu/getText/'+id,function (r) {
+         $('[name=spmId]').val(r.id)
+         $('[name=spmName]').val(r.title)
+         $('[name=spmParentId]').val(r.parentId)
+         $('[name=spmParentName]').val(r.parentName)
+         $('[name=spmRemark]').val(r.spmRemark)
+         form.on('submit(component-form-demo)',function (data) {
+             /*var siId = document.getElementById("school").options[document.getElementById("school").selectedIndex].value;*/
+             var pId = document.getElementById("pId").value;
+             var pName = document.getElementById("pName").value;
+             var pSex = document.getElementById("pSex").options[document.getElementById("pSex").selectedIndex].text;
+             var PBDate = document.getElementById("PBDate").value;
+             var pNationality = document.getElementById("pNationality").options[document.getElementById("pNationality").selectedIndex].text;
+             var pPapers = document.getElementById("pPapers").options[document.getElementById("pPapers").selectedIndex].text;
+             var pIdNumber= document.getElementById("pIdNumber").value;
+             var pMarriage = document.getElementById("pMarriage").options[document.getElementById("pMarriage").selectedIndex].text;
+             var pNation = document.getElementById("pNation").options[document.getElementById("pNation").selectedIndex].text;
+             var pPStatus = document.getElementById("pPStatus").options[document.getElementById("pPStatus").selectedIndex].text;
+             var pJpDate = document.getElementById("pJpDate").value;
+             var pPTitle = document.getElementById("pPTitle").options[document.getElementById("pPTitle").selectedIndex].text;
+             var pCNumber = document.getElementById("pCNumber").value;
+             var dName = document.getElementById("dName").value;
+             var pUnitAddress= document.getElementById("pUnitAddress").value;
+             var pPNumber= document.getElementById("pPNumber").value;
+             var pEmail= document.getElementById("pEmail").value;
+             var pBCity= document.getElementById("pBCity").value;
+             var pChrCity= document.getElementById("pChrCity").value;
+             var pNativePlace= document.getElementById("pNativePlace").value;
+             var pPcdAddress= document.getElementById("pPcdAddress").value;
+             var pPStation= document.getElementById("pPStation").value;
+             var pPrAddress= document.getElementById("pPrAddress").value;
+             var pMAddress= document.getElementById("pMAddress").value;
+             if (pName==r.pname&&pSex==r.psex&&PBDate==r.pbdate&&pNationality==r.pnationality&&pPapers==r.ppapers&&pIdNumber==r.pidNumber&&pMarriage==r.pmarriage&&pNation==r.pnation
+                 &&pPStatus==r.ppstatus&&pJpDate==r.pjpDate&&pPTitle==r.pptitle&&pCNumber==r.pcnumber&&dName==r.dname&&pUnitAddress==r.punitAddress
+                 &&pPNumber==r.ppnumber&&pEmail==r.pemail&&pBCity==r.pbcity&&pChrCity==r.pchrCity&&pNativePlace==r.pnativePlace&&pPcdAddress==r.ppcdAddress&&pPStation==r.ppstation&&pPrAddress==r.pprAddress&&pMAddress==r.pmaddress) {
+                 layer.msg('并没有修改信息',{icon: 5, shade: 0.5, time: 1500});
+             }else {
+                 var json1 = $('form').serialize();
+                 $.post(
+                     "/postdoctorrinformation/update",
+                     json1,
+                     function (res) {
+                         if (res){
+                             layer.msg("修改成功", {icon: 6, shade: 0.5, time: 1500}, function () {
+                                 var index = parent.layer.getFrameIndex(window.name);
+                                 parent.layer.close(index);
+                                 parent.window.location.reload();
+                             })
+                         }else {
+                             layer.msg("修改失败",{icon: 5, shade: 0.5, time: 1500});
+                         }
+                     },'json');
+             }
+
+             return false;
+         });
+     },'json')
+</script>
+</body>
+</html>

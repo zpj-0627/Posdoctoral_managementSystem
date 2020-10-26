@@ -21,4 +21,6 @@ public interface AwardsMapper extends BaseMapper<Awards> {
 
     List<Awards> selectBydId(Awards awards);
 
+    void deleteById(String id);
+
 }

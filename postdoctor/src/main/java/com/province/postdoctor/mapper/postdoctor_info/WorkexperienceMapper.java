@@ -13,4 +13,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface WorkexperienceMapper extends BaseMapper<Workexperience> {
 
+    void deleteById(String id);
+
 }

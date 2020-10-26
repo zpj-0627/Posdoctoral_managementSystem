@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+    <title>项目管理</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../css/plugins/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../layui/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../layui/layui_exts/layui_ext/dtree/dtree.css">
+    <link rel="stylesheet" type="text/css" href="../../layui/layui_exts/layui_ext/dtree/font/dtreefont.css">
+    <style>
+      .layui-form-label {
+            width: 120px;
+        }
+        .layui-input{
+            border:1.5px solid #74d2e7;
+        }
+
+
+        /* .layui-form-item {
+             margin: 0px;
+         }
+         .layui-input-inline {
+             margin: 0px;
+
+         }
+         .layui-form-label {
+             padding:2px 0px;
+             width: 60px;
+             !* line-height: 24px; *!
+             background: #74d2e7;
+
+             !*font-size: 15px;*!
+         }
+         .layui-input {
+             width: 80%;
+             background: #74d2e7;
+         }*/
+        /*.select-test{position: absolute;max-height: 500px;height: 350px;overflow: auto;width: 235px;z-index: 123;display: none;border:1px solid silver;top: 42px;}
+        .layui-show{display: block!important;}*/
+    </style>
+</head>
+<body>
+<script type="text/javascript" src="../../layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../js/main.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../js/phdInfo.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../js/plugins/jquery-3.3.1.min.js"></script>
+<div class="layui-form timo-compile">
+    <!--添加表单元素-->
+    <form class="layui-form" action="" lay-filter="component-form-group" id="component-form-group" style="text-align: center;">
+        <input type="hidden" name="id" id="id">
+        <div class="layui-form-item">
+            <label class="layui-form-label" >论文项目名称<span class="required"> *</span></label>
+            <div class="layui-input-inline">
+                <input id="projectName" class="layui-input"  type="text" name="projectName"  lay-verify="required"  style="width:640px;" >
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" >下达部门</label>
+            <div class="layui-input-inline">
+                <select id="departmentName" name="departmentName" >
+                </select>
+            </div>
+            <label class="layui-form-label" >项目性质</label>
+            <div class="layui-input-inline">
+                <select id="projectNature" name="projectNature" >
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label" >项目进展</label>
+            <div class="layui-input-inline">
+                <select id="projectProgress" name="projectProgress" >
+                </select>
+            </div>
+            <label class="layui-form-label" >项目金额</label>
+            <div class="layui-input-inline">
+                <input class="layui-input"  type="text" name="projectSum" id="projectSum" >
+            </div>
+            <label class="layui-form-label" style="text-align: left;padding:9px 0px;width: 70px" >万元</label>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" >批准时间<span class="required"> *</span></label>
+            <div class="layui-input-inline">
+                <input type="text" id="approveTime" name="approveTime" class="layui-input test-item"
+                       lay-verify="required" >
+            </div>
+            <label class="layui-form-label" >承担责任<span class="required"> *</span></label>
+            <div class="layui-input-inline">
+                <select id="duty" name="duty" lay-verify="required">
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-form-item timo-finally" align="center">
+            <button class="layui-btn" lay-submit="" lay-filter="component-form-demo"style="background-color:#0091cd">保存</button>
+        </div>
+    </form>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+<script>
+    layui.use(['table','form','laydate','jquery'], function(){
+        var laydate = layui.laydate;
+        $ = layui.$,
+            form = layui.form;
+        lay('.test-item').each(function(){
+            laydate.render({
+                elem: this,
+                type: 'date',
+                theme: 'grid',
+                trigger: 'click',
+            });
+        });
+    id=location.href.split("?")[1].split("=")[1];
+    alert(id);
+    $.get('/postdoctoraproject/getText/'+id,function (r) {
+        $('[name=id]').val(r.id)
+        $('[name=projectName]').val(r.projectName)
+        // $('[name=departmentName]').val(r.departmentName)
+        // $('[name=projectNature]').val(r.projectNature)
+        // $('[name=projectProgress]').val(r.projectProgress)
+        $('[name=projectSum]').val(r.projectSum)
+        $('[name=approveTime]').val(r.approveTime)
+        // $('[name=duty]').val(r.duty)
+
+        //科研项目下达部门下拉框
+        selectPDept(r);
+
+        //科研项目性质下拉框
+        selectPprojectNature(r);
+
+        //科研项目进展下拉框
+        selectPprojectProgress(r)
+
+        //科研项目承担责任下拉框
+        selectPduty(r)
+        form.on('submit(component-form-demo)',function (data) {
+            /*var siId = document.getElementById("school").options[document.getElementById("school").selectedIndex].value;*/
+            // var pId = document.getElementById("pId").value;
+            var projectName = document.getElementById("projectName").value;
+            var departmentName = document.getElementById("departmentName").options[document.getElementById("departmentName").selectedIndex].text;
+            var projectNature = document.getElementById("projectNature").options[document.getElementById("projectNature").selectedIndex].text;
+            var projectProgress = document.getElementById("projectProgress").options[document.getElementById("projectProgress").selectedIndex].text;
+            var projectSum = document.getElementById("projectSum").value;
+            var approveTime = document.getElementById("approveTime").value;
+            var duty = document.getElementById("duty").options[document.getElementById("duty").selectedIndex].text;
+            if (projectName==r.projectName&&
+                departmentName==r.departmentName&&
+                projectNature==r.projectNature&&
+                projectProgress==r.projectProgress&&
+                projectSum==r.projectSum&&
+                approveTime==r.approveTime&&
+                duty==r.duty) {
+                layer.msg('并没有修改信息',{icon: 5, shade: 0.5, time: 1500});
+            }else {
+                var json1 = $('form').serialize();
+                alert(json1);
+                $.post(
+                    "/postdoctoraproject/update",
+                    json1,
+                    function (res) {
+                        if (res){
+                            layer.msg("修改成功", {icon: 6, shade: 0.5, time: 1500}, function () {
+                                var index = parent.layer.getFrameIndex(window.name);
+                                parent.layer.close(index);
+                                parent.window.location.reload();
+                            })
+                        }else {
+                            layer.msg("修改失败",{icon: 5, shade: 0.5, time: 1500});
+                        }
+                    },'json');
+            }
+
+            return false;
+        });
+    },'json')
+    });
+
+</script>
+</body>
+</html>

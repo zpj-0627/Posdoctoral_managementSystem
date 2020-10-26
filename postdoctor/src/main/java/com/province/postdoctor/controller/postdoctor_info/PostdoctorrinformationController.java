@@ -52,6 +52,25 @@ public class PostdoctorrinformationController {
     @Resource
     private WorkexperienceService workexperienceService;
 
+    @Resource
+    private ThesisService thesisService;
+
+    @Resource
+    private PostdoctoraprojectService postdoctoraprojectService;
+
+    @Resource
+    private PatentService patentService;
+
+    @Resource
+    private TreatiseService treatiseService;
+
+    @Resource
+    private AwardsService awardsService;
+
+    @Resource
+    private FundapplicationService fundapplicationService;
+
+
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -160,17 +179,35 @@ public class PostdoctorrinformationController {
         QueryWrapper<Learningexperience> queryWrapper3 = new QueryWrapper<>();
         QueryWrapper<Workexperience> queryWrapper4 = new QueryWrapper<>();
         QueryWrapper<Studyingabroadinformation> queryWrapper5 = new QueryWrapper<>();
-        int a=0,b=0,c=0,d=0,e=0;
+        QueryWrapper<Thesis> queryWrapper6 = new QueryWrapper<>();
+        QueryWrapper<Postdoctoraproject> queryWrapper7 = new QueryWrapper<>();
+        QueryWrapper<Patent> queryWrapper8 = new QueryWrapper<>();
+        QueryWrapper<Treatise> queryWrapper9 = new QueryWrapper<>();
+        QueryWrapper<Awards> queryWrapper10 = new QueryWrapper<>();
+        QueryWrapper<Fundapplication> queryWrapper11 = new QueryWrapper<>();
+        int a=0,b=0,c=0,d=0,e=0,f=0,g=0,h=0,i=0,j=0,k=0;
         queryWrapper1.eq("P_id",id);
         queryWrapper2.eq("P_id",id);
         queryWrapper3.eq("P_id",id);
         queryWrapper4.eq("P_id",id);
         queryWrapper5.eq("P_id",id);
+        queryWrapper6.eq("P_id",id);
+        queryWrapper7.eq("P_id",id);
+        queryWrapper8.eq("P_id",id);
+        queryWrapper9.eq("P_id",id);
+        queryWrapper10.eq("P_id",id);
+        queryWrapper11.eq("P_id",id);
         List<Postdoctorrinformation> dList1=postdoctorrinformationService.list(queryWrapper1);
         List<Phdinformation> dList2=phdinformationService.list(queryWrapper2);
         List<Learningexperience> dList3 = learningexperienceService.list(queryWrapper3);
         List<Workexperience> dList4=workexperienceService.list(queryWrapper4);
         List<Studyingabroadinformation> dList5=studyingabroadinformationService.list(queryWrapper5);
+        List<Thesis> dList6=thesisService.list(queryWrapper6);
+        List<Postdoctoraproject> dList7=postdoctoraprojectService.list(queryWrapper7);
+        List<Patent> dList8=patentService.list(queryWrapper8);
+        List<Treatise> dList9=treatiseService.list(queryWrapper9);
+        List<Awards> dList10=awardsService.list(queryWrapper10);
+        List<Fundapplication> dList11=fundapplicationService.list(queryWrapper11);
         PostdoctoralInfoNumber postdoctoralInfoNumber=new PostdoctoralInfoNumber();
         for (Postdoctorrinformation postdoctorrinformation : dList1) {
             if (Optional.ofNullable(postdoctorrinformation.getPId()).orElse(123).equals(id)) {
@@ -202,6 +239,42 @@ public class PostdoctorrinformationController {
             }
             postdoctoralInfoNumber.setStudyAbroadNumber(e);
         }
+        for (Thesis thesis : dList6) {
+            if (Optional.ofNullable(thesis.getPId()).orElse(123).equals(id)) {
+                f++;
+            }
+            postdoctoralInfoNumber.setPaperNumber(f);
+        }
+        for (Postdoctoraproject postdoctoraproject : dList7) {
+            if (Optional.ofNullable(postdoctoraproject.getPId()).orElse(123).equals(id)) {
+                g++;
+            }
+            postdoctoralInfoNumber.setProjectNumber(g);
+        }
+        for (Patent patent : dList8) {
+            if (Optional.ofNullable(patent.getPId()).orElse(123).equals(id)) {
+                h++;
+            }
+            postdoctoralInfoNumber.setPatentNumber(h);
+        }
+        for (Treatise treatise : dList9) {
+            if (Optional.ofNullable(treatise.getPId()).orElse(123).equals(id)) {
+                i++;
+            }
+            postdoctoralInfoNumber.setMonographNumber(i);
+        }
+        for (Awards awards : dList10) {
+            if (Optional.ofNullable(awards.getPId()).orElse(123).equals(id)) {
+                g++;
+            }
+            postdoctoralInfoNumber.setRewardNumber(g);
+        }
+        for (Fundapplication fundapplication : dList11) {
+            if (Optional.ofNullable(fundapplication.getPId()).orElse(123).equals(id)) {
+                k++;
+            }
+            postdoctoralInfoNumber.setFundfoNumber(k);
+        }
         List<PostdoctoralInfoNumber> postdoctoralInfoNumbers=new ArrayList<>();
         System.out.println(postdoctoralInfoNumber);
         postdoctoralInfoNumbers.add(postdoctoralInfoNumber);
@@ -211,6 +284,7 @@ public class PostdoctorrinformationController {
         System.out.println(postdoctoralInfoNumberDidresult);
         return  postdoctoralInfoNumberDidresult;
     }
+
     @RequestMapping("/update")
     public boolean update(Postdoctorrinformation postdoctorrinformation){
         System.out.println(postdoctorrinformation);

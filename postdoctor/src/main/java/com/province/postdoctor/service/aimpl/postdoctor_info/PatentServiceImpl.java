@@ -32,4 +32,9 @@ public class PatentServiceImpl extends ServiceImpl<PatentMapper, Patent> impleme
     public List<Patent> selectBydId(Patent patent) {
         return patentMapper.selectBydId(patent);
     }
+
+    @Override
+    public void deleteById(String id) {
+        patentMapper.deleteById(id);
+    }
 }

@@ -19,4 +19,6 @@ public interface TreatiseService extends IService<Treatise> {
 
     List<Treatise> selectBydId(Treatise treatise);
 
+    void deleteById(String id);
+
 }

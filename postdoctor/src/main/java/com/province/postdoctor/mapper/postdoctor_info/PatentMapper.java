@@ -21,4 +21,6 @@ public interface PatentMapper extends BaseMapper<Patent> {
 
     List<Patent> selectBydId(Patent patent);
 
+    void deleteById(String id);
+
 }

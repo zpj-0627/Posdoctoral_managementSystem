@@ -19,4 +19,6 @@ public interface ThesisService extends IService<Thesis> {
 
     List<Thesis> selectBydId(Thesis thesis);
 
+    void deleteById(String id);
+
 }

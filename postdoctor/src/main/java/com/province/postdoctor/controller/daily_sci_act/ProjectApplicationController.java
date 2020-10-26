@@ -87,15 +87,15 @@ public class ProjectApplicationController {
         }else if ("01".equals(projectApplication.getDId()))
         {
             queryWrapper.eq("d_type","01");
-            queryWrapper.select("applicant_unit","project_name","project_type","applicant","applicant_time","situation");
+            queryWrapper.select("d_name","project_name","project_type","applicant","applicant_time","situation");
             dList = projectApplicationService.list(queryWrapper);
         }else if ("02".equals(projectApplication.getDId())) {
             queryWrapper.eq("d_type","02");
-            queryWrapper.select("applicant_unit","project_name","project_type","applicant","applicant_time","situation");
+            queryWrapper.select("d_name","project_name","project_type","applicant","applicant_time","situation");
             dList = projectApplicationService.list(queryWrapper);
         }else {
             queryWrapper.eq("d_id",projectApplication.getDId());
-            queryWrapper.select("applicant_unit","project_name","project_type","applicant","applicant_time","situation");
+            queryWrapper.select("d_name","project_name","project_type","applicant","applicant_time","situation");
             dList = projectApplicationService.list(queryWrapper);
         }
 

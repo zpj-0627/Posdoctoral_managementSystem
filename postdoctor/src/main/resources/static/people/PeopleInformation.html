@@ -148,34 +148,35 @@
             mydata[11] = "个人情况";
             mydata[12] = "在站期间成果";
             var tr;
-            tr = '<td  bgcolor="#009688" align="center" colspan="5">'+'<font size="4" color="#fff">' + mydata[11] + '</font>'+'</td>'
-            $("#tabletest1").append('<tr >' + tr + '</tr>')
+        tr = '<td  bgcolor="#009688" align="center" colspan="5">'+'<font size="4" color="#fff">' + mydata[11] + '</font>'+'</td>'
+        $("#tabletest1").append('<tr >' + tr + '</tr>')
 
-            tr = '<td style="text-align:center;" rowspan="4" >' +'<font size="3" color="black">' +'<strong>'+ mydata[11] +'</strong>'+'</font>'+'</td>'
-            $("#tabletest1").append('<tr>' + tr + '</tr>')
+        tr = '<td style="text-align:center;" rowspan="4" >' +'<font size="3" color="black">' +'<strong>'+ mydata[11] +'</strong>'+'</font>'+'</td>'
+        $("#tabletest1").append('<tr>' + tr + '</tr>')
 
-            tr = '<td  align="right" id="BasicInformation" style="cursor: pointer; width:17%" >'+'<strong>' + mydata[0]+'</strong>' + '</td>' + '<td align="left" style=" width:21%" >'+'(' + data.data[0].basicInfoNumber +')'+ '</td>'+'<td  align="right"  style="cursor: pointer;width:15%">'+'<strong>' + mydata[1]+'</strong>' + '</td>' + '<td align="left" style="width: 21%">' +'(' + data.data[0].phdSituationNumber  +')'+ '</td>'
-            $("#tabletest1").append('<tr>' + tr + '</tr>')
+        tr = '<td  align="right" id="BasicInformation" style="cursor: pointer; width:17%" >'+'<strong>' + mydata[0]+'</strong>' + '</td>' + '<td align="left" style=" width:21%" >'+'(' + data.data[0].basicInfoNumber +')'+ '</td>'+'<td  align="right" id="ReadPostdoctorInformation" style="cursor: pointer;width:15%">'+'<strong>' + mydata[1]+'</strong>' + '</td>' + '<td align="left" style="width: 21%">' +'(' + data.data[0].phdSituationNumber  +')'+ '</td>'
+        $("#tabletest1").append('<tr>' + tr + '</tr>')
 
-            tr = '<td  align="right" id="tt"style="cursor: pointer; width:10%" >'+'<strong>' + mydata[2]+'</strong>' + '</td>' + '<td align="left" style=" width:30%" >' + '(' +data.data[0].studyAbroadNumber +')'+ '</td>'+'<td  align="right"  id="LearningExperience"style="cursor: pointer;width:10%">'+'<strong>' + mydata[3]+'</strong>' + '</td>' + '<td>' + '(' +data.data[0].learningExpNumber +')'+ '</td>'
-            $("#tabletest1").append('<tr>' + tr + '</tr>')
+        tr = '<td  align="right" id="AbroadDoctorInformation"style="cursor: pointer; width:10%" >'+'<strong>' + mydata[2]+'</strong>' + '</td>' + '<td align="left" style=" width:30%" >' + '(' +data.data[0].studyAbroadNumber +')'+ '</td>'+'<td  align="right"  id="LearningExperience"style="cursor: pointer;width:10%">'+'<strong>' + mydata[3]+'</strong>' + '</td>' + '<td>' + '(' +data.data[0].learningExpNumber +')'+ '</td>'
+        $("#tabletest1").append('<tr>' + tr + '</tr>')
 
-            tr = '<td  align="right" id="tt" style="cursor: pointer; width:10%" >'+'<strong>' + mydata[4]+'</strong>' + '</td>' + '<td align="left" style=" width:30%" >' +'(' + data.data[0].workExpNumber+')' + '</td>'+'<td  colspan="2"  style="width:10%">'  + '</td>'
-            $("#tabletest1").append('<tr>' + tr + '</tr>')
+        tr = '<td  align="right" id="WorkExperienceInformation" style="cursor: pointer; width:10%" >'+'<strong>' + mydata[4]+'</strong>' + '</td>' + '<td align="left" style=" width:30%" >' +'(' + data.data[0].workExpNumber+')' + '</td>'+'<td  colspan="2"  style="width:10%">'  + '</td>'
+        $("#tabletest1").append('<tr>' + tr + '</tr>')
 
-            tr = '<td style="text-align:center;" rowspan="4" >' +'<font size="3" color="black">'+'<strong>'+ mydata[12] +'</strong>'+'</font>'+'</td>'
-            $("#tabletest1").append('<tr>' + tr + '</tr>')
+        tr = '<td style="text-align:center;" rowspan="4" >' +'<font size="3" color="black">'+'<strong>'+ mydata[12] +'</strong>'+'</font>'+'</td>'
+        $("#tabletest1").append('<tr>' + tr + '</tr>')
 
-            tr = '<td  align="right" id="tt" style="cursor: pointer; width:10%" >'+'<strong>' + mydata[5]+'</strong>' + '</td>' + '<td align="left" style=" width:30%" >' +'(' + data.data[0].paperNumber+')' + '</td>'+'<td  align="right"  style="cursor: pointer;width:10%">'+'<strong>' + mydata[6]+'</strong>' + '</td>' + '<td>' + '(' +data.data[0].projectNumber  +')'+ '</td>'
-            $("#tabletest1").append('<tr>' + tr + '</tr>')
+        tr = '<td  align="right" id="ThesisInformation" style="cursor: pointer; width:10%" >'+'<strong>' + mydata[5]+'</strong>' + '</td>' + '<td align="left" style=" width:30%" >' +'(' + data.data[0].paperNumber+')' + '</td>'+'<td  align="right" id="ProjectsInformation" style="cursor: pointer;width:10%">'+'<strong>' + mydata[6]+'</strong>' + '</td>' + '<td>' + '(' +data.data[0].projectNumber  +')'+ '</td>'
+        $("#tabletest1").append('<tr>' + tr + '</tr>')
 
-            tr = '<td  align="right" id="tt" style="cursor: pointer; width:10%" >'+'<strong>' + mydata[7]+'</strong>' + '</td>' + '<td align="left" style=" width:30%" >' + '(' +data.data[0].patentNumber +')'+ '</td>'+'<td  align="right"  style="cursor: pointer;width:10%">'+'<strong>' + mydata[8]+'</strong>' + '</td>' + '<td>' + '(' +data.data[0].monographNumber  +')'+ '</td>'
-            $("#tabletest1").append('<tr>' + tr + '</tr>')
+        tr = '<td  align="right" id="PatentInformation" style="cursor: pointer; width:10%" >'+'<strong>' + mydata[7]+'</strong>' + '</td>' + '<td align="left" style=" width:30%" >' + '(' +data.data[0].patentNumber +')'+ '</td>'+'<td  align="right"  style="cursor: pointer;width:10%">'+'<strong>' + mydata[8]+'</strong>' + '</td>' + '<td>' + '(' +data.data[0].monographNumber  +')'+ '</td>'
+        $("#tabletest1").append('<tr>' + tr + '</tr>')
 
-            tr = '<td  align="right" id="tt" style="cursor: pointer; width:10%" >'+'<strong>' + mydata[9]+'</strong>' + '</td>' + '<td align="left" style=" width:30%" >' + '(' +data.data[0].rewardNumber+')' + '</td>'+'<td  align="right"  style="cursor: pointer;width:10%">'+'<strong>' + mydata[10]+'</strong>' + '</td>' + '<td>' +'(' + data.data[0].fundfoNumber  +')'+ '</td>'
-            $("#tabletest1").append('<tr>' + tr + '</tr>')
+        tr = '<td  align="right" id="tt" style="cursor: pointer; width:10%" >'+'<strong>' + mydata[9]+'</strong>' + '</td>' + '<td align="left" style=" width:30%" >' + '(' +data.data[0].rewardNumber+')' + '</td>'+'<td  align="right"  style="cursor: pointer;width:10%">'+'<strong>' + mydata[10]+'</strong>' + '</td>' + '<td>' +'(' + data.data[0].fundfoNumber  +')'+ '</td>'
+        $("#tabletest1").append('<tr>' + tr + '</tr>')
 
     },'json')
+
 
     window.onload = function () {
         var elem = document.getElementById("BasicInformation");
@@ -207,7 +208,122 @@
                 skin: 'layui-layer-lan'
             });
         }
+        var elem = document.getElementById("LearningExperience");
+        elem.addEventListener("click", LearningExperience, false);    //click 代表的是事件，  aa代表事件触发执行的函数
+        function LearningExperience() {
+            layer.open({
+                title: ['学习经历', 'font-size:18px;'],
+                type: 2,
+                /* content: 'PeopleManagement.html?id=' + data.id,*/
+                content: '/people/learning/LearningExperience.html?id=' + id,
+                maxmin: true,
+                resize: true,
+                area: ['80%', '100%'],
+                skin: 'layui-layer-lan'
+            });
+        }
+        var elem = document.getElementById("ReadPostdoctorInformation");
+        elem.addEventListener("click", ReadPostdoctorInformation, false);    //click 代表的是事件，  aa代表事件触发执行的函数
+        function ReadPostdoctorInformation() {
+            layer.open({
+                title: ['读博信息', 'font-size:18px;'],
+                type: 2,
+                /* content: 'PeopleManagement.html?id=' + data.id,*/
+                content: '/people/readpostdoctorinformation/PhdInformation.html?id=' + id,
+                maxmin: true,
+                resize: true,
+                area: ['80%', '100%'],
+                skin: 'layui-layer-lan'
+            });
+        }
+        var elem = document.getElementById("AbroadDoctorInformation");
+        elem.addEventListener("click", AbroadDoctorInformation, false);    //click 代表的是事件，  aa代表事件触发执行的函数
+        function AbroadDoctorInformation() {
+            layer.open({
+                title: ['是否留学回国博士', 'font-size:18px;'],
+                type: 2,
+                /* content: 'PeopleManagement.html?id=' + data.id,*/
+                content: '/people/abroad/AbroadDoctor.html?id=' + id,
+                maxmin: true,
+                resize: true,
+                area: ['80%', '100%'],
+                skin: 'layui-layer-lan'
+            });
+        }
+        var elem = document.getElementById("WorkExperienceInformation");
+        elem.addEventListener("click", WorkExperienceInformation, false);    //click 代表的是事件，  aa代表事件触发执行的函数
+        function WorkExperienceInformation() {
+            layer.open({
+                title: ['工作经历', 'font-size:18px;'],
+                type: 2,
+                /* content: 'PeopleManagement.html?id=' + data.id,*/
+                content: '/people/workexperience/WorkingExperience.html?id=' + id,
+                maxmin: true,
+                resize: true,
+                area: ['80%', '100%'],
+                skin: 'layui-layer-lan'
+            });
+        }
+        var elem = document.getElementById("WorkExperienceInformation");
+        elem.addEventListener("click", WorkExperienceInformation, false);    //click 代表的是事件，  aa代表事件触发执行的函数
+        function WorkExperienceInformation() {
+            layer.open({
+                title: ['工作经历', 'font-size:18px;'],
+                type: 2,
+                /* content: 'PeopleManagement.html?id=' + data.id,*/
+                content: '/people/workexperience/WorkingExperience.html?id=' + id,
+                maxmin: true,
+                resize: true,
+                area: ['80%', '100%'],
+                skin: 'layui-layer-lan'
+            });
+        }
+        var elem = document.getElementById("ProjectsInformation");
+        elem.addEventListener("click", ProjectsInformation, false);    //click 代表的是事件，  aa代表事件触发执行的函数
+        function ProjectsInformation() {
+            layer.open({
+                title: ['参与或主持的项目', 'font-size:18px;'],
+                type: 2,
+                /* content: 'PeopleManagement.html?id=' + data.id,*/
+                content: '/people/projects/Projects.html?id=' + id,
+                maxmin: true,
+                resize: true,
+                area: ['80%', '100%'],
+                skin: 'layui-layer-lan'
+            });
+        }
+        var elem = document.getElementById("ThesisInformation");
+        elem.addEventListener("click", ThesisInformation, false);    //click 代表的是事件，  aa代表事件触发执行的函数
+        function ThesisInformation() {
+            layer.open({
+                title: ['代表性论文', 'font-size:18px;'],
+                type: 2,
+                /* content: 'PeopleManagement.html?id=' + data.id,*/
+                content: '/people/thesis/Thesis.html?id=' + id,
+                maxmin: true,
+                resize: true,
+                area: ['80%', '100%'],
+                skin: 'layui-layer-lan'
+            });
+        }
+        var elem = document.getElementById("PatentInformation");
+        elem.addEventListener("click", PatentInformation, false);    //click 代表的是事件，  aa代表事件触发执行的函数
+        function PatentInformation() {
+            layer.open({
+                title: ['专利情况', 'font-size:18px;'],
+                type: 2,
+                /* content: 'PeopleManagement.html?id=' + data.id,*/
+                content: '/people/patent/Patent.html?id=' + id,
+                maxmin: true,
+                resize: true,
+                area: ['80%', '100%'],
+                skin: 'layui-layer-lan'
+            });
+        }
     }
+
+
+
 
 </script>
 </body>

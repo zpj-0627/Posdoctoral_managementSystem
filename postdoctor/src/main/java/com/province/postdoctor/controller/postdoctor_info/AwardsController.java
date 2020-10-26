@@ -2,6 +2,7 @@ package com.province.postdoctor.controller.postdoctor_info;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.province.postdoctor.entity.postdoctor_info.Awards;
@@ -14,6 +15,7 @@ import com.province.postdoctor.service.postdoctor_info.FundapplicationService;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -44,6 +46,8 @@ public class AwardsController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
 
+
+
     //奖励信息表
     @RequestMapping("/list1")
     public PoetResult<Awards> list1(Integer page, Integer limit) {
@@ -51,6 +55,22 @@ public class AwardsController {
         PoetResult<Awards> thesisPoetResult = new PoetResult<>();
         QueryWrapper<Awards> queryWrapper = new QueryWrapper<>();
         queryWrapper.select("project_name","awards_name","type","awards_type","awards_date","awards_grade","ranking");
+        List<Awards> dList = awardsService.list(queryWrapper);
+        System.out.println(dList);
+        thesisPoetResult.setCode(0);
+        thesisPoetResult.setMsg("");
+        thesisPoetResult.setCount(((Page)dList).getTotal());//((Page)dList).getTotal()
+        thesisPoetResult.setData(dList);
+        return thesisPoetResult;
+    }
+    //人员管理奖励信息表
+    @RequestMapping("/plist1")
+    public PoetResult<Awards> plist1(Integer page, Integer limit,Integer pId) {
+        PageHelper.startPage(page,limit);
+        PoetResult<Awards> thesisPoetResult = new PoetResult<>();
+        QueryWrapper<Awards> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("p_id",pId);
+        queryWrapper.select("id","project_name","type","awards_name","awards_date","awards_type","awards_grade","awards_categories","results_assessment","ranking","project_brief","results_described");
         List<Awards> dList = awardsService.list(queryWrapper);
         System.out.println(dList);
         thesisPoetResult.setCode(0);
@@ -140,5 +160,45 @@ public class AwardsController {
         queryWrapper.orderByDesc("d_name");
         List<Awards> dList = awardsService.list(queryWrapper);
         return dList;
+    }
+    //查询一条信息
+    @RequestMapping("/getText/{id}")
+    public Awards getThesisById(@PathVariable int id){
+        QueryWrapper<Awards> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id",id);
+        return awardsService.getOne(queryWrapper);
+    }
+
+    //修改信息
+    @RequestMapping("/update")
+    public boolean update(Awards awards){
+        UpdateWrapper<Awards> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.eq("id",awards.getId());
+        updateWrapper.set("project_name",awards.getProjectName());
+        updateWrapper.set("type",awards.getType());
+        updateWrapper.set("awards_name",awards.getAwardsName());
+        updateWrapper.set("awards_date",awards.getAwardsDate());
+        updateWrapper.set("awards_type",awards.getAwardsType());
+        updateWrapper.set("awards_grade",awards.getAwardsGrade());
+        updateWrapper.set("awards_categories",awards.getAwardsCategories());
+        updateWrapper.set("results_assessment",awards.getResultsAssessment());
+        updateWrapper.set("ranking",awards.getRanking());
+        updateWrapper.set("project_brief",awards.getProjectBrief());
+        updateWrapper.set("results_described",awards.getResultsDescribed());
+        return awardsService.update(updateWrapper);
+    }
+    //删除信息
+    @RequestMapping("/remove/{id}")
+    public Integer del(@PathVariable String id){
+        QueryWrapper<Awards> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id",id);
+        awardsService.deleteById(id);
+        boolean del=true;
+        if (del){
+            return 2;//删除成功
+        }
+        else{
+            return 0;//删除失败
+        }
     }
 }

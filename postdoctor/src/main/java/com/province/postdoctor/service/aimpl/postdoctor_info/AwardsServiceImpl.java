@@ -33,4 +33,9 @@ public class AwardsServiceImpl extends ServiceImpl<AwardsMapper, Awards> impleme
     public List<Awards> selectBydId(Awards awards) {
         return awardsMapper.selectBydId(awards);
     }
+
+    @Override
+    public void deleteById(String id) {
+        awardsMapper.deleteById(id);
+    }
 }

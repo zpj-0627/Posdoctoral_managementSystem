@@ -19,4 +19,6 @@ public interface PostdoctoraprojectService extends IService<Postdoctoraproject> 
 
     List<Postdoctoraproject> selectBydId(Postdoctoraproject postdoctoraproject);
 
+    void deleteById(String id);
+
 }

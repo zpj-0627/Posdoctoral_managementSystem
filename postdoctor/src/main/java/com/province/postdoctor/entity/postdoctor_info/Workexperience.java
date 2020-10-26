@@ -3,6 +3,8 @@ package com.province.postdoctor.entity.postdoctor_info;
     import com.baomidou.mybatisplus.annotation.IdType;
     import com.baomidou.mybatisplus.annotation.TableId;
     import java.io.Serializable;
+    import java.sql.Date;
+
     import lombok.Data;
     import lombok.EqualsAndHashCode;
     import lombok.experimental.Accessors;
@@ -41,17 +43,17 @@ package com.province.postdoctor.entity.postdoctor_info;
             /**
             * 是否待业
             */
-    private Integer employment;
+    private String employment;
 
             /**
             * 工作起始时间
             */
-    private String weStartDate;
+    private Date weStartDate;
 
             /**
             * 工作终止时间
             */
-    private String weEndDate;
+    private Date weEndDate;
 
             /**
             * 国别

@@ -20,4 +20,6 @@ public interface ThesisMapper extends BaseMapper<Thesis> {
     List<Thesis> selectthesisInfo(Thesis thesis);
 
     List<Thesis> selectBydId(Thesis thesis);
+
+    void deleteById(String id);
 }

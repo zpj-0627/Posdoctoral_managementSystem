@@ -2,7 +2,7 @@ package com.province.postdoctor.entity.postdoctor_info;
 
     import com.baomidou.mybatisplus.annotation.TableName;
     import com.baomidou.mybatisplus.annotation.IdType;
-    import java.util.Date;
+    import java.sql.Date;
     import com.baomidou.mybatisplus.annotation.TableId;
     import java.io.Serializable;
     import lombok.Data;
@@ -64,7 +64,7 @@ package com.province.postdoctor.entity.postdoctor_info;
             /**
             * 是否已取得博士学位
             */
-    private Integer dDegreeCertificate;
+    private String dDegreeCertificate;
 
             /**
             * 博士证书签发时间

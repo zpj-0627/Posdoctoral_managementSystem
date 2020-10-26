@@ -19,4 +19,6 @@ public interface FundapplicationService extends IService<Fundapplication> {
 
     List<Fundapplication> selectBydId(Fundapplication fundapplication);
 
+    void deleteById(String id);
+
 }

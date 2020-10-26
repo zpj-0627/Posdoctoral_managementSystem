@@ -2,9 +2,7 @@ package com.province.postdoctor.entity.postdoctor_info;
 
     import java.io.Serializable;
     import java.sql.Date;
-    import java.util.List;
 
-    import com.baomidou.mybatisplus.annotation.TableField;
     import lombok.Data;
     import lombok.EqualsAndHashCode;
     import lombok.experimental.Accessors;
@@ -27,26 +25,28 @@ package com.province.postdoctor.entity.postdoctor_info;
             /**
             * id
             */
-    private int id;
+    private Integer id;
 
-    /**
-     * 博士号
-     */
+            /**
+            * 博士号
+            */
     private Integer pId;
-    /**
-     * 博士名字
-     */
+
+            /**
+            * 博士名字
+            */
     private String pName;
 
-    /**
-     * 单位编号
-     */
+            /**
+            * 单位编号
+            */
     private String dId;
 
-    /**
-     * 单位名字
-     */
+            /**
+            * 单位名字
+            */
     private String dName;
+
             /**
             * 起始时间
             */
@@ -76,8 +76,6 @@ package com.province.postdoctor.entity.postdoctor_info;
             * 二级学科
             */
     private String smName2;
-    
-    @TableField(exist = false)
-    private List<Learningexperience> learningexperienceList;
+
 
 }

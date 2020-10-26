@@ -32,4 +32,9 @@ public class PostdoctoraprojectServiceImpl extends ServiceImpl<Postdoctoraprojec
     public List<Postdoctoraproject> selectBydId(Postdoctoraproject postdoctoraproject) {
         return postdoctoraprojectMapper.selectBydId(postdoctoraproject);
     }
+
+    @Override
+    public void deleteById(String id) {
+        postdoctoraprojectMapper.deleteById(id);
+    }
 }

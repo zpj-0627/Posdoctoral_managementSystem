@@ -1,6 +1,7 @@
 package com.province.postdoctor.service.postdoctor_info;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.province.postdoctor.entity.postdoctor_info.Learningexperience;
 import com.province.postdoctor.entity.postdoctor_info.Postdoctorrinformation;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public interface PostdoctorrinformationService extends IService<Postdoctorrinfor
     List<Postdoctorrinformation> selectBygzzdId();
 
     List<Postdoctorrinformation> getById(Integer id);
+
 
 
 }

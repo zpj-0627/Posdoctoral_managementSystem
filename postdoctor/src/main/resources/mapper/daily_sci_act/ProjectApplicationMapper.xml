@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.province.postdoctor.mapper.daily_sci_act.ProjectApplicationMapper">
+    <select id="selectprojectInfo" parameterType="com.province.postdoctor.entity.daily_sci_act.ProjectApplication" resultType="com.province.postdoctor.entity.daily_sci_act.ProjectApplication">
+        SELECT
+        d_name,
+        project_name,
+        project_type,
+        applicant,
+        applicant_time,
+        situation
+        FROM
+        project_application
+        <where> 1=1
+            <if test="dName != null and dName !=''">
+                and d_name like "%"#{dName}"%"
+            </if>
+            <if test="applicantstartTime != null and applicantendTime != null">
+                and applicant_time between #{applicantstartTime} and #{applicantendTime}
+            </if>
+            <if test="projectType != null and projectType !=''">
+                and project_type = #{projectType}
+            </if>
+            <if test="applicant != null and applicant !=''">
+                and applicant = #{applicant}
+            </if>
+            <if test="situation != null and situation !=''">
+                and situation = #{situation}
+            </if>
+        </where>
+
+    </select>
+
+
+</mapper>

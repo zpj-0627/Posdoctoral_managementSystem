@@ -46,7 +46,7 @@
 <script type="text/javascript" src="../../js/plugins/jquery-3.3.1.min.js"></script>
 <div class="layui-form timo-compile">
     <form class="layui-form" id="form" >
-        <input type="hidden" name="id">
+        <input type="hidden" name="pId" id="pId">
         <div class="layui-form-item">
             <label class="layui-form-label">高校名称</label>
             <div class="layui-input-inline">
@@ -99,13 +99,14 @@
         <table class="layui-table" id="mytable" style="text-align: center;" >
             <tr style="background-color: #0091cd;color: #fff;text-align: center;">
                 <th style="width:6%;text-align: center">编号</th>
-                <th style="width:14%;text-align: center">起始时间</th>
-                <th style="width:14%;text-align: center">终止时间</th>
-                <th style="width:14%;text-align: center">高校名称</th>
-                <th style="width:19%;text-align: center">学历</th>
-                <th style="width:14%;text-align: center">一级学科</th>
+                <th style="width:10%;text-align: center">ID</th>
+                <th style="width:13%;text-align: center">起始时间</th>
+                <th style="width:13%;text-align: center">终止时间</th>
+                <th style="width:13%;text-align: center">高校名称</th>
+                <th style="width:14%;text-align: center">学历</th>
+                <th style="width:13%;text-align: center">一级学科</th>
                 <th style="width:14%;text-align: center">二级学科</th>
-                <th style="width:15%;text-align: center">操作</th>
+                <th style="width:14%;text-align: center">操作</th>
             </tr>
             <tbody id="mytbody">
             </tbody>
@@ -117,16 +118,24 @@
     layui.use(['table','form','laydate','jquery'],function () {
         var table = layui.table,
             $ = layui.$,
-            form = layui.form;
-
+            form = layui.form,
+            laydate = layui.laydate;
+        lay('.test-item').each(function(){
+            laydate.render({
+                elem: this,
+                type: 'date',
+                theme: 'grid',
+                trigger: 'click',
+            });
+        });
        id=location.href.split("?")[1].split("=")[1];
        /* pname=location.href.split("?")[2].split("=")[2];*/
-        alert(id);
-      /*  alert(pname);*/
+        $('[name=pId]').val(id)
         //监听添加
         form.on('submit(component-form-demo)',function (data) {
             doctorId = $("#mytable").find("tr").length;
             var education = document.getElementById("education").options[document.getElementById("education").selectedIndex].text;
+            var pId = document.getElementById("pId").value;
             /*var smName1 = document.getElementById("sm_name2").value;
             var smName2 = document.getElementById("sm_name2").value;*/
 
@@ -134,16 +143,17 @@
             tr.height = 36;*/
             var addtr = $("<tr>" +
                 "<td>" + doctorId + "</td>" +
+                "<td name='pid'>" + pId + "</td>" +
                 "<td name='lestartdate'>" + data.field.lestartdate + "</td>" +
                 "<td name='leenddate'>" + data.field.leenddate + "</td>" +
                 "<td name='school'>" + data.field.school + "</td>" +
                 "<td name='education'>" + education + "</td>" +
-                "<td name='sm_name1'>" + data.field.sm_name1 + "</td>" +
-                "<td name='sm_name2'>" + data.field.sm_name2 + "</td>" +
+                "<td name='smName1'>" + data.field.sm_name1 + "</td>" +
+                "<td name='smName2'>" + data.field.sm_name2 + "</td>" +
+
               /*  "<td name='dRemark' style='display: none'>" + data.field.dRemark + "</td>" +*/
                 "<td><a class='layui-btn' href=\"javascript:;\" onclick=\"del(this)\">删除</a></td>" +
                 "</tr>");
-
             addtr.appendTo('#mytable');
             document.getElementById("form").reset();
             return false;
@@ -173,12 +183,11 @@
         //循环tr原素
         for (i = 1; i <= length; i++) {
             var obj = {};
-            for (j = 1; j <= 7; j++) {
+            for (j = 1; j <= 8; j++) {
                 var td = $("#mytable").find("tr").eq(i).children("td").eq(j);
                 obj[$(td).attr('name')] = $(td).text();
             }
             learningexperience.push(obj);
-            alert(learningexperience);
         }
 
         layer.confirm('您确定添加吗？',{title:'温馨提示',skin: 'layui-layer-molv'},function(){
@@ -186,7 +195,7 @@
                 type: "POST",
                 traditional: true,
                 url: '/learningexperience/addAllDoctor',
-                    data: JSON.stringify({"learningexperienceList":learningexperience}),
+                data: JSON.stringify({"learningexperienceList":learningexperience}),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function () {

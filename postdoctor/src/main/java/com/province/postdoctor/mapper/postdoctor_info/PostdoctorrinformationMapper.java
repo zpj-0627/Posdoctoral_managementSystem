@@ -1,7 +1,9 @@
 package com.province.postdoctor.mapper.postdoctor_info;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.province.postdoctor.entity.postdoctor_info.Learningexperience;
 import com.province.postdoctor.entity.postdoctor_info.Postdoctorrinformation;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -22,4 +24,5 @@ public interface PostdoctorrinformationMapper extends BaseMapper<Postdoctorrinfo
     List<Postdoctorrinformation> selectBygzzdId();
 
     List<Postdoctorrinformation> getById(Integer id);
+
 }

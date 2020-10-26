@@ -167,16 +167,16 @@
 
         //监听头工具栏事件
         table.on('toolbar(test)', function (obj) {
-            alert(obj)
-                var checkStatus = table.checkStatus(obj.config.id),
-                    data = checkStatus.data; //获取选中的数据
+            alert(id)
+            /*var checkStatus = table.checkStatus(obj.config.id),
+              data = checkStatus.data; //获取选中的数据*/
             switch (obj.event) {
                 //添加
                 case 'add':
                     layer.open({
                         title: ['添加信息', 'font-size:18px;'],
                         type: 2,
-                        content: '/people/learning/LearningExperience-add.html?id=' + obj.pid,
+                        content: '/people/learning/LearningExperience-add.html?id=' + id,
                         resize: true,
                         area: ['100%', '100%'],
                         skin: 'layui-layer-lan',

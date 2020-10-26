@@ -29,26 +29,24 @@ package com.province.postdoctor.entity.postdoctor_info;
             */
     private int id;
 
-            /**
-            * 博士号
-            */
+    /**
+     * 博士号
+     */
     private Integer pId;
-
-            /**
-            * 博士名字
-            */
+    /**
+     * 博士名字
+     */
     private String pName;
 
-            /**
-            * 单位编号
-            */
+    /**
+     * 单位编号
+     */
     private String dId;
 
-            /**
-            * 单位名字
-            */
+    /**
+     * 单位名字
+     */
     private String dName;
-
             /**
             * 起始时间
             */
@@ -78,7 +76,7 @@ package com.province.postdoctor.entity.postdoctor_info;
             * 二级学科
             */
     private String smName2;
-
+    
     @TableField(exist = false)
     private List<Learningexperience> learningexperienceList;
 

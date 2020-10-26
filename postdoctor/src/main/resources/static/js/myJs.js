@@ -55,20 +55,6 @@ function f_subject(){
     });
 }
 
-//高校名称添加联动显示高校代码
-function siIdSelect() {
-    layui.use(['form','jquery'],function () {
-        var $ = layui.$,
-            form = layui.form;
-
-        form.on('select(Type_filter)', function(o){
-            id = o.value;
-            $.get('/schoolinformation/getText/'+id,function (r) {
-                $('[name=siId]').val(r.siId);
-            },'json')
-        });
-    });
-    }
 
 //高校名称修改联动显示高校代码
 function siIdSelectEdit() {
@@ -95,9 +81,10 @@ function selectdName(){
                 dataType: "json",
                 cache: false,
                 success: function (data) {
+
                     $('#dName').append(new Option());
                     $.each(data, function (index, item) {
-                        $('#dName').append(new Option(item.dname, item.id));
+                        $('#dName').append(new Option(item.dname, item.did));
                     });
                     form.render('select');
                 }, error: function () {
@@ -725,5 +712,22 @@ function selectprojectNature(){
             });
         });
 
+    });
+}
+//单位名称添加联动显示单位代码
+function dIdSelect() {
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+
+        form.on('select(Type_filter)', function(o){
+                id = o.value;
+ alert(id)
+            $.get('/gzz-information/list3/'+id,function (r) {
+                $('[name=dId]').val(r.did);
+                $('[name=dType]').val(r.dtype);
+
+            },'json')
+        });
     });
 }

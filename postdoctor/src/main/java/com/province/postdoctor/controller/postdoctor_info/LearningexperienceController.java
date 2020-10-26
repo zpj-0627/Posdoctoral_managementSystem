@@ -10,12 +10,14 @@ import com.province.postdoctor.entity.postdoctor_info.Learningexperience;
 import com.province.postdoctor.entity.postdoctor_info.Postdoctorrinformation;
 import com.province.postdoctor.result.PoetResult;
 import com.province.postdoctor.service.postdoctor_info.LearningexperienceService;
+import com.province.postdoctor.service.postdoctor_info.PostdoctorrinformationService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * <p>
@@ -32,18 +34,21 @@ public class LearningexperienceController {
     @Resource
     private LearningexperienceService learningexperienceService;
 
+    @Resource
+    private PostdoctorrinformationService postdoctorrinformationService;
+
 
     //学习经历信息表
     @RequestMapping("/list1")
     public PoetResult<Learningexperience> list1(Integer page, Integer limit ,Integer pId) {
-        System.out.println(pId);
+      /*  System.out.println(pId);*/
         PageHelper.startPage(page,limit);
         PoetResult<Learningexperience> thesisPoetResult = new PoetResult<>();
         QueryWrapper<Learningexperience> queryWrapper = new QueryWrapper<>();
         queryWrapper.select("lestartdate","leenddate","school","education","p_id","id");
         queryWrapper.eq("p_id",pId);
         List<Learningexperience> dList = learningexperienceService.list(queryWrapper);
-        System.out.println(dList);
+       /* System.out.println(dList);*/
         thesisPoetResult.setCode(0);
         thesisPoetResult.setMsg("");
         thesisPoetResult.setCount(((Page)dList).getTotal());//((Page)dList).getTotal()
@@ -56,7 +61,7 @@ public class LearningexperienceController {
         QueryWrapper<Learningexperience> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("id",id);
         Learningexperience learningexperience= learningexperienceService.getOne(queryWrapper);
-        System.out.println(learningexperience);
+       /* System.out.println(learningexperience);*/
         return learningexperience;
     }
 
@@ -84,7 +89,7 @@ public class LearningexperienceController {
     }
     @RequestMapping("/update")
     public boolean update(Learningexperience learningexperience){
-        System.out.println(learningexperience);
+      /*  System.out.println(learningexperience);*/
         UpdateWrapper<Learningexperience> updateWrapper=new UpdateWrapper<>();
         updateWrapper.eq("id",learningexperience.getId());
         updateWrapper.set("lestartdate",learningexperience.getLestartdate());

@@ -124,9 +124,9 @@ public class PostdoctorrinformationController {
     @RequestMapping("/querydName")
     public List<Postdoctorrinformation> querydName() {
         QueryWrapper<Postdoctorrinformation> queryWrapper = new QueryWrapper<>();
-        queryWrapper.select("d_name");
+        queryWrapper.select("d_id,d_name");
         queryWrapper.eq("sign", 0);
-        queryWrapper.orderByDesc("d_name");
+        queryWrapper.orderByDesc("d_id,d_name");
         List<Postdoctorrinformation> dList = postdoctorrinformationService.list(queryWrapper);
         return dList;
     }

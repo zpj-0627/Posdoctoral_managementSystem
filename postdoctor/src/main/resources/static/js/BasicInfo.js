@@ -219,3 +219,30 @@ function selectDegree(r){
     });
 }
 
+//项目申请——部门名字下拉框
+function selectdName2(r){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/postdoctorrinformation/querydName",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#dname').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#dname').append(new Option(item.dname, item.id));
+                        $('#dname').val(r.dname);
+                    });
+                    form.render('select');
+                }, error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}
+

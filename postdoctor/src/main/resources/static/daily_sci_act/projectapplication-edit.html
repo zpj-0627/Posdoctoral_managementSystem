@@ -45,6 +45,8 @@
 <body>
 <script type="text/javascript" src="../layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript" src="../js/main.js" charset="utf-8"></script>
+<script type="text/javascript" src="../js/myJs.js" charset="utf-8"></script>
+<script type="text/javascript" src="../js/BasicInfo.js" charset="utf-8"></script>
 <script type="text/javascript" src="../js/plugins/jquery-3.3.1.min.js"></script>
 <div class="layui-form timo-compile">
     <!--添加表单元素-->
@@ -53,18 +55,14 @@
         <div class="layui-form-item">
             <label class="layui-form-label" >项目类别</label>
             <div class="layui-input-inline">
-                <select id="project_type" name="project_type" >
-                    <option>是</option>
-                    <option>否</option>
+                <select id="project_type" name="project_type">
                 </select>
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label" >申报单位</label>
             <div class="layui-input-inline">
-                <select id="applicant_unit" name="applicant_unit" >
-                    <option>中国</option>
-                    <option>美国</option>
+                <select id="dname" name="dname">
                 </select>
             </div>
         </div>
@@ -77,8 +75,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label" >申报时间(年)</label>
             <div class="layui-input-inline">
-                <input type="text" id="applicant_time" name="applicant_time"   class="layui-input test-item"
-                      >
+                <input type="text" id="applicantTime" name="applicantTime"   class="layui-input test-item">
             </div>
         </div>
 
@@ -94,7 +91,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">项目名称</label>
             <div class="layui-input-inline">
-                <input id="parentId" class="layui-input"  type="text" name="spmParentId"   >
+                <input id="projectName" class="layui-input"  type="text" name="projectName"   >
             </div>
         </div>
         <div class="layui-form-item timo-finally" align="center">
@@ -111,39 +108,45 @@
         lay('.test-item').each(function(){
             laydate.render({
                 elem: this,
-                type: 'year',
+                type: 'date',
                 theme: 'grid',
                 trigger: 'click',
-                format: 'yyyy年'
             });
         });
         id=location.href.split("?")[1].split("=")[1];
         alert(id);
-        $.get('/workexperience/getText/'+id,function (r) {
-            $('[name=projectId]').val(r.project_id)
-            $('[name=project_type]').val(r.project_type)
-            $('[name=applicant_unit]').val(r.applicant_unit)
+        $.get('/project_application/getText/'+id,function (r) {
+            $('[name=projectId]').val(r.projectId)
+            /*$('[name=project_type]').val(r.projectType)*/
+            //$('[name=dname]').val(r.dname)
             $('[name=applicant]').val(r.applicant)
-            $('[name=applicant_time]').val(r.applicant_time)
+            $('[name=applicantTime]').val(r.applicantTime)
             $('[name=situation]').val(r.situation)
+            $('[name=projectName]').val(r.projectName)
             layui.form.render('select');
+            //项目类别下拉框
+            selectprojrctType(r);
+            //申报单位下拉框
+            selectdName2(r);
             form.on('submit(component-form-demo)',function (data) {
                 /*var siId = document.getElementById("school").options[document.getElementById("school").selectedIndex].value;*/
-                var project_type = document.getElementById("project_type").options[document.getElementById("employment").selectedIndex].text;
-                var applicant_unit = document.getElementById("applicant_unit").value;
+                var project_type = document.getElementById("project_type").options[document.getElementById("project_type").selectedIndex].text;
+                var dname = document.getElementById("dname").options[document.getElementById("dname").selectedIndex].text;
                 var applicant = document.getElementById("applicant").value;
                 var applicant_time = document.getElementById("applicant_time").value;
-                var situation = document.getElementById("situation").options[document.getElementById("employment").selectedIndex].text;
+                var situation = document.getElementById("situation").options[document.getElementById("situation").selectedIndex].text;
+                var projectName = document.getElementById("projectName").value;
                 if (project_type==r.project_type&&
-                    applicant_unit==r.applicant_unit&&
+                    dname==r.dname&&
                     applicant==r.applicant&&
                     applicant_time==r.applicant_time&&
-                    situation==r.situation) {
+                    situation==r.situation&&
+                    projectName==r.projectName) {
                     layer.msg('并没有修改信息',{icon: 5, shade: 0.5, time: 1500});
                 }else {
                     var json1 = $('form').serialize();
                     $.post(
-                        "/workexperience/update",
+                        "/project_application/update",
                         json1,
                         function (res) {
                             if (res){

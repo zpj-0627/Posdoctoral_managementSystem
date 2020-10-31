@@ -3,6 +3,8 @@ package com.province.postdoctor.controller.station_info;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
+import com.province.postdoctor.entity.daily_sci_act.NameObject;
+import com.province.postdoctor.entity.postdoctor_info.Postdoctorrinformation;
 import com.province.postdoctor.entity.postdoctor_info.Thesis;
 import com.province.postdoctor.entity.station_info.GzzInformation;
 import com.province.postdoctor.entity.station_info.LdzInformation;
@@ -77,21 +79,41 @@ public class GzzInformationController {
         return didresult;
     }
 
-    @RequestMapping("/getText/{id}")
-    public List list3(@PathVariable int id) {
+    @RequestMapping("selectdNameInfo")
+    public List selectdName() {
         List<GzzInformation> dList1 = gzzInformationService.list();
         List<LdzInformation> dList2 = ldzInformationService.list();
         List dList = new ArrayList<>();
-        for (GzzInformation gzzInformation1 : dList1) {
-            if (Optional.ofNullable(gzzInformation1.getDId()).orElse("zpj").equals(id)) {
-                dList.add(gzzInformation1);
-            }
+        for (GzzInformation gzzInformation : dList1) {
+           dList.add(gzzInformation);
+        }for (LdzInformation ldzInformation : dList2) {
+                dList.add(ldzInformation);
         }
-        for (LdzInformation ldzInformation1 : dList2) {
-            if (Optional.ofNullable(ldzInformation1.getDId()).orElse("zpj").equals(id)) {
-                dList.add(ldzInformation1);
-            }
-        }
+        System.out.println(dList);
         return dList;
+    }
+
+    @RequestMapping("/getText/{id}")
+    public NameObject list3(@PathVariable String id) {
+        System.out.println(id);
+        List<GzzInformation> dList1 = gzzInformationService.list();
+        List<LdzInformation> dList2 = ldzInformationService.list();
+        NameObject nameObject=new NameObject();
+        for (GzzInformation gzzInformation : dList1) {
+            if (Optional.ofNullable(gzzInformation.getDName()).orElse("123").equals(id)) {
+                nameObject.setDid(gzzInformation.getDId());
+                nameObject.setDname(gzzInformation.getDName());
+                nameObject.setDtype(gzzInformation.getDType());
+            }
+        }
+        for (LdzInformation ldzInformation : dList2) {
+            if (Optional.ofNullable(ldzInformation.getDName()).orElse("123").equals(id)) {
+                nameObject.setDid(ldzInformation.getDId());
+                nameObject.setDname(ldzInformation.getDName());
+                nameObject.setDtype(ldzInformation.getDType());
+            }
+        }
+        System.out.println(nameObject);
+        return nameObject;
     }
 }

@@ -143,9 +143,8 @@ public class PostdoctorrinformationController {
     @RequestMapping("/querydName")
     public List<Postdoctorrinformation> querydName() {
         QueryWrapper<Postdoctorrinformation> queryWrapper = new QueryWrapper<>();
-        queryWrapper.select("d_id,d_name");
-        queryWrapper.eq("sign", 0);
-        queryWrapper.orderByDesc("d_id,d_name");
+        queryWrapper.select("d_name,d_id");
+        queryWrapper.orderByDesc("d_name,d_id");
         List<Postdoctorrinformation> dList = postdoctorrinformationService.list(queryWrapper);
         return dList;
     }
@@ -315,5 +314,18 @@ public class PostdoctorrinformationController {
         updateWrapper.set("p_m_address",postdoctorrinformation.getPMAddress());
         return postdoctorrinformationService.update(updateWrapper);
     }
+
+    //查询一条信息
+    @RequestMapping("/getcontent/{id}")
+    public Postdoctorrinformation getPostdoctorrinformationBydId(@PathVariable String id){
+        System.out.println(id);
+        QueryWrapper<Postdoctorrinformation> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("d_name",id);
+        Postdoctorrinformation postdoctorrinformation= postdoctorrinformationService.getOne(queryWrapper);
+        System.out.println(postdoctorrinformation);
+        return postdoctorrinformation;
+    }
+
+
 
 }

@@ -39,7 +39,7 @@ package com.province.postdoctor.entity.daily_sci_act;
     /**
      * 申报项目id
      */
-    private String projectId;
+    private Integer projectId;
 
     /**
      * 申报单位id
@@ -74,7 +74,6 @@ package com.province.postdoctor.entity.daily_sci_act;
             /**
             * 申请时间
             */
-            @DateTimeFormat(pattern = "yyyy")
     private Date applicantTime;
 
             /**

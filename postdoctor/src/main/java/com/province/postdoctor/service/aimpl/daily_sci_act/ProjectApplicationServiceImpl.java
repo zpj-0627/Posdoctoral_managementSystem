@@ -4,11 +4,9 @@ import com.province.postdoctor.entity.daily_sci_act.ProjectApplication;
 import com.province.postdoctor.mapper.daily_sci_act.ProjectApplicationMapper;
 import com.province.postdoctor.service.daily_sci_act.ProjectApplicationService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.sql.Date;
 import java.util.List;
 
 /**
@@ -28,6 +26,11 @@ public class ProjectApplicationServiceImpl extends ServiceImpl<ProjectApplicatio
     @Override
     public List<ProjectApplication> selectprojectInfo(ProjectApplication projectApplication) {
         return projectApplicationMapper.selectprojectInfo(projectApplication);
+    }
+
+    @Override
+    public Integer getprojectId() {
+        return projectApplicationMapper.getprojectId();
     }
 
 

@@ -2,7 +2,10 @@ package com.province.postdoctor.entity.postdoctor_info;
 
     import java.io.Serializable;
     import java.sql.Date;
+    import java.util.List;
 
+    import com.baomidou.mybatisplus.annotation.TableField;
+    import com.province.postdoctor.entity.daily_sci_act.ProjectApplication;
     import lombok.Data;
     import lombok.EqualsAndHashCode;
     import lombok.experimental.Accessors;
@@ -25,7 +28,7 @@ package com.province.postdoctor.entity.postdoctor_info;
             /**
             * id
             */
-    private Integer id;
+    private int id;
 
             /**
             * 博士号
@@ -77,5 +80,6 @@ package com.province.postdoctor.entity.postdoctor_info;
             */
     private String smName2;
 
-
+    @TableField(exist = false)
+    private List<Learningexperience> learningexperienceList;
 }

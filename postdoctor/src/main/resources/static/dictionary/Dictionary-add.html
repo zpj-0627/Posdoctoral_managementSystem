@@ -74,6 +74,7 @@
             $ = layui.jquery,
             form = layui.form;
         form.on('submit(component-form-demo)',function (data) {
+            alert(JSON.stringify(data))
             $.post(
                 "/dictionary/add",
                 data.field,

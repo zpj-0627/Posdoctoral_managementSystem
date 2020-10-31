@@ -124,17 +124,22 @@ public class ProjectApplicationController {
     @RequestMapping("/getText/{id}")
     public ProjectApplication getPostdoctorrinformationById(@PathVariable int id){
         QueryWrapper<ProjectApplication> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("d_id",id);
+        queryWrapper.eq("project_id",id);
         ProjectApplication projectApplication= projectApplicationService.getOne(queryWrapper);
-        /* System.out.println(learningexperience);*/
+         System.out.println(projectApplication);
         return projectApplication;
     }
-    //批量添加学历信息
+    //批量添加项目申请信息
     @RequestMapping("/addAllDoctor")
-    @ResponseBody
-    public boolean addAllDoctor(@RequestBody ProjectApplication projectApplication, HttpServletRequest request) {
+    public boolean save( ProjectApplication projectApplication) {
         System.out.println(projectApplication);
-        List<ProjectApplication> list = projectApplication.getProjectApplicationList();
-        return projectApplicationService.saveBatch(list);
+        return projectApplicationService.save(projectApplication);
+    }
+
+    //获取项目申请Id
+    @RequestMapping("/getprojectId")
+    @ResponseBody
+    public Integer getprojectId() {
+        return projectApplicationService.getprojectId();
     }
 }

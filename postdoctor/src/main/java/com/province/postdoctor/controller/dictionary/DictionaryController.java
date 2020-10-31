@@ -443,4 +443,13 @@ public class DictionaryController {
         return dList;
     }
 
+    //项目类别下拉框
+    @RequestMapping("/queryprojecttype")
+    public List<Dictionary> queryprojecttype(){
+        QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("updictionaryid",10395);
+        queryWrapper.select("dictionaryid","updictionaryid","title","sign");
+        List<Dictionary> dList = dictionaryService.list(queryWrapper);
+        return dList;
+    }
 }

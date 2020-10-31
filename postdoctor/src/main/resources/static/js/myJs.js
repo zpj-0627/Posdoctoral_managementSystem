@@ -81,10 +81,10 @@ function selectdName(){
                 dataType: "json",
                 cache: false,
                 success: function (data) {
-
                     $('#dName').append(new Option());
                     $.each(data, function (index, item) {
                         $('#dName').append(new Option(item.dname, item.did));
+
                     });
                     form.render('select');
                 }, error: function () {
@@ -722,12 +722,70 @@ function dIdSelect() {
 
         form.on('select(Type_filter)', function(o){
                 id = o.value;
- alert(id)
-            $.get('/gzz-information/list3/'+id,function (r) {
+            alert(JSON.stringify(o));
+            $.get('/gzz-information/getText/'+id,function (r) {
                 $('[name=dId]').val(r.did);
                 $('[name=dType]').val(r.dtype);
-
+            },'json')
+            $.get('/project_application/getprojectId',function (r) {
+                $('[name=projectId]').val(r);
+                alert(JSON.stringify(r));
             },'json')
         });
+    });
+}
+//日常科研——项目申报部门名字下拉框
+function selectdName1(){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $('#dName').empty();
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/gzz-information/selectdNameInfo",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    alert(JSON.stringify(data));
+                    $('#dName').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#dName').append(new Option(item.dname, item.dname));
+                    });
+                    form.render('select');
+                }, error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}
+
+//项目类别下拉框
+function selectprojrctType(r){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $('#project_type').empty();
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/dictionary/queryprojecttype",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#project_type').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#project_type').append(new Option(item.title, item.dictionaryid));
+                        $('#project_type').val(r.projectType);
+                    });
+                    form.render('select');
+                }, error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
     });
 }

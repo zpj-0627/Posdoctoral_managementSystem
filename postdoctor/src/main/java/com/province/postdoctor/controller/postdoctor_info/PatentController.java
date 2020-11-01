@@ -15,11 +15,7 @@ import com.province.postdoctor.service.postdoctor_info.PatentService;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.text.ParseException;
@@ -198,5 +194,11 @@ public class PatentController {
         queryWrapper.orderByAsc("rank");
         List<Patent> dList = patentService.list(queryWrapper);
         return dList;
+    }
+    //批量添加博士后专利信息
+    @RequestMapping("/addAllDoctor")
+    @ResponseBody
+    public boolean save( Patent patent) {
+        return patentService.save(patent);
     }
 }

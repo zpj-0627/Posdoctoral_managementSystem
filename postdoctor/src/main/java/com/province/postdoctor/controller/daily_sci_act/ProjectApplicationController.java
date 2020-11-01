@@ -111,8 +111,8 @@ public class ProjectApplicationController {
     public boolean update(ProjectApplication projectApplication){
         /*  System.out.println(learningexperience);*/
         UpdateWrapper<ProjectApplication> updateWrapper=new UpdateWrapper<>();
-        updateWrapper.eq("id",projectApplication.getProjectId());
-        updateWrapper.set("d_name",projectApplication.getDName());
+        updateWrapper.eq("project_id",projectApplication.getProjectId());
+       /* updateWrapper.set("d_name",projectApplication.getDName());*/
         updateWrapper.set("project_name",projectApplication.getProjectName());
         updateWrapper.set("project_type",projectApplication.getProjectType());
         updateWrapper.set("applicant",projectApplication.getApplicant());

@@ -9,6 +9,7 @@ import com.github.pagehelper.PageHelper;
 import com.province.postdoctor.entity.postdoctor_info.Awards;
 import com.province.postdoctor.entity.postdoctor_info.Postdoctoraproject;
 
+import com.province.postdoctor.entity.postdoctor_info.Postdoctorrinformation;
 import com.province.postdoctor.entity.postdoctor_info.Workexperience;
 import com.province.postdoctor.result.PoetResult;
 import com.province.postdoctor.result.TableResult;
@@ -18,11 +19,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -188,5 +185,10 @@ public class PostdoctoraprojectController {
             return 0;//删除失败
         }
     }
-
+    //批量添加项目信息
+    @RequestMapping("/addAllDoctor")
+    @ResponseBody
+    public boolean save(Postdoctoraproject postdoctoraproject) {
+        return postdoctoraprojectService.save(postdoctoraproject);
+    }
 }

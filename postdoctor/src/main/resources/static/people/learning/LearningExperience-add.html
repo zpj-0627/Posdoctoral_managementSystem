@@ -46,15 +46,35 @@
 <script type="text/javascript" src="../../js/plugins/jquery-3.3.1.min.js"></script>
 <div class="layui-form timo-compile">
     <form class="layui-form" id="form" >
-        <input type="hidden" name="pId" id="pId">
+        <div class="layui-form-item">
+            <label class="layui-form-label">pId</label>
+            <div class="layui-input-inline">
+                <input class="layui-input" type="text" name="pId" id="pId" >
+            </div>
+            <label class="layui-form-label">pName</label>
+            <div class="layui-input-inline">
+                <input class="layui-input" type="text" name="pName" id="pName" >
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">dId</label>
+            <div class="layui-input-inline">
+                <input class="layui-input" type="text" name="dId" id="dId" >
+            </div>
+            <label class="layui-form-label">dName</label>
+            <div class="layui-input-inline">
+                <input class="layui-input" type="text" name="dName" id="dName" >
+            </div>
+        </div>
         <div class="layui-form-item">
             <label class="layui-form-label">高校名称</label>
             <div class="layui-input-inline">
                 <input class="layui-input" type="text" name="school" id="school" >
             </div>
-            <label class="layui-form-label">学历:</label>
+            <label class="layui-form-label">学历</label>
             <div class="layui-input-inline">
                 <select id="education" name="education">
+                    <option>--请选择--</option>
                       <option>博士</option>
                     <option>硕士</option>
                     <option>高中</option>
@@ -86,26 +106,36 @@
                 <input class="layui-input"  type="text" name="sm_name2"  id="sm_name2"  >
             </div>
         </div>
-        <div class="layui-form-item timo-finally" align="center">
+        <!--<div class="layui-form-item timo-finally" align="center">
             <button class="layui-btn" lay-submit="" lay-filter="component-form-demo"style="background-color:#0091cd">添加</button>
-        </div>
+        </div>-->
     </form>
-    <div style="position: absolute;top: 30.5%;left: 38%">
+    <div class="layui-form-item" align="center">
+        <button class="layui-btn" lay-submit="" lay-filter="component-form-demo"style="background-color:#0091cd">添加</button>
         <button class="layui-btn" onclick="saveAll()"style="background-color:#0091cd">保存</button>
     </div>
+    <!--<div  align="center">
+        <button class="layui-btn" lay-submit="" lay-filter="component-form-demo"style="background-color:#0091cd">添加</button>
+    </div>
+    <div align="center">
+        <button class="layui-btn" onclick="saveAll()"style="background-color:#0091cd">保存</button>
+    </div>-->
 </div>
 
 <div class="layui-form">
         <table class="layui-table" id="mytable" style="text-align: center;" >
             <tr style="background-color: #0091cd;color: #fff;text-align: center;">
                 <th style="width:6%;text-align: center">编号</th>
-                <th style="width:10%;text-align: center">ID</th>
-                <th style="width:13%;text-align: center">起始时间</th>
-                <th style="width:13%;text-align: center">终止时间</th>
-                <th style="width:13%;text-align: center">高校名称</th>
-                <th style="width:14%;text-align: center">学历</th>
-                <th style="width:13%;text-align: center">一级学科</th>
-                <th style="width:14%;text-align: center">二级学科</th>
+                <th style="width:10%;text-align: center">pId</th>
+                <th style="width:10%;text-align: center">pName</th>
+                <th style="width:10%;text-align: center">dId</th>
+                <th style="width:10%;text-align: center">dName</th>
+                <th style="width:10%;text-align: center">起始时间</th>
+                <th style="width:10%;text-align: center">终止时间</th>
+                <th style="width:10%;text-align: center">高校名称</th>
+                <th style="width:10%;text-align: center">学历</th>
+                <th style="width:10%;text-align: center">一级学科</th>
+                <th style="width:10%;text-align: center">二级学科</th>
                 <th style="width:14%;text-align: center">操作</th>
             </tr>
             <tbody id="mytbody">
@@ -129,21 +159,29 @@
             });
         });
        id=location.href.split("?")[1].split("=")[1];
-       /* pname=location.href.split("?")[2].split("=")[2];*/
-        $('[name=pId]').val(id)
+        $.get('/postdoctorrinformation/getText/'+id,function (r) {
+            $('[name=dId]').val(r.did);
+            $('[name=dName]').val(r.dname);
+            $('[name=pId]').val(r.pid);
+            $('[name=pName]').val(r.pname);
+        },'json')
         //监听添加
         form.on('submit(component-form-demo)',function (data) {
             doctorId = $("#mytable").find("tr").length;
             var education = document.getElementById("education").options[document.getElementById("education").selectedIndex].text;
             var pId = document.getElementById("pId").value;
-            /*var smName1 = document.getElementById("sm_name2").value;
-            var smName2 = document.getElementById("sm_name2").value;*/
+            var pName = document.getElementById("pName").value;
+            var dId = document.getElementById("dId").value;
+            var dName = document.getElementById("dName").value;
 
             /*var tr = table.insertRow();
             tr.height = 36;*/
             var addtr = $("<tr>" +
                 "<td>" + doctorId + "</td>" +
-                "<td name='pid'>" + pId + "</td>" +
+                "<td name='pid'>" + pId+ "</td>" +
+                "<td name='pname'>" + pName+ "</td>" +
+                "<td name='did'>" + dId + "</td>" +
+                "<td name='dname'>" + dName + "</td>" +
                 "<td name='lestartdate'>" + data.field.lestartdate + "</td>" +
                 "<td name='leenddate'>" + data.field.leenddate + "</td>" +
                 "<td name='school'>" + data.field.school + "</td>" +
@@ -183,7 +221,7 @@
         //循环tr原素
         for (i = 1; i <= length; i++) {
             var obj = {};
-            for (j = 1; j <= 8; j++) {
+            for (j = 1; j <= 10; j++) {
                 var td = $("#mytable").find("tr").eq(i).children("td").eq(j);
                 obj[$(td).attr('name')] = $(td).text();
             }

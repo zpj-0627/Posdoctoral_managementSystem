@@ -203,6 +203,7 @@ function selectDegree(r){
                 dataType: "json",
                 cache: false,
                 success: function (data) {
+
                     $('#education').append(new Option());
                     $.each(data,function (index,item) {
                         $('#education').append(new Option(item.title,item.dictionaryid));
@@ -246,3 +247,119 @@ function selectdName2(r){
     });
 }
 
+//文献类型下拉框
+function selectliterature(r){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $('#literature').empty();
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/dictionary/queryLiterature",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#literature').append(new Option());
+                    $.each(data,function (index,item) {
+                        $('#literature').append(new Option(item.title,item.dictionaryid));
+                        $('#literature').val(r.literature);
+                    });
+                    form.render('select');
+
+                },error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}
+
+
+//论文收录情况下拉框
+function selectcollection(r){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $('#collection').empty();
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/dictionary/queryCollection",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#collection').append(new Option());
+                    $.each(data,function (index,item) {
+                        $('#collection').append(new Option(item.title,item.dictionaryid));
+                        $('#collection').val(r.collection);
+                    });
+                    form.render('select');
+
+                },error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}
+//文献类型下拉框
+function selectliterature1(){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $('#literature').empty();
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/dictionary/queryLiterature",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#literature').append(new Option());
+                    $.each(data,function (index,item) {
+                        $('#literature').append(new Option(item.title,item.dictionaryid));
+
+                    });
+                    form.render('select');
+
+                },error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}
+
+
+//论文收录情况下拉框
+function selectcollection1() {
+    layui.use(['form', 'jquery'], function () {
+        var $ = layui.$,
+            form = layui.form;
+        $('#collection').empty();
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/dictionary/queryCollection",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#collection').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#collection').append(new Option(item.title, item.dictionaryid));
+
+                    });
+                    form.render('select');
+
+                }, error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}

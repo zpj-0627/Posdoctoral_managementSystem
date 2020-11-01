@@ -389,6 +389,7 @@ public class DictionaryController {
         queryWrapper.eq("sign", 0);
         queryWrapper.select("title");
         List<Dictionary> dList = dictionaryService.list(queryWrapper);
+        System.out.println(dList);
         return dList;
     }
 

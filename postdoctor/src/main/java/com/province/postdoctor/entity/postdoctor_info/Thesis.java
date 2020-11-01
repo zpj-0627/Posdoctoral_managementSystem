@@ -5,6 +5,7 @@ package com.province.postdoctor.entity.postdoctor_info;
     import com.baomidou.mybatisplus.annotation.TableId;
     import java.io.Serializable;
     import java.sql.Date;
+    import java.util.List;
 
     import lombok.Data;
     import lombok.EqualsAndHashCode;
@@ -49,7 +50,7 @@ package com.province.postdoctor.entity.postdoctor_info;
             /**
             * 论文题目
             */
-    private String tTtitle;
+    private String tTitle;
 
             /**
             * 论文英文题目
@@ -135,13 +136,13 @@ package com.province.postdoctor.entity.postdoctor_info;
             /**
             * 是否通讯作者
             */
-    private Integer cauthor;
+    private String cauthor;
 
+    private Date publishingtimeStart;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private java.util.Date publishingtimeStart;
+    private Date publishingtimeEnd;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private java.util.Date publishingtimeEnd;
+    @TableField(exist = false)
+    private List<Thesis> thesisList;
 
 }

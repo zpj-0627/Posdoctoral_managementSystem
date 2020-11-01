@@ -116,7 +116,6 @@
             , height: "auto"
             , toolbar: "#toolbarDemo"
             , defaultToolbar: []
-            , url: '/workexperience/list1' //数据接口
             , page: true //开启分页
             , limit: 5
             , limits: [5, 10, 15]
@@ -145,20 +144,17 @@
                 };
             }
         });
-        //表格重载
+        //执行重载
+        table.reload('testReload', {
+            url: '/workexperience/list1'
+            , where: {
+                pId: id,
+            }
+            , page: {
+                curr: 1 //重新从第 1 页开始
+            }
 
-
-                //执行重载
-                table.reload('testReload',{
-                    url:'/workexperience/list1'
-                    ,where:{
-                        pId:id,
-                    }
-                    ,page: {
-                        curr: 1 //重新从第 1 页开始
-                    }
-
-                });
+        });
 
 
 
@@ -172,7 +168,7 @@
                     layer.open({
                         title: ['添加信息', 'font-size:18px;'],
                         type: 2,
-                        content: 'LearningExperience-add.html',
+                        content: 'WorkingExperience-add.html?id=' + id,
                         resize: true,
                         area: ['100%', '100%'],
                         skin: 'layui-layer-lan',

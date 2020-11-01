@@ -1,9 +1,11 @@
 package com.province.postdoctor.entity.postdoctor_info;
 
     import com.baomidou.mybatisplus.annotation.IdType;
+    import com.baomidou.mybatisplus.annotation.TableField;
     import com.baomidou.mybatisplus.annotation.TableId;
     import java.io.Serializable;
     import java.sql.Date;
+    import java.util.List;
 
     import lombok.Data;
     import lombok.EqualsAndHashCode;
@@ -89,6 +91,9 @@ package com.province.postdoctor.entity.postdoctor_info;
             * 单位名称
             */
     private String dName;
+
+    @TableField(exist = false)
+    private List<Workexperience> workexperienceList;
 
 
 }

@@ -52,18 +52,15 @@ package com.province.postdoctor.entity.postdoctor_info;
             */
     private String treatiseName;
 
-
-
             /**
             * 论著方式
             */
-            private String treatiseType;
+    private String treatiseType;
 
             /**
             * 出版日期
             */
-            private Date publicationDate;
-
+    private Date publicationDate;
 
             /**
             * 书号
@@ -78,7 +75,7 @@ package com.province.postdoctor.entity.postdoctor_info;
             /**
             * 作者排名
             */
-    private Integer authorRank;
+    private String authorRank;
 
 
 }

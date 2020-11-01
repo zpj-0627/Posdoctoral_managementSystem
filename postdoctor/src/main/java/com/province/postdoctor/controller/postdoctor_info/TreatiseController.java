@@ -14,11 +14,7 @@ import com.province.postdoctor.service.postdoctor_info.ThesisService;
 import com.province.postdoctor.service.postdoctor_info.TreatiseService;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.text.ParseException;
@@ -63,11 +59,11 @@ public class TreatiseController {
     }
     //人员管理论文信息表
     @RequestMapping("/plist1")
-    public PoetResult<Treatise> plist1(Integer page, Integer limit,Integer pId) {
+    public PoetResult<Treatise> plist1(Integer page, Integer limit,Integer pid) {
         PageHelper.startPage(page,limit);
         PoetResult<Treatise> thesisPoetResult = new PoetResult<>();
         QueryWrapper<Treatise> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("p_id",pId);
+        queryWrapper.eq("p_id",pid);
         queryWrapper.select("id","treatise_name","p_id","treatise_type","treatise_number","publication_date","author_rank","press");
         List<Treatise> dList = treatiseService.list(queryWrapper);
         System.out.println(dList);
@@ -181,6 +177,12 @@ public class TreatiseController {
         else{
             return 0;//删除失败
         }
+    }
+    //批量添加博士后专著信息
+    @RequestMapping("/addAllDoctor")
+    @ResponseBody
+    public boolean save( Treatise treatise) {
+        return treatiseService.save(treatise);
     }
 
 }

@@ -41,7 +41,7 @@ public class LearningexperienceController {
         PoetResult<Learningexperience> thesisPoetResult = new PoetResult<>();
         QueryWrapper<Learningexperience> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("p_id",pId);
-        queryWrapper.select("p_id","lestartdate","leenddate","school","education");
+        queryWrapper.select("p_id","lestartdate","leenddate","school","education","id");
         List<Learningexperience> dList = learningexperienceService.list(queryWrapper);
         System.out.println(dList);
         thesisPoetResult.setCode(0);
@@ -55,7 +55,7 @@ public class LearningexperienceController {
     @RequestMapping("/getText/{id}")
     public Learningexperience getLearningexperienceById(@PathVariable int id){
         QueryWrapper<Learningexperience> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("P_id",id);
+        queryWrapper.eq("id",id);
         return learningexperienceService.getOne(queryWrapper);
     }
 
@@ -76,7 +76,6 @@ public class LearningexperienceController {
     @RequestMapping("/addAllDoctor")
     @ResponseBody
     public boolean addAllDoctor(@RequestBody Learningexperience learningexperience, HttpServletRequest request) {
-        System.out.println(learningexperience);
         List<Learningexperience> list = learningexperience.getLearningexperienceList();
         return learningexperienceService.saveBatch(list);
     }

@@ -258,3 +258,155 @@ function selectRank(r){
 
     });
 }
+//科研项目下达部门下拉框
+function selectPDept1(){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/dictionary/queryPDept",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#departmentName').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#departmentName').append(new Option(item.title, item.dictionaryid));
+                    });
+                    form.render('select');
+                }, error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}
+//科研项目性质下拉框
+function selectPprojectNature1(){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/dictionary/queryPprojectNature",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#projectNature').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#projectNature').append(new Option(item.title, item.dictionaryid));
+                    });
+                    form.render('select');
+                }, error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}
+//科研项目进展下拉框
+function selectPprojectProgress1(){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/dictionary/queryPprojectProgress",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#projectProgress').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#projectProgress').append(new Option(item.title, item.dictionaryid));
+                    });
+                    form.render('select');
+                }, error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}
+//科研项目承担责任下拉框
+function selectPduty1(){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/dictionary/queryPduty",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#duty').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#duty').append(new Option(item.title, item.dictionaryid));
+                    });
+                    form.render('select');
+                }, error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}
+//专利类型下拉框
+function selectPtype1(){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/dictionary/queryPtype",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#ptype').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#ptype').append(new Option(item.title, item.dictionaryid));
+
+                    });
+                    form.render('select');
+                }, error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}
+//排名下拉框
+function selectRank1(){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/patent/queryRank",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#rank').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#rank').append(new Option(item.rank, item.id));
+
+                    });
+                    form.render('select');
+                }, error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}

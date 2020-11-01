@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.province.postdoctor.entity.daily_sci_act.ProjectApplication;
 import com.province.postdoctor.entity.dictionary.Dictionary;
 import com.province.postdoctor.entity.postdoctor_info.Learningexperience;
 import com.province.postdoctor.entity.postdoctor_info.Workexperience;
@@ -13,13 +14,10 @@ import com.province.postdoctor.service.postdoctor_info.LearningexperienceService
 import com.province.postdoctor.service.postdoctor_info.WorkexperienceService;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -101,5 +99,10 @@ public class WorkexperienceController {
             return 0;//删除失败
         }
     }
-
+    //批量添加工作经历信息
+    @RequestMapping("/addAllDoctor")
+    @ResponseBody
+    public boolean save( Workexperience workexperience) {
+        return workexperienceService.save(workexperience);
+    }
 }

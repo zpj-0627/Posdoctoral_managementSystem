@@ -5,22 +5,16 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.province.postdoctor.entity.postdoctor_info.Postdoctoraproject;
-import com.province.postdoctor.entity.postdoctor_info.Postdoctorrinformation;
-import com.province.postdoctor.entity.postdoctor_info.Thesis;
-import com.province.postdoctor.entity.postdoctor_info.Workexperience;
+import com.province.postdoctor.entity.postdoctor_info.*;
 import com.province.postdoctor.result.PoetResult;
 import com.province.postdoctor.service.postdoctor_info.PostdoctorrinformationService;
 import com.province.postdoctor.service.postdoctor_info.ThesisService;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -53,7 +47,7 @@ public class ThesisController {
         PageHelper.startPage(page,limit);
         PoetResult<Thesis> thesisPoetResult = new PoetResult<>();
         QueryWrapper<Thesis> queryWrapper = new QueryWrapper<>();
-        queryWrapper.select("id","d_name","p_id","p_name","t_ttitle","publishingtime","collection","literature");
+        queryWrapper.select("id","d_name","p_id","p_name","t_title","publishingtime","collection","literature");
         List<Thesis> dList = thesisService.list(queryWrapper);
         System.out.println(dList);
         thesisPoetResult.setCode(0);
@@ -69,7 +63,7 @@ public class ThesisController {
         PoetResult<Thesis> thesisPoetResult = new PoetResult<>();
         QueryWrapper<Thesis> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("p_id",pId);
-        queryWrapper.select("id","d_name","p_id","p_name","t_ttitle","publishingtime","collection","literature");
+        queryWrapper.select("id","d_name","p_id","p_name","t_title","publishingtime","collection","literature");
         List<Thesis> dList = thesisService.list(queryWrapper);
         System.out.println(dList);
         thesisPoetResult.setCode(0);
@@ -115,16 +109,16 @@ public class ThesisController {
         System.out.println(thesis.getDId());
         System.out.println(thesis);
         if ("110".equals(thesis.getDId())){
-            queryWrapper.select("p_name","p_id","t_ttitle","d_name","publishingtime","collection");
+            queryWrapper.select("p_name","p_id","t_title","d_name","publishingtime","collection");
             dList = thesisService.list(queryWrapper);
         }else if ("01".equals(thesis.getDId()))
         {
             queryWrapper.eq("d_type","01");
-            queryWrapper.select("p_name","p_id","t_ttitle","d_name","publishingtime","collection");
+            queryWrapper.select("p_name","p_id","t_title","d_name","publishingtime","collection");
             dList = thesisService.list(queryWrapper);
         }else if ("02".equals(thesis.getDId())) {
             queryWrapper.eq("d_type","02");
-            queryWrapper.select("p_name","p_id","t_ttitle","d_name","publishingtime","collection");
+            queryWrapper.select("p_name","p_id","t_title","d_name","publishingtime","collection");
             dList = thesisService.list(queryWrapper);
         }else {
             dList = thesisService.selectBydId(thesis);
@@ -150,7 +144,7 @@ public class ThesisController {
     public boolean update(Thesis thesis){
         UpdateWrapper<Thesis> updateWrapper = new UpdateWrapper<>();
         updateWrapper.eq("id",thesis.getId());
-        updateWrapper.set("t_ttitle",thesis.getTTtitle());
+        updateWrapper.set("t_title",thesis.getTTitle());
         updateWrapper.set("collection",thesis.getCollection());
         updateWrapper.set("t_etitle",thesis.getTEtitle());
         updateWrapper.set("publishingtime",thesis.getPublishingtime());
@@ -184,7 +178,12 @@ public class ThesisController {
             return 0;//删除失败
         }
     }
-
+    //批量添加博士后论文信息
+    @RequestMapping("/addAllDoctor")
+    @ResponseBody
+    public boolean save( Thesis thesis) {
+        return thesisService.save(thesis);
+    }
 
 
 }

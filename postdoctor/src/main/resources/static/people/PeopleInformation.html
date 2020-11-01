@@ -169,7 +169,7 @@
         tr = '<td  align="right" id="ThesisInformation" style="cursor: pointer; width:10%" >'+'<strong>' + mydata[5]+'</strong>' + '</td>' + '<td align="left" style=" width:30%" >' +'(' + data.data[0].paperNumber+')' + '</td>'+'<td  align="right" id="ProjectsInformation" style="cursor: pointer;width:10%">'+'<strong>' + mydata[6]+'</strong>' + '</td>' + '<td>' + '(' +data.data[0].projectNumber  +')'+ '</td>'
         $("#tabletest1").append('<tr>' + tr + '</tr>')
 
-        tr = '<td  align="right" id="PatentInformation" style="cursor: pointer; width:10%" >'+'<strong>' + mydata[7]+'</strong>' + '</td>' + '<td align="left" style=" width:30%" >' + '(' +data.data[0].patentNumber +')'+ '</td>'+'<td  align="right"  style="cursor: pointer;width:10%">'+'<strong>' + mydata[8]+'</strong>' + '</td>' + '<td>' + '(' +data.data[0].monographNumber  +')'+ '</td>'
+        tr = '<td  align="right" id="PatentInformation" style="cursor: pointer; width:10%" >'+'<strong>' + mydata[7]+'</strong>' + '</td>' + '<td align="left" style=" width:30%" >' + '(' +data.data[0].patentNumber +')'+ '</td>'+'<td  align="right" id="Treatise" style="cursor: pointer;width:10%">'+'<strong>' + mydata[8]+'</strong>' + '</td>' + '<td>' + '(' +data.data[0].monographNumber  +')'+ '</td>'
         $("#tabletest1").append('<tr>' + tr + '</tr>')
 
         tr = '<td  align="right" id="tt" style="cursor: pointer; width:10%" >'+'<strong>' + mydata[9]+'</strong>' + '</td>' + '<td align="left" style=" width:30%" >' + '(' +data.data[0].rewardNumber+')' + '</td>'+'<td  align="right"  style="cursor: pointer;width:10%">'+'<strong>' + mydata[10]+'</strong>' + '</td>' + '<td>' +'(' + data.data[0].fundfoNumber  +')'+ '</td>'
@@ -194,20 +194,20 @@
             });
         }
 
-        var elem = document.getElementById("LearningExperience");
+      /*  var elem = document.getElementById("LearningExperience");
         elem.addEventListener("click", LearningExperience, false);    //click 代表的是事件，  aa代表事件触发执行的函数
         function LearningExperience() {
             layer.open({
                 title: ['基本信息', 'font-size:18px;'],
                 type: 2,
-                /* content: 'PeopleManagement.html?id=' + data.id,*/
+                /!* content: 'PeopleManagement.html?id=' + data.id,*!/
                 content: '/people/learning/LearningExperience.html?id=' + id,
                 maxmin: true,
                 resize: true,
                 area: ['80%', '100%'],
                 skin: 'layui-layer-lan'
             });
-        }
+        }*/
         var elem = document.getElementById("LearningExperience");
         elem.addEventListener("click", LearningExperience, false);    //click 代表的是事件，  aa代表事件触发执行的函数
         function LearningExperience() {
@@ -264,20 +264,7 @@
                 skin: 'layui-layer-lan'
             });
         }
-        var elem = document.getElementById("WorkExperienceInformation");
-        elem.addEventListener("click", WorkExperienceInformation, false);    //click 代表的是事件，  aa代表事件触发执行的函数
-        function WorkExperienceInformation() {
-            layer.open({
-                title: ['工作经历', 'font-size:18px;'],
-                type: 2,
-                /* content: 'PeopleManagement.html?id=' + data.id,*/
-                content: '/people/workexperience/WorkingExperience.html?id=' + id,
-                maxmin: true,
-                resize: true,
-                area: ['80%', '100%'],
-                skin: 'layui-layer-lan'
-            });
-        }
+
         var elem = document.getElementById("ProjectsInformation");
         elem.addEventListener("click", ProjectsInformation, false);    //click 代表的是事件，  aa代表事件触发执行的函数
         function ProjectsInformation() {
@@ -314,6 +301,21 @@
                 type: 2,
                 /* content: 'PeopleManagement.html?id=' + data.id,*/
                 content: '/people/patent/Patent.html?id=' + id,
+                maxmin: true,
+                resize: true,
+                area: ['80%', '100%'],
+                skin: 'layui-layer-lan'
+            });
+        }
+
+        var elem = document.getElementById("Treatise");
+        elem.addEventListener("click", Treatise, false);    //click 代表的是事件，  aa代表事件触发执行的函数
+        function Treatise() {
+            layer.open({
+                title: ['专著情况', 'font-size:18px;'],
+                type: 2,
+                /* content: 'PeopleManagement.html?id=' + data.id,*/
+                content: '/people/treatise/Treatise.html?id=' + id,
                 maxmin: true,
                 resize: true,
                 area: ['80%', '100%'],

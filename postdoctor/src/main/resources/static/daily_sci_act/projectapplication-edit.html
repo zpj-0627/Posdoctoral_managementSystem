@@ -51,11 +51,11 @@
 <div class="layui-form timo-compile">
     <!--添加表单元素-->
     <form class="layui-form" action="" lay-filter="component-form-group" id="component-form-group" style="text-align: center;">
-        <input type="hidden" name="pId" id="pId">
+        <input type="hidden" name="Id" id="Id">
         <div class="layui-form-item">
             <label class="layui-form-label" >项目类别</label>
             <div class="layui-input-inline">
-                <select id="project_type" name="project_type">
+                <select id="projectType" name="projectType">
                 </select>
             </div>
         </div>
@@ -94,6 +94,12 @@
                 <input id="projectName" class="layui-input"  type="text" name="projectName"   >
             </div>
         </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">项目id</label>
+            <div class="layui-input-inline">
+                <input id="projectId" class="layui-input"  type="text" name="projectId"   >
+            </div>
+        </div>
         <div class="layui-form-item timo-finally" align="center">
             <button class="layui-btn" lay-submit="" lay-filter="component-form-demo"style="background-color:#0091cd">保存</button>
         </div>
@@ -116,6 +122,7 @@
         id=location.href.split("?")[1].split("=")[1];
         alert(id);
         $.get('/project_application/getText/'+id,function (r) {
+            alert(JSON.stringify(r))
             $('[name=projectId]').val(r.projectId)
             /*$('[name=project_type]').val(r.projectType)*/
             //$('[name=dname]').val(r.dname)
@@ -129,22 +136,21 @@
             //申报单位下拉框
             selectdName2(r);
             form.on('submit(component-form-demo)',function (data) {
-                /*var siId = document.getElementById("school").options[document.getElementById("school").selectedIndex].value;*/
-                var project_type = document.getElementById("project_type").options[document.getElementById("project_type").selectedIndex].text;
+                var projectType = document.getElementById("projectType").options[document.getElementById("projectType").selectedIndex].text;
+/*
                 var dname = document.getElementById("dname").options[document.getElementById("dname").selectedIndex].text;
+*/
+                /*var projectId = document.getElementById("projectId").value;*/
                 var applicant = document.getElementById("applicant").value;
-                var applicant_time = document.getElementById("applicant_time").value;
+                var applicant_time = document.getElementById("applicantTime").value;
                 var situation = document.getElementById("situation").options[document.getElementById("situation").selectedIndex].text;
                 var projectName = document.getElementById("projectName").value;
-                if (project_type==r.project_type&&
-                    dname==r.dname&&
-                    applicant==r.applicant&&
-                    applicant_time==r.applicant_time&&
-                    situation==r.situation&&
-                    projectName==r.projectName) {
+
+                if (projectType==r.projectType/*&&dname==r.dname*/&&applicant==r.applicant&&applicant_time==r.applicantTime&&situation==r.situation&&projectName==r.projectName) {
                     layer.msg('并没有修改信息',{icon: 5, shade: 0.5, time: 1500});
                 }else {
                     var json1 = $('form').serialize();
+                    alert(json1);
                     $.post(
                         "/project_application/update",
                         json1,

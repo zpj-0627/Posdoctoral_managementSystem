@@ -115,7 +115,6 @@
             , id: 'testReload'
             , height: "auto"
             , toolbar: "#toolbarDemo"
-
             , defaultToolbar: []
             , page: true //开启分页
             , limit: 5
@@ -124,7 +123,7 @@
             , cols: [[ //表头
                 {align: 'center', title: '序号', type: 'numbers', width: '10%'}
                 , {align: 'center', field: 'pid', title: '编号',hide: true }
-                , {align: 'center', field: 'pname', title: '论文题目', width: '70%'}
+                , {align: 'center', field: 'ttitle', title: '论文题目', width: '70%'}
                 , {align: 'center', fixed: 'right', title: '操作',width: '21%', toolbar: '#barDemo'}
 
             ]]
@@ -164,7 +163,7 @@
                     layer.open({
                         title: ['添加信息', 'font-size:18px;'],
                         type: 2,
-                        content: 'LearningExperience-add.html',
+                        content: 'Thesis-add.html?id=' + id,
                         resize: true,
                         area: ['100%', '100%'],
                         skin: 'layui-layer-lan',

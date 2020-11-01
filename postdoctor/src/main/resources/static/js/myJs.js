@@ -747,7 +747,7 @@ function selectdName1(){
                 dataType: "json",
                 cache: false,
                 success: function (data) {
-                    alert(JSON.stringify(data));
+                   /* alert(JSON.stringify(data));*/
                     $('#dName').append(new Option());
                     $.each(data, function (index, item) {
                         $('#dName').append(new Option(item.dname, item.dname));
@@ -775,10 +775,64 @@ function selectprojrctType(r){
                 dataType: "json",
                 cache: false,
                 success: function (data) {
-                    $('#project_type').append(new Option());
+                    $('#projectType').append(new Option());
                     $.each(data, function (index, item) {
-                        $('#project_type').append(new Option(item.title, item.dictionaryid));
-                        $('#project_type').val(r.projectType);
+                        $('#projectType').append(new Option(item.title, item.dictionaryid));
+                        $('#projectType').val(r.projectType);
+                    });
+                    form.render('select');
+                }, error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}
+//民族下拉框
+function selectCountry(){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/dictionary/queryPCountry",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+
+                    $('#nationality').append(new Option());
+                    $.each(data,function (index,item) {
+                        $('#nationality').append(new Option(item.title,item.dictionaryid));
+                    });
+                    form.render('select');
+
+                },error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}
+//论著方式下拉框
+function TrselectTtype1(r){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $('#treatiseType').empty();
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/dictionary/queryTtype",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#treatiseType').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#treatiseType').append(new Option(item.title, item.dictionaryid));
+                        $('#treatiseType').val(r.treatiseType)
                     });
                     form.render('select');
                 }, error: function () {

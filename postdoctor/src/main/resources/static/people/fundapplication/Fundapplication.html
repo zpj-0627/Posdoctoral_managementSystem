@@ -1,6 +1,6 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title>专利管理</title>
+    <title>申获基金管理</title>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -30,7 +30,7 @@
             color:#037ef3 ;
         }
         .layui-laypage .layui-laypage-curr .layui-laypage-em{
-            background-color:#0091cd
+            background-color: #0091cd
         }
 
         .layui-table-tool-temp {
@@ -124,7 +124,7 @@
             , cols: [[ //表头
                 {align: 'center', title: '序号', type: 'numbers', width: '10%'}
                 , {align: 'center', field: 'pid', title: '编号',hide: true }
-                , {align: 'center', field: 'patentName', title: '专利名称', width: '70%'}
+                , {align: 'center', field: 'faName', title: '申获基金名称', width: '70%'}
                 , {align: 'center', fixed: 'right', title: '操作',width: '21%', toolbar: '#barDemo'}
 
             ]]
@@ -144,7 +144,7 @@
 
         //执行重载
         table.reload('testReload',{
-            url:'/patent/plist1'
+            url:'/fundapplication/plist1'
             ,where:{
                 pId:id,
             }
@@ -207,7 +207,7 @@
                 layer.open({
                     title: ['编辑信息', 'font-size:18px;'],
                     type: 2,
-                    content: 'Patent-edit.html?id=' + id,
+                    content: 'Fundapplication-edit.html?id=' + id,
                     maxmin: true,
                     resize: true,
                     area: ['100%', '100%'],

@@ -49,17 +49,17 @@
         <div class="layui-form-item">
             <label class="layui-form-label">pId</label>
             <div class="layui-input-inline">
-                <input class="layui-input" type="text" name="pId" id="pId" >
+                <input class="layui-input" type="text" name="pId" id="pId"readonly="readonly">
             </div>
             <label class="layui-form-label">pName</label>
             <div class="layui-input-inline">
-                <input class="layui-input" type="text" name="pName" id="pName" >
+                <input class="layui-input" type="text" name="pName" id="pName" readonly="readonly">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">dId</label>
             <div class="layui-input-inline">
-                <input class="layui-input" type="text" name="dId" id="dId" >
+                <input class="layui-input" type="text" name="dId" id="dId" readonly="readonly">
             </div>
             <label class="layui-form-label">dName</label>
             <div class="layui-input-inline">
@@ -167,6 +167,12 @@
         },'json')
         //监听添加
         form.on('submit(component-form-demo)',function (data) {
+            $.get('/postdoctorrinformation/getText/'+id,function (r) {
+                $('[name=dId]').val(r.did);
+                $('[name=dName]').val(r.dname);
+                $('[name=pId]').val(r.pid);
+                $('[name=pName]').val(r.pname);
+            },'json')
             doctorId = $("#mytable").find("tr").length;
             var education = document.getElementById("education").options[document.getElementById("education").selectedIndex].text;
             var pId = document.getElementById("pId").value;
@@ -190,7 +196,7 @@
                 "<td name='smName2'>" + data.field.sm_name2 + "</td>" +
 
               /*  "<td name='dRemark' style='display: none'>" + data.field.dRemark + "</td>" +*/
-                "<td><a class='layui-btn' href=\"javascript:;\" onclick=\"del(this)\">删除</a></td>" +
+                "<td><a class='layui-btn' href=\"javascript:;\" onclick=\"del(this)\"style=\"background-color:#0091cd\">删除</a></td>" +
                 "</tr>");
             addtr.appendTo('#mytable');
             document.getElementById("form").reset();
@@ -201,7 +207,7 @@
 
     //删除一行后排序不变
     function del(tr){
-        layer.confirm('您确定删除吗？',{title:'温馨提示',skin: 'layui-layer-molv'},function(){
+        layer.confirm('您确定删除吗？',{title:'温馨提示',skin: 'layui-layer-lan'},function(){
             var doctorId=$(tr).parent().parent().find("td:eq(0)").text();//获取当前的编号
             var num2=$(tr).parent().parent().nextAll("tr").length;//获取当前元素后的同级元素个数
             if(num2>0){
@@ -228,7 +234,7 @@
             learningexperience.push(obj);
         }
 
-        layer.confirm('您确定添加吗？',{title:'温馨提示',skin: 'layui-layer-molv'},function(){
+        layer.confirm('您确定添加吗？',{title:'温馨提示',skin: 'layui-layer-lan'},function(){
             $.ajax({
                 type: "POST",
                 traditional: true,

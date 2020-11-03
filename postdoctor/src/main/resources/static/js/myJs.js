@@ -539,7 +539,7 @@ function selectAtype(){
                 success: function (data) {
                     $('#awardsType').append(new Option());
                     $.each(data, function (index, item) {
-                        $('#awardsType').append(new Option(item.title, item.id));
+                        $('#awardsType').append(new Option(item.title, item.dictionaryid));
 
                     });
                     form.render('select');
@@ -567,7 +567,7 @@ function selectAresults(){
                 success: function (data) {
                     $('#resultsAssessment').append(new Option());
                     $.each(data, function (index, item) {
-                        $('#resultsAssessment').append(new Option(item.title, item.id));
+                        $('#resultsAssessment').append(new Option(item.title, item.dictionaryid));
 
                     });
                     form.render('select');
@@ -588,13 +588,13 @@ function selectType(){
         $(function () {
             $.ajax({
                 type: "POST",
-                url: "/awards/queryType",
+                url: "/dictionary/queryresultType",
                 dataType: "json",
                 cache: false,
                 success: function (data) {
                     $('#type').append(new Option());
                     $.each(data, function (index, item) {
-                        $('#type').append(new Option(item.type, item.id));
+                        $('#type').append(new Option(item.title, item.dictionaryid));
 
                     });
                     form.render('select');
@@ -606,7 +606,7 @@ function selectType(){
 
     });
 }
-//获奖类别下拉框
+//奖励类别下拉框
 function selectCategories(){
     layui.use(['form','jquery'],function () {
         var $ = layui.$,
@@ -615,13 +615,13 @@ function selectCategories(){
         $(function () {
             $.ajax({
                 type: "POST",
-                url: "/awards/queryCategories",
+                url: "/dictionary/queryAcategories",
                 dataType: "json",
                 cache: false,
                 success: function (data) {
                     $('#awardsCategories').append(new Option());
                     $.each(data, function (index, item) {
-                        $('#awardsCategories').append(new Option(item.awardsCategories, item.id));
+                        $('#awardsCategories').append(new Option(item.title, item.dictionaryid));
 
                     });
                     form.render('select');
@@ -722,14 +722,12 @@ function dIdSelect() {
 
         form.on('select(Type_filter)', function(o){
                 id = o.value;
-            alert(JSON.stringify(o));
             $.get('/gzz-information/getText/'+id,function (r) {
                 $('[name=dId]').val(r.did);
                 $('[name=dType]').val(r.dtype);
             },'json')
             $.get('/project_application/getprojectId',function (r) {
                 $('[name=projectId]').val(r);
-                alert(JSON.stringify(r));
             },'json')
         });
     });
@@ -833,6 +831,115 @@ function TrselectTtype1(r){
                     $.each(data, function (index, item) {
                         $('#treatiseType').append(new Option(item.title, item.dictionaryid));
                         $('#treatiseType').val(r.treatiseType)
+                    });
+                    form.render('select');
+                }, error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}
+//获奖类型下拉框
+function selectAtype1(r){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $('#awardsType').empty();
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/dictionary/queryAtype",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#awardsType').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#awardsType').append(new Option(item.title, item.dictionaryid));
+                        $('#awardsType').val(r.awardsType)
+                    });
+                    form.render('select');
+                }, error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}
+
+//成果评价下拉框
+function selectAresults1(r){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $('#resultsAssessment').empty();
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/dictionary/queryAresults",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#resultsAssessment').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#resultsAssessment').append(new Option(item.title, item.dictionaryid));
+                        $('#resultsAssessment').val(r.resultsAssessment)
+                    });
+                    form.render('select');
+                }, error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}
+//成果类型下拉框
+function selectType1(r){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $('#type').empty();
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/dictionary/queryresultType",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#type').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#type').append(new Option(item.title, item.dictionaryid));
+                        $('#type').val(r.type)
+                    });
+                    form.render('select');
+                }, error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+
+    });
+}
+//获奖类别下拉框
+function selectCategories1(r){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $('#awardsCategories').empty();
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/dictionary/queryAcategories",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    $('#awardsCategories').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#awardsCategories').append(new Option(item.title, item.dictionaryid));
+                        $('#awardsCategories').val(r.awardsCategories)
                     });
                     form.render('select');
                 }, error: function () {

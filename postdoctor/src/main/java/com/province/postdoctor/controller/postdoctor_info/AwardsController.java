@@ -5,20 +5,13 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.province.postdoctor.entity.postdoctor_info.Awards;
-import com.province.postdoctor.entity.postdoctor_info.Fundapplication;
-import com.province.postdoctor.entity.postdoctor_info.Postdoctorrinformation;
-import com.province.postdoctor.entity.postdoctor_info.Thesis;
+import com.province.postdoctor.entity.postdoctor_info.*;
 import com.province.postdoctor.result.PoetResult;
 import com.province.postdoctor.service.postdoctor_info.AwardsService;
 import com.province.postdoctor.service.postdoctor_info.FundapplicationService;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.text.ParseException;
@@ -129,16 +122,6 @@ public class AwardsController {
         return postdoctorrinformationResult;
     }
 
-    //成果类型下拉框
-    @RequestMapping("/queryType")
-    public List<Awards> queryType() {
-        QueryWrapper<Awards> queryWrapper = new QueryWrapper<>();
-        queryWrapper.select("type");
-//        queryWrapper.eq("sign", 0);
-        queryWrapper.orderByDesc("type");
-        List<Awards> dList = awardsService.list(queryWrapper);
-        return dList;
-    }
 
     //获奖类别下拉框
     @RequestMapping("/queryCategories")
@@ -200,5 +183,11 @@ public class AwardsController {
         else{
             return 0;//删除失败
         }
+    }
+    //批量添加博士后成果信息
+    @RequestMapping("/addAllDoctor")
+    @ResponseBody
+    public boolean save( Awards awards) {
+        return awardsService.save(awards);
     }
 }

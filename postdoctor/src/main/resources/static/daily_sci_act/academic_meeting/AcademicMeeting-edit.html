@@ -5,11 +5,11 @@
     <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
     <title>项目申报</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../css/plugins/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
-    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
-    <link rel="stylesheet" type="text/css" href="../css/main.css" media="all">
-    <link rel="stylesheet" type="text/css" href="../layui/layui_exts/layui_ext/dtree/dtree.css">
-    <link rel="stylesheet" type="text/css" href="../layui/layui_exts/layui_ext/dtree/font/dtreefont.css">
+    <link rel="stylesheet" type="text/css" href="../../css/plugins/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../layui/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../layui/layui_exts/layui_ext/dtree/dtree.css">
+    <link rel="stylesheet" type="text/css" href="../../layui/layui_exts/layui_ext/dtree/font/dtreefont.css">
     <style>
         .layui-form-label {
             width: 122px;
@@ -43,11 +43,11 @@
     </style>
 </head>
 <body>
-<script type="text/javascript" src="../layui/layui.js" charset="utf-8"></script>
-<script type="text/javascript" src="../js/main.js" charset="utf-8"></script>
-<script type="text/javascript" src="../js/myJs.js" charset="utf-8"></script>
-<script type="text/javascript" src="../js/BasicInfo.js" charset="utf-8"></script>
-<script type="text/javascript" src="../js/plugins/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../js/main.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../js/myJs.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../js/BasicInfo.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../js/plugins/jquery-3.3.1.min.js"></script>
 <div class="layui-form timo-compile">
     <!--添加表单元素-->
     <form class="layui-form" action="" lay-filter="component-form-group" id="component-form-group" style="text-align: center;">
@@ -124,8 +124,6 @@
         $.get('/project_application/getText/'+id,function (r) {
             alert(JSON.stringify(r))
             $('[name=projectId]').val(r.projectId)
-            /*$('[name=project_type]').val(r.projectType)*/
-            //$('[name=dname]').val(r.dname)
             $('[name=applicant]').val(r.applicant)
             $('[name=applicantTime]').val(r.applicantTime)
             $('[name=situation]').val(r.situation)
@@ -137,16 +135,14 @@
             selectdName2(r);
             form.on('submit(component-form-demo)',function (data) {
                 var projectType = document.getElementById("projectType").options[document.getElementById("projectType").selectedIndex].text;
-/*
                 var dname = document.getElementById("dname").options[document.getElementById("dname").selectedIndex].text;
-*/
                 /*var projectId = document.getElementById("projectId").value;*/
                 var applicant = document.getElementById("applicant").value;
                 var applicant_time = document.getElementById("applicantTime").value;
                 var situation = document.getElementById("situation").options[document.getElementById("situation").selectedIndex].text;
                 var projectName = document.getElementById("projectName").value;
 
-                if (projectType==r.projectType/*&&dname==r.dname*/&&applicant==r.applicant&&applicant_time==r.applicantTime&&situation==r.situation&&projectName==r.projectName) {
+                if (projectType==r.projectType&&dname==r.dname&&applicant==r.applicant&&applicant_time==r.applicantTime&&situation==r.situation&&projectName==r.projectName) {
                     layer.msg('并没有修改信息',{icon: 5, shade: 0.5, time: 1500});
                 }else {
                     var json1 = $('form').serialize();

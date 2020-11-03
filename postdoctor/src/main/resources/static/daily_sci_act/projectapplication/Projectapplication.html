@@ -17,10 +17,10 @@
     <!-- 引入css -->
 
 
-    <link rel="stylesheet" type="text/css" href="../css/plugins/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
-    <link rel="stylesheet" type="text/css" href="../layui/layui_exts/layui_ext/dtree/dtree.css">
-    <link rel="stylesheet" type="text/css" href="../layui/layui_exts/layui_ext/dtree/font/dtreefont.css">
-    <link rel="stylesheet" href="../layui/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../css/plugins/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../layui/layui_exts/layui_ext/dtree/dtree.css">
+    <link rel="stylesheet" type="text/css" href="../../layui/layui_exts/layui_ext/dtree/font/dtreefont.css">
+    <link rel="stylesheet" href="../../layui/css/layui.css" media="all">
     <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
     <style>
         body {
@@ -62,10 +62,10 @@
     </style>
 </head>
 <body>
-<script type="text/javascript" src="../layui/layui.js" charset="utf-8"></script>
-<script type="text/javascript" src="../js/main.js" charset="utf-8"></script>
-<script type="text/javascript" src="../js/plugins/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="../js/myJs.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../js/main.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../js/plugins/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/myJs.js" charset="utf-8"></script>
 <!--<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.4.0/jquery.js"></script>-->
 
 <div class="layui-card">
@@ -189,7 +189,7 @@
 
 <script>
     layui.config({
-        base: '../layui/layui_exts/',
+        base: '../../layui/layui_exts/',
     }).use(['table','excel','tree','form','laydate'],function () {
         var table = layui.table,
             $ = layui.$,
@@ -320,7 +320,7 @@
                     layer.open({
                         title: ['添加信息', 'font-size:18px;'],
                         type: 2,
-                        content: 'projectapplication-add.html',
+                        content: '/daily_sci_act/projectapplication/Projectapplication-add.html',
                         resize: true,
                         area: ['50%', '85%'],
                         skin: 'layui-layer-molv',
@@ -362,7 +362,7 @@
                   layer.open({
                       title: ['编辑信息', 'font-size:18px;'],
                       type: 2,
-                      content: '/daily_sci_act/projectapplication-edit.html?id=' + data.projectId,
+                      content: '/daily_sci_act/projectapplication/Projectapplication-edit.html?id=' + data.projectId,
                       maxmin: true,
                       resize: true,
                       area: ['50%', '90%'],

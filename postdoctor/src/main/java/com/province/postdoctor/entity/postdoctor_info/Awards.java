@@ -102,7 +102,7 @@ package com.province.postdoctor.entity.postdoctor_info;
             /**
             * 排名
             */
-    private Integer ranking;
+    private String ranking;
 
             /**
             * 项目简介

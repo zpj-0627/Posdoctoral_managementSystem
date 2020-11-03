@@ -61,10 +61,10 @@ public class LearningexperienceController {
 
     //修改学习经历信息
     @RequestMapping("/update")
-    public boolean update(Learningexperience learningexperience,Integer pId, Date lestardate, Date leenddate,String school,String education,String smName1,String smName2){
+    public boolean update(Learningexperience learningexperience,Integer pId, Date lestartdate, Date leenddate,String school,String education,String smName1,String smName2){
         UpdateWrapper<Learningexperience> updateWrapper = new UpdateWrapper<>();
-        updateWrapper.eq("p_id",learningexperience.getPId());
-        updateWrapper.set("lestardate",learningexperience.getLestartdate());
+        updateWrapper.eq("id",learningexperience.getId());
+        updateWrapper.set("lestartdate",learningexperience.getLestartdate());
         updateWrapper.set("leenddate",learningexperience.getLeenddate());
         updateWrapper.set("school",learningexperience.getSchool());
         updateWrapper.set("education",learningexperience.getEducation());

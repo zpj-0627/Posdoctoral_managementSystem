@@ -349,6 +349,16 @@ public class DictionaryController {
         List<Dictionary> dList = dictionaryService.list(queryWrapper);
         return dList;
     }
+    //奖励类别下拉框
+    @RequestMapping("/queryAcategories")
+    public List<Dictionary> queryAcategories() {
+        QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("updictionaryid", 10398);
+        queryWrapper.select( "title");
+        queryWrapper.eq("sign", 0);
+        List<Dictionary> dList = dictionaryService.list(queryWrapper);
+        return dList;
+    }
 
     //成果评价下拉框
     @RequestMapping("/queryAresults")
@@ -453,4 +463,37 @@ public class DictionaryController {
         List<Dictionary> dList = dictionaryService.list(queryWrapper);
         return dList;
     }
+    //成果类型下拉框
+    @RequestMapping("/queryresultType")
+    public List<Dictionary> queryresultType() {
+        QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("updictionaryid", 10401);
+        queryWrapper.select( "title");
+        queryWrapper.eq("sign", 0);
+        List<Dictionary> dList = dictionaryService.list(queryWrapper);
+        return dList;
+    }
+
+    //基金名称下拉框
+    @RequestMapping("/queryfundName")
+    public List<Dictionary> queryfundName() {
+        QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("updictionaryid", 10501);
+        queryWrapper.select( "id","title","dictionaryid");
+        queryWrapper.eq("sign", 0);
+        List<Dictionary> dList = dictionaryService.list(queryWrapper);
+        return dList;
+    }
+
+    //基金名称下拉框
+    @RequestMapping("/queryfundGrade")
+    public List<Dictionary> queryfundGrade(String dictionaryid) {
+        QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("updictionaryid", dictionaryid);
+        queryWrapper.select( "title","dictionaryid");
+        queryWrapper.eq("sign", 0);
+        List<Dictionary> dList = dictionaryService.list(queryWrapper);
+        return dList;
+    }
+
 }

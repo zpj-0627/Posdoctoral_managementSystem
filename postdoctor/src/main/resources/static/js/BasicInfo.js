@@ -234,7 +234,7 @@ function selectdName2(r){
                 success: function (data) {
                     $('#dname').append(new Option());
                     $.each(data, function (index, item) {
-                        $('#dname').append(new Option(item.dname, item.id));
+                        $('#dname').append(new Option(item.dname, item.dictionaryid));
                         $('#dname').val(r.dname);
                     });
                     form.render('select');
@@ -359,6 +359,63 @@ function selectcollection1() {
                     alert("查询失败");
                 }
             });
+        });
+
+    });
+}
+
+/*//单位名称添加联动显示单位代码
+function dIdSelect() {
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+
+        form.on('select(Type_filter)', function(o){
+            id = o.value;
+            $.get('/gzz-information/getText/'+id,function (r) {
+                $('[name=dId]').val(r.did);
+                $('[name=dType]').val(r.dtype);
+            },'json')
+            $.get('/project_application/getprojectId',function (r) {
+                $('[name=projectId]').val(r);
+            },'json')
+        });
+    });
+}*/
+//基金情况——基金名称下拉框
+function selectfundName(r){
+    layui.use(['form','jquery'],function () {
+        var $ = layui.$,
+            form = layui.form;
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/dictionary/queryfundName",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    alert(JSON.stringify(data))
+                    $('#fundName').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#fundName').append(new Option(item.title, item.dictionaryid));
+                        $('#fundName').val(r.fundName);
+                    });
+                    form.render('select');
+                }, error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+        form.on('select(Type_filter)', function(o){
+            id = o.value;
+            alert(JSON.stringify(o))
+            $.get('/gzz-information/getText/'+id,function (r) {
+                $('[name=dId]').val(r.did);
+                $('[name=dType]').val(r.dtype);
+            },'json')
+            $.get('/project_application/getprojectId',function (r) {
+                $('[name=projectId]').val(r);
+            },'json')
         });
 
     });

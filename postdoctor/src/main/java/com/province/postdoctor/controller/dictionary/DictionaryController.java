@@ -479,8 +479,9 @@ public class DictionaryController {
     public List<Dictionary> queryfundName() {
         QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("updictionaryid", 10501);
-        queryWrapper.select( "id","title","dictionaryid");
+        queryWrapper.select( "id","dictionaryid","title");
         queryWrapper.eq("sign", 0);
+        queryWrapper.orderByDesc("dictionaryid,title");
         List<Dictionary> dList = dictionaryService.list(queryWrapper);
         return dList;
     }

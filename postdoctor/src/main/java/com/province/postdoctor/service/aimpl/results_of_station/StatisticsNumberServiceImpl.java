@@ -16,8 +16,14 @@ public class StatisticsNumberServiceImpl extends ServiceImpl<StatisticsNumberMap
     @Resource
     private StatisticsNumberMapper statisticsNumberMapper;
 
+
     @Override
-    public List<StatisticsNumber> stationInfo(Postdoctorrinformation postdoctorrinformation) {
-        return statisticsNumberMapper.stationInfo(postdoctorrinformation);
+    public List situationOFstation(String dName) {
+        return statisticsNumberMapper.situationOFstation(dName);
+    }
+
+    @Override
+    public List list1() {
+        return statisticsNumberMapper.list1();
     }
 }

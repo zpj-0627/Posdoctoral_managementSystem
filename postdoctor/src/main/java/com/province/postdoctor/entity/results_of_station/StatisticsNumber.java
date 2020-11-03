@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class StatisticsNumber {
-    private String schoolname;
+    private String dName;
     private Integer A;
     private Integer B;
     private Integer C;

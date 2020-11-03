@@ -84,5 +84,19 @@
         p_id = #{id};
     </select>
 
+    <select id="situationOFstation" parameterType="java.lang.String" resultType="java.util.List">
+            count(IF(`status`='在站',`status`,NULL)) as 在站,
+            count(IF(`status`='出站',`status`,NULL)) as 出站,
+            count(IF(`status`='退站',`status`,NULL)) as 退站,
+            count(IF(`status`='注销',`status`,NULL)) as 注销
+            FROM
+            postdoctorrinformation
+            <where>
+                <if test="dName != null and dName !=''">
+                    and d_name = #{dName}
+                </if>
+            </where>
+    </select>
+
 
 </mapper>

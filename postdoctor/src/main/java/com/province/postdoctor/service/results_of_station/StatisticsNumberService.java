@@ -8,5 +8,7 @@ import com.province.postdoctor.entity.results_of_station.StatisticsNumber;
 import java.util.List;
 
 public interface StatisticsNumberService extends IService<StatisticsNumber> {
-    List<StatisticsNumber> stationInfo(Postdoctorrinformation postdoctorrinformation);
+    List situationOFstation(String dName);
+
+    List list1();
 }

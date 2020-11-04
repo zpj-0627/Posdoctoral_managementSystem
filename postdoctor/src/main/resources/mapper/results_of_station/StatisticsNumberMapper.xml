@@ -15,16 +15,12 @@ GROUP BY
 	d_name
     </select>
 
-	<select id="list1"  resultType="java.util.Map">
- SELECT
-	d_name AS schoolname,
-        count(IF(`status`='在站',`status`,NULL)) as 在站,
-        count(IF(`status`='出站',`status`,NULL)) as 出站,
-        count(IF(`status`='退站',`status`,NULL)) as 退站,
-        count(IF(`status`='注销',`status`,NULL)) as 注销
-        FROM
-        postdoctorrinformation
-        where d_name='太原科技大学'
+	<select id="list1"  resultType="com.province.postdoctor.entity.results_of_station.StatisticsList">
+        select `status` AS name,count(*) AS value
+
+        from postdoctorrinformation
+
+        group by `status`
     </select>
 
 

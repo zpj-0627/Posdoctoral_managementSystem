@@ -22,6 +22,6 @@ import lombok.Data;
 @Data
 public class StatisticsList {
     private String name;
-    private String passNum;
+    private String value;
 }
 

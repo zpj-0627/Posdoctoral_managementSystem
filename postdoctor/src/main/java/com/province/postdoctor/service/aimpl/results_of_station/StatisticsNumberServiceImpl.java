@@ -2,6 +2,7 @@ package com.province.postdoctor.service.aimpl.results_of_station;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.province.postdoctor.entity.postdoctor_info.Postdoctorrinformation;
+import com.province.postdoctor.entity.results_of_station.StatisticsList;
 import com.province.postdoctor.entity.results_of_station.StatisticsNumber;
 import com.province.postdoctor.mapper.results_of_station.StatisticsNumberMapper;
 import com.province.postdoctor.service.results_of_station.StatisticsNumberService;
@@ -23,7 +24,7 @@ public class StatisticsNumberServiceImpl extends ServiceImpl<StatisticsNumberMap
     }
 
     @Override
-    public List list1() {
+    public List<StatisticsList> list1() {
         return statisticsNumberMapper.list1();
     }
 }

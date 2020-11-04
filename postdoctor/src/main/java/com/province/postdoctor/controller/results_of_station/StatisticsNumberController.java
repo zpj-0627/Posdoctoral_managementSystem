@@ -27,15 +27,9 @@ public class StatisticsNumberController {
 
     //统计查询首页面表
     @RequestMapping("/list1")
-    public List list1(){
-        List dList = statisticsNumberService.list1();
+    public List<StatisticsList> list1(){
+        List<StatisticsList> dList = statisticsNumberService.list1();
         System.out.println(dList);
-        List<StatisticsList> dList1=new ArrayList<>();
-        //todo
-        for (Object o : dList) {
-
-        }
-
         return dList;
     }
 

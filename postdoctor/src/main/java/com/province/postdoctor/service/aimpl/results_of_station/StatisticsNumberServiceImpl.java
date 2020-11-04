@@ -19,8 +19,8 @@ public class StatisticsNumberServiceImpl extends ServiceImpl<StatisticsNumberMap
 
 
     @Override
-    public List situationOFstation(String dName) {
-        return statisticsNumberMapper.situationOFstation(dName);
+    public List<StatisticsList> situationOFstation(Postdoctorrinformation postdoctorrinformation) {
+        return statisticsNumberMapper.situationOFstation(postdoctorrinformation);
     }
 
     @Override

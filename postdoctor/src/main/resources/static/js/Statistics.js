@@ -1,6 +1,6 @@
 //统计——统计范围下拉框
-function selectrange(){
-    layui.use(['form','jquery'],function () {
+function selectrange() {
+    layui.use(['form', 'jquery'], function () {
         var $ = layui.$,
             form = layui.form;
         $('#range').empty();
@@ -23,5 +23,5 @@ function selectrange(){
             });
         });
 
-    });
+    })
 }

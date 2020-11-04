@@ -9,7 +9,7 @@ import com.province.postdoctor.entity.results_of_station.StatisticsNumber;
 import java.util.List;
 
 public interface StatisticsNumberMapper extends BaseMapper<StatisticsNumber> {
-    List situationOFstation(String dName);
+    List<StatisticsList> situationOFstation(Postdoctorrinformation postdoctorrinformation);
 
     List<StatisticsList> list1();
 }

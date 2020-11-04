@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.province.postdoctor.mapper.results_of_station.StatisticsNumberMapper">
-    <select id="stationInfo" parameterType="com.province.postdoctor.entity.postdoctor_info.Postdoctorrinformation" resultType="com.province.postdoctor.entity.results_of_station.StatisticsNumber">
-        SELECT
-	d_name AS schoolname,
-	/* 在站情况*/
-	count(IF (STATUS = '在站',STATUS,NULL)) AS A,-- 在站
-	count(IF (STATUS = '出站',STATUS,NULL)) AS B,-- 出站
-	count(IF (STATUS = '退站',STATUS,NULL)) AS C-- 退站
-FROM
-	postdoctorrinformation
-WHERE d_name = '太原科技大学'
+    <select id="situationOFstation" parameterType="com.province.postdoctor.entity.postdoctor_info.Postdoctorrinformation" resultType="com.province.postdoctor.entity.results_of_station.StatisticsList">
+		select `status` AS name,count(*) AS value
+
+		from postdoctorrinformation
+		<where> 1=1
+			<if test="dName != null and dName !=''">
+				and d_name = #{dName}
+			</if>
+			<if test="startStation != null">
+				and #{startStation} between start_station and end_station
+			</if>
+			<if test="endStation != null">
+				and #{endStation} between start_station and end_station
+			</if>
+		</where>
 GROUP BY
-	d_name
+		`status`
     </select>
 
 	<select id="list1"  resultType="com.province.postdoctor.entity.results_of_station.StatisticsList">

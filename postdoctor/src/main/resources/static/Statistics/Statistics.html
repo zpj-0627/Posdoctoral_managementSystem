@@ -185,8 +185,7 @@
             type: "post",
             async : true,            //异步请求（同步请求将会锁住浏览器，用户其他操作必须等待请求完成才可以执行）
             url: "/StatisticsNumber/list1",
-            data : {
-            },
+            data : {},
             dataType : "json",        //返回数据形式为json
             success: function(result){
                 //请求成功时执行该函数内容，result即为服务器返回的json对象
@@ -320,10 +319,185 @@
                 top.location.reload();
             }
         });
+        $('#do_search').bind('click', function () {
+            var index = $('#index').find("option:selected").text();
+            var range = $('#range').find("option:selected").text();
+            var saStartDate = $('#saStartDate').val();
+            var saEndDate = $('#saEndDate').val();
+            var myChart3 = echarts.init(document.getElementById('bar'));//基于准备好的dom，初始化echarts实例
+            var myChart4 = echarts.init(document.getElementById('pie'));//基于准备好的dom，初始化echarts实例
+            // 指定图表的配置项和数据
+            var names = [];  //类别数组（实际用来盛放X轴坐标值）
+            var values = []; //及格人数数组（实际用来盛放Y坐标值）
+            var htitle;
+            var ptitle;
+            var xAxis;
+            var yAxis;
+            var Data;
+            var url;
+            if (index == '进出站人数统计') {
+                url = "/StatisticsNumber/situationOFstation";
+            }
+            console.log(index);
+            console.log(range);
+            console.log(saStartDate);
+            console.log(saEndDate);
+            //数据加载完之前先显示一段简单的loading动画
+            myChart1.showLoading();
+            myChart2.showLoading();
+            $.ajax({
+                type: "post",
+                async: true, //异步请求（同步请求将会锁住浏览器，用户其他操作必须等待请求完成才可以执行）
+                url: url,
+                data: {
+                    dName: range,
+                    startStation: saStartDate,
+                    endStation: saEndDate
+                },
+                dataType: "json",        //返回数据形式为json
+                success: function (result) {
+                    //请求成功时执行该函数内容，result即为服务器返回的json对象
+                    console.log(result);
+                    htitle = result.htitle;
+                    ptitle = result.ptitle;
+                    Data = result.data;
+                    xAxis = result.xaxis;
+                    yAxis = result.yaxis;
+                    if (Data) {
+                        for (var i = 0; i < Data.length; i++) {
+                            names.push(Data[i].name);    //挨个取出考试名称并填入类别数组
+                            values.push(Data[i].value); //挨个取出及格人数并填入类别数组
+                        }
+                        var Histogram = {
+                            title: {
+                                text: htitle/*text: '各场考试人数及格统计'*/
+                            },
+                            tooltip : {
+                                trigger : 'axis',
+                                showDelay : 0,        // 显示延迟，添加显示延迟可以避免频繁切换，单位ms
+                                axisPointer : {          // 坐标轴指示器，坐标轴触发有效
+                                    type : 'none'        // 默认为直线，可选为：'line' | 'shadow'
+                                }
+                            },
+                            grid: {
+                                y2: 65  //增加柱形图纵向的高度
+                            },
+                            legend: {
+                                data:htitle
+                            },
+                            axisTick:{
+                                show:false
+                            },
+                            xAxis: {
+                                data: names,
+                                axisLabel:{
+                                    textStyle:{
+                                        color:"#656566",
+                                        fontWeight:"bold",          //文字粗细bold   bolder   lighter  100 | 200 | 300 | 400...
+                                        fontFamily:"sans-serif",    //字体系列
+                                        fontSize:14                 //字体大小
+                                    },
+                                    interval:0   //横轴信息全部显示
+                                },
+                                name : xAxis   //显示在轴上的标题
+                            },
+                            yAxis: {
+                                axisLabel:{
+                                    textStyle:{
+                                        color:"#000"
+                                    }
+                                },
+                                name : yAxis   //显示在轴上的标题
+                            },
+                            color : [ '#71c9ce' ],
+                            series: [{ // For shadow
+                                type: 'bar',
+                                barWidth:'50',//设置柱宽度
+                                itemStyle: {
+                                    color: 'rgba(0,0,0,0.05)'
+                                },
+                                barGap: '-100%',
+                                barCategoryGap: '40%',
+                                animation: false
+                            },
+                                {
+                                    type: 'bar',
+                                    itemStyle: {
+                                        color: new echarts.graphic.LinearGradient(
+                                            0, 0, 0, 1,
+                                            [
+                                                {offset: 0, color: '#cbf1f5'},
+                                                {offset: 0.5, color: '#a6e3e9'},
+                                                {offset: 1, color: '#71c9ce'}
+                                            ]
+                                        )
+                                    },
+                                    emphasis: {
+                                        itemStyle: {
+                                            color: new echarts.graphic.LinearGradient(
+                                                0, 0, 0, 1,
+                                                [
+                                                    {offset: 0, color: '#71c9ce'},
+                                                    {offset: 0.7, color: '#a6e3e9'},
+                                                    {offset: 1, color: '#cbf1f5'}
+                                                ]
+                                            )
+                                        }
+                                    },
+                                    data: values
+                                }]
+                        };
+
+                        var Piechart = {
+                            title: {
+                                text: ptitle,
+                                left: 'center'
+                            },
+                            tooltip: {
+                                trigger: 'item',
+                                formatter: '{a} <br/>{b} : {c} ({d}%)'
+                            },
+                            legend: {
+                                orient: 'vertical',
+                                left: 'left',
+                                data: names
+                            },
+                            color: ["#95e1d3","#bbded6","#fce38a","#f38181"],
+                            series: [
+                                {
+                                    name:"所占比例",
+                                    type: 'pie',
+                                    radius: '55%',
+                                    center: ['50%', '60%'],
+                                    data: Data,
+                                    emphasis: {
+                                        itemStyle: {
+                                            shadowBlur: 10,
+                                            shadowOffsetX: 0,
+                                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                        }
+                                    }
+                                }
+                            ]
+                        };
+                        myChart3.hideLoading();    //隐藏加载动画
+                        setTimeout(() => {
+                            try {
+                                myChart3.setOption(Histogram, true)
+                            } catch (error) {}
+                        }, 500);
+                        myChart4.hideLoading();    //隐藏加载动画
+                        setTimeout(() => {
+                            try {
+                                myChart4.setOption(Piechart, true)
+                            } catch (error) {}
+                        }, 500)
+                    }
+                }
+            })
+
+        })
     };
-
-
-
 </script>
 
 <script>

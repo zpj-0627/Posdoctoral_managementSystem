@@ -76,6 +76,13 @@ public class PostdoctorrinformationController {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
+    //人员信息管理表
+    @RequestMapping("/list")
+    public List<Postdoctorrinformation> list() {
+        List<Postdoctorrinformation> dList = postdoctorrinformationService.list();
+        System.out.println(dList);
+        return dList;
+    }
 
     //人员信息管理表
     @RequestMapping("/list1")

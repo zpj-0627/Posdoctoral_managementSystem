@@ -28,5 +28,23 @@ GROUP BY
         group by `status`
     </select>
 
+	<select id="situationOFrecruitType" parameterType="com.province.postdoctor.entity.postdoctor_info.Postdoctorrinformation" resultType="com.province.postdoctor.entity.results_of_station.StatisticsList">
+		select recruit_type AS name,count(*) AS value
+
+		from postdoctorrinformation
+		<where> 1=1
+			<if test="dName != null and dName !=''">
+				and d_name = #{dName}
+			</if>
+			<if test="startStation != null ">
+				and #{startStation} between start_station and end_station
+			</if>
+			<if test="endStation != null ">
+				and #{endStation} between start_station and end_station
+			</if>
+		</where>
+		GROUP BY
+		recruit_type
+	</select>
 
 </mapper>

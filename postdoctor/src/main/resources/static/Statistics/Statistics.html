@@ -335,8 +335,12 @@
             var yAxis;
             var Data;
             var url;
-            if (index == '进出站人数统计') {
+            if (index == '进出站人数统计'){
                 url = "/StatisticsNumber/situationOFstation";
+            }else if(index == '按招收类型统计') {
+                url = "/StatisticsNumber/situationOFrecruitType";
+            }else if (index == '按学科领域统计'){
+                url = "/StatisticsNumber/situationOFsubjectArea";
             }
             console.log(index);
             console.log(range);
@@ -462,7 +466,7 @@
                                 left: 'left',
                                 data: names
                             },
-                            color: ["#95e1d3","#bbded6","#fce38a","#f38181"],
+                            color: ["#95e1d3","#bbded6","#fce38a","#f38181","#6a2c70","#b83b5e","#f08a5d","#364f6b","#8785a2","#355c7d"],
                             series: [
                                 {
                                     name:"所占比例",

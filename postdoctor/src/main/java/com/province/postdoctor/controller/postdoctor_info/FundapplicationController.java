@@ -12,11 +12,7 @@ import com.province.postdoctor.service.postdoctor_info.FundapplicationService;
 import com.province.postdoctor.service.postdoctor_info.PatentService;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.sql.Date;
@@ -161,5 +157,10 @@ public class FundapplicationController {
             return 0;//删除失败
         }
     }
-
+    //批量添加博士后专利信息
+    @RequestMapping("/addAllDoctor")
+    @ResponseBody
+    public boolean save( Fundapplication fundapplication) {
+        return fundapplicationService.save(fundapplication);
+    }
 }

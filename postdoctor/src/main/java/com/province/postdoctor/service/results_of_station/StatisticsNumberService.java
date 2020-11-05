@@ -12,4 +12,6 @@ public interface StatisticsNumberService extends IService<StatisticsNumber> {
     List<StatisticsList> situationOFstation(Postdoctorrinformation postdoctorrinformation);
 
     List<StatisticsList> list1();
+
+    List<StatisticsList> situationOFrecruitType(Postdoctorrinformation postdoctorrinformation);
 }

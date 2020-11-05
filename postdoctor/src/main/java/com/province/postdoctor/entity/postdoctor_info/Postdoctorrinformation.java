@@ -1,15 +1,14 @@
 package com.province.postdoctor.entity.postdoctor_info;
 
-    import com.baomidou.mybatisplus.annotation.TableField;
     import com.baomidou.mybatisplus.annotation.TableName;
-
+    import com.baomidou.mybatisplus.annotation.IdType;
+    import com.baomidou.mybatisplus.annotation.TableId;
     import java.io.Serializable;
     import java.sql.Date;
 
     import lombok.Data;
     import lombok.EqualsAndHashCode;
     import lombok.experimental.Accessors;
-    import org.springframework.format.annotation.DateTimeFormat;
 
 /**
 * <p>
@@ -17,7 +16,7 @@ package com.province.postdoctor.entity.postdoctor_info;
     * </p>
 *
 * @author tykj
-* @since 2020-10-05
+* @since 2020-11-05
 */
     @Data
         @EqualsAndHashCode(callSuper = false)
@@ -27,7 +26,18 @@ package com.province.postdoctor.entity.postdoctor_info;
 
     private static final long serialVersionUID = 1L;
 
+            @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
+
+            /**
+            * 博士号
+            */
+    private Integer pId;
+
+            /**
+            * 博士后名字
+            */
+    private String pName;
 
             /**
             * 部门id
@@ -40,17 +50,18 @@ package com.province.postdoctor.entity.postdoctor_info;
     private String dName;
 
             /**
-            * 博士号
+            * 单位类型
             */
-    private Integer pId;
+    private String dType;
 
             /**
-             * 博士名字
-             */
-    private String pName;
-    /**
-     * 学科领域Id
-     */
+            * 招收类型
+            */
+    private String recruitType;
+
+            /**
+            * 学科领域id
+            */
     private String subjectAreaId;
 
             /**
@@ -67,11 +78,6 @@ package com.province.postdoctor.entity.postdoctor_info;
             * 一级学科
             */
     private String fSubject;
-
-    /**
-     * 部门类型
-     */
-    private String dType;
 
             /**
             * 性别
@@ -124,14 +130,14 @@ package com.province.postdoctor.entity.postdoctor_info;
     private Date endStation;
 
             /**
-             * 在站状态
-             */
-    private String status;
-
-            /**
             * 入党日期
             */
     private Date pJpDate;
+
+            /**
+            * 在站状态
+            */
+    private String status;
 
             /**
             * 专业技术职称

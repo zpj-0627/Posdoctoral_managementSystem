@@ -1,7 +1,6 @@
 package com.province.postdoctor.mapper.postdoctor_info;
 
 
-import com.province.postdoctor.entity.postdoctor_info.Postdoctorrinformation;
 import com.province.postdoctor.entity.postdoctor_info.Thesis;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 

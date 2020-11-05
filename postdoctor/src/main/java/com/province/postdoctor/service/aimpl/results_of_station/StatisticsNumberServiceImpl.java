@@ -27,4 +27,9 @@ public class StatisticsNumberServiceImpl extends ServiceImpl<StatisticsNumberMap
     public List<StatisticsList> list1() {
         return statisticsNumberMapper.list1();
     }
+
+    @Override
+    public List<StatisticsList> situationOFrecruitType(Postdoctorrinformation postdoctorrinformation) {
+        return statisticsNumberMapper.situationOFrecruitType(postdoctorrinformation);
+    }
 }

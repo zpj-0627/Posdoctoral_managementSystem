@@ -408,7 +408,7 @@ function selectfundName(r){
         });
         form.on('select(Type_filter)', function(o){
             id = o.value;
-            alert(JSON.stringify(o))
+            alert(JSON.stringify(id))
             $.get('/gzz-information/getText/'+id,function (r) {
                 $('[name=dId]').val(r.did);
                 $('[name=dType]').val(r.dtype);
@@ -419,4 +419,50 @@ function selectfundName(r){
         });
 
     });
+}
+//基金情况——基金名称下拉框
+function selectfundName1() {
+    layui.use(['form', 'jquery'], function () {
+        var $ = layui.$,
+            form = layui.form;
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "/dictionary/queryfundName",
+                dataType: "json",
+                cache: false,
+                success: function (data) {
+                    alert(JSON.stringify(data))
+                    $('#fundName').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#fundName').append(new Option(item.title, item.dictionaryid));
+                    });
+                    form.render('select');
+                }, error: function () {
+                    alert("查询失败");
+                }
+            });
+        });
+        form.on('select(Type_filter)', function (o) {
+            id = o.value;
+            $.ajax({
+                url: '/dictionary/queryfundGrade',
+                data: {
+                    id: id,
+                },
+                type: 'post',
+                dataType: 'json',
+                success: function (data) {
+                    $('#fundGrade').append(new Option());
+                    $.each(data, function (index, item) {
+                        $('#fundGrade').append(new Option(item.title, item.id));
+                    });
+                    form.render('select');
+                }, error: function () {
+                    alert("查询失败");
+                }
+            });
+
+        });
+    })
 }

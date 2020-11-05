@@ -1,11 +1,8 @@
 package com.province.postdoctor.controller.station_info;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import com.province.postdoctor.entity.daily_sci_act.NameObject;
-import com.province.postdoctor.entity.postdoctor_info.Postdoctorrinformation;
-import com.province.postdoctor.entity.postdoctor_info.Thesis;
 import com.province.postdoctor.entity.station_info.GzzInformation;
 import com.province.postdoctor.entity.station_info.LdzInformation;
 import com.province.postdoctor.entity.station_info.PoetTable;

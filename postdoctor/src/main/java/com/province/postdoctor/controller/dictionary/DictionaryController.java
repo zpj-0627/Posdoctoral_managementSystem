@@ -7,18 +7,15 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.province.postdoctor.entity.dictionary.Dictionary;
 import com.province.postdoctor.entity.dictionary.smTable;
-import com.province.postdoctor.entity.postdoctor_info.Postdoctorrinformation;
 import com.province.postdoctor.result.TableResult;
 import com.province.postdoctor.result.TreeResult;
 import com.province.postdoctor.service.dictionary.DictionaryService;
-import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -487,10 +484,11 @@ public class DictionaryController {
     }
 
     //基金名称下拉框
-    @RequestMapping("/queryfundGrade")
-    public List<Dictionary> queryfundGrade(String dictionaryid) {
+    @RequestMapping("/queryfundGrade/{id}")
+    public List<Dictionary> queryfundGrade(String id) {
+        System.out.println(id);
         QueryWrapper<Dictionary> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("updictionaryid", dictionaryid);
+        queryWrapper.eq("updictionaryid", id);
         queryWrapper.select( "title","dictionaryid");
         queryWrapper.eq("sign", 0);
         List<Dictionary> dList = dictionaryService.list(queryWrapper);

@@ -22,6 +22,6 @@ import lombok.Data;
 @Data
 public class StatisticsList {
     private String name;
-    private String value;
+    private int value;
 }
 

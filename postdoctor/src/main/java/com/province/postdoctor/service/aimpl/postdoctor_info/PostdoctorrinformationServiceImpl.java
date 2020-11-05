@@ -1,6 +1,5 @@
 package com.province.postdoctor.service.aimpl.postdoctor_info;
 
-import com.province.postdoctor.entity.postdoctor_info.Learningexperience;
 import com.province.postdoctor.entity.postdoctor_info.Postdoctorrinformation;
 import com.province.postdoctor.mapper.postdoctor_info.PostdoctorrinformationMapper;
 import com.province.postdoctor.service.postdoctor_info.PostdoctorrinformationService;

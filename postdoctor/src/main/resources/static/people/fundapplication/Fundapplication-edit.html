@@ -141,7 +141,9 @@
                     layer.msg('并没有修改信息',{icon: 5, shade: 0.5, time: 1500});
                 }else {
                     var json1 = $('form').serialize();
+/*
                     alert(json1);
+*/
                     $.post(
                         "/treatise/update",
                         json1,

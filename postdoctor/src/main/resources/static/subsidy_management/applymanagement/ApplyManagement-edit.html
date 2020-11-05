@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+    <title>补助申请人员信息</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../css/plugins/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../layui/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../layui/layui_exts/layui_ext/dtree/dtree.css">
+    <link rel="stylesheet" type="text/css" href="../../layui/layui_exts/layui_ext/dtree/font/dtreefont.css">
+    <style>
+        .layui-form-label {
+            width: 150px;
+        }
+        .layui-input{
+            border:1.5px solid #74d2e7;
+        }
+        .select-test{position: absolute;padding-left:-10px; max-height: 500px;height: 350px;overflow: auto;width: 240px;z-index: 123;display: none;border:1px solid silver;top: 42px;}
+
+        /* .layui-form-item {
+             margin: 0px;
+         }
+         .layui-input-inline {
+             margin: 0px;
+
+         }
+         .layui-form-label {
+             padding:2px 0px;
+             width: 60px;
+             !* line-height: 24px; *!
+             background: #74d2e7;
+
+             !*font-size: 15px;*!
+         }
+         .layui-input {
+             width: 80%;
+             background: #74d2e7;
+         }*/
+        /*.select-test{position: absolute;max-height: 500px;height: 350px;overflow: auto;width: 235px;z-index: 123;display: none;border:1px solid silver;top: 42px;}
+        .layui-show{display: block!important;}*/
+    </style>
+</head>
+<body>
+<script type="text/javascript" src="../../layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../js/main.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../js/myJs.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../js/phdInfo.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../js/plugins/jquery-3.3.1.min.js"></script>
+<div class="layui-form timo-compile">
+    <!--添加表单元素-->
+    <form class="layui-form" action="" lay-filter="component-form-group" id="component-form-group">
+        <input type="hidden" name="pId" id="pId">
+        <div class="layui-form-item">
+            <label class="layui-form-label" >申请人</label>
+            <div class="layui-input-inline">
+                <input id="saSchool" class="layui-input"  type="text" name="saSchool"   >
+
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" >申请单位</label>
+            <div class="layui-input-inline"  >
+                <select id="saNationality" name="saNationality" >
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" >流动站</label>
+            <div class="layui-input-inline">
+                <select id="saId" name="saId" >
+                    <option>太原科技大学</option>
+                    <option>太原理工大学</option>
+
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" >进站时间</label>
+            <div class="layui-input-inline">
+                <input type="text" id="saStartDate" name="saStartDate"  readonly="" class="layui-input test-item"
+                       lay-verify="required" >
+            </div>
+        </div>
+        <div class="layui-form-item ">
+            <label class="layui-form-label" >申请情况</label>
+            <div class="layui-input-inline">
+                <select id="saId" name="saId" >
+                    <option>首次申请</option>
+                    <option>二次申请</option>
+                    <option>再次申请</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label" >承担项目</label>
+            <div class="layui-input-inline">
+                <input id="saSchool" class="layui-input"  type="text" name="saSchool"  >
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" >经费投入(万元)</label>
+            <div class="layui-input-inline">
+                <input id="saSchool" class="layui-input"  type="text" name="saSchool"  >
+            </div>
+        </div>
+
+        <div class="layui-form-item timo-finally" align="center">
+            <button class="layui-btn" lay-submit="" lay-filter="component-form-demo" >确定</button>
+            <button class="layui-btn" lay-submit="" lay-filter="component-form-demo" >取消</button>
+        </div>
+
+    </form>
+</div>
+<script>
+    layui.use(['table','form','laydate','jquery'], function(){
+        var laydate = layui.laydate;
+        $ = layui.$,
+            form = layui.form;
+        lay('.test-item').each(function(){
+            laydate.render({
+                elem: this,
+                type: 'date',
+                theme: 'grid',
+                trigger: 'click',
+            });
+        });
+        id=location.href.split("?")[1].split("=")[1]
+        $.get('/studyingabroadinformation/getText/'+id,function (r) {
+            $('[name=pId]').val(r.pid)
+            $('[name=studyingAbroad]').val(r.studyingAbroad)
+            // $('[name=saNationality]').val(r.saNationality)
+            $('[name=saId]').val(r.saId)
+            $('[name=saLogoff]').val(r.saLogoff)
+            $('[name=saStartDate]').val(r.saStartDate)
+            $('[name=saEndDate]').val(r.saEndDate)
+            $('[name=saSchool]').val(r.saSchool)
+            layui.form.render('select');
+            //国别下拉框
+            selectSCountry(r);
+            form.on('submit(component-form-demo)',function (data) {
+                /*var siId = document.getElementById("school").options[document.getElementById("school").selectedIndex].value;*/
+                var pId = document.getElementById("pId").value;
+                var studyingAbroad = document.getElementById("studyingAbroad").options[document.getElementById("studyingAbroad").selectedIndex].text;
+                var saNationality = document.getElementById("saNationality").options[document.getElementById("saNationality").selectedIndex].text;
+                var saId = document.getElementById("saId").options[document.getElementById("saId").selectedIndex].text;
+                var saLogoff = document.getElementById("saLogoff").options[document.getElementById("saLogoff").selectedIndex].text;
+                var saStartDate = document.getElementById("saStartDate").value;
+                var saEndDate = document.getElementById("saEndDate").value;
+                var saSchool = document.getElementById("saSchool").value;
+                if (studyingAbroad==r.studyingAbroad&&
+                    saNationality==r.saNationality&&
+                    saId==r.saId&&
+                    saLogoff==r.saLogoff&&
+                    saStartDate==r.saStartDate&&
+                    saEndDate==r.saEndDate&&
+                    saSchool==r.saSchool) {
+                    layer.msg('并没有修改信息',{icon: 5, shade: 0.5, time: 1500});
+                }else {
+                    var json1 = $('form').serialize();
+                    $.post(
+                        "/studyingabroadinformation/update",
+                        json1,
+                        function (res) {
+                            if (res){
+                                layer.msg("修改成功", {icon: 6, shade: 0.5, time: 1500}, function () {
+                                    var index = parent.layer.getFrameIndex(window.name);
+                                    parent.layer.close(index);
+                                    parent.window.location.reload();
+                                })
+                            }else {
+                                layer.msg("修改失败",{icon: 5, shade: 0.5, time: 1500});
+                            }
+                        },'json');
+                }
+
+                return false;
+            });
+        },'json');
+    });
+
+
+
+</script>
+</body>
+</html>

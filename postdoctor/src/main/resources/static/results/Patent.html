@@ -133,6 +133,15 @@
             </div>
             <a class="layui-btn " id="do_search" style="position: absolute; left: 89.5%; top: 44%;">查询</a>
             <a class="layui-btn " onclick="reset()" style="position: absolute; left: 94%; top: 44%;">重置</a>
+            <div class="col-md-12">
+                <h1 size="2px">选择Excel文件导入到数据库中</h1>
+                <form action="/importExcel/import" method="post" enctype="multipart/form-data" class="form-inline">
+                    <div class="form-group">
+                        <input class="form-control" type="file" name="excelFile">
+                        <input type="submit" class="btn btn-danger" value="导入数据">
+                    </div>
+                </form>
+            </div>
 
         </div>
     </div>

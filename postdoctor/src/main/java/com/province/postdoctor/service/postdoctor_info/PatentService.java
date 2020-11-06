@@ -21,4 +21,8 @@ public interface PatentService extends IService<Patent> {
 
     void deleteById(String id);
 
+
+
+    void saveAll(List<Patent> patents);
+
 }

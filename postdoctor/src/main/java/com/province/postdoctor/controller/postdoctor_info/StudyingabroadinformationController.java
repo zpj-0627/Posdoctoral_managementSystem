@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -38,6 +40,12 @@ public class StudyingabroadinformationController {
     protected void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+    }
+
+    @RequestMapping("list")
+    public List<Studyingabroadinformation> list(){
+        List<Studyingabroadinformation> studyingabroadinformations=studyingabroadinformationService.list();
+        return studyingabroadinformations;
     }
 
     //查询一条信息

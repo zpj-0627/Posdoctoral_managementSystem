@@ -22,4 +22,6 @@ public interface PatentMapper extends BaseMapper<Patent> {
 
     void deleteById(String id);
 
+    void saveE(Patent patent);
+
 }

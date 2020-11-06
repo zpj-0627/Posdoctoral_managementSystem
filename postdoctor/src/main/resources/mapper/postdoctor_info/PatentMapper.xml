@@ -65,4 +65,18 @@
         WHERE
         id = #{id};
     </select>
+    <!--通过Excel插入数据-->
+    <insert id="saveE" parameterType="com.province.postdoctor.entity.postdoctor_info.Patent" useGeneratedKeys="true" keyProperty="id">
+        insert  into patent (patenter,patent_name) value (#{patenter},#{patentName})
+    </insert>
+
+    <select id="findByPnumber" parameterType="java.lang.String">
+        SELECT
+        patenter
+        FROM
+        patent
+        <where> 1=1
+            pnumber = #{pnumber};
+        </where>
+    </select>
 </mapper>

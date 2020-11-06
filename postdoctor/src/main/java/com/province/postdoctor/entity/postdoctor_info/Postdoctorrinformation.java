@@ -139,6 +139,11 @@ package com.province.postdoctor.entity.postdoctor_info;
             */
     private String status;
 
+    /**
+     * 出站去向
+     */
+    private String outbound;
+
             /**
             * 专业技术职称
             */

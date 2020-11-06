@@ -37,4 +37,12 @@ public class PatentServiceImpl extends ServiceImpl<PatentMapper, Patent> impleme
     public void deleteById(String id) {
         patentMapper.deleteById(id);
     }
+
+    @Override
+    public void saveAll(List<Patent> patents) {
+        patents.forEach(patent -> {
+            patent.setId(null);
+            patentMapper.saveE(patent);
+        });
+    }
 }

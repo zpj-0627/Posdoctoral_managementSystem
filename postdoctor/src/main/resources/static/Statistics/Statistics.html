@@ -89,7 +89,7 @@
                         <option>按留学人员统计</option>
                         <option>按留学国家统计</option>
                         <option>按性别统计</option>
-                        <option>按出站情况统计</option>
+                        <option>按出站去向统计</option>
                         <option>按出站单位统计</option>
                     </select>
                 </div>
@@ -334,13 +334,54 @@
             var xAxis;
             var yAxis;
             var Data;
+            var upload;
+            var upload1;
+            var upload2;
             var url;
+            upload1={dName: range,
+                startStation: saStartDate,
+                endStation: saEndDate
+            }
+            upload2={
+                dName: range,
+                saStartDate: saStartDate,
+                saEndDate: saEndDate
+            }
             if (index == '进出站人数统计'){
                 url = "/StatisticsNumber/situationOFstation";
+                upload=upload1;
             }else if(index == '按招收类型统计') {
                 url = "/StatisticsNumber/situationOFrecruitType";
+                upload=upload1;
             }else if (index == '按学科领域统计'){
                 url = "/StatisticsNumber/situationOFsubjectArea";
+                upload=upload1;
+            }else if (index == '按学科门类统计'){
+                url = "/StatisticsNumber/situationOFsubjectCategory";
+                upload=upload1;
+            }else if (index == '按行政区域统计'){
+                url = "/StatisticsNumber/situationOFsubjectCategory";
+                upload=upload1;
+            }else if (index == '按地理区域统计'){
+                url = "/StatisticsNumber/situationOFsubjectCategory";
+                upload=upload1;
+            } else if (index == '按留学人员统计'){
+                url = "/StatisticsNumber/situationOFabroadnumber";
+                upload=upload2;
+            } else if (index=='按留学国家统计'){
+                url = "/StatisticsNumber/situationOFabroadcountry";
+                upload=upload2;
+            } else if (index=='按性别统计'){
+                url = "/StatisticsNumber/situationOFsex";
+                upload=upload1;
+            }
+            else if (index=='按出站去向统计'){
+                url = "/StatisticsNumber/situationOFoutbound";
+                upload=upload1;
+            }
+            else if (index=='按出站单位统计'){
+                url = "/StatisticsNumber/situationOFoutbountunits";
+                upload=upload1;
             }
             console.log(index);
             console.log(range);
@@ -353,11 +394,7 @@
                 type: "post",
                 async: true, //异步请求（同步请求将会锁住浏览器，用户其他操作必须等待请求完成才可以执行）
                 url: url,
-                data: {
-                    dName: range,
-                    startStation: saStartDate,
-                    endStation: saEndDate
-                },
+                data: upload,
                 dataType: "json",        //返回数据形式为json
                 success: function (result) {
                     //请求成功时执行该函数内容，result即为服务器返回的json对象

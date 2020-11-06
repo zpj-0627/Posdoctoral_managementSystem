@@ -47,4 +47,117 @@ GROUP BY
 		recruit_type
 	</select>
 
+	<select id="situationOFsubjectCategory" parameterType="com.province.postdoctor.entity.postdoctor_info.Postdoctorrinformation" resultType="com.province.postdoctor.entity.results_of_station.StatisticsList">
+		select subject_category AS name,count(*) AS value
+
+		from postdoctorrinformation
+		<where> 1=1
+			<if test="dName != null and dName !=''">
+				and d_name = #{dName}
+			</if>
+			<if test="startStation != null ">
+				and #{startStation} between start_station and end_station
+			</if>
+			<if test="endStation != null ">
+				and #{endStation} between start_station and end_station
+			</if>
+		</where>
+		GROUP BY
+		subject_category
+	</select>
+
+	<select id="situationOFabroadnumber" parameterType="com.province.postdoctor.entity.postdoctor_info.Studyingabroadinformation" resultType="com.province.postdoctor.entity.results_of_station.StatisticsList">
+		select d_name AS name,count(*) AS value
+		FROM `studyingabroadinformation`
+		<where> studying_abroad='是'
+			<if test="dName != null and dName !=''">
+				and d_name = #{dName}
+			</if>
+			<if test="saStartDate != null ">
+				and #{saStartDate} between sa_start_date and sa_end_date
+			</if>
+			<if test="saEndDate != null ">
+				and #{saEndDate} between sa_start_date and sa_end_date
+			</if>
+		</where>
+		GROUP BY d_name
+	</select>
+
+	<select id="situationOFabroadcountry" parameterType="com.province.postdoctor.entity.postdoctor_info.Studyingabroadinformation" resultType="com.province.postdoctor.entity.results_of_station.StatisticsList">
+		select sa_nationality AS name,count(*) AS value
+		from studyingabroadinformation
+		<where> 1=1
+			<if test="dName != null and dName !=''">
+				and d_name = #{dName}
+			</if>
+			<if test="saStartDate != null ">
+				and #{saStartDate} between sa_start_date and sa_end_date
+			</if>
+			<if test="saEndDate != null ">
+				and #{saEndDate} between sa_start_date and sa_end_date
+			</if>
+		</where>
+		GROUP BY
+		sa_nationality
+	</select>
+
+	<select id="situationOFsex" parameterType="com.province.postdoctor.entity.postdoctor_info.Postdoctorrinformation" resultType="com.province.postdoctor.entity.results_of_station.StatisticsList">
+		select p_sex AS name,count(*) AS value
+
+		from postdoctorrinformation
+		<where> 1=1
+			<if test="dName != null and dName !=''">
+				and d_name = #{dName}
+			</if>
+			<if test="startStation != null ">
+				and #{startStation} between start_station and end_station
+			</if>
+			<if test="endStation != null ">
+				and #{endStation} between start_station and end_station
+			</if>
+		</where>
+		GROUP BY
+		p_sex
+	</select>
+
+	<select id="situationOFoutbound" parameterType="com.province.postdoctor.entity.postdoctor_info.Postdoctorrinformation" resultType="com.province.postdoctor.entity.results_of_station.StatisticsList">
+		SELECT outbound AS name , COUNT(*) AS value
+
+		FROM `postdoctorrinformation`
+		<where> `status`='出站'
+			<if test="dName != null and dName !=''">
+				and d_name = #{dName}
+			</if>
+			<if test="startStation != null ">
+				and #{startStation} between start_station and end_station
+			</if>
+			<if test="endStation != null ">
+				and #{endStation} between start_station and end_station
+			</if>
+		</where>
+		GROUP BY
+		outbound
+	</select>
+
+	<select id="situationOFoutbountunits" parameterType="com.province.postdoctor.entity.postdoctor_info.Postdoctorrinformation" resultType="com.province.postdoctor.entity.results_of_station.StatisticsList">
+		SELECT d_name AS name,COUNT(*) AS value
+
+		FROM `postdoctorrinformation`
+		<where> `status`='出站'
+			<if test="dName != null and dName !=''">
+				and d_name = #{dName}
+			</if>
+			<if test="startStation != null ">
+				and #{startStation} between start_station and end_station
+			</if>
+			<if test="endStation != null ">
+				and #{endStation} between start_station and end_station
+			</if>
+		</where>
+		GROUP BY
+		d_name
+	</select>
+
+
+
 </mapper>

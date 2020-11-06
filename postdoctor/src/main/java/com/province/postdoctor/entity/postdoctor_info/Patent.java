@@ -1,5 +1,6 @@
 package com.province.postdoctor.entity.postdoctor_info;
 
+    import cn.afterturn.easypoi.excel.annotation.Excel;
     import com.baomidou.mybatisplus.annotation.IdType;
     import java.sql.Date;
 
@@ -42,7 +43,9 @@ package com.province.postdoctor.entity.postdoctor_info;
             /**
             * 专利权人
             */
-    private String patenter;
+
+            @Excel(name = "专利权人")
+            private String patenter;
 
             /**
             * 博士号
@@ -57,7 +60,9 @@ package com.province.postdoctor.entity.postdoctor_info;
             /**
             * 专利名称
             */
-    private String patentName;
+
+            @Excel(name = "专利名称")
+            private String patentName;
 
             /**
             * 专利申请日
@@ -80,7 +85,9 @@ package com.province.postdoctor.entity.postdoctor_info;
             /**
             * 专利号
             */
-    private String pnumber;
+
+            @Excel(name = "专利号")
+            private String pnumber;
 
             /**
             * 公开号

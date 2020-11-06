@@ -79,7 +79,6 @@
                 <label class="layui-form-label">统计指标：</label>
                 <div class="layui-input-block">
                     <select id="index" name="index" style="border:1.5px solid #009688;height: 30px;width: 200px">
-                        <option><!--请输入--></option>
                         <option>进出站人数统计</option>
                         <option>按招收类型统计</option>
                         <option>按学科领域统计</option>
@@ -89,7 +88,7 @@
                         <option>按留学人员统计</option>
                         <option>按留学国家统计</option>
                         <option>按性别统计</option>
-                        <option>按出站去向统计</option>
+                        <option>按出站情况统计</option>
                         <option>按出站单位统计</option>
                     </select>
                 </div>
@@ -99,8 +98,8 @@
             <div class="layui-col-md6">
                 <label class="layui-form-label" >显示方式：</label>
                     <div class="layui-input-block" >
-                        <input lay-filter="sex" id="ldztype" type="radio" name="sex" checked="checked" value="02" title="柱状图"/>
-                        <input lay-filter="sex" id="gzztype" type="radio" name="sex" value="01" title="饼状图"/>
+                        <input lay-filter="sex" id="ldztype" type="radio" name="sex" checked="checked" value="01" title="柱状图"/>
+                        <input lay-filter="sex" id="gzztype" type="radio" name="sex"  value="02" title="饼状图"/>
                     </div>
 
             </div>
@@ -142,13 +141,18 @@
 
     <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
     <div class="layui-card-body ">
-        <div class="layui-row ">
+        <div class="layui-row"id="myChart" style="display: block">
             <div class="layui-col-md7">
                 <div id="bar" style="width: 90%;height:400px;"></div>
             </div>
             <div class="layui-col-md5">
                 <div id="pie" style="width: 90%;height:400px;"></div>
             </div>
+        </div>
+
+        <div class="layui-row "id="reChart" style="display: none">
+            <div id="reload" style="width: 90%;height:400px;">硕士</div>
+        </div>
         </div>
     </div>
 </div>
@@ -194,9 +198,6 @@
                         names.push(result[i].name);    //挨个取出考试名称并填入类别数组
                         values.push(result[i].value); //挨个取出及格人数并填入类别数组
                     }
-                    console.log(names);
-                    console.log(values);
-                    console.log(result);
                     var option1 = {
                         title: {
                             text: '在站情况统计'/*text: '各场考试人数及格统计'*/
@@ -320,24 +321,25 @@
             }
         });
         $('#do_search').bind('click', function () {
+            $("#myChart").hide();
+            $("#reChart").show();
+            var type = $('input[name="sex"]:checked').val();
             var index = $('#index').find("option:selected").text();
             var range = $('#range').find("option:selected").text();
             var saStartDate = $('#saStartDate').val();
             var saEndDate = $('#saEndDate').val();
-            var myChart3 = echarts.init(document.getElementById('bar'));//基于准备好的dom，初始化echarts实例
-            var myChart4 = echarts.init(document.getElementById('pie'));//基于准备好的dom，初始化echarts实例
-            // 指定图表的配置项和数据
+            var myChart = echarts.init(document.getElementById('reload'));//基于准备好的dom，初始化echarts实例
             var names = [];  //类别数组（实际用来盛放X轴坐标值）
             var values = []; //及格人数数组（实际用来盛放Y坐标值）
-            var htitle;
-            var ptitle;
-            var xAxis;
-            var yAxis;
-            var Data;
-            var upload;
-            var upload1;
-            var upload2;
-            var url;
+            var htitle;//柱形图标题
+            var ptitle;//饼状图标题
+            var xAxis;//柱形图横坐标
+            var yAxis;//柱形图纵坐标
+            var Data;//数据源
+            var upload;//后台传输数据
+            var upload1;//博士后信息传输
+            var upload2;//留学信息传输
+            var url;//接受数据地址
             upload1={dName: range,
                 startStation: saStartDate,
                 endStation: saEndDate
@@ -375,7 +377,7 @@
                 url = "/StatisticsNumber/situationOFsex";
                 upload=upload1;
             }
-            else if (index=='按出站去向统计'){
+            else if (index=='按出站统计'){
                 url = "/StatisticsNumber/situationOFoutbound";
                 upload=upload1;
             }
@@ -383,13 +385,8 @@
                 url = "/StatisticsNumber/situationOFoutbountunits";
                 upload=upload1;
             }
-            console.log(index);
-            console.log(range);
-            console.log(saStartDate);
-            console.log(saEndDate);
             //数据加载完之前先显示一段简单的loading动画
-            myChart1.showLoading();
-            myChart2.showLoading();
+            myChart.showLoading();
             $.ajax({
                 type: "post",
                 async: true, //异步请求（同步请求将会锁住浏览器，用户其他操作必须等待请求完成才可以执行）
@@ -398,7 +395,6 @@
                 dataType: "json",        //返回数据形式为json
                 success: function (result) {
                     //请求成功时执行该函数内容，result即为服务器返回的json对象
-                    console.log(result);
                     htitle = result.htitle;
                     ptitle = result.ptitle;
                     Data = result.data;
@@ -521,18 +517,20 @@
                                 }
                             ]
                         };
-                        myChart3.hideLoading();    //隐藏加载动画
-                        setTimeout(() => {
-                            try {
-                                myChart3.setOption(Histogram, true)
-                            } catch (error) {}
-                        }, 500);
-                        myChart4.hideLoading();    //隐藏加载动画
-                        setTimeout(() => {
-                            try {
-                                myChart4.setOption(Piechart, true)
-                            } catch (error) {}
-                        }, 500)
+                            myChart.hideLoading();    //隐藏加载动画
+                            setTimeout(() => {
+                                try {
+                                    if (type == '01') {
+                                        myChart.setOption(Histogram, true)
+                                    }else if (type == '02'){
+                                        myChart.setOption(Piechart, true)
+                                    }else if (type == 'NULL'){
+                                        alert("请选择显示方式")
+                                    }
+                                } catch (error) {
+                                }
+                            }, 500);
+
                     }
                 }
             })

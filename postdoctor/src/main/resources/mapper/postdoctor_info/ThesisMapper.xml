@@ -8,7 +8,7 @@
         p_id,
         publishingtime,
         d_name,
-        t_ttitle,
+        t_title,
         collection,
         literature
         FROM
@@ -27,7 +27,7 @@
                 and d_name = #{dName}
             </if>
             <if test="tTtitle != null and tTtitle !=''">
-                and t_ttitle = #{tTtitle}
+                and t_title = #{tTitle}
             </if>
             <if test="collection != null and collection !=''">
                 and collection = #{collection}
@@ -45,7 +45,7 @@
         p_id,
         publishingtime,
         d_name,
-        t_ttitle,
+        t_title,
         collection,
         literature
         FROM

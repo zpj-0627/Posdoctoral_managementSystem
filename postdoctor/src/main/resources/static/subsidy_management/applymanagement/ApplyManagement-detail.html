@@ -72,7 +72,7 @@
         <div class="layui-row ">
             <label class="layui-form-label">设站单位名称</label>
             <div class="layui-input-block ">
-                <input id="saSchool" class="layui-input" type="text" name="saSchool"
+                <input id="dName" class="layui-input" type="text" name="dName"
                        style="border:1.5px solid #009688;height: 35px;width: 71%">
             </div>
         </div>
@@ -84,7 +84,7 @@
         <div class="layui-row ">
             <label class="layui-form-label">收款单位</label>
             <div class="layui-input-block ">
-                <input id="saSchool" class="layui-input" type="text" name="saSchool"
+                <input id="Collection" class="layui-input" type="text" name="Collection"
                        style="border:1.5px solid #009688;height: 35px;width: 71%">
             </div>
         </div>
@@ -92,14 +92,14 @@
             <div class="layui-col-md5 ">
                 <label class="layui-form-label">开户银行</label>
                 <div class="layui-input-block ">
-                    <input id="saSchool" class="layui-input" type="text" name="saSchool"
+                    <input id="Bank" class="layui-input" type="text" name="Bank"
                            style="border:1.5px solid #009688;height: 35px;width: 70.3%">
                 </div>
             </div>
             <div class="layui-col-md5">
                 <label class="layui-form-label">账号</label>
                 <div class="layui-input-block ">
-                    <input id="saSchool" class="layui-input" type="text" name="saSchool"
+                    <input id="Account" class="layui-input" type="text" name="Account"
                            style="border:1.5px solid #009688;height: 35px;width: 70.3%">
                 </div>
             </div>
@@ -107,7 +107,7 @@
         <div class="layui-row ">
             <label class="layui-form-label">博士后站名称</label>
             <div class="layui-input-block ">
-                <select id="" name="" style="border:1.5px solid #009688;height: 35px;width: 71%">
+                <select id="ldzName" name="ldzName" style="border:1.5px solid #009688;height: 35px;width: 71%">
                 </select>
             </div>
         </div>
@@ -203,7 +203,8 @@
                 trigger: 'click',
             });
         });
-
+        id=location.href.split("?")[1].split("=")[1]
+        alert(id)
         //执行table分页
         table.render({
             elem: '#demo'

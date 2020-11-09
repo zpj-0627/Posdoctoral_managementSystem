@@ -79,7 +79,7 @@
             <div class="layui-col-md3 ">
                 <label class="layui-form-label">申报时间：</label>
                 <div class="layui-input-block ">
-                    <input type="text" id="startStation" name="dTime" placeholder="开始时间" class="layui-input test-item"
+                    <input type="text" id="applicationstartTime" name="applicationstartTime" placeholder="开始时间" class="layui-input test-item"
                            lay-verify="required" style="border:1.5px solid #009688;height: 30px;width: 150px">
                 </div>
             </div>
@@ -87,7 +87,7 @@
             <div class="layui-col-md3">
                 <label class="layui-form-label">至：</label>
                 <div class="layui-input-block " >
-                    <input type="text" id="startStation" name="dTime" placeholder="结束时间" class="layui-input test-item"
+                    <input type="text" id="applicationendTime" name="applicationendTime" placeholder="结束时间" class="layui-input test-item"
                            lay-verify="required" style="border:1.5px solid #009688;height: 30px;width: 150px">
                 </div>
             </div>
@@ -96,16 +96,19 @@
             <div class="layui-col-md3" style="float: left">
                 <label class="layui-form-label">流动站：</label>
                 <div class="layui-input-block">
-                    <select id="" name=""
-                            style="border:1.5px solid #009688;height: 30px;width: 150px">
+                    <select id="ldzName" name="ldzName" style="border:1.5px solid #009688;height: 30px;width: 150px">
                     </select>
                 </div>
             </div>
             <div class="layui-col-md3" style="float: left">
                 <label class="layui-form-label">审批状态：</label>
                 <div>
-                    <select id="pNationality" name="pNationality"
-                            style="border:1.5px solid #009688;height: 30px;width: 150px">
+                    <select id="state" name="state" style="border:1.5px solid #009688;height: 30px;width: 150px">
+                        <option><!--请选择--></option>
+                        <option>未提交</option>
+                        <option>未审批</option>
+                        <option>审批未通过</option>
+                        <option>审批已通过</option>
                     </select>
                 </div>
             </div>
@@ -178,7 +181,7 @@
             , height: "auto"
             , toolbar: "#toolbarDemo"
             , defaultToolbar: []
-            , url: '/postdoctorrinformation/list1' //数据接口
+            , url: '/subsidies-application/list1' //数据接口
             , page: true //开启分页
             , limit: 5
             , limits: [5, 10, 15]
@@ -186,10 +189,10 @@
             , cols: [[ //表头
                 {align: 'center', title: '序号', type: 'numbers', width: '5%'}
                 , {align: 'center', field: 'pid', title: '编号', hide:'true'}
-                , {align: 'center', field: 'pname', title: '单位名称', width: '20%'}
-                , {align: 'center', field: 'pname', title: '流动站', width: '20%'}
-                , {align: 'center', field: 'startStation', title: '申报时间', width: '20%'}
-                , {align: 'center', field: 'dname', title: '审批状态', width: '15%'}
+                , {align: 'center', field: 'dname', title: '单位名称', width: '20%'}
+                , {align: 'center', field: 'ldzName', title: '流动站', width: '20%'}
+                , {align: 'center', field: 'applicationTime', title: '申报时间', width: '20%'}
+                , {align: 'center', field: 'state', title: '审批状态', width: '15%'}
                 ,{align:'center',fixed:'right',toolbar:'#barDemo',title:'操作',width: '20%'}
             ]]
             //表头颜色

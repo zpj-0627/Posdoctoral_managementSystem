@@ -123,7 +123,6 @@
                 trigger: 'click',
             });
         });
-        id=location.href.split("?")[1].split("=")[1]
         $.get('/studyingabroadinformation/getText/'+id,function (r) {
             $('[name=pId]').val(r.pid)
             $('[name=studyingAbroad]').val(r.studyingAbroad)

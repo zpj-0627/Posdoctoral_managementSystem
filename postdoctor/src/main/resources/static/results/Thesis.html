@@ -71,15 +71,11 @@
         <i class="layui-icon layui-icon-rate-half"></i><strong>成果管理>论文</strong>
         (查询条件)
     </div>
-    <div class="layui-card-body layui-row ">
-
-        <div id="magicalDragScene" class="mc-root mc-ui-absolute-pane">
-
+    <div class="layui-card-body ">
+        <div class="layui-row">
             <!--单位名称下拉框-->
-            <div class="layui-col-md4 mc-ui-flex-end">
-
+            <div class="layui-col-md4">
                 <label class="layui-form-label" >单位名称：</label>
-
                 <div class="layui-input-block " >
                     <select id="dName" name="dName" style="border:1.5px solid #009688;height: 30px;width: 150px">
                     </select>
@@ -87,21 +83,21 @@
             </div>
 
             <!--日期框-->
-            <div class="layui-col-md4" style="float: left">
+            <div class="layui-col-md4" >
                 <label class="layui-form-label">发表年份：</label>
-                <div class="layui-input-block layui-form" lay-filter="test1">
+                <div class="layui-input-block " lay-filter="test1">
                     <input type="text" id="publishingtimeStart" name="dTime"  readonly="" class="layui-input test-item"
                            lay-verify="required" style="border:1.5px solid #009688;height: 30px;width: 150px">
                 </div>
             </div>
-            <div class="layui-col-md4" style="float: left">
+            <div class="layui-col-md4" >
                 <label class="layui-form-label">至：</label>
                 <div>
                     <input type="text" id="publishingtimeEnd" name="dTime"  readonly="" class="layui-input test-item"
                            lay-verify="required" style="border:1.5px solid #009688;height: 30px;width: 150px">
                 </div>
             </div>
-
+        </div>
             <div class="layui-row ">
                 <div class="layui-col-md4">
                     <label class="layui-form-label">文献类型：</label>
@@ -126,14 +122,11 @@
                         </select>
                     </div>
                 </div>
-
-
             </div>
             <a class="layui-btn " id="do_search" style="position: absolute; left: 88%; top: 46%;">查询</a>
             <a class="layui-btn " onclick="reset()" style="position: absolute; left: 93%; top: 46%;">重置</a>
 
         </div>
-    </div>
     <div class="layui-card-body layui-row">
         <div class="layui-col-lg3 layui-col-sm3">
             <div class="layui-card timo-nav-tree">
